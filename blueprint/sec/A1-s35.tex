@@ -1,0 +1,181 @@
+\subsection{Helffer--Sj\"ostrand formula and the counting function}\label{sec:HS}
+Throughout this subsection $\mathsf s:\R\to[0,1]$ denotes the quintic step
+\[
+ \mathsf s(t):=0\ \ (t\le0),\qquad \mathsf s(t):=10t^3-15t^4+6t^5\ \ (0\le t\le1),\qquad \mathsf s(t):=1\ \ (t\ge1).
+\]
+On $[0,1]$: $\mathsf s'(t)=30t^2(1-t)^2$ and $\mathsf s''(t)=60t(1-t)(1-2t)$; both vanish at $t=0$ and $t=1$, and $\mathsf s(1)=1$. Hence $\mathsf s\in C^2(\R)$, $\mathsf s$ is nondecreasing, $0\le\mathsf s'\le\mathsf s'(\frac12)=\frac{15}8$,
+and, since $\mathsf s'$ increases on $[0,\frac12]$ and decreases on $[\frac12,1]$,
+\begin{equation}\tag{Q}\label{eq:a1-quintic}
+ \int_\R|\mathsf s'|=1,\qquad\int_\R|\mathsf s''|=2\,\mathsf s'(\tfrac12)=\tfrac{15}4 .
+\end{equation}
+
+\begin{lemma}[Helffer--Sj\"ostrand formula]\label{lem:HS} \infra\
+Let $f\in C^2(\R)$ be real valued with compact support and let $\chi\in C^1(\R)$ be even with $\chi=1$ on $[-1,1]$, $\chi=0$ outside $[-2,2]$ and $0\le\chi\le1$. Put
+\[
+ g(x,y):=\ii yf''(x)\chi(y)+\ii\big(f(x)+\ii yf'(x)\big)\chi'(y)\qquad(x,y\in\R).
+\]
+Then for every $\lambda\in\R$
+\begin{equation}\label{eq:HS}
+ f(\lambda)=\frac1{2\pi}\int_{\R}\int_{\R}\frac{\ii yf''(x)\chi(y)+\ii\big(f(x)+\ii yf'(x)\big)\chi'(y)}{\lambda-x-\ii y}\,\rd x\,\rd y,
+\end{equation}
+the integral being absolutely convergent: for all $\lambda,x\in\R$ and $y\ne0$,
+\begin{equation}\tag{HS$'$}\label{eq:a1-HSdom}
+ \Big|\frac{g(x,y)}{\lambda-x-\ii y}\Big|\le\Gamma(x,y):=|f''(x)|\,\bone(|y|\le2)+|\chi'(y)|\big(|f(x)|+2|f'(x)|\big),\qquad\int_\R\int_\R\Gamma\,\rd x\,\rd y<\infty .
+\end{equation}
+Moreover $g(x,-y)=\ol{g(x,y)}$.
+\end{lemma}
+\begin{proof}
+\emph{The function $\tilde f$.} Define $\tilde f:\R^2\to\C$ by $\tilde f(x,y):=\big(f(x)+\ii yf'(x)\big)\chi(y)$. Since $f\in C^2$ and $\chi\in C^1$, $\tilde f$ is continuously differentiable on $\R^2$, with
+\[
+ \partial_x\tilde f=\big(f'(x)+\ii yf''(x)\big)\chi(y),\qquad\partial_y\tilde f=\ii f'(x)\chi(y)+\big(f(x)+\ii yf'(x)\big)\chi'(y),
+\]
+so that
+\begin{equation}\tag{HS1}\label{eq:a1-HS1}
+ \partial_x\tilde f+\ii\,\partial_y\tilde f=\ii yf''(x)\chi(y)+\ii\big(f(x)+\ii yf'(x)\big)\chi'(y)=g(x,y).
+\end{equation}
+Fix $\rho>0$ with $\operatorname{supp}f\subset(-\rho,\rho)$. Then $\tilde f(x,y)=0$ if $|x|\ge\rho$ or $|y|\ge2$, and $\tilde f(x,y)=f(x)+\ii yf'(x)$ if $|y|\le1$.
+Since $\chi$ is even, $\chi'$ is odd, and since $f$ is real, $\ol{g(x,y)}=-\ii yf''(x)\chi(y)-\ii(f(x)-\ii yf'(x))\chi'(y)=g(x,-y)$.
+
+\emph{Absolute convergence.} $|\lambda-x-\ii y|\ge|y|$, so $|\ii yf''(x)\chi(y)|/|\lambda-x-\ii y|\le|f''(x)|\bone(|y|\le2)$. The function $\chi'$ vanishes for $|y|<1$ and for $|y|>2$; for $1\le|y|\le2$ we have $|\lambda-x-\ii y|\ge1$ and
+$|f(x)+\ii yf'(x)|\le|f(x)|+2|f'(x)|$. This proves the pointwise bound in \eqref{eq:a1-HSdom}; $\Gamma$ is bounded with compact support, hence integrable.
+
+\emph{The kernel.} Let $h(x,y):=(\lambda-x-\ii y)^{-1}$ for $(x,y)\ne(\lambda,0)$. It is smooth there, with $\partial_xh=h^2$ and $\partial_yh=\ii h^2$, hence
+\begin{equation}\tag{HS2}\label{eq:a1-HS2}
+ \partial_xh+\ii\,\partial_yh=0 .
+\end{equation}
+Let $F:=\tilde fh$ on $\{y\ne0\}$. By \eqref{eq:a1-HS1}, \eqref{eq:a1-HS2}: $\partial_xF+\ii\partial_yF=gh$, and $F$ is continuously differentiable on $\{y\ne0\}$.
+
+\emph{Divergence theorem.} Let $0<\eps<1$. On the rectangle $[-\rho,\rho]\times[\eps,3]$ the divergence theorem (Mathlib), applied to the continuously differentiable vector field $(F,\ii F)$, gives
+\[
+ \int_\eps^3\!\!\int_{-\rho}^{\rho}g\,h\,\rd x\,\rd y=\int_\eps^3\big(F(\rho,y)-F(-\rho,y)\big)\rd y+\ii\int_{-\rho}^{\rho}\big(F(x,3)-F(x,\eps)\big)\rd x=-\ii\int_{-\rho}^\rho F(x,\eps)\,\rd x,
+\]
+because $\tilde f$ vanishes for $|x|=\rho$ and for $y=3$. Since $\chi(\eps)=1$ and $g=0$ outside $[-\rho,\rho]\times[-2,2]$,
+\[
+ \int_{y>\eps}\!\int_\R\frac{g(x,y)}{\lambda-x-\ii y}\,\rd x\,\rd y=-\ii\int_\R\frac{f(x)+\ii\eps f'(x)}{\lambda-x-\ii\eps}\,\rd x .
+\]
+In the same way, on $[-\rho,\rho]\times[-3,-\eps]$,
+\[
+ \int_{y<-\eps}\!\int_\R\frac{g(x,y)}{\lambda-x-\ii y}\,\rd x\,\rd y=\ii\int_{-\rho}^\rho\big(F(x,-\eps)-F(x,-3)\big)\rd x=\ii\int_\R\frac{f(x)-\ii\eps f'(x)}{\lambda-x+\ii\eps}\,\rd x .
+\]
+With $a:=\lambda-x$ we have $\frac1{a+\ii\eps}-\frac1{a-\ii\eps}=\frac{-2\ii\eps}{a^2+\eps^2}$ and $\frac1{a+\ii\eps}+\frac1{a-\ii\eps}=\frac{2a}{a^2+\eps^2}$. Adding the two identities and dividing by $2\pi$:
+\begin{equation}\tag{HS3}\label{eq:a1-HS3}
+ \frac1{2\pi}\int_{|y|>\eps}\!\int_\R\frac{g(x,y)}{\lambda-x-\ii y}\,\rd x\,\rd y=\frac1\pi\int_\R f(x)\frac{\eps}{(\lambda-x)^2+\eps^2}\,\rd x+\frac1\pi\int_\R f'(x)\frac{\eps(\lambda-x)}{(\lambda-x)^2+\eps^2}\,\rd x .
+\end{equation}
+
+\emph{The limit $\eps\downarrow0$.} By \eqref{eq:a1-HSdom} and dominated convergence the left side of \eqref{eq:a1-HS3} converges to the right side of \eqref{eq:HS}.
+In the first term on the right substitute $x=\lambda-\eps s$: it equals $\frac1\pi\int_\R f(\lambda-\eps s)\frac{\rd s}{1+s^2}$, which converges to $f(\lambda)\cdot\frac1\pi\int_\R\frac{\rd s}{1+s^2}=f(\lambda)$ by dominated convergence ($f$ is bounded and continuous).
+In the second term, $\big|\frac{\eps a}{a^2+\eps^2}\big|\le\frac12$ for all real $a$, and $\frac{\eps a}{a^2+\eps^2}\to0$ as $\eps\downarrow0$ for every fixed $a$ (it vanishes for $a=0$ and is at most $\eps/|a|$ otherwise); since $f'$ is integrable, the second term
+tends to $0$ by dominated convergence. This proves \eqref{eq:HS}.
+\end{proof}
+
+\begin{lemma}[Counting function from the Stieltjes transform]\label{lem:count}
+Let $\lambda_1\le\dots\le\lambda_N$ be real, $m(z):=\frac1N\sum_j(\lambda_j-z)^{-1}$, $\fn(E):=\frac1N\#\{j:\lambda_j\le E\}$. Let $E_1<E_2$ with $E_2-E_1\le8$, $0<\tilde\eta\le\frac12$, $U\ge1$, and assume
+\begin{equation}\label{eq:HShyp}
+ |m(x+\ii y)-\msc(x+\ii y)|\le\frac{U}{Ny}\qquad\text{for all }x\in[E_1-\tilde\eta,E_2+\tilde\eta],\ y\in[\tilde\eta,2].
+\end{equation}
+Then, with the absolute constant $C_6:=10$,
+\[
+ \Big|\big(\fn(E_2)-\fn(E_1)\big)-\big(\nsc(E_2)-\nsc(E_1)\big)\Big|\le\frac{C_6}{N}\Big(U\log(2/\tilde\eta)+N\tilde\eta\Big).
+\]
+\end{lemma}
+\begin{proof}
+\emph{Step 0: test functions.} Let $\chi(y):=\mathsf s(2-|y|)$. Then $\chi$ is even, $\chi=1$ on $[-1,1]$, $\chi=0$ outside $[-2,2]$, $0\le\chi\le1$, and $\chi\in C^1(\R)$ (near $y=0$ it is constant); for $y>0$, $\chi'(y)=-\mathsf s'(2-y)\le0$, so
+\begin{equation}\tag{T$\chi$}\label{eq:a1-chi}
+ \int_1^2|\chi'(y)|\,\rd y=1,\qquad \chi'(y)=0\ \text{ for }0<y<1\text{ and for }y>2 .
+\end{equation}
+Let
+\[
+ f(x):=\mathsf s\Big(\frac{x-E_1+\tilde\eta}{\tilde\eta}\Big)\,\mathsf s\Big(\frac{E_2+\tilde\eta-x}{\tilde\eta}\Big).
+\]
+The second factor equals $1$ for $x\le E_2$ and the first equals $1$ for $x\ge E_1$; since $E_1<E_2$, $f$ coincides with the first factor on $(-\infty,E_2]$ and with the second on $[E_1,\infty)$. Hence $f\in C^2(\R)$ is real, $0\le f\le1$,
+$f=1$ on $[E_1,E_2]$, $f=0$ outside $(E_1-\tilde\eta,E_2+\tilde\eta)$, $f'$ and $f''$ vanish outside $I_1\cup I_2$ with $I_1:=[E_1-\tilde\eta,E_1]$, $I_2:=[E_2,E_2+\tilde\eta]$, and by \eqref{eq:a1-quintic} (substituting $t=(x-E_1+\tilde\eta)/\tilde\eta$, resp.\ $t=(E_2+\tilde\eta-x)/\tilde\eta$)
+\begin{equation}\tag{T$f$}\label{eq:a1-fbounds}
+ \int_\R|f|\le E_2-E_1+2\tilde\eta\le9,\qquad\int_\R|f'|=2,\qquad\int_\R|f''|=\frac{2}{\tilde\eta}\cdot\frac{15}4=\frac{15}{2\tilde\eta}.
+\end{equation}
+
+\emph{Step 1: a formula for $D:=\frac1N\sum_jf(\lambda_j)-\int_\R f\rhosc$.} For $z\in\C\setminus\R$ let $m(z)$ be defined by the same formula as above and let $\mathfrak s(z):=\int_{-2}^2\rhosc(\lambda)(\lambda-z)^{-1}\rd\lambda$. Then $m(\bar z)=\ol{m(z)}$, $\mathfrak s(\bar z)=\ol{\mathfrak s(z)}$,
+and $\mathfrak s=\msc$ on $\C_+$ by Lemma~\ref{lem:stieltjes}. Put $\Delta(z):=m(z)-\mathfrak s(z)$; thus $\Delta=m-\msc$ on $\C_+$ and $\Delta(\bar z)=\ol{\Delta(z)}$.
+Applying \eqref{eq:HS} with $\lambda=\lambda_j$ and averaging over $j$,
+\[
+ \frac1N\sum_jf(\lambda_j)=\frac1{2\pi}\int_\R\int_\R g(x,y)\,m(x+\ii y)\,\rd x\,\rd y .
+\]
+Multiplying \eqref{eq:HS} by $\rhosc(\lambda)$ and integrating over $\lambda$, Fubini's theorem (justified by \eqref{eq:a1-HSdom}: the integrand is dominated by $\Gamma(x,y)\rhosc(\lambda)$, which is integrable on $\R^3$) gives
+$\int f\rhosc=\frac1{2\pi}\int\!\!\int g(x,y)\mathfrak s(x+\ii y)\,\rd x\,\rd y$. Hence
+\[
+ D=\frac1{2\pi}\int_\R\int_\R g(x,y)\,\Delta(x+\ii y)\,\rd x\,\rd y .
+\]
+By Lemma~\ref{lem:HS}, $g(x,-y)\Delta(x-\ii y)=\ol{g(x,y)\Delta(x+\ii y)}$, so the contributions of $y<0$ and $y>0$ are complex conjugates and $D=\frac1\pi\int_{y>0}\int\re\big[g\,\Delta\big]\rd x\,\rd y$.
+Since $g=\ii yf''\chi+\ii f\chi'-yf'\chi'$ with $f,\chi$ real, $\re[g\Delta]=-yf''\chi\im\Delta-f\chi'\im\Delta-yf'\chi'\re\Delta$. By \eqref{eq:a1-chi} we obtain $D=T_1+T_2+T_3$ with
+\begin{align*}
+ T_1&:=-\frac1\pi\int_1^2\!\!\int_\R\chi'(y)\Big(f(x)\im\Delta(x+\ii y)+yf'(x)\re\Delta(x+\ii y)\Big)\rd x\,\rd y,\\
+ T_2&:=-\frac1\pi\int_0^{\tilde\eta}\!\!\int_\R yf''(x)\im\Delta(x+\ii y)\,\rd x\,\rd y,\qquad
+ T_3:=-\frac1\pi\int_{\tilde\eta}^2\!\!\int_\R yf''(x)\chi(y)\im\Delta(x+\ii y)\,\rd x\,\rd y
+\end{align*}
+(recall $\chi=1$ on $[0,\tilde\eta]\subset[0,1]$). In all three terms $x$ ranges over $\operatorname{supp}f\subset[E_1-\tilde\eta,E_2+\tilde\eta]$, so the hypothesis \eqref{eq:HShyp} is available whenever $\tilde\eta\le y\le2$.
+
+\emph{Step 2: $T_1$.} For $1\le y\le2$, \eqref{eq:HShyp} gives $|\Delta|\le U/(Ny)\le U/N$ and $y|\Delta|\le U/N$. By \eqref{eq:a1-chi}, \eqref{eq:a1-fbounds},
+\[
+ |T_1|\le\frac1\pi\int_1^2|\chi'(y)|\rd y\cdot\frac UN\Big(\int|f|+\int|f'|\Big)\le\frac{11}{\pi}\cdot\frac UN .
+\]
+
+\emph{Step 3: $T_2$.} For $y>0$ and real $x$, $\im m(x+\ii y)=\frac1N\sum_j\frac{y}{(\lambda_j-x)^2+y^2}>0$, and $y\,\im m(x+\ii y)=\frac1N\sum_j\frac{y^2}{(\lambda_j-x)^2+y^2}$ is nondecreasing in $y$. Also $0<\im\msc\le|\msc|\le1$ (Lemma~\ref{lem:msc}).
+Hence for $0<y\le\tilde\eta$ and $x\in[E_1-\tilde\eta,E_2+\tilde\eta]$, using \eqref{eq:HShyp} at $x+\ii\tilde\eta$,
+\[
+ y|\im\Delta(x+\ii y)|\le y\,\im m(x+\ii y)+y\,\im\msc(x+\ii y)\le\tilde\eta\,\im m(x+\ii\tilde\eta)+\tilde\eta\le\tilde\eta\Big(1+\frac{U}{N\tilde\eta}\Big)+\tilde\eta=2\tilde\eta+\frac UN .
+\]
+By \eqref{eq:a1-fbounds},
+\[
+ |T_2|\le\frac1\pi\cdot\tilde\eta\cdot\frac{15}{2\tilde\eta}\Big(2\tilde\eta+\frac UN\Big)=\frac{15}{\pi}\tilde\eta+\frac{15}{2\pi}\cdot\frac UN .
+\]
+
+\emph{Step 4: $T_3$.} The function $\Delta$ is holomorphic on $\C_+$: $m$ is a rational function with real poles and $\msc$ is holomorphic by Lemma~\ref{lem:msc}(i). Therefore $\partial_x\Delta=\Delta'$ and $\partial_y\Delta=\ii\Delta'$ as functions of $(x,y)$, $y>0$, and
+\begin{equation}\tag{CR}\label{eq:a1-CR}
+ \partial_x\im\Delta=\im\Delta'=-\re(\ii\Delta')=-\partial_y\re\Delta .
+\end{equation}
+Fix $y\in[\tilde\eta,2]$. Integrating by parts in $x$ ($f'$ has compact support and $x\mapsto\im\Delta(x+\ii y)$ is $C^1$) and using \eqref{eq:a1-CR},
+\[
+ \int_\R f''(x)\im\Delta(x+\ii y)\,\rd x=-\int_\R f'(x)\,\partial_x\im\Delta(x+\ii y)\,\rd x=\int_\R f'(x)\,\partial_y\re\Delta(x+\ii y)\,\rd x .
+\]
+Insert this into $T_3$ and exchange the order of integration (the integrand $yf'(x)\chi(y)\partial_y\re\Delta(x+\ii y)$ is continuous on the compact set $\operatorname{supp}f'\times[\tilde\eta,2]$). For fixed $x$, integration by parts in $y$, with $\chi(2)=0$ and $\chi(\tilde\eta)=1$, gives
+\[
+ \int_{\tilde\eta}^2y\chi(y)\,\partial_y\re\Delta(x+\ii y)\,\rd y=-\tilde\eta\,\re\Delta(x+\ii\tilde\eta)-\int_{\tilde\eta}^2\big(\chi(y)+y\chi'(y)\big)\re\Delta(x+\ii y)\,\rd y .
+\]
+Hence
+\[
+ T_3=\frac1\pi\int_\R f'(x)\Big[\tilde\eta\,\re\Delta(x+\ii\tilde\eta)+\int_{\tilde\eta}^2\big(\chi(y)+y\chi'(y)\big)\re\Delta(x+\ii y)\,\rd y\Big]\rd x .
+\]
+For $x\in\operatorname{supp}f'\subset I_1\cup I_2$ and $y\in[\tilde\eta,2]$, \eqref{eq:HShyp} gives $|\re\Delta(x+\ii y)|\le U/(Ny)$. So $|\tilde\eta\re\Delta(x+\ii\tilde\eta)|\le U/N$, $\int_{\tilde\eta}^2\chi(y)\frac{U}{Ny}\rd y\le\frac UN\log(2/\tilde\eta)$ and, by \eqref{eq:a1-chi},
+$\int_{\tilde\eta}^2y|\chi'(y)|\frac U{Ny}\rd y=\frac UN$. With $\int|f'|=2$,
+\[
+ |T_3|\le\frac2\pi\cdot\frac UN\big(2+\log(2/\tilde\eta)\big).
+\]
+
+\emph{Step 5: the smooth statistic.} Adding Steps 2--4 and using $\log(2/\tilde\eta)\ge\log4>1.38$:
+\[
+ |D|\le\frac UN\Big(\frac{11}\pi+\frac{15}{2\pi}+\frac4\pi+\frac2\pi\log(2/\tilde\eta)\Big)+\frac{15}\pi\tilde\eta\le5.9\,\frac UN\log(2/\tilde\eta)+4.8\,\tilde\eta ,
+\]
+since $\frac{22.5}{\pi}<7.17<5.2\cdot1.38$ and $5.2+\frac2\pi<5.9$.
+
+\emph{Step 6: removing the smoothing.} Since $\fn(E_2)-\fn(E_1)=\frac1N\#\{j:E_1<\lambda_j\le E_2\}$ and $f=1$ on $[E_1,E_2]$, $0\le f\le1$, $f=0$ outside $I_1\cup[E_1,E_2]\cup I_2$,
+\[
+ \Big|\frac1N\sum_jf(\lambda_j)-\big(\fn(E_2)-\fn(E_1)\big)\Big|\le\frac1N\#\{j:\lambda_j\in I_1\}+\frac1N\#\{j:\lambda_j\in I_2\}.
+\]
+For $E\in\{E_1,E_2\}$: every $j$ with $|\lambda_j-E|\le\tilde\eta$ contributes at least $\frac1{2\tilde\eta}$ to $N\im m(E+\ii\tilde\eta)=\sum_j\frac{\tilde\eta}{(\lambda_j-E)^2+\tilde\eta^2}$, so by \eqref{eq:HShyp} at $E+\ii\tilde\eta$
+\[
+ \#\{j:|\lambda_j-E|\le\tilde\eta\}\le2N\tilde\eta\,\im m(E+\ii\tilde\eta)\le2N\tilde\eta\Big(1+\frac{U}{N\tilde\eta}\Big)=2N\tilde\eta+2U .
+\]
+As $I_1\subset[E_1-\tilde\eta,E_1+\tilde\eta]$ and $I_2\subset[E_2-\tilde\eta,E_2+\tilde\eta]$, the right side of the previous display is at most $4\tilde\eta+4U/N$.
+Similarly, by $0\le\rhosc\le\frac1\pi$ (Lemma~\ref{lem:nsc}(a)),
+\[
+ \Big|\int f\rhosc-\big(\nsc(E_2)-\nsc(E_1)\big)\Big|=\int_{I_1\cup I_2}f\rhosc\le\frac{2\tilde\eta}\pi .
+\]
+Altogether, using $4\le2.9\log(2/\tilde\eta)$,
+\begin{align*}
+ \Big|\big(\fn(E_2)-\fn(E_1)\big)-\big(\nsc(E_2)-\nsc(E_1)\big)\Big|&\le|D|+4\tilde\eta+\frac{4U}N+\frac{2\tilde\eta}\pi\le8.8\,\frac UN\log(2/\tilde\eta)+9.5\,\tilde\eta\\
+ &\le\frac{10}N\Big(U\log(2/\tilde\eta)+N\tilde\eta\Big).\qedhere
+\end{align*}
+\end{proof}
+\begin{remark}\label{rem:count}
+Lemma~\ref{lem:count} is deterministic. It replaces Lemma~5.1 of the original (quoted there from another paper), whose hypothesis did not match its use; here the hypothesis is exactly what Theorem~\ref{thm:K}(i) provides.
+The lemma is applied in Section~\ref{sec:rig} with $E_1=-3$, to the left of the spectrum.
+\end{remark}

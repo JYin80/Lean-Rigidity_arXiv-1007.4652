@@ -1,0 +1,141 @@
+\paragraph{Moments and tail of one entry.} Put $\hat\vartheta:=\min(\vartheta,1)$ and
+\[
+\mathfrak m_k=\mathfrak m_k(\vartheta):=\Big(\frac{90\,k}{\hat\vartheta}\Big)^{k/\hat\vartheta}\qquad(k=3,4,6).
+\]
+These are the moment constants of the standing assumptions (the letters $C_2,C_3,C_4$ denote other constants below).
+Let $\nu$ be a Borel probability measure on $\K$ such that
+\begin{equation}\label{eq:b3:nu}
+\sigma^2:=\int|y|^2\,\nu(dy)\le\frac{C_0}N\qquad\text{and}\qquad\nu\big(\{y:|y|>x\sigma\}\big)\le\vartheta^{-1}e^{-x^\vartheta}\quad\text{for all real }x\ge1 .
+\end{equation}
+Every law $\nu_p$ of an ensemble of size $N$ with $\fA(\Par)$ satisfies \eqref{eq:b3:nu}, by (C) and \eqref{eq:subexp}. Under \eqref{eq:b3:nu}:
+\begin{align}
+&\int|y|^k\,\nu(dy)\le\mathfrak m_k\,\sigma^k\le\mathfrak m_k\,C_0^{k/2}N^{-k/2}\qquad(k=3,4,6),\label{eq:b3:M}\\
+&\nu\big(\{y:|y|>t\}\big)\le N^{-20}.\label{eq:b3:T}
+\end{align}
+\emph{Proof of \eqref{eq:b3:M}.} For $x\ge1$ we have $\vartheta^{-1}e^{-x^\vartheta}\le\hat\vartheta^{-1}e^{-x^{\hat\vartheta}}$: this is an equality if $\vartheta\le1$, and if $\vartheta>1$ then
+$\vartheta^{-1}<1=\hat\vartheta^{-1}$ and $x^\vartheta\ge x$. So $\nu$, regarded as a measure on $\C$, satisfies the hypothesis of Lemma~\ref{lem:moments} with the parameter
+$\hat\vartheta\in(0,1]$ and $s=\sigma$, and Lemma~\ref{lem:moments}(a) with $q=k$ gives $\int|y|^k d\nu\le(90k/\hat\vartheta)^{k/\hat\vartheta}\sigma^k$.
+\emph{Proof of \eqref{eq:b3:T}.} By \eqref{eq:b3:nu} and \textup{(N4)}, $N^{\eg}\sigma\le N^{\eg}C_0^{1/2}N^{-1/2}\le N^{-1/2+2\eg}=t$, so
+$\{|y|>t\}\subset\{|y|>N^{\eg}\sigma\}$. Since $N^{\eg}\ge1$, \eqref{eq:b3:nu} with $x=N^{\eg}$ and \textup{(N3)} give
+$\nu(|y|>t)\le\vartheta^{-1}\exp(-N^{\eg\vartheta})\le N^{-20}$. \qed
+
+\begin{proof}[Proof of Lemma~\ref{lem:RfromS}\textup{(b)}]
+Let $M$ be an ensemble of size $N$ over $\K$ with $\fA(\Par)$ and $p=(a,b)\in\mathcal P_N$. We show
+\begin{equation}\label{eq:b3:incl}
+\big\{x\in\Omega:\ H(x)^{[p]}\notin\cG_p\big\}\ \subset\ \Omega_{\rm edge}\cup\big\{x\in\Omega:\ |x_p|>t\big\}.
+\end{equation}
+Let $x\notin\Omega_{\rm edge}$ with $|x_p|\le t$, and $H=H(x)$. By Definition~\ref{def:ens}, $h_{ab}=x_p$ if $a<b$ and $h_{aa}=\re x_p$ if $a=b$; in both cases $|h_{ab}|\le|x_p|\le t$.
+By the standing assumptions $|E_i-2|\le N^{-2/3+\eg}$ for $i=1,2$, so $[E_1,E_2]\subset I_{\rm edge}$, and since $x\in\Omega^c_{\rm edge}$ (Lemma~\ref{lem:edge}),
+$|G_H(y+i\eta)_{kl}+\delta_{kl}|\le\frac12\Psi$ for all $k,l\in\{a,b\}$ and all $y\in[E_1,E_2]$. By Lemma~\ref{lem:RfromS}(a) (its hypothesis \textup{(D2)} is \textup{(N4)}),
+$H^{[p]}\in\cG_p$. This proves \eqref{eq:b3:incl}.
+
+The three sets in \eqref{eq:b3:incl} are Borel: the first is open (the remark after Definition~\ref{def:goodB}), $\Omega_{\rm edge}$ is open (Lemma~\ref{lem:edge}), and
+$\{|x_p|>t\}$ is open. By Lemma~\ref{lem:edge}, $\P_M(\Omega_{\rm edge})\le N^{-20}$. Under $\P_M$ the coordinate $x_p$ has the law $\nu_p$, with $\sigma_p^2\le C_0/N$ by (C)
+and with \eqref{eq:subexp}; hence $\P_M(|x_p|>t)=\nu_p(\{|y|>t\})\le N^{-20}$ by the tail bound \eqref{eq:b3:T} above (whose proof uses only \textup{(N3)}, \textup{(N4)}).
+Adding the two bounds gives $\P_M(H^{[p]}\notin\cG_p)\le2N^{-20}$.
+\end{proof}
+
+\begin{corollary}[integration over one entry]\label{cor:entry}
+Assume the standing assumptions of \S\ref{sec:step} \textup{(}in particular $\eg\in(0,\frac1{10}]$ and $N\ge N_1(\Par,\eg)$\textup{)}.
+Let $p=(a,b)\in\mathcal P_N$, let $Q\in\cG_p$, $R=G_Q$, $x_0=X(Q)$, and let $u,w,g,\Delta_1,\Delta_2,\Delta_3,P_1,P_2$ be as in Lemmas~\ref{lem:det} and~\ref{lem:expand}.
+Let $\nu$ be a Borel probability measure on $\K$, with $\nu(\R)=1$ if $a=b$, which satisfies \eqref{eq:b3:nu} and $\int y\,\nu(dy)=0$. Put
+\[
+m_{11}:=\int|y|^2\nu(dy)=\sigma^2,\quad m_{20}:=\int y^2\,\nu(dy),\quad\mu_3:=\int|y|^2y\,\nu(dy)\quad\big(\text{so }|\mu_3|\le\mathfrak m_3C_0^{3/2}N^{-3/2}\big),
+\]
+and
+\begin{equation}\label{eq:b3:C2}
+C_2=C_2(\vartheta,C_0):=64\,\mathfrak m_3C_0^{3/2}+16\,\mathfrak m_4C_0^{2}+6\big(1+\mathfrak m_6^{1/2}C_0^{3/2}\big).
+\end{equation}
+Then $v\mapsto F(X(Q+V_p(v)))$ is a bounded continuous function on $\K$, and with
+\[
+\mathfrak D(Q;\nu):=\int_\K\big[F(X(Q+V_p(v)))-F(X(Q))\big]\,\nu(dv)
+\]
+we have
+\begin{align}
+a\ne b:\quad&\Big|\mathfrak D(Q;\nu)-\mathfrak Q_2(Q;\nu)-F'(X(Q))\,\mathfrak T_3(Q;\nu)\Big|\le C_2C_F\,N^{-13/6+4\eg},\label{eq:b3:entry}\\
+a=b:\quad&\Big|\mathfrak D(Q;\nu)-\mathfrak Q_2(Q;\nu)\Big|\le C_2C_F\,N^{-11/6+2\eg},\label{eq:b3:entryd}
+\end{align}
+where $\mathfrak Q_2(Q;\nu):=\int P_2\,d\nu$ and $\mathfrak T_3(Q;\nu):=\int\Delta_3\,d\nu$ are given by the following formulas. For $a\ne b$, with
+$\varkappa:=\br{R_{ba}}-\overline{\br{R_{ab}}}$,
+\begin{align}
+\mathfrak Q_2(Q;\nu)&=\frac{F'(x_0)}\pi\,\im\Big(m_{11}\br{R_{aa}R_{bb}}+\tfrac12m_{20}\br{R_{ba}^2}+\tfrac12\overline{m_{20}}\,\br{R_{ab}^2}\Big)\notag\\
+&\qquad+\frac{F''(x_0)}{4\pi^2}\Big(|\varkappa|^2m_{11}-\re\big(\varkappa^2m_{20}\big)\Big),\label{eq:b3:Q2}\\
+\mathfrak T_3(Q;\nu)&=-\frac1\pi\,\im\br{\big(\mu_3R_{ba}+\overline{\mu_3}\,R_{ab}\big)\,g};\label{eq:b3:T3}
+\end{align}
+for $a=b$,
+\begin{equation}\label{eq:b3:Q2d}
+\mathfrak Q_2(Q;\nu)=m_{11}\Big(\frac{F'(x_0)}{2\pi}\,\im\br{R_{aa}^2}+\frac{F''(x_0)}{2\pi^2}\big(\im\br{R_{aa}}\big)^2\Big).
+\end{equation}
+In particular $\mathfrak Q_2(Q;\nu)$ depends on $\nu$ only through the second moments $m_{11}=\int|y|^2d\nu$ and $m_{20}=\int y^2d\nu$ \textup{(}and $\int\bar y^2d\nu=\overline{m_{20}}$\textup{)},
+and $\mathfrak T_3(Q;\nu)$ only through $\mu_3$. For fixed $\nu$, $\mathfrak Q_2(\cdot\,;\nu)$ and $\mathfrak T_3(\cdot\,;\nu)$ are continuous functions on the Hermitian matrices.
+\end{corollary}
+\begin{proof}
+Throughout, resolvent entries without argument are evaluated at $z_1$ or $z_2$, and $t\le\Psi/40\le\frac1{320}$, $\Psi\le\frac18$ by \textup{(N4)}.
+If $a=b$ then $\nu(\R)=1$ and $V_p(v)=vE^{(aa)}$ for $v\in\R$ (Definition~\ref{def:hyb}), so all integrals below are integrals over $\R$.
+
+\emph{Step 0: integrability; the integrals of $P_1$, $P_2$, $\Delta_3$.} The map $v\mapsto Q+V_p(v)$ is $\R$-linear, hence continuous, into the Hermitian matrices, and $X$ is continuous there
+(Lemma~\ref{lem:Xspec}(c)); so $v\mapsto F(X(Q+V_p(v)))$ is continuous, and bounded by $C_F$. By \eqref{eq:b3:M}, $\int|y|^3d\nu<\infty$, hence all polynomials of degree $\le3$ in
+$(v,\bar v)$ are $\nu$-integrable; in particular $P_1,P_2,\Delta_3$ are, and $|\mu_3|\le\int|y|^3d\nu\le\mathfrak m_3C_0^{3/2}N^{-3/2}$. For a constant $c\in\C$ and a $\nu$-integrable function $\xi$
+we have $\int\im(c\,\xi)\,d\nu=\im\big(c\int\xi\,d\nu\big)$, and $\int\bar\xi\,d\nu=\overline{\int\xi\,d\nu}$.
+
+\emph{Case $a\ne b$.} By \eqref{eq:b1:D1} and $\int v\,d\nu=0=\int\bar v\,d\nu$: $\int\Delta_1d\nu=0$, hence $\int P_1d\nu=F'(x_0)\int\Delta_1d\nu=0$.
+By \eqref{eq:b1:D2}, $\int\Delta_2\,d\nu=\frac1\pi\im\big(m_{11}\br{R_{aa}R_{bb}}+\frac12m_{20}\br{R_{ba}^2}+\frac12\overline{m_{20}}\br{R_{ab}^2}\big)$.
+Next, for complex numbers $c_1,c_2$ and $v$: $\im(c_1v+c_2\bar v)=\im(c_1v)-\im(\overline{c_2}\,v)=\im\big((c_1-\overline{c_2})v\big)$. With $c_1=\br{R_{ba}}$, $c_2=\br{R_{ab}}$ this gives
+$\Delta_1(v)=-\frac1\pi\im(\varkappa v)$ by \eqref{eq:b1:D1}. Since $(\im\xi)^2=\frac12\big(|\xi|^2-\re(\xi^2)\big)$ for $\xi\in\C$,
+\[
+\Delta_1(v)^2=\frac1{2\pi^2}\Big(|\varkappa|^2|v|^2-\re\big(\varkappa^2v^2\big)\Big),\qquad\int\Delta_1^2\,d\nu=\frac1{2\pi^2}\Big(|\varkappa|^2m_{11}-\re\big(\varkappa^2m_{20}\big)\Big).
+\]
+As $P_2=F'(x_0)\Delta_2+\frac12F''(x_0)\Delta_1^2$, this proves \eqref{eq:b3:Q2}. By \eqref{eq:b1:D3} and $\int|v|^2\bar v\,d\nu=\overline{\mu_3}$,
+$\int\Delta_3\,d\nu=-\frac1\pi\im\big(\mu_3\br{R_{ba}g}+\overline{\mu_3}\br{R_{ab}g}\big)$, which is \eqref{eq:b3:T3}.
+
+\emph{Case $a=b$.} Here $\Delta_1(v)=-\frac v\pi\im\br{R_{aa}}$ and $\Delta_2(v)=\frac{v^2}{2\pi}\im\br{R_{aa}^2}$ for $v\in\R$. So $\int P_1d\nu=0$ and, as $\int v^2d\nu=m_{11}$,
+$\int P_2\,d\nu=F'(x_0)\frac{m_{11}}{2\pi}\im\br{R_{aa}^2}+\frac12F''(x_0)\frac{m_{11}}{\pi^2}(\im\br{R_{aa}})^2$, which is \eqref{eq:b3:Q2d}.
+
+\emph{Continuity in $Q$.} $Q\mapsto X(Q)$ and $Q\mapsto R_{kl}(z_i)=G_Q(z_i)_{kl}$ are continuous on the Hermitian matrices (Lemma~\ref{lem:Xspec}(c), Lemma~\ref{lem:basic}(h)),
+and $F',F''$ are continuous; so the right sides of \eqref{eq:b3:Q2}--\eqref{eq:b3:Q2d} are continuous in $Q$.
+
+\emph{The error function.} Define, for $v\in\K$ ($v\in\R$ if $a=b$),
+\[
+e(v):=F\big(X(Q+V_p(v))\big)-F(x_0)-P_1(v)-P_2(v)-\mathbf 1(a\ne b)\,F'(x_0)\Delta_3(v).
+\]
+It is continuous and $\nu$-integrable, and by the above $\int e\,d\nu$ is the quantity inside the modulus in \eqref{eq:b3:entry}, resp.\ in \eqref{eq:b3:entryd}
+(recall $F(x_0)=F(X(Q))$ and $\nu(\K)=1$). We bound
+$\int|e|\,d\nu$ by splitting $\K=\{|v|\le t\}\cup\{|v|>t\}$.
+
+\emph{Step 1: $a\ne b$, the region $|v|\le t$.} Since $t\le\Psi/40$, Lemma~\ref{lem:expand}(b) (with $c_1=4$) gives $|e(v)|\le4C_F(|v|^3\Psi^2+|v|^4\Psi)$ for $|v|\le t$. By \eqref{eq:b3:M}
+and $\Psi=4N^{-1/3+2\eg}$,
+\begin{align*}
+\int_{\{|v|\le t\}}|e|\,d\nu&\le4C_F\Big(\mathfrak m_3C_0^{3/2}N^{-3/2}\cdot16N^{-2/3+4\eg}+\mathfrak m_4C_0^2N^{-2}\cdot4N^{-1/3+2\eg}\Big)\\
+&=C_F\Big(64\,\mathfrak m_3C_0^{3/2}N^{-13/6+4\eg}+16\,\mathfrak m_4C_0^2N^{-7/3+2\eg}\Big)\\
+&\le C_F\big(64\,\mathfrak m_3C_0^{3/2}+16\,\mathfrak m_4C_0^2\big)N^{-13/6+4\eg},
+\end{align*}
+because $-\frac32-\frac23=-\frac{13}6$ and $-\frac73+2\eg\le-\frac{13}6+4\eg$.
+
+\emph{Step 2: $a\ne b$, the region $|v|>t$.} For \emph{all} $v\in\K$, $|F|\le C_F$ and Lemma~\ref{lem:expand}(a) give
+\[
+|e(v)|\le C_F\Big(2+2|v|\Psi+3|v|^2\Psi+\tfrac12(2|v|\Psi)^2+3|v|^3\Psi\Big)\le C_F\big(2+|v|+|v|^2+|v|^3\big)\le4C_F\big(1+|v|^3\big),
+\]
+where we used $\Psi\le\frac18$ (so $2\Psi\le1$, $3\Psi+2\Psi^2\le1$, $3\Psi\le1$) and $|v|,|v|^2\le1+|v|^3$. By the Cauchy--Schwarz inequality, $(1+s)^2\le2+2s^2$, \eqref{eq:b3:T} and \eqref{eq:b3:M} with $k=6$ (note $N^{-3}\le1$),
+\begin{align*}
+\int_{\{|v|>t\}}|e|\,d\nu&\le4C_F\,\nu(|v|>t)^{1/2}\Big(2+2\!\int|v|^6d\nu\Big)^{1/2}\le4\sqrt2\,C_F\,N^{-10}\big(1+\mathfrak m_6C_0^3\big)^{1/2}\\
+&\le6\,C_F\big(1+\mathfrak m_6^{1/2}C_0^{3/2}\big)N^{-10}.
+\end{align*}
+Since $N^{-10}\le N^{-13/6+4\eg}$, Steps 1 and 2 give $\int|e|\,d\nu\le C_2C_FN^{-13/6+4\eg}$, which is \eqref{eq:b3:entry}.
+
+\emph{Step 3: $a=b$.} For $v\in\R$ with $|v|\le t$ $(\le\frac14)$, Lemma~\ref{lem:expand} (case $a=b$) gives $|e(v)|\le4C_F(|v|^3\Psi+v^4)$, so by \eqref{eq:b3:M}
+\begin{align*}
+\int_{\{|v|\le t\}}|e|\,d\nu&\le4C_F\Big(\mathfrak m_3C_0^{3/2}N^{-3/2}\cdot4N^{-1/3+2\eg}+\mathfrak m_4C_0^2N^{-2}\Big)\\
+&\le C_F\big(16\,\mathfrak m_3C_0^{3/2}+4\,\mathfrak m_4C_0^2\big)N^{-11/6+2\eg},
+\end{align*}
+because $-\frac32-\frac13=-\frac{11}6$ and $-2\le-\frac{11}6+2\eg$. For all $v\in\R$, by $|\Delta_1|\le|v|\Psi$ and $|\Delta_2|\le v^2\Psi$:
+$|e(v)|\le C_F(2+|v|\Psi+v^2\Psi+\frac12v^2\Psi^2)\le C_F(2+|v|+v^2)\le4C_F(1+|v|^3)$, and exactly as in Step 2,
+$\int_{\{|v|>t\}}|e|\,d\nu\le6C_F(1+\mathfrak m_6^{1/2}C_0^{3/2})N^{-10}\le6C_F(1+\mathfrak m_6^{1/2}C_0^{3/2})N^{-11/6+2\eg}$. The sum is at most $C_2C_FN^{-11/6+2\eg}$, which is \eqref{eq:b3:entryd}.
+\end{proof}
+
+\noindent\emph{Remarks.} (1) \emph{Exponent check.} Off-diagonal: third moment $N^{-3/2}$ times $\Psi^2=16N^{-2/3+4\eg}$ gives $N^{-13/6+4\eg}$; the fourth-order term $N^{-2}\Psi$
+is smaller by $N^{-1/6-2\eg}$. Diagonal: $N^{-3/2}\cdot\Psi=4N^{-11/6+2\eg}$. The region $|v|>t$ costs $N^{-10}$.
+(2) \emph{What remains.} After Corollary~\ref{cor:entry}, the difference of the two integrals for $\nu^v_p$ and $\nu^w_p$ is, up to the errors \eqref{eq:b3:entry},
+$\mathfrak Q_2(Q;\nu^v_p)-\mathfrak Q_2(Q;\nu^w_p)=0$ (matching second moments) plus $F'(X(Q))\big(\mathfrak T_3(Q;\nu^v_p)-\mathfrak T_3(Q;\nu^w_p)\big)$. By Lemma~\ref{lem:expand}(a),
+$|\mathfrak T_3(Q;\nu)|\le3\mathfrak m_3C_0^{3/2}N^{-3/2}\Psi$ on $\cG_p$, which is of order $N^{-11/6+2\eg}$: too large by a factor $N^{1/6}$ for $N^2/2$ steps. The missing factor $\Psi$
+is gained in the next subsection, in expectation over $Q$.
+(3) \emph{Vanishing variance.} If $\sigma=0$ then $\nu=\delta_0$ (Lemma~\ref{lem:moments}(a)), all quantities in \eqref{eq:b3:entry}, \eqref{eq:b3:entryd} vanish, and the statement is trivial; the proof does not treat this case separately and never divides by $\sigma$.

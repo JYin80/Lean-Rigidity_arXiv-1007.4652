@@ -1,0 +1,115 @@
+\subsection{Proof of Theorem~\ref{thm:24B}}\label{sec:proof24}
+Throughout this subsection
+\[
+\eg:=\tfrac1{50},\qquad\e=\tfrac12\eg=\tfrac1{100},\qquad\delta:=\tfrac1{20},
+\]
+and $L_0,W,E_L,\eta,\ell$ are the parameters \eqref{eq:B2par}, \eqref{eq:B2par2} for this $\eg$; in particular $\eta=N^{-2/3-\eg}$ is the same in
+Proposition~\ref{prop:sandwich} and in Theorem~\ref{thm:gfc}.
+
+\paragraph{The cutoff.} Let $\mathsf S_4:\R\to\R$ be the polynomial step
+\[
+\mathsf S_4(t):=0\ \ (t\le0),\quad\mathsf S_4(t):=t^5\big(126-420t+540t^2-315t^3+70t^4\big)\ \ (0\le t\le1),\quad\mathsf S_4(t):=1\ \ (t\ge1).
+\]
+On $[0,1]$ one has $\mathsf S_4'(t)=630\,t^4(1-t)^4\ge0$ (expand both sides) and $\mathsf S_4(1)=126-420+540-315+70=1$; all derivatives of order $1,\dots,4$ of the polynomial vanish at $t=0$ and at $t=1$
+(because $t^4(1-t)^4$ has zeros of order $4$ there), so $\mathsf S_4\in C^4(\R)$, $\mathsf S_4$ is nondecreasing and $0\le\mathsf S_4\le1$. Fix once and for all
+\[
+q(x):=1-\mathsf S_4(9x-1)\qquad(x\in\R),\qquad C_q:=\max_{0\le k\le3}\sup_{x\in\R}|q^{(k)}(x)|.
+\]
+Then $q\in C^4(\R)$, $0\le q\le1$, $q(x)=1$ for $x\le\frac19$ (as $9x-1\le0$) and $q(x)=0$ for $x\ge\frac29$ (as $9x-1\ge1$). $C_q$ is an explicit absolute constant:
+$|q|\le1$, and for $1\le k\le3$, $q^{(k)}(x)=-9^k\mathsf S_4^{(k)}(9x-1)$, where $\mathsf S_4^{(k)}$ vanishes outside $[0,1]$ and on $[0,1]$ is a polynomial whose modulus is at most the sum of the moduli of its coefficients;
+for $k=3$ this sum is $7560+50400+113400+105840+35280=312480$, and it is smaller for $k=1,2$, so $C_q\le9^3\cdot312480<2.3\cdot10^8$ (numerically $C_q=9^3\cdot\frac{315}4\approx5.7\cdot10^4$, the value of $9^3|\mathsf S_4'''|$ at $t=\frac12$).
+Thus $q$ is an admissible function in
+Proposition~\ref{prop:sandwich} (it is continuous, hence Borel) and an admissible $F$ in Theorem~\ref{thm:gfc}, with $C_F=C_q$. Monotonicity of $q$ is not used.
+(Any $q\in C^3(\R)$ with the same three properties would do, for instance $q(x)=1-\mathsf S(9x-1)$ with the smooth transition function $\mathsf S$ of Mathlib; then $C_q$ is finite by compactness, but not explicit.)
+
+\paragraph{The threshold.} Let $N_1=N_1(\Par,\frac1{50})$ be the threshold of Lemma~\ref{lem:N0} (it is also the threshold of Theorem~\ref{thm:gfc}), and let $C_4=C_4(\vartheta,C_0)$ be the
+constant of Theorem~\ref{thm:gfc} for $\eg=\frac1{50}$. Define
+\begin{equation}\label{eq:B2N0}
+N_0^{\rm edge}(\Par):=\max\Big\{N_1,\ (2C_4C_q)^{300/11}\Big\}.
+\end{equation}
+It depends only on $\Par$ (through the constants $A_0,C,c,\phi,N_0$ of Part~I, through $\vartheta,C_0$, and through $N_1,C_4$), and not on $s$, $\K$ or the ensembles.
+For $N\ge N_0^{\rm edge}(\Par)$ the conditions (N1)--(N5) of Lemma~\ref{lem:N0} hold with $\eg=\frac1{50}$, and in addition
+\begin{itemize}
+\item[\textup{(N6)}] $C_4C_qN^{-1/6+4\eg}+2N^{-20}\le N^{-\delta}$.
+\end{itemize}
+Indeed $-\frac16+4\eg=-\frac{13}{150}=-\frac1{20}-\frac{11}{300}$, so $C_4C_qN^{-1/6+4\eg}=C_4C_qN^{-11/300}\cdot N^{-\delta}\le\frac12N^{-\delta}$ because
+$N^{11/300}\ge2C_4C_q$; and $2N^{-20}\le\frac12N^{-\delta}$ because $N^{20-\delta}\ge4$ (as $N\ge N_1\ge e^{27}$).
+
+\begin{proposition}[one-sided comparison]\label{prop:oneside}
+Let $N\ge N_0^{\rm edge}(\Par)$, $\K\in\{\R,\C\}$, and let $M^v,M^w$ be ensembles of size $N$ over $\K$ which satisfy $\fA(\Par)$ and have matching second moments
+\eqref{eq:2m}. Then for every $s\in\R$:
+\[
+\P^v\big(N^{2/3}(\lambda_N-2)\le s-N^{-\e}\big)\le\P^w\big(N^{2/3}(\lambda_N-2)\le s\big)+N^{-\delta}.
+\]
+\end{proposition}
+\begin{proof}
+For $r\in\R$ the event $\{x:N^{2/3}(\lambda_N(H(x))-2)\le r\}$ is closed by Lemma~\ref{lem:weyl}(d), so all probabilities below are defined.
+Let $\cR^v,\cR^w$ be the event $\cR$ of the proof of Proposition~\ref{prop:sandwich} (it does not depend on the ensemble), considered under $\P^v$ and under $\P^w$;
+by \eqref{eq:B2Rc}, $\P^v(\Omega\setminus\cR)\le N^{-20}$ and $\P^w(\Omega\setminus\cR)\le N^{-20}$, and on $\cR$, by (R1), $N^{2/3}|\lambda_N-2|<(\log N)^{L_0}$.
+Note $N^{-20}\le N^{-\delta}$.
+
+\emph{Case A: $s>(\log N)^{L_0}$.} On $\cR$, $N^{2/3}(\lambda_N-2)<(\log N)^{L_0}<s$. Hence
+$\P^w(N^{2/3}(\lambda_N-2)\le s)+N^{-\delta}\ge\P^w(\cR)+N^{-20}\ge1$, which is at least the left side.
+
+\emph{Case B: $s<-(\log N)^{L_0}$.} On $\cR$, $N^{2/3}(\lambda_N-2)>-(\log N)^{L_0}>s>s-N^{-\e}$. Hence the left side is at most
+$\P^v(\Omega\setminus\cR)\le N^{-20}\le N^{-\delta}$, which is at most the right side.
+
+\emph{Case C: $|s|\le(\log N)^{L_0}$.} Put $E:=2+sN^{-2/3}$; then $|E-2|\le W$. By \eqref{eq:B2etaell}, $3\ell=N^{-2/3-\e}$, so
+$\{N^{2/3}(\lambda_N-2)\le s-N^{-\e}\}=\{\lambda_N\le E-3\ell\}\subset\{\lambda_N<E-2\ell\}$. The point $E':=E-2\ell$ satisfies $2-2W\le2-W-2\ell\le E'<E\le2+W$ (by (N5), $2\ell\le W$),
+and $E'+\ell=E-\ell$, so $X^+_{E'}=X_{E-\ell,E_L,\eta}=X^-_E$. Put $E_1:=E-\ell$, $E_2:=E_L$. Then $E_1<E_2$ (Proposition~\ref{prop:sandwich}),
+$|E_1-2|\le W+\ell\le2W\le N^{-2/3+\eg}$ and $|E_2-2|=2W\le N^{-2/3+\eg}$ by (N2) and (N5). Moreover, by Definition~\ref{def:X} and \eqref{eq:green},
+$X_{E_1,E_2,\eta}(H)=\frac1\pi\int_{E_1}^{E_2}\im\tr G_H(y+i\eta)\,dy=\frac N\pi\int_{E_1}^{E_2}\im m(y+i\eta)\,dy$, which is the argument of $F$ in Theorem~\ref{thm:gfc}. Therefore
+\begin{align*}
+\P^v\big(N^{2/3}(\lambda_N-2)\le s-N^{-\e}\big)&\le\P^v(\lambda_N<E')\\
+&\le\E^v\,q\big(X^+_{E'}(H)\big)+N^{-20}&&\text{(a)}\\
+&=\E^v\,q\big(X_{E_1,E_2,\eta}(H)\big)+N^{-20}&&\text{(b)}\\
+&\le\E^w\,q\big(X_{E_1,E_2,\eta}(H)\big)+C_4C_qN^{-1/6+4\eg}+N^{-20}&&\text{(c)}\\
+&=\E^w\,q\big(X^-_{E}(H)\big)+C_4C_qN^{-1/6+4\eg}+N^{-20}&&\text{(b)}\\
+&\le\P^w(\lambda_N<E)+C_4C_qN^{-1/6+4\eg}+2N^{-20}&&\text{(d)}\\
+&\le\P^w\big(N^{2/3}(\lambda_N-2)\le s\big)+N^{-\delta}&&\text{(e)}
+\end{align*}
+Here (a) is the upper bound of Proposition~\ref{prop:sandwich} for $M^v$ at the point $E'$; (b) is $X^+_{E'}=X_{E_1,E_2,\eta}=X^-_E$; (c) is Theorem~\ref{thm:gfc} with
+$F=q$; (d) is the lower bound of Proposition~\ref{prop:sandwich} for $M^w$ at the point $E$; (e) is (N6) together with $\{\lambda_N<E\}\subset\{\lambda_N\le E\}$.
+Theorem~\ref{thm:gfc} applies because $N\ge N_1$, $M^v,M^w$ satisfy $\fA(\Par)$ and \eqref{eq:2m}, $\eta=N^{-2/3-\eg}$, $E_1\le E_2$, $|E_i-2|\le N^{-2/3+\eg}$, and $q\in C^3(\R)$
+with $C_F=C_q$. Proposition~\ref{prop:sandwich} applies because $N\ge N_1$, $E,E'\in[2-2W,2+W]$, and $M^v$, $M^w$ satisfy $\fA(\Par)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:24B}]
+Let $\Par$ be given, $N\ge N_0^{\rm edge}(\Par)$, $\K\in\{\R,\C\}$, and let $M^v,M^w$ be as in the theorem; let $s\in\R$.
+
+\emph{The first inequality of \eqref{eq:tw}} is Proposition~\ref{prop:oneside}.
+
+\emph{The second inequality of \eqref{eq:tw}.} The hypotheses of Proposition~\ref{prop:oneside} are symmetric in $(M^v,M^w)$ (\eqref{eq:2m} is an equality). Applied to the pair
+$(M^w,M^v)$ at the point $s+N^{-\e}$ it gives $\P^w(N^{2/3}(\lambda_N-2)\le s)\le\P^v(N^{2/3}(\lambda_N-2)\le s+N^{-\e})+N^{-\delta}$.
+
+\emph{The inequalities \eqref{eq:tw1} for $\lambda_1$.} By Lemma~\ref{lem:hyb}(iii), the pair $(-M^v,-M^w)$ satisfies the hypotheses of the theorem (same $\Par$, same $N$, same $\K$),
+so \eqref{eq:tw} holds for it, at every point; we use it at the point $-s$. For $r\in\R$ let $S_r$ be the set of Hermitian $N\times N$ matrices $A$ with
+$N^{2/3}(\lambda_N(A)-2)\le r$; it is closed, because $|\lambda_N(A)-\lambda_N(A')|\le\|A-A'\|$ (Lemma~\ref{lem:weyl}(b)). By Lemma~\ref{lem:weyl}(c), $\lambda_N(-A)=-\lambda_1(A)$, so
+\[
+-A\in S_r\iff N^{2/3}\big(-\lambda_1(A)-2\big)\le r\iff N^{2/3}\big(\lambda_1(A)+2\big)\ge-r .
+\]
+Since the law of $H$ under $\P_{-M}$ is the law of $-H$ under $\P_M$ (Lemma~\ref{lem:hyb}(iii)), for $M\in\{M^v,M^w\}$ and every $r\in\R$:
+\begin{equation}\label{eq:B2refl}
+\P_{-M}\big(N^{2/3}(\lambda_N-2)\le r\big)=\P_{-M}(H\in S_r)=\P_M(-H\in S_r)=\P_M\big(N^{2/3}(\lambda_1+2)\ge-r\big).
+\end{equation}
+The first inequality of \eqref{eq:tw} for $(-M^v,-M^w)$ at $-s$ reads
+$\P_{-M^v}(N^{2/3}(\lambda_N-2)\le-s-N^{-\e})-N^{-\delta}\le\P_{-M^w}(N^{2/3}(\lambda_N-2)\le-s)$; by \eqref{eq:B2refl} with $r=-s-N^{-\e}$ and $r=-s$ this is
+\[
+\P^v\big(N^{2/3}(\lambda_1+2)\ge s+N^{-\e}\big)-N^{-\delta}\le\P^w\big(N^{2/3}(\lambda_1+2)\ge s\big),
+\]
+the first inequality of \eqref{eq:tw1}. The second inequality of \eqref{eq:tw} for $(-M^v,-M^w)$ at $-s$ reads
+$\P_{-M^w}(N^{2/3}(\lambda_N-2)\le-s)\le\P_{-M^v}(N^{2/3}(\lambda_N-2)\le-s+N^{-\e})+N^{-\delta}$; by \eqref{eq:B2refl} with $r=-s$ and $r=-s+N^{-\e}$ this is
+\[
+\P^w\big(N^{2/3}(\lambda_1+2)\ge s\big)\le\P^v\big(N^{2/3}(\lambda_1+2)\ge s-N^{-\e}\big)+N^{-\delta},
+\]
+the second inequality of \eqref{eq:tw1}.
+
+\emph{Quantifiers.} $\e=\frac1{100}$ and $\delta=\frac1{20}$ are absolute; $N_0^{\rm edge}$ \eqref{eq:B2N0} depends only on $\Par$. The parameters $\delta_\pm$ enter only through the
+thresholds $N_0$ (of Part~I) and $N_1$; the exponents and the constant $C_4(\vartheta,C_0)$ do not depend on them.
+\end{proof}
+
+\begin{remark}[other values of $\e,\delta$]\label{rem:B2eps}
+The same proof works for every $\e\in(0,\frac1{48})$ and every $\delta\in(0,\frac16-8\e)$, with $\eg:=2\e$: then $\eg<\frac1{24}\le\frac1{10}$, so Lemma~\ref{lem:N0},
+Proposition~\ref{prop:sandwich} and Theorem~\ref{thm:gfc} apply, and (N6) holds for large $N$ because $-\frac16+4\eg=-\frac16+8\e<-\delta$. The threshold becomes
+$\max\{N_1,(2C_4C_q)^{1/(\frac16-8\e-\delta)},4^{1/(20-\delta)}\}$.
+\end{remark}

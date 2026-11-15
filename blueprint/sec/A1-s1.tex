@@ -1,0 +1,99 @@
+\section{Introduction and conventions}\label{sec:intro}
+
+\subsection{The results and the scope of this paper}
+A \emph{generalized Wigner matrix} is an $N\times N$ Hermitian or real symmetric random matrix $H=(h_{ij})$ whose entries are independent up to the symmetry
+constraint, centred, with variances $\sigma_{ij}^2=\EE|h_{ij}|^2$ that may depend on $(i,j)$ but sum to one in every row. The paper
+of Erd\H{o}s, Yau and Yin, \emph{Rigidity of eigenvalues of generalized Wigner matrices} (below: \emph{the original}), established four results for such
+matrices, under a spectral gap condition on the matrix of variances and a subexponential decay condition on the entries:
+\begin{itemize}[leftmargin=2em,itemsep=1pt]
+\item the \emph{strong local semicircle law} (Theorem~\ref{thm:21}): the Stieltjes transform $m(z)$ of the empirical spectral measure and the individual entries $G_{ij}(z)$
+of the resolvent are close to their deterministic limits, down to the optimal scale $\im z\gg N^{-1}$, with the optimal error $(N\im z)^{-1}$ for $m$, uniformly in
+the energy up to the spectral edges, together with the bound $2+N^{-2/3+o(1)}$ on the norm of $H$;
+\item the \emph{rigidity of eigenvalues} (Theorem~\ref{thm:22}): the $j$-th eigenvalue is within $N^{-2/3+o(1)}\min(j,N+1-j)^{-1/3}$ of its classical location $\gamma_j$;
+\item the \emph{strong local ergodicity of Dyson Brownian motion} (Theorem~\ref{thm:23}): after a time $t\gg N^{-1}$ the local eigenvalue statistics in the bulk, averaged over a small
+energy window, coincide with those of the Gaussian ensemble, with an explicit power-law error;
+\item the \emph{universality of the extreme eigenvalues} (Theorem~\ref{thm:24}): the distributions of the largest (and of the smallest) eigenvalue of two generalized Wigner
+matrices with matching first two moments agree on the scale $N^{-2/3}$.
+\end{itemize}
+The present paper, called NP below, proves these four theorems again. Its purpose is different from that of the original: NP is written as the mathematical
+source of a formalization in Lean~4 with Mathlib. This has three consequences.
+
+\emph{(1) Self-containedness.} No result is quoted from another paper or book. Whatever is not available in Mathlib is proved here. A statement marked \infra\ (``infrastructure'') is a standard result of analysis, linear algebra or probability
+which is \emph{not} available in Mathlib and which NP therefore proves in full (for instance the Helffer--Sj\"ostrand formula, the joint eigenvalue density of the Gaussian ensembles,
+the Pr\'ekopa--Leindler inequality); the marker carries no other meaning, and it indicates the places where the formalization will have to add material to Mathlib.
+Appendix~\ref{app:mathlib} lists the facts that \emph{are} taken from Mathlib. In particular the inputs which the original takes from earlier papers
+(the Schur complement identities, the large deviation bounds for quadratic forms, the properties of $\msc$, the a priori bound on the norm, the Helffer--Sj\"ostrand
+argument for the counting function, the logarithmic Sobolev inequality and the local relaxation flow) are all proved, in most cases by an argument chosen for
+its shortness and for the absence of analytic prerequisites.
+
+\emph{(2) Finite-$N$ statements with explicit quantifiers.} There are no limits and no ``with high probability'': every probability is bounded by an explicit expression,
+every constant has a stated dependence, and the order of the quantifiers is fixed once and for all (Convention~\ref{conv:const}).
+
+\emph{(3) New proofs where the old ones are long.} The statements are those of the original, up to the corrections listed in Appendix~\ref{app:diff}; several proofs are new.
+
+NP has three parts. Part~I (Sections~\ref{sec:intro}--\ref{sec:export}) contains the model, the four statements, and the proofs of Theorems~\ref{thm:21}
+and~\ref{thm:22}. Part~II (Section~\ref{sec:edge}) proves Theorem~\ref{thm:24} and Part~III (Sections~\ref{sec:C1}--\ref{sec:C9}) proves Theorem~\ref{thm:23}; both use Theorems~\ref{thm:21}, \ref{thm:22} and the auxiliary results
+collected in Section~\ref{sec:export}, and nothing else from Part~I. The appendices contain the bookkeeping of the exponents of Part~I (Appendix~\ref{app:ledger}), its dependency graph
+(Appendix~\ref{app:dep}), the list of differences from the original (Appendix~\ref{app:diff}) and the list of facts taken from Mathlib (Appendix~\ref{app:mathlib}).
+
+\subsection{Strategy of Part~I}
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+\item \emph{One level parameter.} The original works with three coupled exponents (in the factors $(\log N)^{\ell}$, $(\log N)^{L}$ and in an iteration index).
+Here a single real parameter $K$, the \emph{level}, with $(\log N)^3\le K\le N^{c_0}$, is fixed. Every error factor is an explicit power $K^{C}$ and every exceptional
+probability is at most $N^{C}e^{-K}$. The main internal result is Theorem~\ref{thm:K}; Theorems~\ref{thm:21} and~\ref{thm:22}, with the original powers of $\log N$, follow
+from it by the substitution $K=(\log N)^{\phi L}$ with a small constant $\phi$ (Proposition~\ref{prop:reduction}, proved in Section~\ref{sec:main}).
+\item \emph{Probabilistic input} (Section~\ref{sec:prob}). Large deviation bounds for linear, quadratic and bilinear forms in independent variables with unequal, possibly
+vanishing variances. They are derived from Hoeffding's inequality after truncation, with a deterministic decoupling of the off-diagonal quadratic form.
+\item \emph{Entrywise (weak) law} (Section~\ref{sec:weak}). Schur complement identities, the large deviation bounds conditionally on a minor, stability of the self-consistent
+equation (the vector part on $\be^\perp$ without any factor $\log N$; the scalar part is a quadratic inequality), and a \emph{deterministic} continuity argument in
+$\eta=\im z$ along a finite lattice.
+\item \emph{Fluctuation averaging} (Section~\ref{sec:FA}). For the index set $L$ of a $p$-fold product one conditions on the minor $H^{(L)}$; the block of $G$ on $L$ is the inverse of an
+$|L|\times|L|$ matrix $M$ whose entry $M_{ab}$ depends only on the rows $a$ and $b$ of $H$. A finite Neumann expansion in the off-diagonal part of $M$ exhibits the exact dependence
+structure, and the terms in which a lone index is not visited have zero expectation. This replaces the thirty pages of Section~7 of the original.
+\item \emph{Strong law} (Section~\ref{sec:strong}). A moment inequality that improves itself in one step (no iteration), followed by a dichotomy and a continuity argument at the level
+of events; a second pass gives the improved bound outside the spectrum.
+\item \emph{Norm bound} (Section~\ref{sec:norm}). A crude bound $\norm H\le K^{C}$ from a grid net and Hoeffding's inequality; eigenvalues between $2+K^{C_3}N^{-2/3}$ and the crude bound
+are excluded by the averaged law outside the spectrum.
+\item \emph{Rigidity} (Sections~\ref{sec:det} and~\ref{sec:rig}). The Helffer--Sj\"ostrand formula, proved from the divergence theorem on rectangles (Lemma~\ref{lem:HS}); a deterministic
+bound on the counting function in terms of $m-\msc$ (Lemma~\ref{lem:count}); and a deterministic conversion lemma which turns the bound on the counting function
+into the bound on $\lambda_j-\gamma_j$ with the factor $\min(j,N+1-j)^{-1/3}$, at both edges at once (Lemma~\ref{lem:conv}).
+\end{enumerate}
+The semicircle law itself enters only through the algebraic function $\msc$: its equation, its size (Lemmas~\ref{lem:msc}, \ref{lem:mscsize}), and the fact that it is the
+Stieltjes transform of $\rhosc$ (Lemma~\ref{lem:stieltjes}), which is needed only for the counting function.
+
+\subsection{Conventions}\label{sec:conv}
+\begin{convention}[Constants]\label{conv:const}
+The \emph{model parameters} are $\vth>0$, $\delta_->0$, $\delta_+>0$, $C_0>0$. By the monotonicity of the assumptions
+(Lemma~\ref{lem:mono}(ii)) we assume in all proofs that $\vth\le1$, $\dpm\le1$, $C_0\ge1$, and we put
+\[
+ \fa:=1/\vth\ \ (\ge1),\qquad \delta_{\min}:=\min(\delta_-,\delta_+).
+\]
+Letters $C,c$ denote positive constants that depend only on $(\vth,\delta_-,\delta_+,C_0)$; their values may change from
+line to line, and they never depend on $N$, $K$, $z$, the ensemble, the field $\kk$, or indices. An \emph{absolute} constant is a fixed real number.
+Named constants ($c_*$, $C_*$, $C_s$, $\lambda_{\rm st}$, $c_F$, $C_1,\dots,C_7$, \dots) keep their value throughout Part~I. Parts~II and~III use a few
+constants with the same names ($C_2,C_3,C_4$ and $\Psi$ in Section~\ref{sec:edge}; $c_0,c_1$, $\Psi$ and others in Part~III); these are defined locally in the section where they occur,
+are unrelated to the constants of Part~I, and this is recalled there. The letter $\delta$ without index is used only for the exponents of Theorems~\ref{thm:23} and~\ref{thm:24}
+(as in the original); the two are unrelated, and each is local to its theorem and to its proof.
+``For $N\ge N_0$'' means: for all $N$ above a threshold that depends only on the model parameters.
+Quantifiers are always in the order: model parameters $\to$ constants $\to$ $N_0$ $\to$ ($N$, $\kk$, ensemble) $\to$ $K$ (or $L$) $\to$ $z$.
+\end{convention}
+\begin{convention}[Probability]\label{conv:prob}
+All probabilities are explicit. An event is called \emph{$K$-likely} if its complement has probability at most $N^{C}e^{-K}$
+with a constant $C$ as in Convention~\ref{conv:const}. A union of at most $N^{C'}$ complements of $K$-likely events has probability
+at most $N^{C+C'}e^{-K}$, and
+\[
+ N^{C}e^{-K}\le e^{-K/2}\qquad\text{whenever }K\ge(\log N)^3\text{ and }(\log N)^2\ge2C,
+\]
+because then $C\log N\le\frac12(\log N)^3\le K/2$. Events indexed by uncountably many $z$
+are always handled as: a finite lattice of $z$'s, a union bound, and a deterministic Lipschitz extension; the final statements
+assert the existence of a measurable event of large probability on which a bound holds for all $z$.
+\end{convention}
+\begin{convention}[Spectral parameter]\label{conv:z}
+$z=E+\ii\eta$ with $E\in\R$, $\eta>0$; $\kappa:=\big||E|-2\big|$; $\varkappa:=\sqrt{\kappa+\eta}$. We write $\C_+:=\{z\in\C:\im z>0\}$.
+\end{convention}
+\begin{convention}[General notation]\label{conv:not}
+$\log$ is the natural logarithm. For $x\in\C^n$, $|x|$ is the Euclidean norm, $\norm x_\infty$ the maximum norm, and $\langle x,y\rangle=\sum_i\ol{x_i}y_i$;
+for a matrix $A$, $\norm A$ is the operator norm with respect to the Euclidean norm. $\bone(\cdot)$ is an indicator, $\#S$ the cardinality of a finite set $S$,
+$(t)_+:=\max(t,0)$, and $|I|$ is the length of an interval $I$. For a complex number $\zeta\notin(-\infty,0]$, $\sqrt\zeta$ is the principal square root (the one with positive real part).
+Integrals without a measure are with respect to Lebesgue measure.
+\end{convention}

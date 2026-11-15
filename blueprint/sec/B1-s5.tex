@@ -1,0 +1,277 @@
+
+\subsection{One-entry replacement: exact expansion of the functional}\label{sec:step}
+\textbf{Standing assumptions for \S\ref{sec:step}--\ref{sec:gfc}.} $\eg\in(0,\frac1{10}]$, $N\ge N_1(\Par,\eg)$,
+$\eta=N^{-2/3-\eg}$, $\Psi=4N^{-1/3+2\eg}$, $t=N^{-1/2+2\eg}$; $E_1\le E_2$ with $|E_i-2|\le N^{-2/3+\eg}$; $z_i=E_i+i\eta$;
+$X=X_{E_1,E_2,\eta}$; $F\in C^3(\R)$ with $C_F:=\max_{0\le k\le3}\sup_\R|F^{(k)}|<\infty$. $c_1,c_2,\dots$ are absolute
+numerical constants; $\mathfrak m_k=\mathfrak m_k(\vartheta)$ are the moment constants of (S5) in the explicit form \eqref{eq:b3:M}.
+The probabilistic statements of \S\ref{sec:step}--\ref{sec:gfc} (Lemma~\ref{lem:RfromS}(b), Corollary~\ref{cor:entry}, Lemma~\ref{lem:decor}, Proposition~\ref{prop:step}, Theorem~\ref{thm:gfc}) hold
+under these standing assumptions, which are repeated in each of them.
+
+\medskip\noindent\textbf{What the deterministic statements use.} Definition~\ref{def:goodB}, Lemma~\ref{lem:RfromS}(a) and Lemma~\ref{lem:expand} are
+deterministic, and they use the standing assumptions only through the following three consequences:
+\begin{itemize}\itemsep0pt
+\item[\textup{(D1)}] $\eta>0$; $E_1\le E_2$ are real; $z_i=E_i+i\eta$; $X=X_{E_1,E_2,\eta}$ (Definition~\ref{def:X});
+\item[\textup{(D2)}] $0<\Psi\le\frac18$ and $0\le t\le\Psi/40$ \quad(this is \textup{(N4)} of Lemma~\ref{lem:N0});
+\item[\textup{(D3)}] $F\in C^3(\R)$ and $\sup_\R|F'|,\ \sup_\R|F''|,\ \sup_\R|F'''|\le C_F$.
+\end{itemize}
+In particular neither $N$, nor the position of $E_1,E_2$ relative to the edge, nor the size of $\eta$ plays any role in these statements, and
+they hold for every Hermitian matrix in $M_N(\C)$, $N\ge1$. All numerical constants below are derived using only $\frac1\pi<\frac13$ and
+$\Psi\le\frac18$; they were also checked by exact rational arithmetic and by random sampling.
+
+\begin{definition}[good set for the pair $p=(a,b)$]\label{def:goodB}
+$\cG_p:=\big\{Q\in M_N(\C)\text{ Hermitian}:\ |G_Q(y+i\eta)_{kl}+\delta_{kl}|\le\Psi\ \text{for all }k,l\in\{a,b\},\ y\in[E_1,E_2]\big\}$ (a closed set).
+\end{definition}
+\noindent\emph{Closedness.} For fixed $y$ and $k,l$ the function $Q\mapsto G_Q(y+i\eta)_{kl}$ is continuous on the Hermitian matrices, because
+$|G_Q(z)_{kl}-G_{Q'}(z)_{kl}|\le\eta^{-2}\|Q-Q'\|$ by Lemma~\ref{lem:basic}(h); so each of the conditions defines a closed set, and $\cG_p$ is their
+intersection. Since $x\mapsto H(x)^{[p]}$ is linear, hence continuous, $\{x\in\Omega:\ H(x)^{[p]}\in\cG_p\}$ is a closed, in particular Borel, subset of $\Omega$.
+Every $Q\in\cG_p$ satisfies in particular the \emph{endpoint condition}
+\begin{equation}\label{eq:b1:end}
+|G_Q(z_i)_{kl}+\delta_{kl}|\le\Psi\qquad\text{for all }k,l\in\{a,b\}\text{ and }i\in\{1,2\},
+\end{equation}
+and \eqref{eq:b1:end} is all that Lemma~\ref{lem:expand} uses.
+
+\begin{lemma}[bounds for the matrix with one entry removed]\label{lem:RfromS}
+\textup{(a) (deterministic)} Let $H\in M_N(\C)$ be Hermitian, $p=(a,b)$, $Q=H^{[p]}$. If $|h_{ab}|\le t$ and
+$|G_H(y+i\eta)_{kl}+\delta_{kl}|\le\frac12\Psi$ for all $k,l\in\{a,b\}$, $y\in[E_1,E_2]$, then $Q\in\cG_p$.
+More precisely, for every single $y\in\R$: if $|h_{ab}|\le t$ and $|G_H(y+i\eta)_{kl}+\delta_{kl}|\le\frac12\Psi$ for all $k,l\in\{a,b\}$, then for all $k,l\in\{a,b\}$
+\begin{equation}\label{eq:b1:RS}
+\big|G_Q(y+i\eta)_{kl}-G_H(y+i\eta)_{kl}\big|\le\tfrac43|h_{ab}|\le\tfrac1{30}\Psi\qquad\text{and}\qquad\big|G_Q(y+i\eta)_{kl}+\delta_{kl}\big|\le\Psi .
+\end{equation}
+\textup{(b)} Under the standing assumptions of \S\ref{sec:step} \textup{(}in particular $\eg\in(0,\frac1{10}]$, $N\ge N_1(\Par,\eg)$, $\eta=N^{-2/3-\eg}$, $|E_i-2|\le N^{-2/3+\eg}$\textup{)}:
+for every ensemble $M$ of size $N$ with $\fA(\Par)$ and every pair $p$, $\ \P_M\big(H^{[p]}\notin\cG_p\big)\le2N^{-20}$.
+\end{lemma}
+\begin{proof}[Proof of \textup{(a)}]
+It suffices to prove the statement for a single $y$. Fix $y\in\R$, $z:=y+i\eta$, and write $S:=G_H(z)$, $R:=G_Q(z)$, $h:=h_{ab}$ and
+$V:=V_p(h)=H-Q$ (Definition~\ref{def:hyb}). By Lemma~\ref{lem:basic}(h) with $(A,B)=(H,Q)$, $S-R=S\,(Q-H)\,R=-SVR$, i.e.
+\[
+R=S+SVR\qquad\text{(exactly)}.
+\]
+Let $P:=\{a,b\}$ and $m:=|P|\in\{1,2\}$. Since $V_{ij}=0$ unless $i,j\in P$, we get for $k,l\in P$: $R_{kl}=S_{kl}+\sum_{i,j\in P}S_{ki}V_{ij}R_{jl}$.
+In terms of the $P\times P$ blocks $R_P,S_P$ and $C:=V_P$ (so $C=\big(\begin{smallmatrix}0&h\\ \bar h&0\end{smallmatrix}\big)$ if $a\ne b$, and $C=(h)$ if $a=b$)
+this is the \emph{closed} $m\times m$ identity
+\begin{equation}\label{eq:b1:closed}
+R_P=S_P+S_PC\,R_P .
+\end{equation}
+For an $m\times m$ matrix $\mathsf A$ let $\|\mathsf A\|_\infty:=\max_k\sum_l|\mathsf A_{kl}|$ (maximal row sum). Then $|\mathsf A_{kl}|\le\|\mathsf A\|_\infty$ and
+$\|\mathsf A\mathsf B\|_\infty\le\|\mathsf A\|_\infty\|\mathsf B\|_\infty$, since $\sum_l|\sum_j\mathsf A_{kj}\mathsf B_{jl}|\le\sum_j|\mathsf A_{kj}|\sum_l|\mathsf B_{jl}|$.
+By hypothesis $|S_{kk}|\le1+\frac12\Psi$ and $|S_{kl}|\le\frac12\Psi$ for $k\ne l$ in $P$, so $\|S_P\|_\infty\le1+\Psi$; and $\|C\|_\infty=|h|$, because each row
+of $C$ has exactly one entry that may be nonzero, of modulus $|h|$. Hence, with \textup{(D2)},
+\[
+\|S_PC\|_\infty\le\tau:=(1+\Psi)|h|\le\tfrac98\cdot\tfrac1{320}=\tfrac{9}{2560}<1 .
+\]
+Taking norms in \eqref{eq:b1:closed}: $\|R_P\|_\infty\le\|S_P\|_\infty+\tau\|R_P\|_\infty$, so $\|R_P\|_\infty\le(1+\Psi)/(1-\tau)$, and then, again by \eqref{eq:b1:closed},
+\[
+\|R_P-S_P\|_\infty=\|S_PC\,R_P\|_\infty\le\frac{\tau\,(1+\Psi)}{1-\tau}=\frac{(1+\Psi)^2}{1-\tau}\,|h|\le\frac{81}{64}\cdot\frac{2560}{2551}\,|h|\le\frac43|h| ,
+\]
+because $81\cdot2560\cdot3=622080\le4\cdot64\cdot2551=653056$. This is the first bound in \eqref{eq:b1:RS}; $\frac43|h|\le\frac43t\le\frac1{30}\Psi$ by \textup{(D2)}.
+Finally $|R_{kl}+\delta_{kl}|\le|S_{kl}+\delta_{kl}|+|R_{kl}-S_{kl}|\le(\frac12+\frac1{30})\Psi\le\Psi$.
+\end{proof}
+\noindent\emph{Remark.} The exact identity \eqref{eq:b1:closed} replaces the tenth-order expansion with the trivial bound $\eta^{-1}$ of the original, (6.45);
+it is the only place where information is transferred from $H$ to $Q=H^{[p]}$. No inverse of $1-S_PC$ and no Neumann series is needed.
+The statement is pointwise in $y$; in particular the endpoint condition \eqref{eq:b1:end} for $Q$ follows from $|h_{ab}|\le t$ and the bound
+$|G_H(z_i)_{kl}+\delta_{kl}|\le\frac12\Psi$ at the two points $z_1,z_2$ alone.
+
+\begin{lemma}[expansion of the functional; deterministic]\label{lem:expand}
+Assume \textup{(D1)--(D3)}. Let $p=(a,b)$, $Q\in\cG_p$ \textup{(or, more generally, let $Q\in M_N(\C)$ be Hermitian and satisfy the endpoint condition \eqref{eq:b1:end})},
+$R=G_Q$, $x_0:=X(Q)$, and $u,w,g$ as in Lemma~\ref{lem:det}. Let $c_1:=4$.
+
+\smallskip\noindent\textup{\textbf{Case $a\ne b$.}} For $v\in\K$ define the real numbers
+\begin{gather*}
+\Delta_1(v):=-\tfrac1\pi\im\br{u(v;\cdot)},\qquad\Delta_2(v):=\tfrac1\pi\im\br{w(v;\cdot)+\tfrac12u(v;\cdot)^2},\\
+\Delta_3(v):=-\tfrac1\pi\im\br{u(v;\cdot)\,w(v;\cdot)},
+\end{gather*}
+\[
+P_1(v):=F'(x_0)\Delta_1(v),\qquad P_2(v):=F'(x_0)\Delta_2(v)+\tfrac12F''(x_0)\Delta_1(v)^2 .
+\]
+\textup{(a)} $\Delta_k$ is a homogeneous real polynomial of degree $k$ in $(v,\bar v)$ whose coefficients are polynomials
+in $R_{kl}(z_i)$, $k,l\in\{a,b\}$, $i=1,2$, and their complex conjugates; explicitly,
+\begin{align}
+\Delta_1(v)&=-\tfrac1\pi\im\Big(v\,\br{R_{ba}}+\bar v\,\br{R_{ab}}\Big),\label{eq:b1:D1}\\
+\Delta_2(v)&=\tfrac1\pi\im\Big(|v|^2\,\br{R_{aa}R_{bb}}+\tfrac12v^2\,\br{R_{ba}^2}+\tfrac12\bar v^2\,\br{R_{ab}^2}\Big),\label{eq:b1:D2}\\
+\Delta_3(v)&=-\tfrac1\pi\im\Big(|v|^2v\,\br{R_{ba}\,g}+|v|^2\bar v\,\br{R_{ab}\,g}\Big).\label{eq:b1:D3}
+\end{align}
+For all $v\in\K$: $|\Delta_1(v)|\le2|v|\Psi$, $|\Delta_2(v)|\le3|v|^2\Psi$, $|\Delta_3(v)|\le3|v|^3\Psi$. Moreover $|g(z_i)-1|\le\frac94\Psi$ and $|g(z_i)|\le\frac43$ for $i=1,2$.\\
+\textup{(b)} For all $v\in\K$ with $|v|\le\Psi/40$:
+\[
+\Big|F\big(X(Q+V_p(v))\big)-F(x_0)-P_1(v)-P_2(v)-F'(x_0)\Delta_3(v)\Big|\le c_1C_F\big(|v|^3\Psi^2+|v|^4\Psi\big),
+\]
+and $|X(Q+V_p(v))-x_0|\le\frac32|v|\Psi$.
+
+\smallskip\noindent
+\textup{\textbf{Case $a=b$}} ($v\in\R$). With $\Delta_1(v):=-\frac v\pi\im\br{R_{aa}}$, $\Delta_2(v):=\frac{v^2}{2\pi}\im\br{R_{aa}^2}$ and the same
+$P_1,P_2$: $|\Delta_1(v)|\le|v|\Psi$ and $|\Delta_2(v)|\le|v|^2\Psi$ for all $v\in\R$, and for $|v|\le\frac14$:
+\[
+\big|F(X(Q+V_p(v)))-F(x_0)-P_1(v)-P_2(v)\big|\le c_1C_F\big(|v|^3\Psi+|v|^4\big),
+\]
+and $|X(Q+V_p(v))-x_0|\le|v|\Psi+|v|^4$.
+\end{lemma}
+
+\begin{proof}
+Throughout, $z\in\{z_1,z_2\}$, all resolvent entries are evaluated at $z$, and we use \eqref{eq:b1:end}, $\Psi\le\frac18$, $\frac1\pi<\frac13$ and \eqref{eq:b1:br}.
+
+\medskip\noindent\textbf{Case $a\ne b$. Step 0: sizes of $u$, $g$, $w$ at $z_1,z_2$.} Write $R_{aa}=-1+\alpha$, $R_{bb}=-1+\beta$. By \eqref{eq:b1:end},
+$|\alpha|,|\beta|,|R_{ab}|,|R_{ba}|\le\Psi$. Hence
+\begin{align}
+&|u|\le|v||R_{ba}|+|v||R_{ab}|\le2|v|\Psi,\label{eq:b1:u}\\
+&g-1=(-1+\alpha)(-1+\beta)-R_{ab}R_{ba}-1=-\alpha-\beta+\alpha\beta-R_{ab}R_{ba},\qquad|g-1|\le2\Psi+2\Psi^2\le\tfrac94\Psi,\label{eq:b1:g}\\
+&|g|\le1+\tfrac94\cdot\tfrac18=\tfrac{41}{32}\le\tfrac43,\qquad|w|=|v|^2|g|\le\tfrac43|v|^2,\label{eq:b1:w}\\
+&|\im w|=|v|^2|\im(g-1)|\le\tfrac94|v|^2\Psi,\label{eq:b1:imw}\\
+&|\im w^2|=|v|^4|\im(g^2-1)|\le|v|^4|g-1||g+1|\le|v|^4\cdot\tfrac94\Psi\cdot\big(2+\tfrac9{32}\big)=\tfrac{657}{128}|v|^4\Psi\le6|v|^4\Psi .\label{eq:b1:imw2}
+\end{align}
+In \eqref{eq:b1:imw} and \eqref{eq:b1:imw2} we used that $|v|^2$ and $|v|^4$ are real: \emph{the leading parts of the even-order terms $w$, $w^2$ are real and drop
+out under $\im$.}
+
+\medskip\noindent\textbf{Step 1: part (a).} By definition $u=vR_{ba}+\bar vR_{ab}$, $u^2=v^2R_{ba}^2+2|v|^2R_{ab}R_{ba}+\bar v^2R_{ab}^2$ and
+$w=|v|^2(R_{aa}R_{bb}-R_{ab}R_{ba})$, so
+\[
+w+\tfrac12u^2=|v|^2R_{aa}R_{bb}+\tfrac12v^2R_{ba}^2+\tfrac12\bar v^2R_{ab}^2,\qquad uw=|v|^2v\,R_{ba}g+|v|^2\bar v\,R_{ab}g .
+\]
+Since $v$ does not depend on the spectral parameter, taking $\br{\cdot}$ gives \eqref{eq:b1:D1}--\eqref{eq:b1:D3}. For a complex number $c$ and integers
+$j,l\ge0$, $\im(c\,v^j\bar v^l)=\frac1{2i}(c\,v^j\bar v^l-\bar c\,\bar v^jv^l)$; hence each $\Delta_k$ is a real valued homogeneous polynomial of degree $k$ in
+$(v,\bar v)$, with coefficients as stated. The bounds follow from \eqref{eq:b1:br} and Step~0:
+\begin{align}
+|\Delta_1|&\le\tfrac1\pi\big(|u(z_1)|+|u(z_2)|\big)\le\tfrac4\pi|v|\Psi\le\tfrac43|v|\Psi,\label{eq:b1:bD1}\\
+|\Delta_2|&\le\tfrac1\pi\sum_{i=1,2}\big(|\im w(z_i)|+\tfrac12|u(z_i)|^2\big)\le\tfrac2\pi\big(\tfrac94+2\Psi\big)|v|^2\Psi\le\tfrac2\pi\cdot\tfrac52|v|^2\Psi\le\tfrac53|v|^2\Psi,\label{eq:b1:bD2}\\
+|\Delta_3|&\le\tfrac1\pi\sum_{i=1,2}|u(z_i)||w(z_i)|\le\tfrac2\pi\cdot2|v|\Psi\cdot\tfrac43|v|^2\le\tfrac{16}9|v|^3\Psi .\label{eq:b1:bD3}
+\end{align}
+These are stronger than the bounds $2|v|\Psi$, $3|v|^2\Psi$, $3|v|^3\Psi$ claimed in (a). No restriction on $|v|$ was used.
+
+\medskip\noindent\textbf{Step 2: the exact formula.} Let $|v|\le\Psi/40$, so $|v|\le\frac1{320}$. Put $\zeta(z):=u(v;z)-w(v;z)=D_p(v;z)-1$. By \eqref{eq:b1:u}, \eqref{eq:b1:w}
+and $|v|\le\Psi/40$,
+\begin{equation}\label{eq:b1:zeta}
+|\zeta(z_i)|\le2|v|\Psi+\tfrac43|v|\cdot\tfrac{\Psi}{40}=\tfrac{61}{30}|v|\Psi\ \le\ \tfrac{61}{30}\cdot\tfrac1{320}\cdot\tfrac18<\tfrac12\qquad(i=1,2).
+\end{equation}
+By Corollary~\ref{cor:Xchange}(i),
+\begin{equation}\label{eq:b1:Delta}
+\Delta:=X(Q+V_p(v))-x_0=-\frac1\pi\im\br{\Log(1+\zeta)} .
+\end{equation}
+(If $Q\in\cG_p$, the bound \eqref{eq:b1:zeta} holds at $y+i\eta$ for every $y\in[E_1,E_2]$ by the same computation, so that $|D_p(v;y+i\eta)-1|\le\frac12$ on the whole
+segment; by \eqref{eq:b1:nocut} this information is not needed.)
+
+\medskip\noindent\textbf{Step 3: expansion of the logarithm.} Let $r_3(\zeta):=\Log(1+\zeta)-\zeta+\frac12\zeta^2$. By \eqref{eq:b1:L2} and \eqref{eq:b1:zeta},
+\[
+|r_3(\zeta(z_i))|\le\tfrac23\big(\tfrac{61}{30}\big)^3|v|^3\Psi^3\le6|v|^3\Psi^3\qquad\big(\tfrac23\cdot\tfrac{226981}{27000}<5.61\big).
+\]
+Algebraically, $\zeta-\frac12\zeta^2=u-w-\frac12(u-w)^2=u-\big(w+\frac12u^2\big)+uw-\frac12w^2$. Inserting $\Log(1+\zeta)=\zeta-\frac12\zeta^2+r_3(\zeta)$ into
+\eqref{eq:b1:Delta} and comparing with the definitions of $\Delta_1,\Delta_2,\Delta_3$,
+\begin{equation}\label{eq:b1:split}
+\Delta=\Delta_1+\Delta_2+\Delta_3+\Delta_4+\Delta_r,\qquad\Delta_4:=\tfrac1{2\pi}\im\br{w^2},\qquad\Delta_r:=-\tfrac1\pi\im\br{r_3(\zeta)},
+\end{equation}
+an exact identity, and by \eqref{eq:b1:imw2} and \eqref{eq:b1:br},
+\begin{equation}\label{eq:b1:bD4}
+|\Delta_4|\le\tfrac1{2\pi}\cdot2\cdot6|v|^4\Psi\le2|v|^4\Psi,\qquad|\Delta_r|\le\tfrac2\pi\cdot6|v|^3\Psi^3\le4|v|^3\Psi^3 .
+\end{equation}
+\textbf{Step 4: sizes.} By \eqref{eq:b1:split}, \eqref{eq:b1:bD1}--\eqref{eq:b1:bD3}, \eqref{eq:b1:bD4}, and $|v|\le\frac1{320}$, $\Psi\le\frac18$:
+\begin{align}
+|\Delta-\Delta_1|&\le|\Delta_2|+|\Delta_3|+|\Delta_4|+|\Delta_r|\le|v|^2\Psi\Big(\tfrac53+\tfrac{16}9|v|+2|v|^2+4|v|\Psi^2\Big)\le2|v|^2\Psi,\label{eq:b1:s1}\\
+|\Delta+\Delta_1|&\le2|\Delta_1|+|\Delta-\Delta_1|\le\big(\tfrac83+2|v|\big)|v|\Psi\le3|v|\Psi,\label{eq:b1:s2}\\
+|\Delta|&\le|\Delta_1|+|\Delta-\Delta_1|\le\big(\tfrac43+2|v|\big)|v|\Psi\le\tfrac32|v|\Psi .\label{eq:b1:s3}
+\end{align}
+(In \eqref{eq:b1:s1}: $\frac53+\frac{16}{9\cdot320}+\frac2{320^2}+\frac4{320\cdot64}<1.68$.)
+
+\medskip\noindent\textbf{Step 5: Taylor expansion of $F$.} By Taylor's formula with Lagrange remainder and \textup{(D3)},
+\[
+F(x_0+\Delta)=F(x_0)+F'(x_0)\Delta+\tfrac12F''(x_0)\Delta^2+\rho_3,\qquad|\rho_3|\le\tfrac16C_F|\Delta|^3 .
+\]
+Subtract $P_1+P_2+F'(x_0)\Delta_3=F'(x_0)(\Delta_1+\Delta_2+\Delta_3)+\frac12F''(x_0)\Delta_1^2$ and use \eqref{eq:b1:split} and $\Delta^2-\Delta_1^2=(\Delta-\Delta_1)(\Delta+\Delta_1)$:
+\begin{equation}\label{eq:b1:err}
+F(x_0+\Delta)-F(x_0)-P_1-P_2-F'(x_0)\Delta_3=F'(x_0)\big(\Delta_4+\Delta_r\big)+\tfrac12F''(x_0)(\Delta-\Delta_1)(\Delta+\Delta_1)+\rho_3 .
+\end{equation}
+By \eqref{eq:b1:bD4}, \eqref{eq:b1:s1}--\eqref{eq:b1:s3} the modulus of the right side is at most
+\begin{align*}
+C_F\Big(2|v|^4\Psi+4|v|^3\Psi^3+\tfrac12\cdot2\cdot3\,|v|^3\Psi^2+\tfrac16\cdot\tfrac{27}8|v|^3\Psi^3\Big)
+&=C_F\Big(\big(3+\tfrac{73}{16}\Psi\big)|v|^3\Psi^2+2|v|^4\Psi\Big)\\
+&\le C_F\Big(\tfrac{457}{128}|v|^3\Psi^2+2|v|^4\Psi\Big),
+\end{align*}
+and $\frac{457}{128}<3.58\le c_1$. Since $X(Q+V_p(v))=x_0+\Delta$, this is the first claim of (b); the second is \eqref{eq:b1:s3}.
+The bounds on $g$ stated in (a) are \eqref{eq:b1:g}, \eqref{eq:b1:w}.
+
+\medskip\noindent\textbf{Case $a=b$} ($v\in\R$). Write $R_{aa}=-1+\alpha$ with $|\alpha|\le\Psi$ at $z_1,z_2$ by \eqref{eq:b1:end}. Then, at $z_1$ and $z_2$,
+\begin{equation}\label{eq:b1:diag0}
+\begin{aligned}
+&|R_{aa}|\le1+\Psi\le\tfrac98,\qquad|\im R_{aa}|=|\im\alpha|\le\Psi,\\
+&|\im R_{aa}^2|=|\im(R_{aa}^2-1)|=|\im(\alpha(\alpha-2))|\le(2+\Psi)\Psi\le\tfrac{17}8\Psi,\\
+&|\im R_{aa}^3|=|\im(R_{aa}^3+1)|=|\im(\alpha(3-3\alpha+\alpha^2))|\le(3+3\Psi+\Psi^2)\Psi\le\tfrac{217}{64}\Psi ,
+\end{aligned}
+\end{equation}
+where we used $R^2-1=(R+1)(R-1)$ and $R^3+1=(R+1)(R^2-R+1)$ with $R=-1+\alpha$. Since $v$ is real, \eqref{eq:b1:br} gives, for all $v\in\R$,
+\begin{equation}\label{eq:b1:diag1}
+|\Delta_1|\le\tfrac{|v|}\pi\cdot2\Psi\le\tfrac23|v|\Psi,\qquad|\Delta_2|\le\tfrac{v^2}{2\pi}\cdot2\cdot\tfrac{17}8\Psi\le\tfrac{17}{24}v^2\Psi ,
+\end{equation}
+which are stronger than the claimed bounds $|v|\Psi$, $|v|^2\Psi$.
+
+Let now $|v|\le\frac14$ and $\zeta(z):=vR_{aa}(z)=D_p(v;z)-1$. Then $|\zeta(z_i)|\le\frac98|v|\le\frac9{32}<\frac12$, and by Corollary~\ref{cor:Xchange}(i),
+$\Delta:=X(Q+V_p(v))-x_0=-\frac1\pi\im\br{\Log(1+\zeta)}$. Let $r_4(\zeta):=\Log(1+\zeta)-\zeta+\frac12\zeta^2-\frac13\zeta^3$; by \eqref{eq:b1:L3},
+$|r_4(\zeta(z_i))|\le\frac12\big(\frac98\big)^4v^4=\frac{6561}{8192}v^4$. As $v$ is real, $-\frac1\pi\im\br{\zeta}=\Delta_1$ and $-\frac1\pi\im\br{-\frac12\zeta^2}=\Delta_2$, so
+\begin{equation}\label{eq:b1:diagsplit}
+\Delta=\Delta_1+\Delta_2+\Delta_3'+\Delta_r',\qquad\Delta_3':=-\tfrac{v^3}{3\pi}\im\br{R_{aa}^3},\qquad\Delta_r':=-\tfrac1\pi\im\br{r_4(\zeta)},
+\end{equation}
+and by \eqref{eq:b1:diag0}, \eqref{eq:b1:br},
+\begin{equation}\label{eq:b1:diag2}
+|\Delta_3'|\le\tfrac{|v|^3}{3\pi}\cdot2\cdot\tfrac{217}{64}\Psi\le\tfrac{217}{288}|v|^3\Psi\le|v|^3\Psi,\qquad|\Delta_r'|\le\tfrac2\pi\cdot\tfrac{6561}{8192}v^4\le v^4 .
+\end{equation}
+Using $|v|\le\frac14$ and $\Psi\le\frac18$ we get from \eqref{eq:b1:diag1}--\eqref{eq:b1:diag2}
+\begin{align}
+|\Delta-\Delta_1|&\le v^2\Psi+|v|^3\Psi+v^4\le\tfrac54v^2\Psi+v^4,\label{eq:b1:ds1}\\
+|\Delta|&\le\tfrac23|v|\Psi+\tfrac54v^2\Psi+v^4\le\big(\tfrac23+\tfrac5{16}\big)|v|\Psi+v^4\le|v|\Psi+v^4\le|v|\big(\tfrac18+\tfrac1{64}\big)\le\tfrac15|v|,\label{eq:b1:ds2}\\
+|\Delta+\Delta_1|&\le|\Delta|+|\Delta_1|\le\tfrac9{64}|v|+\tfrac1{12}|v|\le\tfrac13|v| .\label{eq:b1:ds3}
+\end{align}
+Exactly as in Step~5 (Taylor's formula to second order with remainder $|\rho_3|\le\frac16C_F|\Delta|^3$, and \eqref{eq:b1:diagsplit}),
+\[
+F(x_0+\Delta)-F(x_0)-P_1-P_2=F'(x_0)\big(\Delta_3'+\Delta_r'\big)+\tfrac12F''(x_0)(\Delta-\Delta_1)(\Delta+\Delta_1)+\rho_3 ,
+\]
+and, bounding $|\Delta|^3\le(\frac15|v|)^2(|v|\Psi+v^4)$ by \eqref{eq:b1:ds2}, the modulus of the right side is at most
+\begin{align*}
+&C_F\Big(|v|^3\Psi+v^4+\tfrac12\big(\tfrac54v^2\Psi+v^4\big)\tfrac{|v|}3+\tfrac1{150}\big(|v|^3\Psi+|v|^6\big)\Big)\\
+&\qquad\le C_F\Big(\big(1+\tfrac5{24}+\tfrac1{150}\big)|v|^3\Psi+\big(1+\tfrac1{24}+\tfrac1{2400}\big)v^4\Big)\le2C_F\big(|v|^3\Psi+v^4\big),
+\end{align*}
+where $|v|^5\le\frac14v^4$ and $|v|^6\le\frac1{16}v^4$ were used. Since $2\le c_1$, this is the claimed expansion; the bound
+$|X(Q+V_p(v))-x_0|=|\Delta|\le|v|\Psi+v^4$ is contained in \eqref{eq:b1:ds2}.
+\end{proof}
+
+\noindent\emph{Remarks on Lemma~\ref{lem:expand}.}
+(1) \emph{Where the factors $\Psi$ come from.} Every term of the expansion carries at least one factor $\Psi$: the odd-order terms $u$, $uw$ through the
+off-diagonal entries $R_{ab},R_{ba}$ \eqref{eq:b1:u}; the even-order terms $w$, $w^2$ through $\im$, because $g=1+O(\Psi)$ and the leading parts
+$|v|^2$, $|v|^4$ are real \eqref{eq:b1:imw}, \eqref{eq:b1:imw2}. For a diagonal entry the same mechanism gives one factor $\Psi$ up to third order \eqref{eq:b1:diag0},
+because $R_{aa}^k=(-1)^k+O(\Psi)$.
+
+(2) \emph{Size table.} Table~1 lists every term that occurs in the proof for $a\ne b$, with the constant proved above. The third column gives the order of the
+term after integration against a law $\nu$ with $\int|v|^k\,d\nu\le\mathfrak m_kC_0^{k/2}N^{-k/2}$ \eqref{eq:b3:M}, for $\Psi=4N^{-1/3+2\eg}$; it is meant as orientation only
+(the integration, including the region $|v|>t$, is carried out in Corollary~\ref{cor:entry}).
+
+\begin{center}\footnotesize
+\begin{tabular}{l|l|l|l}
+term & bound under \eqref{eq:b1:end}, $|v|\le\Psi/40$ & order after $\int\!\cdot\,d\nu$ & fate\\\hline
+$F'\Delta_1$ & $\frac43C_F|v|\Psi$ \eqref{eq:b1:bD1} & $=0$ exactly (mean zero) & $P_1$\\[1pt]
+$F'\Delta_2$ & $\frac53C_F|v|^2\Psi$ \eqref{eq:b1:bD2} & second moments only & $P_2$, matched\\[1pt]
+$\frac12F''\Delta_1^2$ & $\frac89C_F|v|^2\Psi^2$ & second moments only & $P_2$, matched\\[1pt]
+$F'\Delta_3$ & $\frac{16}9C_F|v|^3\Psi$ \eqref{eq:b1:bD3} & $N^{-3/2}\Psi\sim N^{-11/6+2\eg}$ & \textbf{key term}, Lemma~\ref{lem:decor}\\[1pt]
+$\frac12F''(\Delta-\Delta_1)(\Delta+\Delta_1)$ & $3C_F|v|^3\Psi^2$ \eqref{eq:b1:s1}, \eqref{eq:b1:s2} & $N^{-3/2}\Psi^2\sim N^{-13/6+4\eg}$ & error (leading)\\[1pt]
+$F'\Delta_r$ & $4C_F|v|^3\Psi^3$ \eqref{eq:b1:bD4} & $N^{-5/2+6\eg}$ & error\\[1pt]
+$\rho_3$ & $\frac9{16}C_F|v|^3\Psi^3$ \eqref{eq:b1:s3} & $N^{-5/2+6\eg}$ & error\\[1pt]
+$F'\Delta_4$ & $2C_F|v|^4\Psi$ \eqref{eq:b1:bD4} & $N^{-2}\Psi\sim N^{-7/3+2\eg}$ & error
+\end{tabular}\\[3pt]
+Table 1: the terms of the expansion for $a\ne b$.
+\end{center}
+
+\noindent The leading part of the fifth row is $F''\Delta_1\Delta_2$; the fifth row also contains $F''(\Delta-\Delta_1)^2$ and $F''\Delta_1\Delta_3$
+(both of size $|v|^4\Psi^2$), and the terms $F'''\Delta_1^3$ and $\rho_4$ of a fourth-order expansion are contained in $\rho_3$. The four error rows add up to at most
+$C_F\big(\frac{457}{128}|v|^3\Psi^2+2|v|^4\Psi\big)$. For $a=b$ and $|v|\le\frac14$ the corresponding list is: $F'\Delta_1$: $\frac23C_F|v|\Psi$; $F'\Delta_2$: $\frac{17}{24}C_Fv^2\Psi$;
+$\frac12F''\Delta_1^2$: $\frac29C_Fv^2\Psi^2$ (these form $P_1$, $P_2$); errors: $F'\Delta_3'$: $C_F|v|^3\Psi$ (order $N^{-3/2}\Psi\sim N^{-11/6+2\eg}$ after integration);
+$F'\Delta_r'$: $C_Fv^4$ (order $N^{-2}$); $\frac12F''(\Delta-\Delta_1)(\Delta+\Delta_1)$: $C_F(\frac5{24}|v|^3\Psi+\frac16|v|^5)$; $\rho_3$: $\frac1{150}C_F(|v|^3\Psi+|v|^6)$.
+
+\textbf{Exponent check} (for the standing assumptions, $\Psi=4N^{-1/3+2\eg}$): off-diagonal, $N^{-3/2}\cdot\Psi^2=16N^{-3/2-2/3+4\eg}=16N^{-13/6+4\eg}$ and
+$N^{-2}\cdot\Psi=4N^{-7/3+2\eg}\le4N^{-13/6+4\eg}$; diagonal, $N^{-3/2}\cdot\Psi=4N^{-11/6+2\eg}$ and $N^{-2}\le N^{-11/6+2\eg}$.
+
+(3) \emph{The key term.} By \eqref{eq:b1:D3}, for a probability measure $\nu$ on $\K$ with $\int|v|^3d\nu<\infty$ and $\mu_3:=\int|v|^2v\,d\nu$,
+\[
+\int\Delta_3(v)\,\nu(dv)=-\frac1\pi\im\br{(\mu_3R_{ba}+\overline{\mu_3}R_{ab})\,g} ,
+\]
+which is the quantity $\mathfrak T_3(Q;\nu)$ of Corollary~\ref{cor:entry}; and by \eqref{eq:b1:D1}, \eqref{eq:b1:D2}, $\int P_1\,d\nu=0$ if $\int v\,d\nu=0$, while $\int P_2\,d\nu$ depends on
+$\nu$ only through $\int v^2d\nu$, $\int|v|^2d\nu$, $\int\bar v^2d\nu$.
+
+(4) \emph{Endpoints only; consequence for the use of Theorem~\ref{thm:21}.} Lemma~\ref{lem:expand} and Corollary~\ref{cor:Xchange} use the resolvent of $Q$ only at the two points
+$z_1,z_2$, and Lemma~\ref{lem:RfromS}(a) is pointwise in $y$. Hence all deterministic statements of \S\ref{sec:X} and of this subsection remain valid if the good sets
+($\cG_p$ in Definition~\ref{def:goodB}, $\Omega_{\rm edge}^c$ in Lemma~\ref{lem:edge}) are defined by conditions at $y\in\{E_1,E_2\}$ only. With such definitions the proof plans of \S\ref{sec:step}--\ref{sec:gfc} would use
+the bound of Theorem~\ref{thm:21}(ii) at the two fixed spectral parameters $z_1,z_2$ only, and not its simultaneity in $z$. We do \emph{not} use this simplification here;
+it is recorded as an optional simplification for the formalization.

@@ -1,0 +1,179 @@
+% =====================================================================
+% NP -- Rigidity of eigenvalues of generalized Wigner matrices: a self-contained proof.
+% Version 1.1. Main file; the sections are in sec/*.tex.
+% =====================================================================
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{alltt}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,hypertexnames=false]{hyperref}
+\numberwithin{equation}{section}
+\setcounter{tocdepth}{2}
+
+% ---------------- theorem-like environments ----------------
+% Part I: definitions, remarks, conventions have their own counter (per section).
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{convention}[definition]{Convention}
+% Parts II and III: one counter for all statements of a section;
+% switched by \useSharedCounters at the beginning of Part II.
+\newcommand{\useSharedCounters}{%
+  \theoremstyle{definition}%
+  \let\definition\relax\let\enddefinition\relax
+  \let\remark\relax\let\endremark\relax
+  \newtheorem{definition}[theorem]{Definition}%
+  \newtheorem{remark}[theorem]{Remark}%
+  \theoremstyle{plain}}
+% lettered auxiliary statements of Part III: numbered <section>.A, <section>.B, ...
+\theoremstyle{plain}
+\newtheorem{auxlemma}{Lemma}[section]
+\renewcommand{\theauxlemma}{\thesection.\Alph{auxlemma}}
+\theoremstyle{definition}
+\newtheorem{auxdefinition}[auxlemma]{Definition}
+\newtheorem{auxremark}[auxlemma]{Remark}
+% unnumbered restatement of a theorem of Part I inside Part III
+\theoremstyle{plain}
+\newcommand{\restatedname}{Theorem}
+\newtheorem*{restated}{\restatedname}
+
+% ---------------- macros ----------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\msc}{m_{sc}}
+\newcommand{\rhosc}{\varrho_{sc}}
+\newcommand{\nsc}{n_{sc}}
+\newcommand{\fn}{\mathfrak{n}}
+\newcommand{\fa}{\mathfrak{a}}
+\newcommand{\fL}{\mathfrak{L}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\Ld}{\Lambda_d}
+\newcommand{\Lo}{\Lambda_o}
+\newcommand{\vth}{\vartheta}
+\newcommand{\dpm}{\delta_\pm}
+\newcommand{\Emax}{E_{\max}}
+\newcommand{\infra}{\textup{[INFRA]}}
+\newcommand{\plan}{\noindent\textit{Proof plan.}\ }
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\avg}[1]{[#1]}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\K}{\Bbbk}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\eg}{\varepsilon_{\mathrm g}}
+\newcommand{\Par}{\mathsf{Par}}
+\newcommand{\fA}{\mathfrak{A}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\br}[1]{\big[#1\big]_{1}^{2}}
+
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Ent}{\operatorname{Ent}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\dv}{\operatorname{div}}
+\newcommand{\Sig}{\Sigma_N}
+\newcommand{\cSig}{\overline{\Sigma}_N}
+\newcommand{\INFRA}{\textup{[INFRA]}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\sloppy
+\emergencystretch=4em
+\allowdisplaybreaks
+
+\begin{document}
+\title{Rigidity of eigenvalues of generalized Wigner matrices:\\ a self-contained proof}
+\author{Jun Yin \quad Claude\\[1.5ex] \normalsize Version 1.2 --- written as the source of a Lean~4 formalization;\\ \normalsize based on L.~Erd\H{o}s, H.-T.~Yau, J.~Yin, arXiv:1007.4652}
+\date{}
+\maketitle
+
+\begin{abstract}
+We give a self-contained proof of the four main results of L.~Erd\H{o}s, H.-T.~Yau and J.~Yin, \emph{Rigidity of eigenvalues of generalized Wigner matrices}
+(arXiv:1007.4652): the strong local semicircle law (Theorem~\ref{thm:21}), the rigidity of the eigenvalues (Theorem~\ref{thm:22}), the strong local ergodicity of
+Dyson Brownian motion (Theorem~\ref{thm:23}) and the universality of the extreme eigenvalues (Theorem~\ref{thm:24}), for real symmetric and complex Hermitian
+generalized Wigner matrices with subexponentially decaying entries. All statements are quantitative and hold for every finite $N$ beyond an explicit threshold;
+the only results used without proof are standard facts available in Lean's Mathlib, listed in Appendix~\ref{app:mathlib}. Several proofs differ from those of the
+original; the differences in the statements are listed in Appendix~\ref{app:diff}.
+The text is organised in three parts: Part~I (Sections~\ref{sec:intro}--\ref{sec:export}) contains the model, the statements and the proofs of Theorems~\ref{thm:21} and~\ref{thm:22};
+Part~II (Section~\ref{sec:edge}) proves Theorem~\ref{thm:24}; Part~III (Sections~\ref{sec:C1}--\ref{sec:C9}) proves Theorem~\ref{thm:23}.
+\end{abstract}
+
+\tableofcontents
+
+% ================= PART I =================
+\clearpage
+\part[The model and the main results; the local semicircle law and rigidity (Theorems 2.1, 2.2)]{The model and the main results;\\ the local semicircle law and rigidity (Theorems 2.1 and 2.2)}
+\input{sec/A1-s1}
+\input{sec/A1-s2}
+\input{sec/A1-s31}
+\input{sec/A2-s32-34}
+\input{sec/A1-s35}
+\input{sec/A3-s4-5}
+\input{sec/A4-s6}
+\input{sec/A5-s7-8}
+\input{sec/A1-s9}
+\input{sec/A5-s10}
+
+% ================= PART II =================
+\clearpage
+\part{Universality of the extreme eigenvalues (Theorem 2.4)}
+\useSharedCounters
+\section{Edge universality}\label{sec:edge}
+\input{sec/B2-s1}
+\input{sec/B3-s2}
+\input{sec/B1-s3}
+\input{sec/B2-s4}
+\input{sec/B1-s5}
+\input{sec/B3-s5}
+\input{sec/B3-s6}
+\input{sec/B3-s7}
+\input{sec/B2-s8}
+
+% ================= PART III =================
+\clearpage
+\part{Strong local ergodicity of Dyson Brownian motion (Theorem 2.3)}
+\input{sec/CI-s1-2}
+\input{sec/CII-s3}
+\input{sec/CIII-s4-5}
+\input{sec/CIV-s6}
+\input{sec/CV-s7-9}
+
+% ================= APPENDICES =================
+\clearpage
+\appendix
+\input{sec/A5-appAB}
+\input{sec/A1-appC}
+\input{sec/mathlib}
+
+\end{document}

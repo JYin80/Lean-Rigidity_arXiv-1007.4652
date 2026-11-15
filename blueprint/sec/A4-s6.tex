@@ -1,0 +1,618 @@
+\section{Fluctuation averaging}\label{sec:FA}
+This section replaces Section~7 of the original (Lemma~4.1 there). It is self-contained given the following statements of
+Sections~\ref{sec:resid} and~\ref{sec:prob}: Lemma~\ref{lem:msc}(a),(c), Lemma~\ref{lem:basic}(a),(b), Lemma~\ref{lem:schur}\,(I1),(I4),(I5), Lemma~\ref{lem:minor},
+Lemma~\ref{lem:moments}, Lemma~\ref{lem:LDmom} and Lemma~\ref{lem:split} (splitting of the product law); Corollary~\ref{cor:FA} also uses
+Theorem~\ref{thm:weak}(c) and the relations \eqref{eq:levelrel}.
+
+Throughout the section, $N\ge3$, $\nu\in\mathcal E_N(\vth,\dpm,C_0)$ (normalised as in Convention~\ref{conv:const}: $\vth\le1$, $C_0\ge1$, $\fa=1/\vth$), and
+$z=E+\ii\eta$ with $\eta>0$ is fixed; $G$, $G^{(T)}$, $m$, $m^{(T)}$, $\Ld$, $\Lo$ are as in \eqref{eq:green}, \eqref{eq:defLambda} and Section~\ref{sec:resid},
+and (Definition~\ref{def:XA})
+\[
+ Z_k=\sum^{(k)}_{i,j}h_{ki}G^{(k)}_{ij}h_{jk}-\sum^{(k)}_i\sigma_{ki}^2G^{(k)}_{ii},\qquad X_k=h_{kk}-Z_k .
+\]
+We shall see (Lemma~\ref{lem:FAstruct}(d)) that $X_k=Q_k(1/G_{kk})$, where $Q_k=1-P_k$ and $P_k$ integrates out the $k$-th row.
+
+\subsection{Statements}
+
+\begin{theorem}[Fluctuation averaging]\label{thm:FA}
+Let $c_F:=8\fa+7$. There are constants $C_F$ and $N_0$ (depending only on the model parameters) such that the following holds for $N\ge N_0$, $\nu\in\mathcal E_N(\vth,\dpm,C_0)$.
+Let $z=E+\ii\eta$ with $|z|\le N$, let $p$ be an even integer with
+\begin{equation}\label{eq:FAhyp}
+ \log N\le p\le N^{1/(40\fa+40)},\qquad p\ge p_0,\qquad N^{-1}\le\eta\le10,\qquad N\eta\ge p^{12\fa+11},
+\end{equation}
+where $p_0:=25\,e\,C_0\,C_m\,13^{2\fa+\frac32}$ with the constant $C_m$ of \eqref{eq:Cm} (it depends only on the model parameters),
+and let $t_1,\dots,t_N\in\C$ be deterministic with $|t_k|\le1/N$. Let
+$\Xi_p(z):=\{\Ld(z)\le\frac12|\msc(z)|,\ \Lo(z)\le\frac{|\msc(z)|}{16p}\}$ and
+\begin{equation}\label{eq:Phistar}
+ \Phi_*(z)^2:=\frac1N+\frac1{N\eta}\Big(\im m(z)+\frac{p}{N\eta}\Big)\qquad(\text{a random variable; it depends on }p).
+\end{equation}
+Then
+\begin{equation}\label{eq:FA}
+ \EE\Big|\sum_{k=1}^Nt_kX_k(z)\Big|^p\le\big(C_Fp^{c_F}\big)^p\ \EE\big[\Phi_*(z)^{2p}\big]+N^{2p}\,\PP\big(\Xi_p(z)^c\big)^{1/2}.
+\end{equation}
+\end{theorem}
+\noindent The right-hand side is \emph{random-parameter} (it contains $\im m=\im\msc+O(\Lambda)$ under the expectation); this is what makes the one-step argument of Section~\ref{sec:strong} possible.
+The statement is uniform in $E$ (near and far regime) and the $p$-dependence is explicit. The constants are given in \eqref{eq:CF} and \eqref{eq:N0FA}.
+
+\begin{corollary}[Form used below]\label{cor:FA}
+Let $N\ge N_0$, let $K$ be as in \eqref{eq:Krange}, $z\in\mathbb L$ and $p\in\{p_1,p_2\}$ (Definitions~\ref{def:levels}, \ref{def:domains}). Then, with $\Phi_*$ defined by \eqref{eq:Phistar} for this $p$,
+\[
+ \norm{\avg{X}(z)}_p\le\mathfrak F\,\norm{\Phi_*(z)^2}_p+N^{-8},\qquad\mathfrak F:=C_Fp_1^{c_F}\ \ (\le K^{12\fa+11}).
+\]
+\end{corollary}
+
+\paragraph{Organisation.} Section~\ref{sec:FAfub} fixes the notation for integration over rows (Lemma~\ref{lem:split}) and the algebraic structure obtained by conditioning on a minor (Lemma~\ref{lem:FAstruct}).
+Section~\ref{sec:FAmom} contains the conditional moment bounds (Lemma~\ref{lem:FAmom}), the deterministic comparison of the a priori event with its minor versions (Lemma~\ref{lem:FAevent}) and a crude bound.
+Section~\ref{sec:FAtwo} proves the case $p=2$ (Proposition~\ref{prop:FAtwo}): it contains every idea of the general proof and no combinatorics.
+Sections~\ref{sec:FAexp}--\ref{sec:FAproof} prove Theorem~\ref{thm:FA}: the finite expansion (Lemma~\ref{lem:FAexp}), the vanishing of terms with an unvisited lone index (Lemma~\ref{lem:FAvanish}),
+the size of the terms (Lemma~\ref{lem:FAsize}), the bound for one index tuple (Lemma~\ref{lem:FAtuple}), the counting of tuples (Lemma~\ref{lem:FAcount}). Corollary~\ref{cor:FA} is proved in Section~\ref{sec:FAcor}.
+
+\subsection{Integration over rows; the block matrix given a minor}\label{sec:FAfub}
+\paragraph{Partial integration.} Recall $\Omega=\kk^{\mathcal P_N}$, $\PP=\bigotimes_{(i,j)\in\mathcal P_N}\nu_{ij}$ (Definition~\ref{def:ens}). A \emph{coordinate} is an element of $\mathcal P_N$; we also write $\{i,j\}$ for the coordinate $(\min(i,j),\max(i,j))$.
+For $\mathcal Q\subset\mathcal P_N$ let $\mathcal Q^c:=\mathcal P_N\setminus\mathcal Q$, $\PP_{\mathcal Q}:=\bigotimes_{(i,j)\in\mathcal Q}\nu_{ij}$ on $\kk^{\mathcal Q}$, and write $x=(x_{\mathcal Q^c},x_{\mathcal Q})$ for $x\in\Omega$.
+By Lemma~\ref{lem:split}, $x\mapsto(x_{\mathcal Q^c},x_{\mathcal Q})$ is a measurable equivalence $\Omega\to\kk^{\mathcal Q^c}\times\kk^{\mathcal Q}$ which maps $\PP$ to $\PP_{\mathcal Q^c}\otimes\PP_{\mathcal Q}$; the same holds
+for $\PP_{\mathcal Q}$ and a subset $\mathcal Q_1\subset\mathcal Q$ (it is the same statement for the index set $\mathcal Q$).
+A function $f$ on $\Omega$ \emph{does not depend on $\mathcal Q$} if $f(x)=f(x')$ whenever $x_{\mathcal Q^c}=x'_{\mathcal Q^c}$. For $T\subset\{1,\dots,N\}$,
+\[
+ \mathcal Q(T):=\big\{(i,j)\in\mathcal P_N:\ \{i,j\}\cap T\ne\emptyset\big\}\qquad(\text{the coordinates in the rows }T).
+\]
+Let $|x|_1:=\sum_{(i,j)\in\mathcal P_N}|x_{ij}|$, and let $\mathcal A$ be the set of all measurable $f:\Omega\to\C$ for which there are $c,m\in[0,\infty)$ with
+\begin{equation}\label{eq:classA}
+ |f(x)|\le c\,(1+|x|_1)^m\qquad\text{for all }x\in\Omega .
+\end{equation}
+For $f\in\mathcal A$, or $f:\Omega\to[0,\infty]$ measurable, and for real $q\ge1$ put
+\begin{equation}\label{eq:PQ}
+ (P_{\mathcal Q}f)(x):=\int_{\kk^{\mathcal Q}}f(x_{\mathcal Q^c},y)\,\PP_{\mathcal Q}(\rd y),\qquad\norm{f}_{q,\mathcal Q}(x):=\Big(\big(P_{\mathcal Q}|f|^q\big)(x)\Big)^{1/q},
+\end{equation}
+and $P_T:=P_{\mathcal Q(T)}$, $\norm{\cdot}_{q,T}:=\norm{\cdot}_{q,\mathcal Q(T)}$, $P_k:=P_{\{k\}}$, $Q_k:=1-P_k$. This is the operator $P_T$ of Section~\ref{sec:prob}; $P_{\mathcal Q}f$ is a version of the conditional expectation of $f$
+given the coordinates in $\mathcal Q^c$, but we shall only use the properties (F0)--(F5) below, which are statements about iterated integrals.
+
+\begin{lemma}[Calculus of partial integration]\label{lem:FAfub}
+Let $\mathcal Q_1,\mathcal Q\subset\mathcal P_N$, $f,g,f_1,\dots,f_n\in\mathcal A$.
+\begin{enumerate}[label=\textup{(F\arabic*)},leftmargin=2.6em,itemsep=1pt,start=0]
+\item $\mathcal A$ is an algebra, closed under complex conjugation and under $f\mapsto|f|^q$ ($q>0$); it contains the functions $h_{ij}$; $\EE|f|^q<\infty$ for all $q<\infty$.
+For every $x\in\Omega$ the integral $(P_{\mathcal Q}f)(x)$ converges absolutely; $P_{\mathcal Q}f\in\mathcal A$; $P_{\mathcal Q}f$ does not depend on $\mathcal Q$; and if $f$ does not depend on $\mathcal Q_1$, then $P_{\mathcal Q}f$ does not depend on $\mathcal Q_1$.
+Moreover $P_{\mathcal Q}\ol f=\ol{P_{\mathcal Q}f}$.
+\item \emph{(Fubini)} $\EE f=\EE[P_{\mathcal Q}f]$, and if $\mathcal Q_1\subset\mathcal Q$ then $P_{\mathcal Q}P_{\mathcal Q_1}f=P_{\mathcal Q}f$. In particular $P_{\mathcal Q}(f-P_{\mathcal Q}f)=0$, i.e.\ $P_kQ_kf=0$.
+\item If $g$ does not depend on $\mathcal Q$, then $P_{\mathcal Q}(gf)=g\,P_{\mathcal Q}f$ and $P_{\mathcal Q}g=g$. If $\Xi\subset\Omega$ is measurable and $\bone_\Xi$ does not depend on $\mathcal Q$, then $\EE[\bone_\Xi f]=\EE[\bone_\Xi P_{\mathcal Q}f]$.
+\item \emph{(H\"older, Minkowski, Jensen)} If $q,q_1,\dots,q_n\in[1,\infty)$ and $\sum_i1/q_i=1/q$, then $\norm{f_1\cdots f_n}_{q,\mathcal Q}\le\prod_{i}\norm{f_i}_{q_i,\mathcal Q}$ pointwise on $\Omega$; in particular ($q=1$) $|P_{\mathcal Q}(f_1\cdots f_n)|\le\prod_{i}\norm{f_i}_{q_i,\mathcal Q}$.
+For $q\ge1$: $\norm{f+g}_{q,\mathcal Q}\le\norm f_{q,\mathcal Q}+\norm g_{q,\mathcal Q}$; $\norm{f}_{q,\mathcal Q}\le\norm{f}_{q',\mathcal Q}$ if $q\le q'$; and if $\mathcal Q_1\subset\mathcal Q$ then $\norm{P_{\mathcal Q_1}f}_{q,\mathcal Q}\le\norm{f}_{q,\mathcal Q}$, hence $\norm{Q_kf}_{q,\mathcal Q}\le2\norm f_{q,\mathcal Q}$ if $\mathcal Q(\{k\})\subset\mathcal Q$.
+\item \emph{(Freezing)} For fixed $x_{\mathcal Q^c}$, the coordinate functions $y\mapsto y_{ij}$, $(i,j)\in\mathcal Q$, are independent random variables on the probability space $(\kk^{\mathcal Q},\PP_{\mathcal Q})$ with laws $\nu_{ij}$,
+and $\norm{f}_{q,\mathcal Q}(x)$ is the $L^q(\PP_{\mathcal Q})$-norm of $y\mapsto f(x_{\mathcal Q^c},y)$.
+\item \emph{(Irrelevant coordinates)} If $f$ does not depend on $\mathcal Q_1$ and does not depend on $\mathcal Q_2$ ($\mathcal Q_2\subset\mathcal P_N$), then $f$ does not depend on $\mathcal Q_1\cup\mathcal Q_2$.
+If $\mathcal Q_1\subset\mathcal Q$ and $f$ does not depend on $\mathcal Q\setminus\mathcal Q_1$, then $P_{\mathcal Q}f=P_{\mathcal Q_1}f$ and $\norm f_{q,\mathcal Q}=\norm f_{q,\mathcal Q_1}$ for every real $q\ge1$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(F0) Sums, products, conjugates and powers of functions satisfying \eqref{eq:classA} satisfy \eqref{eq:classA}; $|h_{ij}|\le|x_{ij}|\le|x|_1$ (recall $h_{ii}=\re x_{ii}$). By Minkowski's inequality and Lemma~\ref{lem:moments},
+$\norm{1+|x|_1}_{L^{s}(\PP)}\le1+\sum_{(i,j)}\big(\int|y|^{s}\nu_{ij}(\rd y)\big)^{1/s}<\infty$ for every $s\ge1$; this gives $\EE|f|^q<\infty$.
+For $x\in\Omega$ and $y\in\kk^{\mathcal Q}$ we have $|(x_{\mathcal Q^c},y)|_1\le|x|_1+|y|_1$ and $(a+b)^m\le2^m(a^m+b^m)$ for $a,b\ge0$, so
+\[
+ \int|f(x_{\mathcal Q^c},y)|\,\PP_{\mathcal Q}(\rd y)\le c\,2^m\Big((1+|x|_1)^m+\int|y|_1^m\,\PP_{\mathcal Q}(\rd y)\Big)\le c'(1+|x|_1)^m,
+\]
+with $c':=c\,2^m(1+\int|y|_1^m\PP_{\mathcal Q}(\rd y))<\infty$ (same argument as before). Thus the integral converges absolutely for every $x$ and $P_{\mathcal Q}f$ satisfies \eqref{eq:classA}. Measurability of $P_{\mathcal Q}f$ is the
+measurability of partial integrals of jointly measurable functions (Fubini--Tonelli theorem). By \eqref{eq:PQ}, $(P_{\mathcal Q}f)(x)$ is a function of $x_{\mathcal Q^c}$ alone. If $f$ does not depend on $\mathcal Q_1$ and $x_{\mathcal Q_1^c}=x'_{\mathcal Q_1^c}$,
+then the points $(x_{\mathcal Q^c},y)$ and $(x'_{\mathcal Q^c},y)$ agree outside $\mathcal Q_1$ for every $y$, so the integrands in \eqref{eq:PQ} coincide. The last claim is the linearity of the integral.
+
+(F1) The first identity is Fubini's theorem for $\PP=\PP_{\mathcal Q^c}\otimes\PP_{\mathcal Q}$ (Lemma~\ref{lem:split}) and the integrable function $f$. For $\mathcal Q_1\subset\mathcal Q$ apply Fubini's theorem to
+$\PP_{\mathcal Q}=\PP_{\mathcal Q\setminus\mathcal Q_1}\otimes\PP_{\mathcal Q_1}$ and the function $y\mapsto f(x_{\mathcal Q^c},y)$, which is $\PP_{\mathcal Q}$-integrable by (F0):
+$(P_{\mathcal Q}f)(x)=\int\!\big[\int f(x_{\mathcal Q^c},y',y'')\PP_{\mathcal Q_1}(\rd y'')\big]\PP_{\mathcal Q\setminus\mathcal Q_1}(\rd y')=(P_{\mathcal Q}P_{\mathcal Q_1}f)(x)$. With $\mathcal Q_1=\mathcal Q$: $P_{\mathcal Q}P_{\mathcal Q}f=P_{\mathcal Q}f$.
+
+(F2) In \eqref{eq:PQ} for $gf$, the factor $g(x_{\mathcal Q^c},y)=g(x)$ is constant in $y$. For the last claim apply this to $g=\bone_\Xi$ and use (F1).
+
+(F3) By (F0) all functions $y\mapsto f_i(x_{\mathcal Q^c},y)$ lie in every $L^q(\PP_{\mathcal Q})$. The first three statements are H\"older's inequality (for $n$ factors, applied to the functions $|f_i|^q$ with exponents $q_i/q$), Minkowski's inequality and the monotonicity of $L^q$-norms on the probability space $(\kk^{\mathcal Q},\PP_{\mathcal Q})$.
+For the fourth: by Jensen's inequality on $(\kk^{\mathcal Q_1},\PP_{\mathcal Q_1})$, $|P_{\mathcal Q_1}f|^q\le P_{\mathcal Q_1}|f|^q$ pointwise; apply $P_{\mathcal Q}$ and (F1) (for the function $|f|^q\in\mathcal A$): $P_{\mathcal Q}|P_{\mathcal Q_1}f|^q\le P_{\mathcal Q}P_{\mathcal Q_1}|f|^q=P_{\mathcal Q}|f|^q$.
+
+(F4) $\PP_{\mathcal Q}$ is a product measure, and the second statement is the definition \eqref{eq:PQ}.
+
+(F5) Let $x,x'\in\Omega$ agree outside $\mathcal Q_1\cup\mathcal Q_2$, and let $x''\in\Omega$ coincide with $x'$ on $\mathcal Q_1$ and with $x$ outside $\mathcal Q_1$. Then $x$ and $x''$ agree outside $\mathcal Q_1$,
+so $f(x)=f(x'')$; and $x''$ and $x'$ agree outside $\mathcal Q_2$ (on $\mathcal Q_1$ by construction, and outside $\mathcal Q_1\cup\mathcal Q_2$ because there $x''=x=x'$), so $f(x'')=f(x')$.
+For the second statement write $y=(y',y'')$ with $y'\in\kk^{\mathcal Q\setminus\mathcal Q_1}$, $y''\in\kk^{\mathcal Q_1}$, so that $\PP_{\mathcal Q}=\PP_{\mathcal Q\setminus\mathcal Q_1}\otimes\PP_{\mathcal Q_1}$ (Lemma~\ref{lem:split}).
+Since $f$ does not depend on $\mathcal Q\setminus\mathcal Q_1$, $f(x_{\mathcal Q^c},y',y'')=f(x_{\mathcal Q^c},x_{\mathcal Q\setminus\mathcal Q_1},y'')=f(x_{\mathcal Q_1^c},y'')$ for all $y',y''$. By Fubini's theorem (the integrand is $\PP_{\mathcal Q}$-integrable by (F0))
+and because $\PP_{\mathcal Q\setminus\mathcal Q_1}$ is a probability measure,
+$(P_{\mathcal Q}f)(x)=\int\!\big[\int f(x_{\mathcal Q_1^c},y'')\,\PP_{\mathcal Q_1}(\rd y'')\big]\PP_{\mathcal Q\setminus\mathcal Q_1}(\rd y')=(P_{\mathcal Q_1}f)(x)$.
+Applied to $|f|^q$, which does not depend on $\mathcal Q\setminus\mathcal Q_1$ either, this gives $\norm f_{q,\mathcal Q}=\norm f_{q,\mathcal Q_1}$.
+\end{proof}
+
+\paragraph{The block matrix given a minor.} Let $L\subset\{1,\dots,N\}$ with $1\le r:=|L|<N$. We write $M:=M^L$ for the $L\times L$ matrix \eqref{eq:MA},
+\begin{equation}\label{eq:ML}
+ M_{ab}=h_{ab}-z\delta_{ab}-\sum_{k,l\notin L}h_{ak}G^{(L)}_{kl}h_{lb}\qquad(a,b\in L),
+\end{equation}
+and define
+\begin{equation}\label{eq:PhiL}
+\begin{aligned}
+ m^{(L)}_a&:=\sum_{l\notin L}\sigma_{al}^2G^{(L)}_{ll}\ \ (a\in L),\qquad\qquad\Phi_L:=\sqrt{\frac{C_0}N}+C_0\sqrt{\frac{\im m^{(L)}}{N\eta}},\\
+ Z^{(L)}_a&:=\sum_{k,l\notin L}h_{ak}G^{(L)}_{kl}h_{la}-\sum_{k\notin L}\sigma_{ak}^2G^{(L)}_{kk}\ \ (a\in L),
+\end{aligned}
+\end{equation}
+where $m^{(L)}=\frac1N\sum_{k\notin L}G^{(L)}_{kk}$, so that $\im m^{(L)}>0$ by Lemma~\ref{lem:basic}(a) for the minor $H^{(L)}$. (For $L=\{k\}$: $Z^{(L)}_k=Z_k$.)
+
+\begin{lemma}[Structure given the minor $H^{(L)}$]\label{lem:FAstruct}
+Let $L$, $M$ be as above. Then, at every point of $\Omega$:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item \emph{(Algebra)} $(G_{ab})_{a,b\in L}=M^{-1}$. For every $a\in L$: $M_{aa}=1/G^{(L\setminus\{a\})}_{aa}\ne0$ and $|1/M_{aa}|\le\eta^{-1}$. If $L=\{k\}$, then $1/G_{kk}=M_{kk}$. If $r\ge2$, $k\in L$ and $L':=L\setminus\{k\}$, then
+the matrix $M_{L'L'}:=(M_{ab})_{a,b\in L'}$ is invertible, $(M_{L'L'})^{-1}=(G^{(k)}_{ab})_{a,b\in L'}$, $|G^{(k)}_{ab}|\le\eta^{-1}$, and
+\begin{equation}\label{eq:1overGL}
+ \frac1{G_{kk}}=M_{kk}-\sum_{a,b\in L'}M_{ka}\,G^{(k)}_{ab}\,M_{bk}.
+\end{equation}
+\item \emph{(Row dependence)} The functions $G^{(L)}_{kl}$ ($k,l\notin L$), $m^{(L)}$, $m^{(L)}_a$, $\Phi_L$ do not depend on $\mathcal Q(L)$. For $a,b\in L$ and every $c\in L\setminus\{a,b\}$, the function $M_{ab}$ does not depend on $\mathcal Q(\{c\})$.
+\item \emph{(Regularity)} The functions $M_{ab}$, $1/M_{aa}$ ($a,b\in L$), $G^{(k)}_{ab}$ ($k\in L$, $a,b\in L\setminus\{k\}$), $1/G_{kk}$, $X_k$, $Z_a^{(L)}$ are continuous on $\Omega$ and belong to $\mathcal A$; $\Phi_L$ and $m_a^{(L)}$ are continuous and bounded.
+\item \emph{(Expectation in one row)} For $a\in L$: $\ P_aM_{aa}=-z-m^{(L)}_a$ and $Q_aM_{aa}=h_{aa}-Z^{(L)}_a$. In particular, for every $k\in\{1,\dots,N\}$,
+\[
+ P_k\Big(\frac1{G_{kk}}\Big)=-z-\sum^{(k)}_l\sigma_{kl}^2G^{(k)}_{ll},\qquad X_k=Q_k\Big(\frac1{G_{kk}}\Big).
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) The first statement is Lemma~\ref{lem:schur} with $A=L$. The identity $M_{aa}=1/G^{(L\setminus\{a\})}_{aa}$ is the last sentence of (I4) of Lemma~\ref{lem:schur} with $A=L$
+(see also Remark~\ref{rem:rows}); explicitly, $1/G^{(L\setminus\{a\})}_{aa}=h_{aa}-z-\sum_{k,l\notin L}h_{ak}G^{(L)}_{kl}h_{la}=M_{aa}$. Further $|G^{(L\setminus\{a\})}_{aa}|\le\eta^{-1}$ by Lemma~\ref{lem:basic}(a) for this minor. The case $L=\{k\}$ is the same identity.
+The statements for $r\ge2$ are (I4) of Lemma~\ref{lem:schur} with $A=L$, and Lemma~\ref{lem:basic}(a) for the minor $H^{(k)}$.
+
+(b) $H^{(L)}$ is a function of the coordinates $\{i,j\}$ with $i,j\notin L$, i.e.\ of $x_{\mathcal Q(L)^c}$; so are $G^{(L)}$, $m^{(L)}$, $m^{(L)}_a$, $\Phi_L$. Let $a,b\in L$ and $c\in L\setminus\{a,b\}$. In \eqref{eq:ML}, $h_{ab}$ is a function of the coordinate $\{a,b\}$,
+$h_{ak}$ of $\{a,k\}$, $h_{lb}$ of $\{l,b\}$ (with $k,l\notin L$), and $G^{(L)}_{kl}$ of coordinates $\{i,j\}$ with $i,j\notin L$. None of these coordinates contains $c$, i.e.\ none belongs to $\mathcal Q(\{c\})$.
+
+(c) Entries of resolvents of $H$ and of all its minors $H^{(T)}$, $T\subsetneq\{1,\dots,N\}$, are continuous functions of $x\in\Omega$ (Lemma~\ref{lem:weyl}(e)) and bounded by $\eta^{-1}$ (Lemma~\ref{lem:basic}(a)). Hence $M_{ab}$ is continuous and
+$|M_{ab}|\le|x|_1+|z|+\eta^{-1}|x|_1^2$; $1/M_{aa}=G^{(L\setminus\{a\})}_{aa}$ and $G^{(k)}_{ab}$ are continuous and bounded; $1/G_{kk}=M^{\{k\}}_{kk}$, $Z^{(L)}_a$ and $X_k=h_{kk}-Z^{(\{k\})}_k$ are continuous and satisfy \eqref{eq:classA} with $m=2$
+(use $\sum_k\sigma^2_{ak}=1$). $\Phi_L$ and $m_a^{(L)}$ are continuous, $|m^{(L)}_a|\le\eta^{-1}$ and $\im m^{(L)}\le\eta^{-1}$.
+
+(d) $\mathcal Q(\{a\})$ consists of the coordinates $\{a,j\}$, $1\le j\le N$. By (b) and (F2), $P_a(h_{ak}G^{(L)}_{kl}h_{la})=G^{(L)}_{kl}\,P_a(h_{ak}h_{la})$ for $k,l\notin L$. Now $h_{la}=\ol{h_{al}}$; for $k\ne l$ the variables $h_{ak}$, $h_{al}$ are functions of different coordinates of $\mathcal Q(\{a\})$, hence
+independent under $\PP_{\mathcal Q(\{a\})}$ (F4), and centred by the centering assumption of Definition~\ref{def:ass}; so $P_a(h_{ak}h_{la})=0$. For $k=l$, $P_a(|h_{ak}|^2)=\sigma_{ak}^2$ by \eqref{eq:aver}. Finally $P_ah_{aa}=0$ and $P_az=z$. This gives $P_aM_{aa}=-z-m_a^{(L)}$, and
+$Q_aM_{aa}=M_{aa}-P_aM_{aa}=h_{aa}-Z_a^{(L)}$ by \eqref{eq:ML}, \eqref{eq:PhiL}. For $L=\{k\}$, (a) gives $1/G_{kk}=M_{kk}$, hence $Q_k(1/G_{kk})=h_{kk}-Z_k=X_k$.
+\end{proof}
+
+\subsection{Conditional moment bounds and the a priori event}\label{sec:FAmom}
+Let $C_\vth\ge1$ be the constant of Lemma~\ref{lem:moments} and $C_{\rm LD}\ge1$ the constant $C$ of Lemma~\ref{lem:LDmom} (both depend only on $\vth$), and put
+\begin{equation}\label{eq:Cm}
+ C_m:=\max\{C_\vth^{\fa},\,C_{\rm LD}^2\}\ \ (\ge1).
+\end{equation}
+
+\begin{lemma}[Conditional moments]\label{lem:FAmom}
+Let $L\subset\{1,\dots,N\}$, $1\le|L|<N$, and $M=M^L$. For every real $q\ge2$, at every point of $\Omega$:
+\begin{enumerate}[label=\textup{(m\arabic*)},leftmargin=2.8em,itemsep=1pt]
+\item for $a\ne b\in L$:\quad $\norm{M_{ab}}_{q,L}\le C_m\,(q+\log N)^{2\fa+1}\,\Phi_L$;
+\item for $a\in L$:\quad $\norm{Q_aM_{aa}}_{q,L}\le C_m\,(q+\log N)^{2\fa+\frac32}\,\Phi_L$.
+\end{enumerate}
+Moreover, let $\eta\ge N^{-1}$, $q_*\ge2$ real and $a\in L$. Then:
+\begin{enumerate}[label=\textup{(m\arabic*)},leftmargin=2.8em,itemsep=1pt,start=3]
+\item at every point of $\Omega$ at which
+\begin{equation}\label{eq:m3hyp}
+ |z+m_a^{(L)}|\ge\tfrac25\qquad\text{and}\qquad5e\,C_m\big((q_*+1)\lceil\log N\rceil\big)^{2\fa+\frac32}\,\Phi_L\le1,
+\end{equation}
+we have $\norm{1/M_{aa}}_{q,L}\le6$ for all real $q\in[1,q_*]$.
+\end{enumerate}
+\end{lemma}
+\noindent Note that (m1), (m2) need no assumption on $G$, and that the hypothesis \eqref{eq:m3hyp} concerns functions that do not depend on $\mathcal Q(L)$ (Lemma~\ref{lem:FAstruct}(b)): it is a condition on the minor $H^{(L)}$ only.
+\begin{proof}
+Fix $L$ and put $\mathcal R_a:=\{\{a,k\}:k\notin L\}\subset\mathcal Q(L)$ for $a\in L$; these sets are pairwise disjoint. Let $n:=N-|L|\in[1,N]$. By (F4), for fixed $x_{\mathcal R_a^c}$ the variables $(h_{ak})_{k\notin L}$ are independent on $(\kk^{\mathcal R_a},\PP_{\mathcal R_a})$; $h_{ak}$ is the coordinate $x_{ak}$ or its complex conjugate, so by
+Definition~\ref{def:ass} it is centred, has variance $\sigma_{ak}^2$ and satisfies the tail bound in \eqref{eq:LDhyp} with $s_k=\sigma_{ak}$. The same holds for the family $(h_{ka})_{k\notin L}=(\ol{h_{ak}})_{k\notin L}$. So Lemma~\ref{lem:LDmom} applies to these families, with coefficients that are constant on $\kk^{\mathcal R_a}$,
+and $\log n\le\log N$. We shall also use that, by (C) and the Ward identity (Lemma~\ref{lem:basic}(b)) for the minor $H^{(L)}$, for all $a,b\in L$,
+\begin{equation}\label{eq:WardL}
+ \sum_{k,l\notin L}\sigma_{ak}^2\,|G^{(L)}_{kl}|^2\,\sigma_{lb}^2\le\frac{C_0}N\sum_{l\notin L}\sigma_{lb}^2\sum_{k\notin L}|G^{(L)}_{kl}|^2=\frac{C_0}N\sum_{l\notin L}\sigma_{lb}^2\frac{\im G^{(L)}_{ll}}{\eta}\le C_0^2\,\frac{\im m^{(L)}}{N\eta}.
+\end{equation}
+
+\emph{(m1).} Let $a\ne b\in L$ and $B_{ab}:=\sum_{k,l\notin L}h_{ak}G^{(L)}_{kl}h_{lb}=\sum_{k\notin L}h_{ak}Y_k$ with $Y_k:=\sum_{l\notin L}G^{(L)}_{kl}h_{lb}$. The functions $Y_k$ do not depend on $\mathcal R_a$ (they depend on $x_{\mathcal Q(L)^c}$ and on $\mathcal R_b$).
+By \eqref{eq:LDm1} for the family $(h_{ak})_{k\notin L}$, with $x_{\mathcal R_a^c}$ fixed,
+\[
+ \norm{B_{ab}}_{q,\mathcal R_a}\le C_{\rm LD}(q+\log N)^{\fa+\frac12}\Big(\sum_{k\notin L}\sigma_{ak}^2|Y_k|^2\Big)^{1/2}.
+\]
+Raise this to the power $q$, apply $P_L$, and use $P_LP_{\mathcal R_a}=P_L$ (F1), then Minkowski's inequality in $L^{q/2}(\PP_{\mathcal Q(L)})$ ($q/2\ge1$; (F3)):
+\[
+ \norm{B_{ab}}_{q,L}\le C_{\rm LD}(q+\log N)^{\fa+\frac12}\Big\|\sum_{k\notin L}\sigma_{ak}^2|Y_k|^2\Big\|_{q/2,L}^{1/2}\le C_{\rm LD}(q+\log N)^{\fa+\frac12}\Big(\sum_{k\notin L}\sigma_{ak}^2\norm{Y_k}_{q,L}^2\Big)^{1/2}.
+\]
+Since $Y_k$ depends, among the coordinates of $\mathcal Q(L)$, only on those of $\mathcal R_b$, $\norm{Y_k}_{q,L}=\norm{Y_k}_{q,\mathcal R_b}$ (by (F5), since $Y_k$ does not depend on $\mathcal Q(L)\setminus\mathcal R_b$), and by \eqref{eq:LDm1} for the family $(h_{lb})_{l\notin L}$ (with $x_{\mathcal R_b^c}$ fixed),
+$\norm{Y_k}_{q,\mathcal R_b}\le C_{\rm LD}(q+\log N)^{\fa+\frac12}(\sum_{l\notin L}|G^{(L)}_{kl}|^2\sigma_{lb}^2)^{1/2}$. With \eqref{eq:WardL},
+\[
+ \norm{B_{ab}}_{q,L}\le C_{\rm LD}^2(q+\log N)^{2\fa+1}\,C_0\sqrt{\frac{\im m^{(L)}}{N\eta}}.
+\]
+The coordinate $\{a,b\}$ belongs to $\mathcal Q(L)$ and $h_{ab}$ depends on no other coordinate, so by (F5) and (F4) $\norm{h_{ab}}_{q,L}=\norm{h_{ab}}_{q,\{\{a,b\}\}}=(\EE|h_{ab}|^q)^{1/q}$, and by Lemma~\ref{lem:moments} and (C), $(\EE|h_{ab}|^q)^{1/q}\le(C_\vth q)^{\fa}\sigma_{ab}\le C_\vth^{\fa}(q+\log N)^{2\fa+1}\sqrt{C_0/N}$. Since $M_{ab}=h_{ab}-B_{ab}$, (m1) follows from Minkowski's inequality and \eqref{eq:Cm}, \eqref{eq:PhiL}.
+
+\emph{(m2).} By Lemma~\ref{lem:FAstruct}(d), $Q_aM_{aa}=h_{aa}-Z_a^{(L)}$. With $\xi_k:=h_{ka}=\ol{h_{ak}}$ and $\mathsf B_{kl}:=G^{(L)}_{kl}$ ($k,l\notin L$) we have $Z_a^{(L)}=\sum_{k,l}\ol{\xi_k}\mathsf B_{kl}\xi_l-\sum_k\sigma_{ak}^2\mathsf B_{kk}$, and $Z_a^{(L)}$ depends, among the coordinates of $\mathcal Q(L)$, only on those of $\mathcal R_a$.
+By (F5), \eqref{eq:LDm2} (with $x_{\mathcal R_a^c}$ fixed) and \eqref{eq:WardL} with $b=a$,
+\[
+ \norm{Z_a^{(L)}}_{q,L}=\norm{Z_a^{(L)}}_{q,\mathcal R_a}\le C_{\rm LD}(q+\log N)^{2\fa+\frac32}\,C_0\sqrt{\frac{\im m^{(L)}}{N\eta}},
+\]
+and $\norm{h_{aa}}_{q,L}\le(C_\vth q)^{\fa}\sqrt{C_0/N}$ as before. Minkowski's inequality gives (m2).
+
+\emph{(m3).} Fix a point $x$ at which \eqref{eq:m3hyp} holds; the functions in \eqref{eq:m3hyp} are constant on the fibre $\{x_{\mathcal Q(L)^c}\}\times\kk^{\mathcal Q(L)}$, on which we now work. By Lemma~\ref{lem:FAstruct}(d), $M_{aa}=-(z+m_a^{(L)})+Q_aM_{aa}$.
+Hence on the set $\{|Q_aM_{aa}|\le\frac15\}$ we have $|M_{aa}|\ge\frac25-\frac15$, i.e.\ $|1/M_{aa}|\le5$; and always $|1/M_{aa}|\le\eta^{-1}\le N$ (Lemma~\ref{lem:FAstruct}(a)).
+Let $q':=q_*\lceil\log N\rceil\ge2$; then $q'+\log N\le(q_*+1)\lceil\log N\rceil$. By Markov's inequality on $(\kk^{\mathcal Q(L)},\PP_{\mathcal Q(L)})$, (m2) with exponent $q'$, and \eqref{eq:m3hyp},
+\[
+ \PP_{\mathcal Q(L)}\big(|Q_aM_{aa}|>\tfrac15\big)\le\big(5\norm{Q_aM_{aa}}_{q',L}\big)^{q'}\le\Big(5C_m\big((q_*+1)\lceil\log N\rceil\big)^{2\fa+\frac32}\Phi_L\Big)^{q'}\le e^{-q'}\le N^{-q_*}.
+\]
+Therefore, for $1\le q\le q_*$: $\ P_L|1/M_{aa}|^q\le5^q+N^q\,N^{-q_*}\le5^q+1\le6^q$.
+\end{proof}
+
+\begin{lemma}[The a priori event controls all small minors]\label{lem:FAevent}
+Let $p\ge1$ be an integer with $12\,C_0\,p\le N$, let $L\subset\{1,\dots,N\}$ with $1\le|L|\le p$ (so that $|L|\le p<N$, since $C_0\ge1$), and let $\Phi_*$ be defined by \eqref{eq:Phistar} (with this $p$). Then:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item at every point of $\Omega$:\quad $N^{-1}\le\Phi_*^2$\quad and\quad $\Phi_L^2\le2C_0^2\,\Phi_*^2$;
+\item on the event $\Xi_p(z)=\{\Ld\le\frac12|\msc|,\ \Lo\le\frac{|\msc|}{16p}\}$:\quad $\im m\le\frac32$\quad and\quad $|z+m_a^{(L)}|\ge\frac25$ for all $a\in L$;
+\item if moreover $\eta\le10$ and $N\eta\ge p$, then on $\Xi_p(z)$:\quad $\Phi_L^2\le25\,C_0^2/(N\eta)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) The first inequality is clear. By (I5) of Lemma~\ref{lem:schur}, $\im m^{(L)}\le\im m+|L|/(N\eta)\le\im m+p/(N\eta)$. Using $(u+v)^2\le2u^2+2v^2$ and $C_0\ge1$,
+$\Phi_L^2\le2C_0/N+2C_0^2\im m^{(L)}/(N\eta)\le2C_0^2\Phi_*^2$.
+
+(b) Recall $|\msc|\le1$ and $|z+\msc|=1/|\msc|\ge1$ (Lemma~\ref{lem:msc}(a),(c)). On $\Xi_p(z)$: $|G_{kk}|\le|\msc|+\Ld\le\frac32$ for all $k$, so $\im m\le|m|\le\frac32$. Next, let $g:=\frac12|\msc|$ and $r:=|L|\le p$. On $\Xi_p(z)$, $|G_{aa}|\ge|\msc|-\Ld\ge g$ for all $a$,
+and $\max_{a\ne b}|G_{ab}|=\Lo\le|\msc|/(16p)\le g/(2r)$. By Lemma~\ref{lem:minor} (with $A=L$), for all $l\notin L$,
+\[
+ |G^{(L)}_{ll}-G_{ll}|\le\frac{2r^2}{g}\Lo^2\le\frac{4p^2}{|\msc|}\cdot\frac{|\msc|^2}{256\,p^2}=\frac{|\msc|}{64},\qquad\text{hence}\quad|G^{(L)}_{ll}-\msc|\le\Big(\frac12+\frac1{64}\Big)|\msc|.
+\]
+By (A) and (C), $\sum_{l\notin L}\sigma_{al}^2=1-\sum_{l\in L}\sigma_{al}^2\in[1-pC_0/N,1]$, so for $a\in L$
+\[
+ |m_a^{(L)}-\msc|\le\sum_{l\notin L}\sigma_{al}^2|G^{(L)}_{ll}-\msc|+|\msc|\sum_{l\in L}\sigma_{al}^2\le\Big(\frac{33}{64}+\frac{pC_0}N\Big)|\msc|\le\Big(\frac{33}{64}+\frac1{12}\Big)|\msc|\le\frac35,
+\]
+and $|z+m_a^{(L)}|\ge|z+\msc|-|m_a^{(L)}-\msc|\ge1-\frac35=\frac25$.
+
+(c) By (a), (b), $N^{-1}\le10/(N\eta)$ and $p/(N\eta)\le1$: $\ \Phi_L^2\le2C_0^2\big(\frac{10}{N\eta}+\frac{3/2+1}{N\eta}\big)=25C_0^2/(N\eta)$.
+\end{proof}
+
+\begin{lemma}[Crude moment bound]\label{lem:FAcrude}
+Let $\eta\ge N^{-1}$. For every $k$ and every real $q\ge2$: $\ \norm{X_k}_{L^q(\PP)}\le3N(2C_\vth q)^{2\fa}$. In particular $\norm{X_k}_{L^{2p}(\PP)}\le N^2$ whenever $p\ge1$ and $3(4C_\vth p)^{2\fa}\le N$.
+\end{lemma}
+\begin{proof}
+Since $\norm{G^{(k)}}\le\eta^{-1}\le N$ and $|G^{(k)}_{ii}|\le N$ (Lemma~\ref{lem:basic}(a)) and $\sum_i\sigma_{ki}^2=1$: $|Z_k|\le N\sum_{i\ne k}|h_{ki}|^2+N$. By Minkowski's inequality and Lemma~\ref{lem:moments} (with exponents $q$ and $2q$),
+\[
+ \norm{X_k}_{L^q}\le\norm{h_{kk}}_{L^q}+N\sum_{i\ne k}\norm{h_{ki}}_{L^{2q}}^2+N\le(C_\vth q)^{\fa}\sigma_{kk}+N(2C_\vth q)^{2\fa}\sum_i\sigma_{ki}^2+N\le3N(2C_\vth q)^{2\fa}.\qedhere
+\]
+\end{proof}
+
+\subsection{The case $p=2$}\label{sec:FAtwo}
+The second moment is treated separately. It is not literally a case of Theorem~\ref{thm:FA} (which assumes $p\ge\log N$), and the constant carries a power of $\log N$ which comes from the term $\log n$ in Lemma~\ref{lem:LDmom}.
+Its proof is the proof of Theorem~\ref{thm:FA} in the situation where the expansion of Section~\ref{sec:FAexp} terminates after one step and has no remainder.
+
+\begin{proposition}[Variance bound]\label{prop:FAtwo}
+There are constants $C_V$ and $N_0$, depending only on the model parameters, such that for $N\ge N_0$, $\nu\in\mathcal E_N(\vth,\dpm,C_0)$, every $z=E+\ii\eta$ with
+\[
+ N^{-1}\le\eta\le10,\qquad N\eta\ge(\log N)^{4\fa+4},
+\]
+and all deterministic $t_1,\dots,t_N\in\C$ with $|t_k|\le1/N$:
+\begin{equation}\label{eq:FAtwo}
+ \EE\Big|\sum_{k=1}^Nt_kX_k(z)\Big|^2\le C_V(\log N)^{8\fa+4}\ \EE\big[\Phi_*(z)^4\big]+N^4\,\PP\big(\Xi_2(z)^c\big)^{1/2},
+\end{equation}
+where $\Xi_2(z)=\{\Ld\le\frac12|\msc|,\ \Lo\le\frac1{32}|\msc|\}$ and $\Phi_*^2=\frac1N+\frac1{N\eta}\big(\im m+\frac2{N\eta}\big)$ (i.e.\ \eqref{eq:Phistar} with $p=2$). One can take
+\begin{equation}\label{eq:CV}
+ C_V:=578\,C_0^4\,C_m^4\,7^{8\fa+4},\qquad N_0:=\max\Big\{24C_0,\ 3(8C_\vth)^{2\fa},\ \exp\big(625\,e^2C_0^2C_m^2\,14^{4\fa+3}\big)\Big\}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+All functions below belong to $\mathcal A$ (Lemma~\ref{lem:FAstruct}(c), (F0)), so every expectation and every partial integral is well defined. Expanding the square,
+\begin{equation}\label{eq:two0}
+ \EE\Big|\sum_kt_kX_k\Big|^2=\sum_k|t_k|^2\,\EE|X_k|^2+\sum_{k\ne l}t_k\ol{t_l}\ \EE\big[X_k\ol{X_l}\big].
+\end{equation}
+
+\emph{Step 1: the diagonal terms.} Fix $k$ and let $L=\{k\}$, $M=M^{\{k\}}$. By Lemma~\ref{lem:FAstruct}(a),(d), $X_k=Q_kM_{kk}$, so by (m2) of Lemma~\ref{lem:FAmom} with $q=2$ and Lemma~\ref{lem:FAevent}(a) with $p=2$ (note $24C_0\le N$), at every point,
+$P_k|X_k|^2\le C_m^2(2+\log N)^{4\fa+3}\Phi_{\{k\}}^2\le2C_0^2C_m^2(2+\log N)^{4\fa+3}\Phi_*^2$. By (F1), $\EE|X_k|^2=\EE[P_k|X_k|^2]$. Since $|t_k|^2\le N^{-2}$ and $N^{-1}\le\Phi_*^2$,
+\begin{equation}\label{eq:two1}
+ \sum_k|t_k|^2\,\EE|X_k|^2\le2C_0^2C_m^2(2+\log N)^{4\fa+3}\,\EE\big[N^{-1}\Phi_*^2\big]\le2C_0^2C_m^2(2+\log N)^{4\fa+3}\,\EE\big[\Phi_*^4\big].
+\end{equation}
+
+\emph{Step 2: off-diagonal terms, algebra.} Fix $k\ne l$ and let $L:=\{k,l\}$, $M:=M^L$ (a $2\times2$ matrix). By Lemma~\ref{lem:FAstruct}(a) with $L'=\{l\}$, $G^{(k)}_{ll}=(M_{ll})^{-1}$ and \eqref{eq:1overGL} reads
+$1/G_{kk}=M_{kk}-M_{kl}M_{lk}/M_{ll}$; the same holds with $k$ and $l$ exchanged. Applying $Q_k$, resp.\ $Q_l$ (Lemma~\ref{lem:FAstruct}(d)),
+\begin{equation}\label{eq:two2}
+ X_k=Q_kM_{kk}-Q_kW_k,\qquad X_l=Q_lM_{ll}-Q_lW_l,\qquad W_k:=\frac{M_{kl}M_{lk}}{M_{ll}},\quad W_l:=\frac{M_{lk}M_{kl}}{M_{kk}}.
+\end{equation}
+
+\emph{Step 3: off-diagonal terms, vanishing.} We claim that
+\begin{equation}\label{eq:two3}
+ P_L\big(X_k\ol{X_l}\big)=P_L\big(Q_kW_k\cdot\ol{Q_lW_l}\big).
+\end{equation}
+By Lemma~\ref{lem:FAstruct}(b) (with $a=b=k$, $c=l$), $M_{kk}$ does not depend on $\mathcal Q(\{l\})$; by (F0) neither does $Q_kM_{kk}=M_{kk}-P_kM_{kk}$. Hence, by (F2) and (F1) ($P_lQ_l=0$), for $f\in\{M_{ll},W_l\}$:
+$P_l\big(Q_kM_{kk}\cdot\ol{Q_lf}\big)=Q_kM_{kk}\cdot\ol{P_lQ_lf}=0$. Symmetrically, $Q_lM_{ll}$ does not depend on $\mathcal Q(\{k\})$ and $P_k\big(Q_kW_k\cdot\ol{Q_lM_{ll}}\big)=\ol{Q_lM_{ll}}\cdot P_kQ_kW_k=0$.
+Since $P_L=P_LP_l=P_LP_k$ (F1), three of the four terms of $P_L(X_k\ol{X_l})$ obtained from \eqref{eq:two2} vanish, which is \eqref{eq:two3}.
+(In the language of Section~\ref{sec:FAexp}: both indices are lone; the term $Q_kM_{kk}$ visits no index and the term $Q_kW_k$ visits $l$; a product survives only if $k$ and $l$ are both visited.)
+
+\emph{Step 4: off-diagonal terms, size.} Let
+\begin{align*}
+ \tau_2&:=C_m(6+\log N)^{2\fa+1},\qquad\varphi_2:=\big(5e\,C_m(7\lceil\log N\rceil)^{2\fa+\frac32}\big)^{-1},\\
+ \Xi_L&:=\{\Phi_L\le\varphi_2\}\cap\bigcap_{a\in L}\big\{|z+m_a^{(L)}|\ge\tfrac25\big\}.
+\end{align*}
+By Lemma~\ref{lem:FAstruct}(b),(c), $\Xi_L$ is a closed subset of $\Omega$ and $\bone_{\Xi_L}$ does not depend on $\mathcal Q(L)$. At every point of $\Xi_L$, \eqref{eq:m3hyp} holds with $q_*=6$, so by (F3) (H\"older with three factors in $L^6$), (m1) and (m3):
+\[
+ \norm{W_k}_{2,L}\le\norm{M_{kl}}_{6,L}\,\norm{M_{lk}}_{6,L}\,\norm{1/M_{ll}}_{6,L}\le6\,\tau_2^2\,\Phi_L^2,
+\]
+and the same for $W_l$. By \eqref{eq:two3}, (F3) (Cauchy--Schwarz, and $\norm{Q_kf}_{2,L}\le2\norm f_{2,L}$) and Lemma~\ref{lem:FAevent}(a), on $\Xi_L$:
+\begin{equation}\label{eq:two4}
+ \big|P_L\big(X_k\ol{X_l}\big)\big|\le4\,\norm{W_k}_{2,L}\norm{W_l}_{2,L}\le144\,\tau_2^4\,\Phi_L^4\le576\,C_0^4\,\tau_2^4\,\Phi_*^4 .
+\end{equation}
+
+\emph{Step 5: the complement of $\Xi_L$.} By (F2), the Cauchy--Schwarz and H\"older inequalities, and Lemma~\ref{lem:FAcrude} (with $p=2$; note $3(8C_\vth)^{2\fa}\le N$),
+\begin{align*}
+ \EE\big[X_k\ol{X_l}\big]&=\EE\big[\bone_{\Xi_L}P_L(X_k\ol{X_l})\big]+\EE\big[\bone_{\Xi_L^c}X_k\ol{X_l}\big],\\
+ \big|\EE\big[\bone_{\Xi_L^c}X_k\ol{X_l}\big]\big|&\le\PP(\Xi_L^c)^{1/2}\norm{X_k}_{L^4(\PP)}\norm{X_l}_{L^4(\PP)}\le N^4\,\PP(\Xi_L^c)^{1/2}.
+\end{align*}
+We claim $\Xi_2(z)\subset\Xi_L$. By Lemma~\ref{lem:FAevent}(b),(c) with $p=2$ (note $N\eta\ge2$), on $\Xi_2(z)$ we have $|z+m_a^{(L)}|\ge\frac25$ for $a\in L$ and $\Phi_L^2\le25C_0^2/(N\eta)$; and
+$25C_0^2/(N\eta)\le\varphi_2^2$ because $N\eta\ge(\log N)^{4\fa+4}$, $\lceil\log N\rceil\le2\log N$ and $\log N\ge625e^2C_0^2C_m^214^{4\fa+3}$ for $N\ge N_0$. Hence $\PP(\Xi_L^c)\le\PP(\Xi_2(z)^c)$.
+
+\emph{Step 6: conclusion.} By Steps 4 and 5, $|\EE[X_k\ol{X_l}]|\le576C_0^4\tau_2^4\,\EE[\Phi_*^4]+N^4\PP(\Xi_2(z)^c)^{1/2}$ for all $k\ne l$, and $\sum_{k\ne l}|t_k||t_l|\le1$. With \eqref{eq:two0}, \eqref{eq:two1} and $2+\log N\le6+\log N\le7\log N$:
+\[
+ \EE\Big|\sum_kt_kX_k\Big|^2\le\big(2C_0^2C_m^2+576C_0^4C_m^4\big)(7\log N)^{8\fa+4}\,\EE[\Phi_*^4]+N^4\,\PP(\Xi_2(z)^c)^{1/2},
+\]
+which is \eqref{eq:FAtwo} with the constant \eqref{eq:CV}.
+\end{proof}
+
+\begin{remark}[Reading of the case $p=2$]\label{rem:FAtwo}
+(1) The gain is in \eqref{eq:two3}--\eqref{eq:two4}: each $X_k$ is of size $\Phi$ (Step~1), but the covariance of $X_k$ and $X_l$, $k\ne l$, is of size $\Phi^4$, not $\Phi^2$; there are $N^2$ covariances with weight $N^{-2}$ and $N$ variances with weight $N^{-2}$, and $N^{-1}\Phi^2\le\Phi^4$. Thus $\sum_kt_kX_k$ is of size $\Phi^2$.
+(2) The three ingredients are: the exact identity \eqref{eq:two2}, in which every term is a function of the minor $H^{(L)}$ and of the rows it ``visits''; the vanishing \eqref{eq:two3}, which is Fubini's theorem; and conditional moment bounds given $H^{(L)}$, valid on an event $\Xi_L$ that is measurable with respect to $H^{(L)}$ and contains the a priori event $\Xi_2(z)$ deterministically.
+No bound on the probability of $\Xi_2(z)$ is assumed: it enters \eqref{eq:FAtwo} additively.
+(3) For general $p$ the identity \eqref{eq:two2} is replaced by a finite expansion with a remainder (Lemma~\ref{lem:FAexp}), and the powers of $\log N$ by powers of $p$, because moments of order up to $8p^2$ are needed.
+\end{remark}
+
+\subsection{The finite expansion and the vanishing of terms}\label{sec:FAexp}
+Let $L\subset\{1,\dots,N\}$, $1\le r=|L|<N$, $M=M^L$, $k\in L$, $L':=L\setminus\{k\}$, and let $n_0\ge1$ be an integer.
+\begin{definition}[Paths]\label{def:FApaths}
+For $n\ge0$, a \emph{path of length $n$ in $L'$} is a tuple $\pi=(a_0,\dots,a_n)\in(L')^{n+1}$ with $a_t\ne a_{t+1}$ for $0\le t<n$; $\Pi_n(k)$ is the set of these paths (it is empty if $L'=\emptyset$).
+For $\pi\in\Pi_n(k)$ put $V(\pi):=\{a_0,\dots,a_n\}\subset L'$ (the indices \emph{visited} by $\pi$), $o(\pi):=n+2$ (the \emph{order}), and
+\begin{equation}\label{eq:Wk}
+ W_k(\pi):=\frac{M_{ka_0}\,M_{a_0a_1}\cdots M_{a_{n-1}a_n}\,M_{a_nk}}{M_{a_0a_0}\,M_{a_1a_1}\cdots M_{a_na_n}}
+\end{equation}
+($n+2$ off-diagonal entries of $M$ in the numerator, $n+1$ diagonal entries in the denominator). The \emph{empty path} $\emptyset$ has $V(\emptyset):=\emptyset$, $o(\emptyset):=1$, $W_k(\emptyset):=M_{kk}$. Let
+\[
+ \mathcal T(k):=\{\emptyset\}\cup\bigcup_{n=0}^{n_0-1}\Pi_n(k),\qquad\epsilon(\emptyset):=1,\qquad\epsilon(\pi):=(-1)^{n+1}\ \ (\pi\in\Pi_n(k)),
+\]
+and define the \emph{remainder}
+\begin{equation}\label{eq:Rk}
+ R_k:=(-1)^{n_0}\sum_{(a_0,\dots,a_{n_0})\in\Pi_{n_0}(k)}\ \sum_{b\in L'}M_{ka_0}\Big(\prod_{t=0}^{n_0-1}\frac{M_{a_ta_{t+1}}}{M_{a_ta_t}}\Big)G^{(k)}_{a_{n_0}b}\,M_{bk}\qquad(R_k:=0\text{ if }L'=\emptyset).
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Finite expansion]\label{lem:FAexp}
+With the notation above, at every point of $\Omega$,
+\begin{equation}\label{eq:expansion}
+ \frac1{G_{kk}}=\sum_{\pi\in\mathcal T(k)}\epsilon(\pi)\,W_k(\pi)-R_k=M_{kk}-\sum_{n=0}^{n_0-1}(-1)^n\!\!\sum_{\pi\in\Pi_n(k)}W_k(\pi)-R_k .
+\end{equation}
+All $W_k(\pi)$ and $R_k$ belong to $\mathcal A$, and
+\begin{equation}\label{eq:FAX}
+ X_k=\sum_{\pi\in\mathcal T(k)}\epsilon(\pi)\,Q_kW_k(\pi)-Q_kR_k .
+\end{equation}
+Moreover, for every $\pi\in\mathcal T(k)$ and every integer $o\ge1$:
+\begin{equation}\label{eq:FAcountpaths}
+ o(\pi)\ge|V(\pi)|+1,\qquad\#\{\pi\in\mathcal T(k):\ o(\pi)=o\}\le r^{\,o-1},\qquad|\Pi_{n_0}(k)|\cdot|L'|\le r^{\,n_0+2}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+If $L'=\emptyset$ then $\mathcal T(k)=\{\emptyset\}$, $R_k=0$, and \eqref{eq:expansion} is $1/G_{kk}=M_{kk}$ (Lemma~\ref{lem:FAstruct}(a)). Let $r\ge2$. Write $A:=M_{L'L'}=D+O$ with $D$ the diagonal part and $O$ the off-diagonal part of $A$. By Lemma~\ref{lem:FAstruct}(a), $A$ is invertible with
+$A^{-1}=(G^{(k)}_{ab})_{a,b\in L'}$, and $D$ is invertible because $D_{aa}=M_{aa}\ne0$. Let $T:=-D^{-1}O$, so $A=D(1-T)$; thus $1-T=D^{-1}A$ is invertible and $A^{-1}=(1-T)^{-1}D^{-1}$. From the telescoping identity $(1-T)\sum_{n=0}^{n_0-1}T^n=1-T^{n_0}$ we get
+$(1-T)^{-1}=\sum_{n=0}^{n_0-1}T^n+T^{n_0}(1-T)^{-1}$, hence the purely algebraic identity
+\begin{equation}\label{eq:Neumann}
+ A^{-1}=\sum_{n=0}^{n_0-1}T^nD^{-1}+T^{n_0}A^{-1}.
+\end{equation}
+(No convergence is involved.) The entries of $T$ are $T_{aa}=0$ and $T_{ab}=-M_{ab}/M_{aa}$ for $a\ne b\in L'$. Therefore, for $a,b\in L'$ and $n\ge0$,
+\[
+ (T^n)_{ab}=(-1)^n\sum_{\substack{(a_0,\dots,a_n)\in\Pi_n(k)\\ a_0=a,\ a_n=b}}\ \prod_{t=0}^{n-1}\frac{M_{a_ta_{t+1}}}{M_{a_ta_t}},\qquad(T^nD^{-1})_{ab}=(-1)^n\sum_{\substack{(a_0,\dots,a_n)\in\Pi_n(k)\\ a_0=a,\ a_n=b}}\ \frac{\prod_{t=0}^{n-1}M_{a_ta_{t+1}}}{\prod_{t=0}^{n}M_{a_ta_t}} .
+\]
+Insert \eqref{eq:Neumann} into \eqref{eq:1overGL}: $\sum_{a,b\in L'}M_{ka}(T^nD^{-1})_{ab}M_{bk}=(-1)^n\sum_{\pi\in\Pi_n(k)}W_k(\pi)$ by \eqref{eq:Wk}, and
+$\sum_{a,b\in L'}M_{ka}(T^{n_0}A^{-1})_{ab}M_{bk}=\sum_{a,c,b\in L'}M_{ka}(T^{n_0})_{ac}G^{(k)}_{cb}M_{bk}=R_k$ by \eqref{eq:Rk}. This proves \eqref{eq:expansion}.
+
+By Lemma~\ref{lem:FAstruct}(c) and (F0), all $W_k(\pi)$ and $R_k$ are in $\mathcal A$ (finite sums of products of functions of $\mathcal A$); so $Q_k$ may be applied term by term to \eqref{eq:expansion}, and $Q_k(1/G_{kk})=X_k$ by Lemma~\ref{lem:FAstruct}(d). This is \eqref{eq:FAX}.
+
+Finally, $o(\emptyset)=1=|V(\emptyset)|+1$, and for $\pi\in\Pi_n(k)$: $|V(\pi)|\le n+1=o(\pi)-1$. The only $\pi\in\mathcal T(k)$ of order $1$ is $\emptyset$; those of order $o\ge2$ are the elements of $\Pi_{o-2}(k)$ (if $o-2<n_0$), and $|\Pi_{n}(k)|\le|L'|^{n+1}\le r^{n+1}$.
+The last bound is $|L'|^{n_0+1}\cdot|L'|\le r^{n_0+2}$.
+\end{proof}
+
+\begin{lemma}[Row dependence and vanishing]\label{lem:FAvanish}
+Let $L$, $M$, $n_0$ be as above.
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item Let $k\in L$, $\pi\in\mathcal T(k)$ and $c\in L\setminus(\{k\}\cup V(\pi))$. Then $W_k(\pi)$ and $Q_kW_k(\pi)$ do not depend on $\mathcal Q(\{c\})$.
+\item Let $j\ge1$, $k_1,\dots,k_j\in L$, $\pi_s\in\mathcal T(k_s)$ for $1\le s\le j$, and let $f^{\#_s}$ denote either $f$ or $\ol f$, for each $s$. Suppose that there is an $s$ such that
+\begin{equation}\label{eq:lonecond}
+ k_s\notin\{k_u\}\cup V(\pi_u)\qquad\text{for all }u\ne s .
+\end{equation}
+Then
+\[
+ P_L\Big(\prod_{u=1}^j\big(Q_{k_u}W_{k_u}(\pi_u)\big)^{\#_u}\Big)=0\qquad\text{at every point of }\Omega .
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Every factor of $W_k(\pi)$ in \eqref{eq:Wk} (resp.\ $W_k(\emptyset)=M_{kk}$) is of the form $M_{ab}$ or $1/M_{aa}$ with $a,b\in\{k\}\cup V(\pi)$. By Lemma~\ref{lem:FAstruct}(b), none of them depends on $\mathcal Q(\{c\})$, since $c\in L\setminus\{a,b\}$.
+So $W_k(\pi)$ does not depend on $\mathcal Q(\{c\})$, and by (F0) neither does $P_kW_k(\pi)$, nor $Q_kW_k(\pi)=W_k(\pi)-P_kW_k(\pi)$.
+
+(b) Put $Y_u:=(Q_{k_u}W_{k_u}(\pi_u))^{\#_u}\in\mathcal A$ and $c:=k_s$. For $u\ne s$, \eqref{eq:lonecond} says $c\in L\setminus(\{k_u\}\cup V(\pi_u))$, so by (a) (and since conjugation does not change the dependence) $Y_u$ does not depend on $\mathcal Q(\{c\})$; hence neither does $g:=\prod_{u\ne s}Y_u\in\mathcal A$.
+By (F2), $P_c(g\,Y_s)=g\,P_cY_s$, and by (F0), (F1), $P_cY_s=(P_cQ_cW_c(\pi_s))^{\#_s}=0$. Since $\mathcal Q(\{c\})\subset\mathcal Q(L)$, (F1) gives $P_L(gY_s)=P_LP_c(gY_s)=0$.
+\end{proof}
+\noindent In words: given the minor $H^{(L)}$, a term $Q_kW_k(\pi)$ is a function of the rows $k$ and $V(\pi)$ only; if some index $k_s$ occurs in exactly one factor, as the index on which $Q_{k_s}$ acts, then integrating the row $k_s$ first gives zero. Remainder terms $Q_kR_k$ are not claimed to vanish.
+
+\subsection{Size of the terms; one index tuple}\label{sec:FAsize}
+From now on $p\ge2$ is an even integer, $N\ge8$ and $\log N\le p$, $\eta\ge N^{-1}$. We fix the parameters
+\begin{equation}\label{eq:n0}
+ n_0:=2p+\lceil\log N\rceil,\quad\ q_{\max}:=p\,(2n_0+2),\quad\ \tau:=C_m\,(9p^2)^{2\fa+1},\quad\ \varphi_0:=\big(5e\,C_m\,(13p^3)^{2\fa+\frac32}\big)^{-1},
+\end{equation}
+and for $L\subset\{1,\dots,N\}$ with $1\le|L|\le p$, $|L|<N$, the event and the random variable
+\begin{equation}\label{eq:XiL}
+ \Xi_L:=\{\Phi_L\le\varphi_0\}\cap\bigcap_{a\in L}\big\{|z+m_a^{(L)}|\ge\tfrac25\big\},\qquad\rho:=6\,\tau\,\Phi_L .
+\end{equation}
+By Lemma~\ref{lem:FAstruct}(b),(c), $\Xi_L$ is closed and $\bone_{\Xi_L}$, $\rho$ do not depend on $\mathcal Q(L)$. The expansion of Section~\ref{sec:FAexp} is used with $n_0$ from \eqref{eq:n0}. Elementary consequences of $2\le\log N\le p$, used below:
+\begin{equation}\label{eq:elem}
+ \lceil\log N\rceil\le p+1,\quad\ n_0\le3p+1,\quad\ q_{\max}\le8p^2,\quad\ q_{\max}+\log N\le9p^2,\quad\ (q_{\max}+1)\lceil\log N\rceil\le13p^3 .
+\end{equation}
+(Indeed $2n_0+2\le6p+4\le8p$, and $(8p^2+1)(p+1)=8p^3+8p^2+p+1\le(8+4+\frac14+\frac18)p^3$ for $p\ge2$.)
+
+\begin{lemma}[Size of the terms]\label{lem:FAsize}
+Let $L$ be as above, $r=|L|$, $k\in L$. At every point of $\Xi_L$:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item $p\,\rho\le\frac18$;
+\item $\norm{Q_kW_k(\pi)}_{p,L}\le2\,\rho^{\,o(\pi)}$ for every $\pi\in\mathcal T(k)$;
+\item $\norm{Q_kR_k}_{p,L}\le2\,(r\rho)^{2p+2}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) On $\Xi_L$, by \eqref{eq:n0},
+$p\rho\le6p\,\tau\,\varphi_0=\frac{6}{5e}\cdot\frac{9^{2\fa+1}}{13^{2\fa+3/2}}\cdot p^{\,1+(4\fa+2)-(6\fa+\frac92)}\le\frac12\,p^{-(2\fa+\frac32)}\le\frac12\,2^{-7/2}\le\frac18$.
+
+Preparations for (b), (c). Let $2\le q\le q_{\max}$. By (m1) of Lemma~\ref{lem:FAmom} and \eqref{eq:elem}, for $a\ne b\in L$,
+\begin{equation}\label{eq:size1}
+ \norm{M_{ab}}_{q,L}\le C_m(q_{\max}+\log N)^{2\fa+1}\Phi_L\le\tau\,\Phi_L .
+\end{equation}
+At a point of $\Xi_L$ the hypothesis \eqref{eq:m3hyp} holds for every $a\in L$ with $q_*:=q_{\max}$, because $5eC_m((q_{\max}+1)\lceil\log N\rceil)^{2\fa+3/2}\Phi_L\le5eC_m(13p^3)^{2\fa+3/2}\varphi_0=1$ by \eqref{eq:elem}. Hence, by (m3),
+\begin{equation}\label{eq:size2}
+ \norm{1/M_{aa}}_{q,L}\le6\qquad(a\in L,\ 1\le q\le q_{\max}).
+\end{equation}
+
+(b) For $\pi=\emptyset$: $Q_kW_k(\emptyset)=Q_kM_{kk}$, and by (m2) with $q=p$: $\norm{Q_kM_{kk}}_{p,L}\le C_m(p+\log N)^{2\fa+3/2}\Phi_L\le C_m(2p)^{2\fa+3/2}\Phi_L\le\tau\Phi_L\le\rho$ (as $(2p)^{2\fa+3/2}\le(9p^2)^{2\fa+1}$).
+Let $\pi\in\Pi_n(k)$ with $0\le n\le n_0-1$. $W_k(\pi)$ is a product of $2n+3$ factors: $n+2$ factors $M_{ab}$ with $a\ne b$ (namely $M_{ka_0}$, $M_{a_ta_{t+1}}$, $M_{a_nk}$; recall $k\notin L'$ and $a_t\ne a_{t+1}$) and $n+1$ factors $1/M_{aa}$.
+By H\"older's inequality (F3) with $2n+3$ factors, each in $L^{q}$ with $q:=p(2n+3)\in[2,q_{\max}]$, and \eqref{eq:size1}, \eqref{eq:size2}:
+\[
+ \norm{W_k(\pi)}_{p,L}\le(\tau\Phi_L)^{n+2}\,6^{\,n+1}\le\rho^{\,n+2}=\rho^{\,o(\pi)} .
+\]
+By (F3), $\norm{Q_kW_k(\pi)}_{p,L}\le2\norm{W_k(\pi)}_{p,L}$.
+
+(c) If $r=1$, $R_k=0$. Let $r\ge2$. Each of the at most $r^{n_0+2}$ terms of \eqref{eq:Rk} (see \eqref{eq:FAcountpaths}) is a product of the deterministic-size factor $G^{(k)}_{a_{n_0}b}$, with $|G^{(k)}_{a_{n_0}b}|\le\eta^{-1}\le N$ (Lemma~\ref{lem:FAstruct}(a)), of $n_0+2$ factors $M_{ab}$ with $a\ne b$
+(namely $M_{ka_0}$, $M_{a_ta_{t+1}}$ for $t<n_0$, and $M_{bk}$), and of $n_0$ factors $1/M_{aa}$. By H\"older's inequality (F3) with $2n_0+2$ factors, each in $L^{q_{\max}}$, and \eqref{eq:size1}, \eqref{eq:size2}, each term has $\norm{\cdot}_{p,L}\le N(\tau\Phi_L)^{n_0+2}6^{n_0}\le N\rho^{n_0+2}$.
+By Minkowski's inequality (F3), \eqref{eq:n0} and (a) (which gives $r\rho\le p\rho\le\frac18\le e^{-1}$, so $N(r\rho)^{\lceil\log N\rceil}\le1$):
+\[
+ \norm{R_k}_{p,L}\le N\,(r\rho)^{n_0+2}=N(r\rho)^{\lceil\log N\rceil}\,(r\rho)^{2p+2}\le(r\rho)^{2p+2},
+\]
+and $\norm{Q_kR_k}_{p,L}\le2\norm{R_k}_{p,L}$.
+\end{proof}
+
+\paragraph{Index tuples.} For $\mathbf k=(k_1,\dots,k_p)\in\{1,\dots,N\}^p$ let $L(\mathbf k):=\{k_1,\dots,k_p\}$ and $r(\mathbf k):=|L(\mathbf k)|\le p$. A position $s\in\{1,\dots,p\}$ is \emph{lone} if $k_s\ne k_{u}$ for all $u\ne s$; $\ell(\mathbf k)$ is the number of lone positions.
+For a function $f$ we write $f^{\#_s}:=f$ if $s\le p/2$ and $f^{\#_s}:=\ol f$ if $s>p/2$.
+
+\begin{lemma}[One index tuple]\label{lem:FAtuple}
+Let $\mathbf k\in\{1,\dots,N\}^p$, $L:=L(\mathbf k)$, $\ell:=\ell(\mathbf k)$, and assume $p<N$. At every point of $\Xi_L$:
+\begin{equation}\label{eq:FAtuple}
+ \Big|P_L\Big(\prod_{s=1}^pX_{k_s}^{\#_s}\Big)\Big|\le\big(8\,p\,\rho\big)^{p+\ell}=\big(48\,p\,\tau\,\Phi_L\big)^{p+\ell}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $r:=|L|$ and $x:=r\rho$; by Lemma~\ref{lem:FAsize}(a), $x\le p\rho\le\frac18$ on $\Xi_L$. Let $\mathfrak r$ be a symbol (``remainder'') and, for $k\in L$ and $\xi\in\mathcal T(k)\cup\{\mathfrak r\}$,
+\[
+ Y_k(\xi):=\epsilon(\xi)\,Q_kW_k(\xi)\ \ (\xi\in\mathcal T(k)),\qquad Y_k(\mathfrak r):=-Q_kR_k .
+\]
+By \eqref{eq:FAX}, $X_k=\sum_{\xi\in\mathcal T(k)\cup\{\mathfrak r\}}Y_k(\xi)$ (a finite sum of functions of $\mathcal A$). Multiplying out,
+\begin{equation}\label{eq:tuple1}
+ P_L\Big(\prod_{s=1}^pX_{k_s}^{\#_s}\Big)=\sum_{\boldsymbol\xi\in\mathcal X}P_L\Big(\prod_{s=1}^pY_{k_s}(\xi_s)^{\#_s}\Big),\qquad\mathcal X:=\prod_{s=1}^p\big(\mathcal T(k_s)\cup\{\mathfrak r\}\big).
+\end{equation}
+We split $\mathcal X=\mathcal X_0\cup\mathcal X_1\cup\mathcal X_2$ (disjoint), where $\mathcal X_2$ is the set of $\boldsymbol\xi$ with $\xi_s=\mathfrak r$ for at least one $s$; $\mathcal X_0$ is the set of $\boldsymbol\xi\in\prod_s\mathcal T(k_s)$ for which there is a lone position $s$ with
+$k_s\notin\bigcup_{u\ne s}V(\xi_u)$; and $\mathcal X_1:=\prod_s\mathcal T(k_s)\setminus\mathcal X_0$.
+
+\emph{Terms in $\mathcal X_0$ vanish.} If $s$ is lone, then $k_s\ne k_u$ for all $u\ne s$; so for $\boldsymbol\xi\in\mathcal X_0$ the condition \eqref{eq:lonecond} holds, and Lemma~\ref{lem:FAvanish}(b) (with $j=p$) gives $P_L(\prod_sY_{k_s}(\xi_s)^{\#_s})=0$.
+
+\emph{Terms in $\mathcal X_1$ have total order at least $p+\ell$.} Let $\boldsymbol\xi\in\mathcal X_1$. For every lone position $s$ there is $u\ne s$ with $k_s\in V(\xi_u)$. The values $k_s$ at the $\ell$ lone positions are pairwise distinct, so $|\bigcup_uV(\xi_u)|\ge\ell$ and, by \eqref{eq:FAcountpaths},
+\begin{equation}\label{eq:tuple2}
+ \sum_{s=1}^po(\xi_s)\ \ge\ \sum_{s=1}^p\big(|V(\xi_s)|+1\big)\ \ge\ p+\ell .
+\end{equation}
+By H\"older's inequality (F3) with $p$ factors in $L^p$ and Lemma~\ref{lem:FAsize}(b), $|P_L(\prod_sY_{k_s}(\xi_s)^{\#_s})|\le\prod_s\norm{Y_{k_s}(\xi_s)}_{p,L}\le\prod_s2\rho^{o(\xi_s)}$. We sum over $\boldsymbol\xi\in\mathcal X_1$ by first fixing the orders $o_s=o(\xi_s)=:1+e_s$, $e_s\ge0$;
+by \eqref{eq:FAcountpaths} there are at most $\prod_sr^{e_s}$ tuples $\boldsymbol\xi$ with given $(e_s)$. Hence, using \eqref{eq:tuple2},
+\begin{align}
+ \sum_{\boldsymbol\xi\in\mathcal X_1}\prod_{s}\norm{Y_{k_s}(\xi_s)}_{p,L}&\le2^p\sum_{\substack{(e_s)\in\Z_{\ge0}^p\\ \sum_se_s\ge\ell}}\ \prod_{s=1}^p\rho\,(r\rho)^{e_s}=2^p\rho^p\sum_{j\ge\ell}\binom{j+p-1}{p-1}x^j\nonumber\\
+ &\le2^p\rho^p\sum_{j\ge\ell}2^{j+p-1}x^j=2^p\rho^p\,\frac{2^{p-1}(2x)^\ell}{1-2x}\le(4\rho)^p(2x)^\ell\le(4p\rho)^{p+\ell}.\label{eq:tuple3}
+\end{align}
+Here $\binom{j+p-1}{p-1}$ is the number of $(e_s)\in\Z_{\ge0}^p$ with $\sum e_s=j$; it is at most $2^{j+p-1}$; and $2x\le\frac14$, $x\le p\rho$, $p\ge1$.
+
+\emph{Terms in $\mathcal X_2$.} For every $s$, by Lemma~\ref{lem:FAsize}(b),(c) and \eqref{eq:FAcountpaths},
+\[
+ \sum_{\xi\in\mathcal T(k_s)}\norm{Y_{k_s}(\xi)}_{p,L}\le\sum_{o\ge1}r^{o-1}\,2\rho^{\,o}=\frac{2\rho}{1-x}\le3\rho=:b,\qquad\norm{Y_{k_s}(\mathfrak r)}_{p,L}\le2x^{2p+2}=:a .
+\]
+By H\"older's inequality as before, and since $\boldsymbol\xi\in\mathcal X_2$ means that the set $J:=\{s:\xi_s=\mathfrak r\}$ is non-empty,
+\[
+ \sum_{\boldsymbol\xi\in\mathcal X_2}\prod_s\norm{Y_{k_s}(\xi_s)}_{p,L}\le\sum_{\emptyset\ne J\subset\{1..p\}}a^{|J|}b^{p-|J|}=(a+b)^p-b^p\le p\,a\,(a+b)^{p-1}\le p\,2^{1-p}a\le a,
+\]
+using $a+b\le2\cdot8^{-6}+\frac38\le\frac12$ and $p\,2^{1-p}\le1$. Finally $a=2x^2\,x^{2p}\le x^{2p}\le(p\rho)^{p+\ell}$, because $x\le p\rho\le1$ and $\ell\le p$.
+
+\emph{Conclusion.} By \eqref{eq:tuple1} and the three cases, $|P_L(\prod_sX_{k_s}^{\#_s})|\le(4p\rho)^{p+\ell}+(p\rho)^{p+\ell}\le2(4p\rho)^{p+\ell}\le(8p\rho)^{p+\ell}$.
+\end{proof}
+
+\begin{lemma}[Counting tuples]\label{lem:FAcount}
+For $0\le\ell\le p$: $\ \#\{\mathbf k\in\{1,\dots,N\}^p:\ \ell(\mathbf k)=\ell\}\le p^p\,N^{(p+\ell)/2}$. Moreover $r(\mathbf k)\le\ell(\mathbf k)+\frac12(p-\ell(\mathbf k))$.
+\end{lemma}
+\begin{proof}
+To $\mathbf k$ associate the partition $\mathscr P(\mathbf k)$ of $\{1,\dots,p\}$ into the non-empty level sets of $s\mapsto k_s$. It has $r(\mathbf k)$ blocks; the lone positions are its blocks of size one, and all other blocks have size at least two, so $r(\mathbf k)\le\ell+\frac12(p-\ell)$ if $\ell(\mathbf k)=\ell$.
+The number of tuples $\mathbf k$ with a given partition with $r$ blocks is at most $N^r\le N^{(p+\ell)/2}$ (choose the value of $k$ on each block). The number of partitions of $\{1,\dots,p\}$ is at most $p^p$, since a partition is determined by the map $\{1..p\}\to\{1..p\}$ sending $s$ to the smallest element of its block.
+\end{proof}
+
+\subsection{Proof of Theorem \ref{thm:FA}}\label{sec:FAproof}
+\paragraph{Constants.} Recall $C_m$ from \eqref{eq:Cm}. We prove Theorem~\ref{thm:FA} with
+\begin{equation}\label{eq:CF}
+ C_F:=2\,\big(48\sqrt2\,C_0\,C_m\,9^{2\fa+1}\big)^2,\qquad c_F=8\fa+7,
+\end{equation}
+and with $N_0$ the smallest integer such that for all $N\ge N_0$:
+\begin{equation}\label{eq:N0FA}
+ N\ge8,\qquad12\,C_0\,N^{1/80}\le N,\qquad3\,(4C_\vth)^{2\fa}N^{1/20}\le N.
+\end{equation}
+(The condition $p\ge p_0$ of \eqref{eq:FAhyp} is a hypothesis on $p$ rather than a condition on $N$; together with $p\ge\log N$ it would follow from $\log N\ge p_0$, but
+in the application, Corollary~\ref{cor:FA}, it follows from the much weaker condition $(\log N)^3\ge p_0$, since there $p\ge(\log N)^3$.)
+
+\begin{proof}[Proof of Theorem~\ref{thm:FA}]
+Let $N\ge N_0$, and let $z,p,(t_k)$ satisfy the hypotheses. Then $p\ge\log N\ge2$, $p\le N^{1/(40\fa+40)}\le N^{1/80}$, so $12C_0p\le N$ (in particular $p<N$), and $3(4C_\vth p)^{2\fa}\le3(4C_\vth)^{2\fa}N^{2\fa/(40\fa+40)}\le N$; moreover $N\eta\ge p$.
+Thus the standing assumptions of Section~\ref{sec:FAsize} and the hypotheses of Lemmas~\ref{lem:FAevent}, \ref{lem:FAcrude}, \ref{lem:FAtuple} hold for every $L$ with $1\le|L|\le p$.
+
+\emph{Step 1: expansion of the $p$-th moment.} Since $p$ is even, $|w|^p=w^{p/2}\,\ol w^{\,p/2}$ for $w\in\C$; with $w=\sum_kt_kX_k$ and $X_k\in\mathcal A$,
+\begin{equation}\label{eq:pf1}
+ \EE\Big|\sum_kt_kX_k\Big|^p=\sum_{\mathbf k\in\{1..N\}^p}\ \prod_{s=1}^pt_{k_s}^{\#_s}\ \cdot\ \EE\Big[\prod_{s=1}^pX_{k_s}^{\#_s}\Big].
+\end{equation}
+
+\emph{Step 2: one tuple.} Fix $\mathbf k$ and let $L:=L(\mathbf k)$, $\ell:=\ell(\mathbf k)$. Since $\bone_{\Xi_L}$ does not depend on $\mathcal Q(L)$, (F2) gives
+\begin{equation}\label{eq:pf2}
+ \EE\Big[\prod_sX_{k_s}^{\#_s}\Big]=\EE\Big[\bone_{\Xi_L}\,P_L\Big(\prod_sX_{k_s}^{\#_s}\Big)\Big]+\EE\Big[\bone_{\Xi_L^c}\prod_sX_{k_s}^{\#_s}\Big].
+\end{equation}
+For the first term we use Lemma~\ref{lem:FAtuple} and Lemma~\ref{lem:FAevent}(a) ($\Phi_L\le\sqrt2\,C_0\Phi_*$): with
+\[
+ \mathfrak p:=48\sqrt2\,C_0\,p\,\tau=48\sqrt2\,C_0C_m9^{2\fa+1}\,p^{4\fa+3}\ \ (\ge1),
+\]
+\begin{equation}\label{eq:pf3}
+ \Big|\EE\Big[\bone_{\Xi_L}\,P_L\Big(\prod_sX_{k_s}^{\#_s}\Big)\Big]\Big|\le\EE\big[\bone_{\Xi_L}(48\,p\,\tau\,\Phi_L)^{p+\ell}\big]\le\EE\big[(\mathfrak p\,\Phi_*)^{p+\ell}\big].
+\end{equation}
+For the second term, by the Cauchy--Schwarz inequality, H\"older's inequality with $p$ factors and Lemma~\ref{lem:FAcrude},
+\begin{equation}\label{eq:pf4}
+ \Big|\EE\Big[\bone_{\Xi_L^c}\prod_sX_{k_s}^{\#_s}\Big]\Big|\le\PP(\Xi_L^c)^{1/2}\Big(\EE\prod_s|X_{k_s}|^2\Big)^{1/2}\le\PP(\Xi_L^c)^{1/2}\prod_s\norm{X_{k_s}}_{L^{2p}(\PP)}\le\PP(\Xi_L^c)^{1/2}\,N^{2p}.
+\end{equation}
+
+\emph{Step 3: $\Xi_p(z)\subset\Xi_L$.} By Lemma~\ref{lem:FAevent}(b),(c), on $\Xi_p(z)$ we have $|z+m_a^{(L)}|\ge\frac25$ for all $a\in L$, and $\Phi_L^2\le25C_0^2/(N\eta)\le25C_0^2\,p^{-(12\fa+11)}$ by \eqref{eq:FAhyp}. By \eqref{eq:n0}, $\varphi_0^2=(5eC_m13^{2\fa+3/2})^{-2}p^{-(12\fa+9)}$, so
+$\Phi_L\le\varphi_0$ as soon as $p\ge5C_0\cdot5eC_m13^{2\fa+3/2}=p_0$, which holds by \eqref{eq:FAhyp}. Hence $\Xi_p(z)\subset\Xi_L$ and $\PP(\Xi_L^c)\le\PP(\Xi_p(z)^c)$, for every $\mathbf k$.
+
+\emph{Step 4: summation over tuples.} Since $|t_k|\le N^{-1}$, $\sum_{\mathbf k}\prod_s|t_{k_s}|\le1$, so by \eqref{eq:pf4} and Step~3 the second terms of \eqref{eq:pf2} contribute to \eqref{eq:pf1} at most $N^{2p}\PP(\Xi_p(z)^c)^{1/2}$.
+For the first terms we group the tuples according to $\ell=\ell(\mathbf k)$ and use Lemma~\ref{lem:FAcount}, \eqref{eq:pf3}, and $N^{-1/2}\le\Phi_*\le\mathfrak p\,\Phi_*$ (Lemma~\ref{lem:FAevent}(a)):
+\begin{align*}
+ \sum_{\mathbf k:\,\ell(\mathbf k)=\ell}\ \prod_s|t_{k_s}|\ \EE\big[(\mathfrak p\Phi_*)^{p+\ell}\big]&\le p^p\,N^{\frac{p+\ell}2-p}\,\EE\big[(\mathfrak p\Phi_*)^{p+\ell}\big]\\
+ &=p^p\,\EE\big[\big(N^{-1/2}\big)^{p-\ell}(\mathfrak p\Phi_*)^{p+\ell}\big]\le p^p\,\EE\big[(\mathfrak p\Phi_*)^{2p}\big].
+\end{align*}
+Summing over $\ell\in\{0,\dots,p\}$ and using $p+1\le2^p$,
+\[
+ \EE\Big|\sum_kt_kX_k\Big|^p\le(p+1)\,p^p\,\mathfrak p^{2p}\,\EE\big[\Phi_*^{2p}\big]+N^{2p}\,\PP\big(\Xi_p(z)^c\big)^{1/2}\le\big(2\,p\,\mathfrak p^2\big)^p\,\EE\big[\Phi_*^{2p}\big]+N^{2p}\,\PP\big(\Xi_p(z)^c\big)^{1/2},
+\]
+and $2p\,\mathfrak p^2=C_F\,p^{8\fa+7}$ by \eqref{eq:CF}. This is \eqref{eq:FA}.
+\end{proof}
+
+\begin{remark}[Comments on the proof]\label{rem:FAcheck}
+(1) \emph{Where the powers of $p$ come from.} The exponent $c_F=8\fa+7=2(4\fa+3)+1$: a factor $p^{4\fa+2}$ in $\tau$ (moments of order up to $q_{\max}\le8p^2$ of bilinear forms, each costing $(q+\log N)^{2\fa+1}$; this is the only place where $p^2$ enters),
+a factor $p$ from the number of paths ($r\le p$ choices per step), squared because the bound is $\Phi_*^{2p}$; and a factor $p^p$ from the number of partitions. The exponent $12\fa+11$ in \eqref{eq:FAhyp} is used only in Step~3 (it could be replaced by $12\fa+10$, at the price of the stronger hypothesis $p\ge p_0^2$ instead of $p\ge p_0$); it comes from
+$\varphi_0\asymp p^{-(6\fa+9/2)}$, i.e.\ from the order $q'\le13p^3$ of the moment used for the tail of $Q_aM_{aa}$ in (m3).
+(2) \emph{The inverse diagonal entries.} The conditional moments of $1/M_{aa}$ are controlled by the deterministic bound $|1/M_{aa}|\le N$ together with a conditional tail bound for $Q_aM_{aa}$ obtained from Markov's inequality at order $q'=q_{\max}\lceil\log N\rceil$; no large-deviation event at a fixed level is involved, so there is no competition between $p$ and the level of such an event.
+(3) \emph{The bad set} enters only through the additive term $N^{2p}\PP(\Xi_p(z)^c)^{1/2}$; the event $\Xi_L$ on which the conditional bounds are used is measurable with respect to the minor $H^{(L)}$ and contains $\Xi_p(z)$ deterministically. This is why $\Phi_*$ contains $p/(N\eta)$ (from $\im m^{(L)}\le\im m+|L|/(N\eta)$).
+(4) \emph{Unused hypotheses.} The hypothesis $|z|\le N$ of Theorem~\ref{thm:FA} is not used in the proof (the crude bound of Lemma~\ref{lem:FAcrude} is for $X_k=h_{kk}-Z_k$ and does not involve $z$); the upper bound on $p$ is used only through $12C_0p\le N$ and $3(4C_\vth p)^{2\fa}\le N$; the lower bound $p\ge\log N$ is used through \eqref{eq:elem} (the remainder needs $n_0-2p\ge\log N$ terms, and $q+\log N\le Cp^2$), and the hypothesis $p\ge p_0$ only in Step~3.
+(5) \emph{Sanity checks.} For $r=1$ (all $k_s$ equal) Lemma~\ref{lem:FAtuple} reduces to $\norm{Q_kM_{kk}}_{p,L}^p\le\rho^p$. For two lone indices the expansion is \eqref{eq:two2} and the surviving term is \eqref{eq:two3}.
+The algebraic identities \eqref{eq:1overGL}, \eqref{eq:expansion}, Lemma~\ref{lem:FAstruct}(d) and the vanishing of Lemma~\ref{lem:FAvanish}(b) were also checked numerically (the last two exactly, by enumeration over a finite product law), and a Monte Carlo experiment illustrates the sizes $\EE|\avg X|^2\lesssim\Phi_*^4$, $\EE|X_k|^2\approx\Phi_*^2$.
+\end{remark}
+
+\subsection{Proof of Corollary \ref{cor:FA}}\label{sec:FAcor}
+\begin{proof}[Proof of Corollary~\ref{cor:FA}]
+Let $K$ be as in \eqref{eq:Krange}, $z=E+\ii\eta\in\mathbb L$ and $p\in\{p_1,p_2\}$, where $p_1=2\lceil K^{3/2}/2\rceil$, $p_2=2\lceil K/2\rceil$. We apply Theorem~\ref{thm:FA} with $t_k:=1/N$, so that $\sum_kt_kX_k=\avg X$.
+In the following, ``for $N\ge N_0$'' refers to finitely many conditions depending only on the model parameters, which we add to \eqref{eq:N0FA}.
+
+\emph{Hypotheses of Theorem~\ref{thm:FA}.} (i) $p$ is an even integer and $K\le p_2\le p\le p_1\le K^{3/2}+2\le2K^{3/2}$. (ii) $p\ge K\ge(\log N)^3\ge\log N$, and $(\log N)^3\ge p_0$ for $N\ge N_0$, so $p\ge p_0$. (iii) By \eqref{eq:Krange}, $p\le2N^{3c_0/2}$, and $\frac32c_0<\frac1{40\fa+40}$ for the value of $c_0$ in \eqref{eq:ledger0}
+(indeed $\frac32c_0=\frac{3}{16C_3}=\frac1{128\fa+192}$); hence $p\le N^{1/(40\fa+40)}$ for $N\ge N_0$. (iv) On $\mathbb L\subset\bD^{\rm near}\cup\bD^{\rm far}$ we have $\eta\le10$ and $\eta\ge\min\{K^{C_1-1}N^{-1},\frac12N^{-1/2}\}\ge N^{-1}$.
+(v) If $z\in\bD^{\rm near}$: $N\eta\ge K^{C_1-1}=K^{18\fa+19}$, while $p^{12\fa+11}\le2^{12\fa+11}K^{18\fa+\frac{33}2}\le K^{18\fa+17}$ for $N\ge N_0$ (as $K^{1/2}\ge(\log N)^{3/2}\ge2^{12\fa+11}$). If $z\in\bD^{\rm far}$: $N\eta\ge\frac12N^{1/2}$, while
+$p^{12\fa+11}\le N^{(12\fa+11)/(40\fa+40)}\le N^{3/10}\le\frac12N^{1/2}$. So $N\eta\ge p^{12\fa+11}$ in both cases. (vi) $|z|\le\Emax+11\le K^{2\fa+1}+11\le N$ (Definition~\ref{def:levels} and \eqref{eq:Krange}).
+Hence \eqref{eq:FAhyp} holds.
+
+\emph{Conclusion.} Taking $p$-th roots in \eqref{eq:FA} and using $(u+v)^{1/p}\le u^{1/p}+v^{1/p}$ for $u,v\ge0$,
+\[
+ \norm{\avg X(z)}_p\le C_Fp^{c_F}\,\norm{\Phi_*(z)^2}_p+N^2\,\PP\big(\Xi_p(z)^c\big)^{1/(2p)} .
+\]
+Here $C_Fp^{c_F}\le C_Fp_1^{c_F}=\mathfrak F$. Since $p\le p_1$, the event $\Xi(z)$ of \eqref{eq:Xiev} is contained in $\Xi_p(z)$, so by Theorem~\ref{thm:weak}(c), $\PP(\Xi_p(z)^c)\le\PP(\Xi(z)^c)\le C_wN^9e^{-K^2}$ with a constant $C_w\ge1$ depending only on the model parameters. By $p\ge\log N$, $p\le p_1$ and
+$K^2=K_w\ge40p_1\log N$ \eqref{eq:levelrel},
+\[
+ N^2\,\PP\big(\Xi_p(z)^c\big)^{1/(2p)}\le N^2\,C_w\,e^{\frac{9\log N}{2p}}\,e^{-\frac{K^2}{2p_1}}\le C_w\,e^{9/2}\,N^{2-20}\le N^{-8}\qquad(N\ge N_0).
+\]
+Finally $\mathfrak F=C_Fp_1^{8\fa+7}\le C_F2^{8\fa+7}K^{12\fa+\frac{21}2}\le K^{12\fa+11}$ for $N\ge N_0$, because $K^{1/2}\ge(\log N)^{3/2}\ge C_F2^{8\fa+7}$.
+\end{proof}
+
+\begin{remark}[On the statements used from other sections]\label{rem:FAext}
+(1) Lemma~\ref{lem:LDmom} is used for all real $q$ in $[2,13p^3]$ and for families of $n=N-|L|\le N$ variables, only through the constant $C_{\rm LD}$ in \eqref{eq:Cm}. A different value of this constant
+changes $C_m$, $C_F$, $C_V$, $p_0$ and $N_0$, and nothing else.
+(2) Lemma~\ref{lem:split} is used only through (F1), (F2), (F4) of Lemma~\ref{lem:FAfub}, i.e.\ as Fubini's theorem for the splittings $\mathcal P_N=\mathcal Q^c\cup\mathcal Q$ and $\mathcal Q=(\mathcal Q\setminus\mathcal Q_1)\cup\mathcal Q_1$.
+(3) Corollary~\ref{cor:FA} uses the numerical values $C_1-1\ge18\fa+17$ and $c_0<\frac{2}{3(40\fa+40)}$ of the ledger \eqref{eq:ledger0} (see Appendix~\ref{app:ledger}).
+\end{remark}

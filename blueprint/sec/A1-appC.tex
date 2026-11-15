@@ -1,0 +1,142 @@
+\section{Differences from the original}\label{app:diff}
+``The original'' is the paper of Erd\H{o}s, Yau and Yin (arXiv:1007.4652v7); its equation and theorem numbers are quoted in upright type, e.g.\ (2.17), Theorem~2.3.
+This appendix is the only list of differences between NP and the original. Section~\ref{app:diffPD} lists every difference between the statements of the original and those of NP,
+under the labels PD-01, \dots, PD-21, which are used for cross-reference throughout NP. Sections~\ref{app:diffNP}, \ref{app:diffB} and~\ref{sec:diff} list, for Parts~I, II and~III,
+the remaining differences (constants, quantifiers, formulations) and compare the proofs with those of the original; items already contained in Section~\ref{app:diffPD} are not repeated there.
+None of the differences weakens a main result, with one exception that is a correction: Theorem~\ref{thm:23} is stated for Lipschitz observables (PD-21).
+
+\emph{Out of scope.} The following statements of the original are not part of NP: the corollary (2.37) on averaged correlation functions and gap distributions; (2.42) and the extension to several extreme eigenvalues;
+Theorem~6.4 (Green function comparison in its general form); the quaternion self-dual case; the remarks on weakening (2.17).
+
+\subsection{Differences in the statements: PD-01 -- PD-21}\label{app:diffPD}
+\begin{description}[leftmargin=1.5em,itemsep=3pt,font=\normalfont\bfseries]
+\item[PD-01] \emph{Place:} remark after (2.18)--(2.20). \emph{Original:} ``the upper bound on $L$ originates from $\mathbf S_L\ne\emptyset$''; but at the upper endpoint of (2.18) the set $\mathbf S_L$ is empty. \emph{NP:} adopted as a remark: the range \eqref{eq:Lbound} is that of the original; at its upper endpoint (i), (ii) of Theorem~\ref{thm:21} are vacuous (Remark~\ref{rem:Kstronger}).
+\item[PD-02] \emph{Place:} (2.18), (4.4), Theorem~3.1. \emph{Original:} three different upper bounds for the exponents $L$, $\ell$. \emph{NP:} adopted: one range \eqref{eq:Lbound} for $L$ in the final statements; the proofs use only the level $K$ with the single range \eqref{eq:Krange}; there is no second exponent $\ell$.
+\item[PD-03] \emph{Place:} (1.3). \emph{Original:} the classical location $\gamma_N$ is not unique ($N\nsc(\gamma)=N$ for all $\gamma\ge2$). \emph{NP:} adopted: $\gamma_j:=\inf\{x:N\nsc(x)\ge j\}$, so $\gamma_N=2$ (\eqref{eq:sc}, Lemma~\ref{lem:nsc}(c)).
+\item[PD-04] \emph{Place:} Theorem~2.3, (2.36). \emph{Original:} $E\in[2-c,2+c]$; $\varrho(E)$ undefined, and $\rhosc(E)=0$ for $E\ge2$. \emph{NP:} adopted: bulk energies $E\in[-2+c,2-c]$, $0<c\le2$, $b\in(0,c/2)$, $\varrho=\rhosc(E)$ (Theorem~\ref{thm:23}).
+\item[PD-05] \emph{Place:} (2.33), (2.36). \emph{Original:} correlation functions $p^{(n)}$ written as densities. \emph{NP:} adopted: $p^{(n)}$ is the $n$-point marginal of the symmetrised eigenvalue law, a measure; \eqref{eq:abstrthm2} is in the equivalent density-free form with $\mathcal X^O_{E',\varrho}$ and $C_{N,n}$ (comment (a) after Theorem~\ref{thm:23}).
+\item[PD-06] \emph{Place:} (2.28), (2.31)--(2.32), symmetric case. \emph{Original:} diagonal variance of the matrix Brownian motion and the coefficient of the generator are those of the Hermitian case. \emph{NP:} adopted: for $\kk=\R$, $V$ is the GOE with diagonal variance $2/N$; $H_t$ is defined by the formula (2.29); the generator of the eigenvalue flow is then twice (2.32) (a time change), and (A) holds for $H_t$ up to a factor $1+O(1/N)$, removed by a rescaling in Part~III (comment (d) after Theorem~\ref{thm:23}, Lemma~\ref{lem:mono}(v)).
+\item[PD-07] \emph{Place:} band matrix example after (2.16). \emph{Original:} $\sigma_{ij}^2=(N/2)^{-1}\bone([i-j]_N\le N/4)$: the absolute value is missing and the row sums are $1+2/N$. \emph{NP:} not used: NP contains no examples. The corrected example is $\sigma_{ij}^2=(N/2+1)^{-1}\bone(|[i-j]_N|\le N/4)$ ($N$ divisible by $4$).
+\item[PD-08] \emph{Place:} (2.37). \emph{Original:} ``$\lim_{N\to0}$''. \emph{NP:} out of scope: (2.37) is not a result of NP (read $N\to\infty$).
+\item[PD-09] \emph{Place:} Lemma~4.6, (4.44). \emph{Original:} the bound on $\PP(\lambda_N\ge3)$ lacks ``$N\ge N_0$'' and is quoted from an earlier paper. \emph{NP:} adopted and superseded: the a priori norm bound is proved in NP with an explicit threshold (Lemma~\ref{lem:norm0}, Propositions~\ref{prop:S4}, \ref{prop:norm}).
+\item[PD-10] \emph{Place:} Lemma~5.1, (5.2). \emph{Original:} the hypothesis of the lemma (quoted from an earlier paper) does not match its use ($E_1=-4$, constant $10$). \emph{NP:} adopted and superseded: Lemma~\ref{lem:count} is a new deterministic statement whose hypothesis \eqref{eq:HShyp} is exactly what Theorem~\ref{thm:K}(i) provides; it is proved from Lemma~\ref{lem:HS}.
+\item[PD-11] \emph{Place:} Lemma~3.3 and its uses. \emph{Original:} large deviation bounds stated for equal variances but applied to unequal, possibly vanishing variances (``all variances being positive''). \emph{NP:} adopted: weighted large deviation bounds, valid for vanishing variances (Lemmas~\ref{lem:LD}, \ref{lem:LDmom}).
+\item[PD-12] \emph{Place:} Theorem~3.1, Lemmas~3.6, 3.11. \emph{Original:} Theorem~3.1 only for Hermitian matrices; dependence of the constants incomplete. \emph{NP:} adopted: every statement of NP is for both $\kk=\R$ and $\kk=\C$, with constants depending on $(\vth,\delta_-,\delta_+,C_0)$ as specified in Convention~\ref{conv:const} (Theorem~\ref{thm:weak}).
+\item[PD-13] \emph{Place:} discussion before Theorem~2.3. \emph{Original:} an assumption of an earlier paper is paraphrased as $U''\ge\delta$. \emph{NP:} not applicable: NP does not quote that paper, and the only confining potential in Part~III is quadratic.
+\item[PD-14] \emph{Place:} (2.3). \emph{Original:} (B) as a condition on the spectrum of $B$. \emph{NP:} adopted: (B) is the equivalent quadratic form bound on $\be^\perp$ (Definition~\ref{def:ass}; equivalence in Lemma~\ref{lem:mono}(i)).
+\item[PD-15] \emph{Place:} (2.17), (2.40). \emph{Original:} conditions on random variables; (2.40) is stated for the rescaled entries $v_{ij}$, $w_{ij}$. \emph{NP:} adopted: both conditions are stated for the laws $\nu_{ij}$ of $h_{ij}$ (\eqref{eq:subexp}, \eqref{eq:2m}); both are scale invariant (Lemma~\ref{lem:mono}(v)).
+\item[PD-16] \emph{Place:} Theorem~2.3. \emph{Original:} dependence of $C$ incomplete; $N\ge n$ implicit. \emph{NP:} adopted: $C$ depends on $(\eps',\delta,c,n,\rho_O,\vth,\delta_-,\delta_+,C_0)$ only; $N\ge\max(n,3)$ (Theorem~\ref{thm:23}).
+\item[PD-17] \emph{Place:} proof of Theorem~2.2, (5.11)--(5.15). \emph{Original:} rigidity proved for $j\le N/2$ only. \emph{NP:} superseded: Lemma~\ref{lem:conv} treats both edges directly; the reflection $H\mapsto-H$ (Lemma~\ref{lem:mono}(iv), Lemma~\ref{lem:weyl}(c)) is not needed.
+\item[PD-18] \emph{Place:} definition of $\Omega_h$ before (3.32). \emph{Original:} $\{|h_{ij}|\ge(\log N)^{\ell/10}|\sigma_{ij}|\}$: if $\sigma_{ij}=0$ this is the whole space. \emph{NP:} adopted: strict inequalities in \eqref{eq:subexp} and in every event comparing $|h_{ij}|$ with a multiple of $\sigma_{ij}$ (Definition~\ref{def:ass} and the sentence after it; Definition~\ref{def:good}).
+\item[PD-19] \emph{Place:} Lemma~4.1. \emph{Original:} constants ``depending on $\vth$''. \emph{NP:} adopted: the dependence of the constants of the fluctuation averaging bound and of its domain of validity on $(\vth,\delta_-,\delta_+,C_0)$ is stated explicitly (Theorem~\ref{thm:FA}, Corollary~\ref{cor:FA}).
+\item[PD-20] \emph{Place:} (2.26). \emph{Original:} supremum over $E$ which need not be attained ($\fn$ is right-continuous). \emph{NP:} adopted: \eqref{eq:nn} is stated with the supremum itself, which is a Borel function (Lemma~\ref{lem:weyl}(f)); no ``$\exists E$'' form is used.
+\item[PD-21] \emph{Place:} Theorem~2.3, (2.36). \emph{Original:} $O$ continuous with compact support, $C$ depending on $O$. \emph{NP:} adopted: $O$ Lipschitz with support in $[-\rho_O,\rho_O]^n$, and $C$ depends on $O$ only through $\rho_O$ and the factor $\norm O_\infty+\operatorname{Lip}(O)$. The source of the original's proof (an earlier paper) requires a smooth observable in the corresponding step,
+and a bound of the form $C(O)\times$(power of $N$) for all continuous $O$ would, by the uniform boundedness principle, be equivalent to a bound with $C(O)=C'\norm O_\infty$, i.e.\ to a total variation bound, which is not what the method gives. H\"older continuous $O$: corollary in Part~III, with a weaker power.
+\end{description}
+
+\subsection{Part~I (Theorems~\ref{thm:21} and~\ref{thm:22})}\label{app:diffNP}
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+\item \emph{Level form.} Theorems~\ref{thm:21} and~\ref{thm:22} are deduced from Theorem~\ref{thm:K}, which has one parameter $K\in[(\log N)^3,N^{c_0}]$, error factors $K^{C_i}$ with $C_i$ depending on $\vth$ alone, and probability $1-e^{-K/2}$.
+This is legitimate because $\phi$ and $A_0$ are existential constants in the original. Theorem~\ref{thm:K} is slightly stronger (Remark~\ref{rem:Kstronger}).
+\item \emph{One event.} Theorem~\ref{thm:K} provides a single measurable event on which all bounds hold for all $z\in\bD_K$, all $E$ and all $j$. In Theorem~\ref{thm:21}(i),(ii) the unions over the uncountable set $\bS_L$ are measured by the outer probability $\PP^*$.
+\item \emph{Quantifiers.} In Theorems~\ref{thm:21}, \ref{thm:22}: the constants $(A_0,C,c,\phi,N_0)$ depend only on $(\vth,\delta_-,\delta_+,C_0)$ and are chosen before $N$, $\kk$, the ensemble and $L$; the same constants serve both theorems; $C=1$, $c=\frac12$.
+\item \emph{The model.} The probability space is the product space $\kk^{\mathcal P_N}$ with the product of the entry laws; $H$ is Hermitian at every point; the diagonal laws are real (R). The assumptions are conditions on the family of laws (Definition~\ref{def:ass}).
+The eigenvalues are ordered, $\lambda_1\le\dots\le\lambda_N$.
+\item \emph{The function $\msc$} is defined by \eqref{eq:defmsc}, the product of two principal square roots (which is the branch with $\im\msc>0$ on all of $\C_+$), not by $\sqrt{z^2-4}$ with a principal branch. All its properties are proved (Lemmas~\ref{lem:msc}--\ref{lem:stieltjes}).
+\item \emph{Counting function.} Theorem~\ref{thm:K}(iv) holds with the supremum over all $E\in\R$, not only $|E|\le5$.
+\item \emph{Explicit constants.} $c_*=\frac1{150}$, $C_*=4$ (Lemma~\ref{lem:mscsize}); $C_6=10$ (Lemma~\ref{lem:count}); $C_7=9$ (Lemma~\ref{lem:conv}); the edge constants $2.8$, $3.6$ (Lemma~\ref{lem:nsc}(c)). The thresholds $N_0$ are not optimised and are very large.
+\end{enumerate}
+
+\subsubsection*{Proofs: the original versus Part~I}\label{app:diffproofs}
+\begin{center}
+\renewcommand{\arraystretch}{1.1}\small
+\begin{tabular}{|p{0.36\textwidth}|p{0.58\textwidth}|}
+\hline
+original & NP (Part~I)\\\hline
+Theorems 2.1, 2.2 & Theorem~\ref{thm:K} and Proposition~\ref{prop:reduction}\\
+Theorem 3.1 (weak law, fixed $z$) & Theorem~\ref{thm:weak} (lattice, deterministic on good events; includes the far regime)\\
+Definition 3.1, Lemma 3.2 (quoted) & Lemma~\ref{lem:schur} (block Schur complement; proved)\\
+Lemma 3.3 (quoted, equal variances) & Lemmas~\ref{lem:LD}, \ref{lem:LDmom} (weighted; Hoeffding and decoupling; PD-11)\\
+Lemma 3.4 (quoted) & Lemmas~\ref{lem:msc}, \ref{lem:mscsize} (proved, explicit constants)\\
+Lemma 3.5 (bounds on minors) & Lemmas~\ref{lem:minor}, \ref{lem:apriori}; the trace identity (I5) of Lemma~\ref{lem:schur} replaces interlacing\\
+Lemma 3.6 (events $\Omega$, $\Psi$) & Definition~\ref{def:good}, Lemma~\ref{lem:good} (no a priori event needed)\\
+Lemmas 3.7--3.9 (stability, with $\log N$) & Lemmas~\ref{lem:vecstab}, \ref{lem:stabnear} (on $\be^\perp$, no $\log N$)\\
+Lemmas 3.10, 3.11, 3.12 & Lemmas~\ref{lem:weakdich}, \ref{lem:initial}, Theorem~\ref{thm:weak}\\
+Lemma 4.1 and Section 7 & Theorem~\ref{thm:FA} (conditioning on a minor, finite Neumann expansion)\\
+Corollary 4.2, Lemmas 4.3, 4.4 (iteration) & Propositions~\ref{prop:S1}, \ref{prop:S2} (one step)\\
+Lemma 4.5 & Proposition~\ref{prop:S3} and Proposition~\ref{prop:norm}\\
+Lemma 4.6 (quoted; PD-09) & Lemma~\ref{lem:norm0}, Propositions~\ref{prop:S4}, \ref{prop:norm}\\
+Lemma 5.1 (quoted; PD-10) & Lemmas~\ref{lem:HS}, \ref{lem:count} (Helffer--Sj\"ostrand from the divergence theorem on rectangles; explicit polynomial cutoffs)\\
+Stieltjes transform of $\rhosc$ (used implicitly) & Lemma~\ref{lem:stieltjes} ($x=2\cos\theta$ and a geometric series)\\
+(5.11)--(5.15), $j>N/2$ by symmetry (PD-17) & Lemma~\ref{lem:conv}, Proposition~\ref{prop:rig} (both edges directly)\\\hline
+\end{tabular}
+\end{center}
+
+\subsection{Part~II (Theorem~\ref{thm:24})}\label{app:diffB}
+This section lists every place where the statements or the route of Section~\ref{sec:edge} differ from \S6 of the original. Numbers of the form (6.xx), Lemma~6.x, Theorem~6.x \emph{in this section}
+refer to the original unless they are given as references to NP; ``TeX $n$'' is a line of the source of the original. The main results are unchanged: Theorem~\ref{thm:24} is (2.41) of the original
+together with the analogous statement for $\lambda_1$.
+
+\begin{enumerate}\itemsep2pt
+\item[\textbf{II.1.}] \textbf{Theorem 2.4 (statement).}
+(a) The exponents are absolute: $\e=\frac1{100}$, $\delta=\frac1{20}$ for every $\vartheta$ (Theorem~\ref{thm:24B}); the original has ``$\e>0$ and $\delta>0$ depending on $\vartheta$'', which is implied. Only $N_0$ depends on
+$(\vartheta,\delta_\pm,C_0)$; it does not depend on $s$.
+(b) The statement for the smallest eigenvalue, \eqref{eq:tw1}, is written out and proved (via $H\mapsto-H$); the original only says ``Analogous result holds for the smallest eigenvalue $\lambda_1$''.
+The quantifiers are: $\eps,\delta$ depend only on $\vth$ (in fact they are absolute), and $N_0$ depends on $(\vth,\delta_-,\delta_+,C_0)$ but not on $s$.
+(c) The moment matching condition and the decay condition are conditions on the laws of the entries (PD-15).
+(d) Events of the form $\{|h_{ij}|>x\sigma_{ij}\}$ use strict inequalities, so that vanishing variances are allowed; nothing in \S\ref{sec:edge} divides by a variance.
+(e) The joint statement (2.42) for several eigenvalues and Theorem~6.4 are not treated (out of scope, see the beginning of this appendix).
+
+\item[\textbf{II.2.}] \textbf{Lemma 6.1 and Corollary 6.2} (sharp versus smoothed counting function) are replaced by Proposition~\ref{prop:sandwich}, which compares $\P(\lambda_N<E)$ directly with
+$\E q(X^\pm_E(H))$ on the rigidity event of \eqref{eq:rigidity}. Not used: (2.19) and (2.26) of the original, the bound of $\tr f(H)$ by $\im m$, the averaging over the window edge in the proof of Lemma~6.1, and the monotonicity
+of $q$. The parameters are $\eta=N^{-2/3-2\e}$ and $\ell=\frac13N^{-2/3-\e}$, instead of $\eta=N^{-2/3-9\e}$, $\ell_1=N^{-2/3-3\e}$, $\ell=\frac12N^{-2/3-\e}$; the probability bounds are $N^{-20}$.
+
+\item[\textbf{II.3.}] \textbf{Theorem 6.3} (Green function comparison at the edge). Theorem~\ref{thm:gfc} proves the integrated form (6.25) only, for $F\in C^3(\R)$ with bounded derivatives up to order $3$; this is the
+form that the proof of Theorem~\ref{thm:24} needs. Differences: the error is $C_4C_FN^{-1/6+4\eg}$ with the explicit exponent $4\eg$ (original: $CN^{-1/6+C\e}$) and with $C_4$ depending on $(\vartheta,C_0)$ only; it holds for every
+$\eg\in(0,\frac1{10}]$ (original: $\e<\e_0(C_1)$); the argument of $F$ is $\frac N\pi\int_{E_1}^{E_2}\im m$, i.e.\ the factor $\frac1\pi$ is included (immaterial: replace $F$ by $F(\pi\,\cdot)$).
+\emph{Not proved:} the pointwise form (6.24) for $F(N\eta\im m(z))$, and polynomially growing $F$ as in (6.23). Neither is used for the main results.
+
+\item[\textbf{II.4.}] \textbf{Lemma 6.5} (one-step comparison). In the original the functional is rewritten as $\eta\int\sum_{i\ne j}S_{ij}\overline{S_{ji}}$ and expanded entrywise by the resolvent expansion; the terms are sorted
+according to $|\{i,j\}\cap\{a,b\}|$ ((6.53)--(6.69)). In NP the change of the functional under the replacement of one entry is given \emph{exactly} by a $2\times2$ determinant: Lemma~\ref{lem:det}, Corollary~\ref{cor:Xchange}(i),
+$X(Q+V)-X(Q)=-\frac1\pi\im\br{\Log D_p}$ with $D_p=1+vR_{ba}+\bar vR_{ab}-|v|^2(R_{aa}R_{bb}-R_{ab}R_{ba})$. Only the four entries $R_{aa},R_{bb},R_{ab},R_{ba}$ at the two points $z_1,z_2$ occur; there is no sum over $i,j$,
+no integral over the spectral parameter inside the expansion, and no case distinction. Lemma~\ref{lem:expand}, Corollary~\ref{cor:entry} and Proposition~\ref{prop:step} replace Lemma~6.5; the error exponents are the same,
+$N^{-13/6+C\e}$ $(a\ne b)$ and $N^{-11/6+C\e}$ $(a=b)$, now with $C=4$, resp.\ $C=2$. The second-order terms $A_N,B_N$ of the original correspond to $\mathfrak Q_2$ \eqref{eq:b3:Q2}, \eqref{eq:b3:Q2d}, given by explicit formulas.
+
+\item[\textbf{II.5.}] \textbf{Lemma 6.6} (the third-order term) is replaced by Lemma~\ref{lem:decor}: a bound $7C_\Phi\Psi^2$ for $\E[\mathbf 1_{\cG_p}\Phi(X(Q))R_{ab}(z)]$, a statement about \emph{one} off-diagonal resolvent entry at one
+spectral parameter (original: $|\E F'(x^R)R_{ij}\overline{R_{ja}R_{bi}}|\le N^{-4/3+C\e}$ for $a,b,i,j$ distinct, (6.70)). The proof is new: $R_{ab}=-R_{aa}Y$ with $Y$ centred given the minor $Q^{(a)}$, and
+$X(Q)-X(Q^{(a)})=\frac1\pi\im\br{\Log(-R_{aa})}$ (Corollary~\ref{cor:Xchange}(ii)). Not used: the large deviation bounds of Lemma~3.3 of the original, bounds on the quantities $Z^{(S)}_{ja}$, any local law for minors, and the
+passage from $R$ to $S$. In particular the step ``$S$ is the Green function of a usual generalized Wigner matrix with all variances being positive'' (TeX 4259--4269), which is not justified under (A)--(C) (variances may
+vanish, and Lemma~3.3 is stated for equal variances), does not occur.
+
+\item[\textbf{II.6.}] \textbf{Bounds for $R=(Q-z)^{-1}$.} The original transfers the bound (6.33) from $S$ to $R$ by a tenth-order resolvent expansion closed with the trivial bound $|R_{ij}|\le\eta^{-1}$ ((6.45)). NP uses the exact closed
+identity $R_P=S_P+S_PV_PR_P$ for the $2\times2$ (or $1\times1$) blocks with indices in $P=\{a,b\}$ (Lemma~\ref{lem:RfromS}(a)); only these entries of $R$ are needed. The matrix $Q$, which does not satisfy (A), is never fed to
+Theorem~\ref{thm:21}.
+
+\item[\textbf{II.7.}] \textbf{Uniformity in the hybrids.} The original states (6.33) with a maximum over all hybrids $\gamma$ inside the probability, and with error probability $C\exp[-c(\log N)^\xi]$ for any $\xi$. In NP each
+Lindeberg step uses an event of its own hybrid only (Lemma~\ref{lem:edge}, Lemma~\ref{lem:RfromS}(b)), with probability bound $2N^{-20}$; the uniformity in the step is the uniformity of the constants of
+Theorem~\ref{thm:21} over the class $\fA(\Par)$, which contains every hybrid because the variance matrix is common to all of them (Lemma~\ref{lem:hyb}(ii)). No union bound over the hybrids is taken.
+
+\item[\textbf{II.8.}] \textbf{The edge behaviour of $\msc$.} The exact identity $(\msc+1)^2=(2-z)\msc$ (Lemma~\ref{lem:mscB}) replaces the asymptotic bound (6.34); accordingly the resolvent entries are compared with $-\delta_{kl}$
+(the edge value $\msc(2)=-1$) rather than with $\delta_{kl}\msc(z)$, and the control parameter is $\Psi=4N^{-1/3+2\eg}$ (original: $N^{-1/3+2\e}$).
+
+\item[\textbf{II.9.}] \textbf{The branch of the logarithm; simultaneity in $z$.} The determinant formulas involve the principal logarithm. By \eqref{eq:b1:nocut}, $D_p(v;z)$ and $-R_{aa}(z)$ avoid the cut $(-\infty,0]$ for
+every $z\in\C_+$, so the exact formulas need no condition along the segment $[E_1,E_2]+i\eta$. The good sets (Lemma~\ref{lem:edge}, Definition~\ref{def:goodB}) are nevertheless defined with ``for all $y$'' in the respective
+interval, as in the original's (6.33) (maximum over $E$); this uses the simultaneity in $z$ of Theorem~\ref{thm:21}(ii), stated with the outer probability. Conditions at the two points $z_1,z_2$ would suffice
+(remark~(4) after Lemma~\ref{lem:expand}).
+\end{enumerate}
+\noindent No statement of \S\ref{sec:edge} is weaker than the corresponding statement of the original that is used for Theorem~\ref{thm:24}; Item II.3 records the two forms of Theorem~6.3 that are not reproduced.
+
+\subsection{Part~III (Theorem~\ref{thm:23})}\label{sec:diff}
+\begin{enumerate}[leftmargin=1.8em,itemsep=2pt,label=\textbf{III.\arabic*.}]
+\item \emph{The statement.} The differences in the statement of Theorem~\ref{thm:23} are PD-04, PD-05, PD-06, PD-16 and PD-21 (Section~\ref{app:diffPD}). In Part~III, PD-06 appears as the rescaling $\kappa_t$ of \eqref{tildeH}
+and as the factor $2$ in the eigenvalue generator (Remark~\ref{rem:gen}). The constant is linear in $\norm O_\infty+\operatorname{Lip}(O)$ and depends on $O$ otherwise only through $\rho_O$.
+The original states (2.36) for continuous $O$ with $C=C(O)$, citing [ESYY, Thm 2.1]; the proof there applies [ESYY, Thm 4.1] to $G=\int\widetilde O\,\rd y$, which must be smooth, with $C=C(G)$.
+For H\"older continuous $O$ NP gets a weaker power rate (Corollary~\ref{cor:cont}); merely continuous $O$ is \emph{not covered} (Remark~\ref{rem:contO}).
+\item \emph{The flow.} The flow is defined by the explicit formula (2.29), $H_t=e^{-t/2}H+(1-e^{-t})^{1/2}V$ (see \eqref{Ht}); the SDE (2.28) is not used, and the equation (2.31) for the eigenvalue density appears only as the pointwise identity
+of Proposition~\ref{prop:U9}(iii) for a smooth symmetric density. The reference measure is the law of $\lambda(V)$; its identification with the density (2.30) of G$\beta$E is a theorem of NP (Theorem~\ref{thm:JD}), which is not needed for the statement.
+\item \emph{A stronger bound.} Part~III proves Theorem~\ref{thm:sharp}, from which \eqref{eq:abstrthm2} follows: the factor $N^{2\eps'}\cdot N^{\eps'}$ is replaced by $e^{A_1(\log\log N)^2}$ and the time threshold
+$N^{-1+\delta+\eps'}$ by $(\log N)^2/N$; the bound is uniform in $E$, $b$ and the ensemble.
+\item \emph{The route.} [ESYY] Assumption IV is derived from the counting-function form of rigidity \eqref{good} (Lemma~\ref{lem:countC}), not from the local semicircle law; Assumption II is not needed beyond (RA5);
+[ESYY, Thm 4.1] (Dirichlet form inequality and auxiliary dynamics) is replaced by Corollary~\ref{cor:gap}, which needs only the relative entropy. The logarithmic Sobolev inequality is proved from the Pr\'ekopa--Leindler
+inequality (Theorem~\ref{thm:LSI}) and not by the Bakry--\'Emery argument.
+\end{enumerate}

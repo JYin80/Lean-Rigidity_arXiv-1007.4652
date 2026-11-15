@@ -1,0 +1,476 @@
+\section{The strong local law: proof of Theorem \ref{thm:K}\,(i),(ii)}\label{sec:strong}
+In this section and the next, $N\ge N_0$, $\kk\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vth,\dpm,C_0)$ (normalised as in Convention~\ref{conv:const}) and $K$ in the range \eqref{eq:Krange} are fixed, as in Section~\ref{sec:weak};
+$K_w,p_1,p_2,\fL,\Emax,\cG(z)$ are as in Definition~\ref{def:levels}; $\bD^{\rm near}$, $\bD^{\rm far}$, $\mathbb L$, ${\rm col}(z)$, $\cG_{\rm col}(z)$ as in Definition~\ref{def:domains};
+$\lambda_{\rm st}=1/(576C_s)$ as in \eqref{eq:lambda1}; $w=\avg v$, $w_0=\msc(1-\msc^2)$ as in Lemma~\ref{lem:stabnear}; and $\avg X=\frac1N\sum_kX_k$ with $X_k$ from Definition~\ref{def:XA}.
+For a random variable $f$ on $(\Omega,\PP)$ and real $p\ge1$, $\norm f_p:=(\EE|f|^p)^{1/p}$. All quantities depend on the spectral parameter $z=E+\ii\eta$; recall $\kappa=||E|-2|$ and $\varkappa=\sqrt{\kappa+\eta}$ (Convention~\ref{conv:z}).
+
+\paragraph{Exponents of this section.} Throughout,
+\[
+ b:=12\fa+12,\qquad\mathfrak E:=K^{b},\qquad\mathfrak E_3:=K^{b+3}.
+\]
+From the previous sections we use the two quantities $\mathfrak E_0=6\cdot10^6C_s^2\fL^2$ of Lemma~\ref{lem:apriori} and $\mathfrak F=C_Fp_1^{c_F}$ of Corollary~\ref{cor:FA}, with the bounds stated there:
+\begin{equation}\tag{T1}\label{eq:a5-T1}
+ 1\le\mathfrak E_0\le K^{8\fa+7},\qquad1\le\mathfrak F\le K^{12\fa+11},\qquad K^{3/2}\le p_1\le2K^{3/2},\qquad K\le p_2\le K+2\le p_1 .
+\end{equation}
+(The lower bounds hold because $C_s,\fL,C_F,p_1\ge1$; the bounds on $p_1,p_2$ are Definition~\ref{def:levels} and Lemma~\ref{lem:levels}(S3), and $K+2\le K^{3/2}$ as $K\ge4$.)
+
+\paragraph{Standing conditions.} ``For $N\ge N_0$'' has the same meaning as in Section~\ref{sec:weak}: (S1)--(S5) of Lemma~\ref{lem:levels} hold with a constant $K_0$ which is at least the maximum of the explicit constants of Sections~\ref{sec:weak}--\ref{sec:norm};
+for the present two sections it suffices that
+\begin{equation}\tag{T2}\label{eq:a5-T2}
+ K\ \ge\ K_0\ \ge\ \max\{124800,\ 2142\,C_s\},\qquad N^{31}\ \ge\ 920\,\fa\,e^{8},
+\end{equation}
+that $N_0$ is at least the thresholds of Lemma~\ref{lem:norm0}, Theorem~\ref{thm:FA} and Corollary~\ref{cor:FA}, and that the finitely many further inequalities marked ``$N\ge N_0$'' below hold; each of them involves only $N$ and absolute constants.
+The complete list of thresholds is collected in Appendix~\ref{app:ledger}. Of the exponent ledger \eqref{eq:ledger0} we use, besides \eqref{eq:ledgerA3} and the two inequalities of Remark~\ref{rem:FAext}(3) (which are hypotheses of the statements we quote), only
+\begin{equation}\tag{T3}\label{eq:a5-T3}
+ C_2\ge b+7,\qquad C_3\ge2b+12,\qquad c_0\,(C_1-1)\le\tfrac13 ;
+\end{equation}
+all of these hold for the values \eqref{eq:ledger0} (Appendix~\ref{app:ledger}). We record three consequences which are used repeatedly.
+
+\smallskip\noindent\textbf{(T4)} \emph{Sizes on $\bD^{\rm near}$.} For $z\in\bD^{\rm near}$: $\eta\ge N^{-1}$, $\ N\eta\ge K^{C_1-1}\ge K^{12\fa+18}\ge\mathfrak F$, $\ \varkappa\ge\sqrt\eta\ge N^{-1/2}$, and, with $c_*=\frac1{150}$, $C_*=4$ of Lemma~\ref{lem:mscsize},
+\[
+ \frac{\eta}{150}\le\im\msc\le\varkappa,\qquad\frac{\varkappa}{1950}\le|w_0|\le4\varkappa,\qquad\Lambda\le\frac1\eta+1\le2N .
+\]
+Indeed, the first three statements are Definition~\ref{def:domains} with \eqref{eq:ledgerA3}, \eqref{eq:a5-T1} and $\kappa\ge0$; the bounds on $\im\msc$ are the ``in particular'' line of Lemma~\ref{lem:mscsize}; those on $w_0=\msc(1-\msc^2)$ follow from \eqref{eq:alpha}: $\frac1{13}\le|\msc|\le1$ and $c_*\varkappa\le|1-\msc^2|\le C_*\varkappa$, with $\frac{c_*}{13}=\frac1{1950}$ (this is also the last statement of Lemma~\ref{lem:stabnear}; it does not involve $H$);
+and $\Lambda=|m-\msc|\le|m|+|\msc|\le\eta^{-1}+1$ by Lemma~\ref{lem:basic}(a) and Lemma~\ref{lem:msc}(b).
+
+\smallskip\noindent\textbf{(T5)} \emph{Powers of $K$ against powers of $N$.} By Lemma~\ref{lem:levels}(S4), $K^{6\fa+6}\le N^{1/32}$; hence
+\[
+ \max\{\mathfrak F,\ \mathfrak E,\ K^{10\fa+8}\}\le K^{12\fa+12}\le N^{1/16},\qquad K^{b+2}=K^{12\fa+14}\le K^{18\fa+18}\le N^{3/32},
+\]
+and, by the third relation in \eqref{eq:a5-T3}, $K^{C_1-1}\le N^{c_0(C_1-1)}\le N^{1/3}$.
+
+\smallskip\noindent\textbf{(T6)} \emph{Bad sets in $L^p$.} Let $z\in\mathbb L$ and $p\in\{p_1,p_2\}$. Then
+\[
+ 2N\,\PP\big(\cG_{\rm col}(z)^c\big)^{1/p}\le N^{-8},\qquad\text{and}\qquad2N\,\big(N^{10}e^{-p_1}\big)^{1/p_2}\le N^{-8}.
+\]
+Indeed, by Definition~\ref{def:domains}, $\PP(\cG_{\rm col}(z)^c)\le460\,\fa N^8e^{-K^2}$. Since $\log N\le K\le p\le p_1$ and $K^2\ge40p_1\log N$ \eqref{eq:levelrel}: $(460\fa)^{1/p}\le460\fa$, $N^{8/p}=e^{8\log N/p}\le e^8$ and $e^{-K^2/p}\le e^{-K^2/p_1}\le N^{-40}$.
+So the first quantity is at most $920\,\fa e^8N^{-39}\le N^{-8}$ by \eqref{eq:a5-T2}. Similarly, $N^{10/p_2}\le e^{10}$ and $e^{-p_1/p_2}\le N^{-40}$ because $p_1\ge40p_2\log N$ \eqref{eq:levelrel}; so the second quantity is at most $2e^{10}N^{-39}\le N^{-8}$ for $N\ge N_0$.
+
+\smallskip We shall also use, without further comment, the elementary inequalities $\sqrt{\alpha+\beta}\le\sqrt\alpha+\sqrt\beta$ and $2\sqrt{\alpha\beta}\le t\alpha+t^{-1}\beta$ ($\alpha,\beta\ge0$, $t>0$), Minkowski's inequality $\norm{f+g}_p\le\norm f_p+\norm g_p$,
+and the following two facts about a random variable $f\ge0$ and $p\ge1$:
+\begin{equation}\tag{M}\label{eq:a5-M}
+ \norm{f^{1/2}}_p\le\norm f_p^{1/2},\qquad\qquad\PP(f>t)\le\big(\norm f_p/t\big)^p\quad(t>0).
+\end{equation}
+(The first is $\EE f^{p/2}\le(\EE f^p)^{1/2}$, the Cauchy--Schwarz inequality; the second is Markov's inequality for $f^p$.)
+
+\subsection{First pass: a moment inequality that improves itself}
+\begin{proposition}[Upper-branch moment bound, near regime]\label{prop:S1}
+Let $z\in\mathbb L\cap\bD^{\rm near}$ and $p=p_1$. Then
+\begin{align}
+ Y(z):=\norm{\Lambda(z)\bone_{\cG_{\rm col}(z)}}_{p}&\le C\Big(\varkappa+\frac{\mathfrak E}{N\eta}\Big),\label{eq:Y}\\
+ \norm{\avg X(z)}_{p}&\le\frac{C\mathfrak F}{N\eta}\Big(\varkappa+\frac{\mathfrak E}{N\eta}\Big),\label{eq:Xmom}
+\end{align}
+and the event $\cG^1(z):=\cG_{\rm col}(z)\cap\big\{|\avg X(z)|\le\frac{K\mathfrak E}{N\eta}\big(\varkappa+\frac{\mathfrak E}{N\eta}\big)\big\}$ satisfies $\PP(\cG_{\rm col}(z)\setminus\cG^1(z))\le e^{-p_1}$.
+The constants are absolute: \eqref{eq:Y} holds with $C=42$ and \eqref{eq:Xmom} with $C=194$. The set $\cG^1(z)$ is closed.
+\end{proposition}
+\begin{proof}
+Write $u:=N\eta$, $p:=p_1$, $\cG_{\rm c}:=\cG_{\rm col}(z)$. Since $z\in{\rm col}(z)$, $\cG_{\rm c}\subset\cG(z)$, and by Theorem~\ref{thm:weak}(a), $\Ld+\Lo\le\lambda_{\rm st}/2$ on $\cG_{\rm c}$. So $\cG_{\rm c}$ is contained in the event $\cG(z)\cap\{\Ld+\Lo\le\lambda_{\rm st}\}$ of Lemma~\ref{lem:apriori}.
+No information on the branch of the quadratic equation (i.e.\ on the size of $\Lambda$ relative to $|w_0|$) is used in this proof.
+
+\emph{Step 1: a pointwise bound on $\cG_{\rm c}$.} Since $\Lambda=|w|$, we have $\Lambda^2=|w^2|\le|w_0|\Lambda+|w^2-w_0w|$, and \eqref{eq:ap3} gives
+\[
+ \tfrac14\Lambda^2\le\Big(|w_0|+\frac{\mathfrak E_0}{u}\Big)\Lambda+|\avg X|+\mathfrak E_0\Big(\frac{\im\msc}{u}+\frac1{u^2}\Big).
+\]
+By the last statement of Lemma~\ref{lem:scalar} (applied to $x=\Lambda$ after multiplication by $4$) and $\sqrt{\alpha+\beta+\gamma}\le\sqrt\alpha+\sqrt\beta+\sqrt\gamma$,
+\[
+ \Lambda\le4|w_0|+\frac{4\mathfrak E_0}{u}+2|\avg X|^{1/2}+2\Big(\frac{\mathfrak E_0\im\msc}{u}\Big)^{1/2}+\frac{2\mathfrak E_0^{1/2}}{u}.
+\]
+By (T4), $|w_0|\le4\varkappa$ and $\im\msc\le\varkappa$, so $2(\mathfrak E_0\im\msc/u)^{1/2}\le\varkappa+\mathfrak E_0/u$; and $\mathfrak E_0^{1/2}\le\mathfrak E_0$. Hence, on $\cG_{\rm c}$,
+\begin{equation}\tag{7.a}\label{eq:a5-7a}
+ \Lambda\le17\varkappa+\frac{7\mathfrak E_0}{u}+2|\avg X|^{1/2}.
+\end{equation}
+
+\emph{Step 2: the moment of $\avg X$ in terms of $Y$.} By Lemma~\ref{lem:weyl}(e) the functions $\Lambda(z)$, $\avg X(z)$, $\im m(z)$ are continuous on $\Omega$; $\cG_{\rm c}$ is closed (Definition~\ref{def:domains}). By (T4), $0\le\Lambda\le2N$, so $Y:=Y(z)\le2N<\infty$, and by (T6)
+\begin{equation}\tag{7.b}\label{eq:a5-7b}
+ \norm\Lambda_p\le\norm{\Lambda\bone_{\cG_{\rm c}}}_p+\norm{\Lambda\bone_{\cG_{\rm c}^c}}_p\le Y+2N\,\PP(\cG_{\rm c}^c)^{1/p}\le Y+N^{-8}.
+\end{equation}
+Next, $\im m\le\im\msc+|m-\msc|=\im\msc+\Lambda$, and $\frac1N\le\frac{150\,\im\msc}{u}$ by (T4). So the random variable \eqref{eq:Phistar} (with $p=p_1$) satisfies, at every point of $\Omega$,
+\[
+ 0\le\Phi_*^2=\frac1N+\frac{\im m}{u}+\frac{p_1}{u^2}\le\frac{151\,\im\msc}{u}+\frac{\Lambda}{u}+\frac{p_1}{u^2},
+\]
+and by Minkowski's inequality, \eqref{eq:a5-7b} and $\im\msc\le\varkappa$: $\norm{\Phi_*^2}_p\le\frac{151\varkappa}u+\frac{Y+N^{-8}}u+\frac{p_1}{u^2}$. Corollary~\ref{cor:FA} (with $p=p_1$) and $\mathfrak F\le u$ (T4) now give
+\begin{equation}\tag{7.c}\label{eq:a5-7c}
+ \norm{\avg X}_p\le\mathfrak F\,\norm{\Phi_*^2}_p+N^{-8}\le\frac{\mathfrak F}{u}\Big(151\varkappa+Y+\frac{p_1}u\Big)+2N^{-8}.
+\end{equation}
+
+\emph{Step 3: closing the inequality.} Multiply \eqref{eq:a5-7a} by $\bone_{\cG_{\rm c}}$, take the $L^p$-norm, and use Minkowski's inequality and \eqref{eq:a5-M}:
+\[
+ Y\le17\varkappa+\frac{7\mathfrak E_0}{u}+2\norm{\avg X}_p^{1/2}.
+\]
+By \eqref{eq:a5-7c},
+\begin{align*}
+ 2\norm{\avg X}_p^{1/2}&\le2\Big(\frac{151\mathfrak F\varkappa}{u}\Big)^{1/2}+2\Big(\frac{\mathfrak FY}{u}\Big)^{1/2}+\frac{2(\mathfrak Fp_1)^{1/2}}{u}+2\sqrt2\,N^{-4}\\
+ &\le\varkappa+\frac{151\mathfrak F}{u}+\frac Y2+\frac{2\mathfrak F}{u}+\frac{2(\mathfrak Fp_1)^{1/2}}{u}+3N^{-4}.
+\end{align*}
+Therefore
+\[
+ Y\le\frac Y2+18\varkappa+\frac{7\mathfrak E_0+153\mathfrak F+2(\mathfrak Fp_1)^{1/2}}{u}+3N^{-4}.
+\]
+\emph{Here the right-hand side contains the unknown $Y$ itself with the factor $\frac12$; since $Y$ is finite, it can be absorbed.} This gives $Y\le36\varkappa+2\big(7\mathfrak E_0+153\mathfrak F+2(\mathfrak Fp_1)^{1/2}\big)/u+6N^{-4}$.
+By \eqref{eq:a5-T1}, $(\mathfrak Fp_1)^{1/2}\le(2K^{12\fa+12.5})^{1/2}\le2K^{12\fa+11}$ and
+\[
+ 14\mathfrak E_0+306\mathfrak F+4(\mathfrak Fp_1)^{1/2}\le328\,K^{12\fa+11}\le K^{12\fa+12}=\mathfrak E
+\]
+by \eqref{eq:a5-T2}; and $6N^{-4}\le6\varkappa$ by (T4). Hence $Y\le42\varkappa+\mathfrak E/u$, which proves \eqref{eq:Y} with $C=42$.
+
+Inserting \eqref{eq:Y} into \eqref{eq:a5-7c}, and using $p_1\le2K^{3/2}\le\mathfrak E$ and $2N^{-8}\le\frac{1}{10}N^{-3/2}\le\frac{\mathfrak F\varkappa}{u}$ (as $\mathfrak F\ge1$, $\varkappa\ge N^{-1/2}$, $u\le10N$, and $N^{13/2}\ge20$),
+\[
+ \norm{\avg X}_p\le\frac{\mathfrak F}{u}\Big(151\varkappa+42\varkappa+\frac{42\mathfrak E}{u}+\frac{\mathfrak E}{u}\Big)+\frac{\mathfrak F\varkappa}{u}\le\frac{194\,\mathfrak F}{u}\Big(\varkappa+\frac{\mathfrak E}u\Big),
+\]
+which is \eqref{eq:Xmom} with $C=194$.
+
+\emph{Step 4: Markov's inequality.} Let $t:=\frac{K\mathfrak E}{u}\big(\varkappa+\frac{\mathfrak E}u\big)>0$. By \eqref{eq:a5-M}, \eqref{eq:Xmom}, \eqref{eq:a5-T1} and \eqref{eq:a5-T2},
+\[
+ \PP\big(\cG_{\rm col}(z)\setminus\cG^1(z)\big)\le\PP\big(|\avg X(z)|>t\big)\le\Big(\frac{194\,\mathfrak F}{K\mathfrak E}\Big)^{p_1}\le\Big(\frac{194}{K^2}\Big)^{p_1}\le e^{-p_1}.
+\]
+Finally $\cG^1(z)$ is closed, as the intersection of the closed set $\cG_{\rm col}(z)$ with a set $\{|f|\le t\}$, $f=\avg X(z)$ continuous.
+\end{proof}
+
+\begin{remark}
+This is the point where NP departs most from the original: there, the bound $\Lambda\lesssim(N\eta)^{-\tau}$ is improved to exponent $\frac{1+\tau}2$ and the step is iterated $2\log\log N$ times, each time losing a factor $(\log N)^{3}$ in the exponent of the probability
+(Lemmas 4.3--4.4 of the original; this is the origin of $L\ge A_0\log\log N$). Here the inequality of Step 3 closes in one step because the right-hand side of \eqref{eq:FA} contains $\Lambda$ itself under the expectation (through $\im m\le\im\msc+\Lambda$ in $\Phi_*^2$, linearly),
+and because the a priori bound $Y\le2N$ makes the absorption $Y\le\frac12Y+\dots$ legitimate. The square root in \eqref{eq:a5-7a} comes from solving the quadratic inequality on the \emph{upper} branch, $|w|\le|w_0|+|\,\cdot\,|^{1/2}$ (Lemma~\ref{lem:scalar}), which needs no dichotomy.
+\end{remark}
+
+\subsection{Dichotomy and continuity at the level of events}
+\begin{proposition}[Averaged and entrywise law on the lattice]\label{prop:S2}
+For $z\in\mathbb L\cap\bD^{\rm near}$ let $\cG^2(z):=\bigcap_{z'\in{\rm col}(z)}\cG^1(z')$; this set is closed, and $\PP(\cG^2(z)^c)\le N^{10}e^{-p_1}$. On $\cG^2(z)$:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=0pt]
+\item if $\varkappa N\eta\ge\mathfrak E_3$:\quad $\Lambda(z)\le K^{b+2}/(N\eta)\le|w_0(z)|/4$;
+\item in all cases:\quad $\Lambda(z)\le K^{b+4}/(N\eta)$;
+\item $\Ld(z)+\Lo(z)\le K^{b+5}\big(\sqrt{\im\msc(z)/(N\eta)}+1/(N\eta)\big)$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Let ${\rm col}(z)=\{z_0,\dots,z_{k_*}\}$, $z_k=E+\ii\eta_k$, $\eta_k=10-kN^{-4}$, $z_{k_*}=z$, as in the justification of Definition~\ref{def:domains}; all $z_k$ lie in $\mathbb L\cap\bD^{\rm near}$, $k_*+1\le10N^4$, and ${\rm col}(z_k)=\{z_0,\dots,z_k\}\subset{\rm col}(z)$.
+
+\emph{Probability.} Each $\cG^1(z_k)$ is closed (Proposition~\ref{prop:S1}), so $\cG^2(z)$ is closed. Since ${\rm col}(z_k)\subset{\rm col}(z)$ we have $\cG_{\rm col}(z)\subset\cG_{\rm col}(z_k)$, hence
+\[
+ \cG^2(z)^c\subset\cG_{\rm col}(z)^c\ \cup\ \bigcup_{k=0}^{k_*}\big(\cG_{\rm col}(z_k)\setminus\cG^1(z_k)\big),
+\]
+and by Definition~\ref{def:domains}, Proposition~\ref{prop:S1} and $K^2\ge p_1$ \eqref{eq:levelrel},
+$\PP(\cG^2(z)^c)\le460\,\fa N^8e^{-K^2}+10N^4e^{-p_1}\le N^{10}e^{-p_1}$ for $N\ge N_0$ (namely $N^{2}\ge460\fa+1$).
+
+\emph{The quadratic inequality on $\cG^1(z')$.} Let $z'=E+\ii\eta'\in{\rm col}(z)$; in the next display all quantities are evaluated at $z'$, $u:=N\eta'$ and
+\[
+ \beta:=\varkappa+\frac{\mathfrak E}{u}.
+\]
+We claim that at every point of $\cG^1(z')$
+\begin{equation}\label{eq:Q1}
+ |w^2-w_0w|\le\frac{2K\mathfrak E\beta}{u}+\frac{2\mathfrak E_0}{u}\Lambda+\tfrac34\Lambda^2 .
+\end{equation}
+Indeed $\cG^1(z')\subset\cG_{\rm col}(z')\subset\cG(z')\cap\{\Ld+\Lo\le\lambda_{\rm st}\}$ (Theorem~\ref{thm:weak}(a)), so \eqref{eq:ap3} holds; by the definition of $\cG^1(z')$, $|\avg X|\le K\mathfrak E\beta/u$; and, by $\im\msc\le\varkappa$ (T4) and $\mathfrak E_0\le\mathfrak E\le K\mathfrak E$ \eqref{eq:a5-T1},
+\[
+ \mathfrak E_0\Big(\frac{\im\msc}{u}+\frac1{u^2}\Big)\le\frac{\mathfrak E_0}{u}\Big(\varkappa+\frac{\mathfrak E}{u}\Big)\le\frac{K\mathfrak E\beta}{u}.
+\]
+
+\emph{Proof of \textup{(a)}.} Call a point $z'=E+\ii\eta'$ of the column \emph{of type \textup{(a)}} if $\varkappa(z')N\eta'\ge\mathfrak E_3$. Since $\kappa$ depends only on $E$, the function $\eta'\mapsto\varkappa(E+\ii\eta')\,N\eta'=\sqrt{\kappa+\eta'}\,N\eta'$ is increasing. Hence, if $z=z_{k_*}$ is of type (a), then all points $z_0,\dots,z_{k_*}$ of the column are of type (a).
+Assume this, and fix a point of $\cG^2(z)$.
+
+\smallskip\noindent\emph{Dichotomy.} Let $z'=z_k$ ($0\le k\le k_*$), write $u=N\eta_k$, and suppose that $\Lambda(z_k)\le\frac12|w_0(z_k)|$. We show that then
+\begin{equation}\tag{7.d}\label{eq:a5-7d}
+ \Lambda(z_k)\le\frac{K^{b+2}}{N\eta_k}\le\frac{|w_0(z_k)|}4 .
+\end{equation}
+All quantities are evaluated at $z_k$. Since $z_k$ is of type (a), $\mathfrak E/u\le\varkappa\mathfrak E/\mathfrak E_3=K^{-3}\varkappa\le\varkappa$, so $\beta\le2\varkappa$. From $|w|=\Lambda\le\frac12|w_0|$ we get $|w-w_0|\ge\frac12|w_0|$, hence $\frac12|w_0|\Lambda\le|w^2-w_0w|$.
+In \eqref{eq:Q1} we have $\frac34\Lambda^2\le\frac38|w_0|\Lambda$, and, by (T4), \eqref{eq:a5-T1} and \eqref{eq:a5-T2},
+\[
+ \frac{2\mathfrak E_0}{u}\le\frac{2\mathfrak E_0\,\varkappa}{\mathfrak E_3}\le\frac{2\varkappa}{K^{4\fa+8}}\le\frac{\varkappa}{16\cdot1950}\le\frac{|w_0|}{16}.
+\]
+Therefore $\big(\frac12-\frac38-\frac1{16}\big)|w_0|\Lambda\le\frac{4K\mathfrak E\varkappa}{u}$, i.e., using $|w_0|\ge\varkappa/1950$ and $K\ge124800$,
+\[
+ \Lambda\le\frac{64\,K\mathfrak E\,\varkappa}{|w_0|\,u}\le\frac{64\cdot1950\,K^{b+1}}{u}=\frac{124800\,K^{b+1}}{u}\le\frac{K^{b+2}}{u}.
+\]
+Moreover $\frac{K^{b+2}}{u}\le\frac{\varkappa}{7800}\le\frac{|w_0|}4$, because $\varkappa u\ge\mathfrak E_3=K^{b+3}\ge7800\,K^{b+2}$. This proves \eqref{eq:a5-7d}.
+
+\smallskip\noindent\emph{Continuity.} We prove by induction on $k\in\{0,\dots,k_*\}$ that \eqref{eq:a5-7d} holds at $z_k$. By the dichotomy it suffices to show $\Lambda(z_k)\le\frac12|w_0(z_k)|$ for each $k$.
+
+$k=0$: here $\eta_0=10$. Our point lies in $\cG(z_0)$, so by Lemma~\ref{lem:initial}, (S2) and (S4), $\Lambda(z_0)\le\Ld(z_0)\le4\fL N^{-1/2}\le4N^{-15/32}$, while $\frac12|w_0(z_0)|\ge\frac{\varkappa(z_0)}{3900}\ge\frac{\sqrt{10}}{3900}$; so $\Lambda(z_0)\le\frac12|w_0(z_0)|$ for $N\ge N_0$.
+
+$k\to k+1$ ($k<k_*$): the points $z_k,z_{k+1}\in\bD^{\rm near}$ have $|z_k-z_{k+1}|=N^{-4}$ and imaginary parts $\ge N^{-1}$, so by \eqref{eq:lipnear} (which is a consequence of Lemma~\ref{lem:basic}(c) and Lemma~\ref{lem:msc}(f) and holds for every Hermitian matrix)
+\[
+ |\Lambda(z_k)-\Lambda(z_{k+1})|\le2N^{-2},\qquad|w_0(z_k)-w_0(z_{k+1})|\le N^{-2}.
+\]
+By the induction hypothesis $\Lambda(z_k)\le\frac14|w_0(z_k)|$. Hence
+\[
+ \Lambda(z_{k+1})\le\tfrac14|w_0(z_k)|+2N^{-2}\le\tfrac14|w_0(z_{k+1})|+3N^{-2}\le\tfrac12|w_0(z_{k+1})|,
+\]
+where the last step uses $|w_0(z_{k+1})|\ge\frac{\varkappa(z_{k+1})}{1950}\ge\frac{N^{-1/2}}{1950}$ (T4) and $N^{3/2}\ge23400$. This completes the induction; for $k=k_*$ we obtain (a).
+
+\emph{Proof of \textup{(b)}.} Fix a point of $\cG^2(z)\subset\cG^1(z)$; all quantities are evaluated at $z$, $u=N\eta$. If $\varkappa u\ge\mathfrak E_3$, then (b) follows from (a). Let $\varkappa u<\mathfrak E_3$. From $\Lambda^2\le|w_0|\Lambda+|w^2-w_0w|$ and \eqref{eq:Q1},
+\[
+ \tfrac14\Lambda^2\le\Big(|w_0|+\frac{2\mathfrak E_0}{u}\Big)\Lambda+\frac{2K\mathfrak E\beta}{u},
+\]
+so by the last statement of Lemma~\ref{lem:scalar}, $\Lambda\le4|w_0|+\frac{8\mathfrak E_0}{u}+\big(\frac{8K\mathfrak E\beta}{u}\big)^{1/2}$. Now $|w_0|\le4\varkappa<4\mathfrak E_3/u$ and $\beta<(\mathfrak E_3+\mathfrak E)/u\le2\mathfrak E_3/u$, and $K\mathfrak E\mathfrak E_3=K^{2b+4}$. Hence
+\[
+ \Lambda\le\frac{16\,\mathfrak E_3+8\,\mathfrak E_0+4\,(K\mathfrak E\mathfrak E_3)^{1/2}}{u}\le\frac{(16+8+4)K^{b+3}}{u}\le\frac{K^{b+4}}{u}.
+\]
+
+\emph{Proof of \textup{(c)}.} Again at a point of $\cG^2(z)\subset\cG(z)\cap\{\Ld+\Lo\le\lambda_{\rm st}\}$, with $u=N\eta$. By \eqref{eq:ap2} and \eqref{eq:ap4} in their explicit form (Lemma~\ref{lem:apriori}), and by $144C_s\Lambda\le144C_s\lambda_{\rm st}=\frac14$ (Lemma~\ref{lem:stabnear}: $\Lambda\le\Ld\le\lambda_{\rm st}$),
+\[
+ \Lo\le35\,\fL\Psi,\qquad\Ld\le\Lambda+D\le\tfrac54\Lambda+1036\,C_s\fL\Psi,\qquad\text{so}\qquad\Ld+\Lo\le\tfrac54\Lambda+1071\,C_s\fL\Psi .
+\]
+By \eqref{eq:Psi} and (b),
+\[
+ \Psi\le\sqrt{\frac{\im\msc}{u}}+\sqrt{\frac{\Lambda}{u}}+\frac1u\le\sqrt{\frac{\im\msc}{u}}+\frac{K^{(b+4)/2}+1}{u}\le\sqrt{\frac{\im\msc}{u}}+\frac{2K^{6\fa+8}}{u}.
+\]
+By (S2) and \eqref{eq:a5-T2} ($K\ge K_0\ge2142\,C_s$): $1071C_s\fL\le K^{4\fa+4}\le K^{b+5}$ and $2142\,C_s\fL K^{6\fa+8}\le K^{10\fa+12}\le K^{b}$. Together with (b),
+\[
+ \Ld+\Lo\le K^{b+5}\sqrt{\frac{\im\msc}{u}}+\frac{\frac54K^{b+4}+K^{b}}{u}\le K^{b+5}\Big(\sqrt{\frac{\im\msc}{u}}+\frac1u\Big).\qedhere
+\]
+\end{proof}
+\noindent\emph{Remark on the two regimes.} The set of type-(a) points is much larger than the set $\{\varkappa\ge\varkappa_w\}$ on which the weak law selects the small branch (Theorem~\ref{thm:weak}(a)): at $E=\pm2$ the former is $\eta\ge K^{2(b+3)/3}N^{-2/3}$, the latter
+$\eta\ge(U_w\fL^{2/3})^{6/5}N^{-2/5}$. This is why the continuity argument has to be repeated here with the stronger input $\cG^1$; it is again deterministic on the intersection of the events along the column.
+
+\subsection{Second pass: the improved bound away from the spectrum}
+\begin{proposition}[Improved averaged law, near regime]\label{prop:S3}
+Let $z\in\mathbb L\cap\bD^{\rm near}$ with $\varkappa N\eta\ge\mathfrak E_3$. There is a closed event $\cG^3(z)\subset\cG^2(z)$ with $\PP(\cG^2(z)\setminus\cG^3(z))\le e^{-p_2}$ on which
+\begin{equation}\label{eq:improved}
+ \Lambda(z)\le K^{b+2}\Big(\frac{\im\msc(z)}{\varkappa N\eta}+\frac1{\varkappa(N\eta)^2}\Big).
+\end{equation}
+Namely, $\cG^3(z)$ is the set of points of $\cG^2(z)$ at which \eqref{eq:improved} holds.
+\end{proposition}
+\begin{proof}
+All quantities are evaluated at $z$; $u:=N\eta$, $p:=p_2$, and $\cG^2:=\cG^2(z)$.
+
+\emph{Step 1: a pointwise bound on $\cG^2$, on the small branch.} At a point of $\cG^2$, Proposition~\ref{prop:S2}(a) gives $\Lambda\le\frac14|w_0|$. As in the dichotomy step of that proof, $|w-w_0|\ge\frac34|w_0|\ge\frac12|w_0|$, so by \eqref{eq:ap3}
+(which holds on $\cG^2\subset\cG(z)\cap\{\Ld+\Lo\le\lambda_{\rm st}\}$)
+\[
+ \tfrac12|w_0|\Lambda\le|w^2-w_0w|\le|\avg X|+\mathfrak E_0\Big(\frac{\im\msc}{u}+\frac1{u^2}\Big)+\frac{\mathfrak E_0}{u}\Lambda+\tfrac34\Lambda^2 .
+\]
+Here $\frac34\Lambda^2\le\frac3{16}|w_0|\Lambda$ and $\frac{\mathfrak E_0}{u}\le\frac1{32}|w_0|$ (shown in the proof of Proposition~\ref{prop:S2}(a)). Hence $\frac9{32}|w_0|\Lambda\le|\avg X|+\mathfrak E_0\big(\frac{\im\msc}{u}+\frac1{u^2}\big)$, and with $|w_0|\ge\varkappa/1950$ (T4) and $\frac{32\cdot1950}{9}\le7000$:
+\begin{equation}\tag{7.e}\label{eq:a5-7e}
+ \Lambda\le\frac{7000}{\varkappa}\Big(|\avg X|+\mathfrak E_0\frac{\im\msc}{u}+\frac{\mathfrak E_0}{u^2}\Big)\qquad\text{on }\cG^2 .
+\end{equation}
+
+\emph{Step 2: moments.} Let $Y_2:=\norm{\Lambda\bone_{\cG^2}}_p\le2N$. By (T4), Proposition~\ref{prop:S2} and (T6),
+\[
+ \norm\Lambda_p\le Y_2+2N\,\PP\big((\cG^2)^c\big)^{1/p_2}\le Y_2+2N\big(N^{10}e^{-p_1}\big)^{1/p_2}\le Y_2+N^{-8}.
+\]
+As in Step 2 of the proof of Proposition~\ref{prop:S1} (now with $p=p_2$ in \eqref{eq:Phistar}), $\Phi_*^2\le\frac{151\im\msc}{u}+\frac\Lambda u+\frac{p_2}{u^2}$, and Corollary~\ref{cor:FA} with $p=p_2$ gives, using $\mathfrak F\le u$,
+\[
+ \norm{\avg X}_p\le\frac{\mathfrak F}{u}\Big(151\,\im\msc+Y_2+\frac{p_2}{u}\Big)+2N^{-8}.
+\]
+Multiplying \eqref{eq:a5-7e} by $\bone_{\cG^2}$ and taking $L^p$-norms,
+\[
+ Y_2\le\frac{7000\,\mathfrak F}{\varkappa u}\,Y_2+\frac{7000}{\varkappa}\Big[(151\mathfrak F+\mathfrak E_0)\frac{\im\msc}{u}+\frac{\mathfrak Fp_2+\mathfrak E_0}{u^2}+2N^{-8}\Big].
+\]
+Since $\varkappa u\ge\mathfrak E_3$, the first coefficient is at most $7000\,\mathfrak F/\mathfrak E_3\le7000\,K^{-4}\le\frac12$ \eqref{eq:a5-T1}, \eqref{eq:a5-T2}; as $Y_2<\infty$, the term is absorbed.
+Further $2N^{-8}\le\frac1{150N}\le\frac{\im\msc}{u}$ by (T4) (and $N^7\ge300$); $151\mathfrak F+\mathfrak E_0+1\le153\,K^{12\fa+11}\le K^b$; and $\mathfrak Fp_2+\mathfrak E_0\le K^{12\fa+11}(K+3)\le2K^b$. Therefore
+\[
+ Y_2\le B:=\frac{28000\,K^b}{\varkappa}\Big(\frac{\im\msc}{u}+\frac1{u^2}\Big).
+\]
+
+\emph{Step 3: Markov's inequality.} $B>0$, and $eB\le K^{b+2}\big(\frac{\im\msc}{\varkappa u}+\frac1{\varkappa u^2}\big)$ because $28000\,e\le K^2$. So $\cG^2\setminus\cG^3(z)\subset\{\Lambda\bone_{\cG^2}>eB\}$ and, by \eqref{eq:a5-M},
+$\PP(\cG^2\setminus\cG^3(z))\le(Y_2/(eB))^{p_2}\le e^{-p_2}$. The set $\cG^3(z)$ is closed because $\cG^2$ is closed and $\Lambda(z)$ is continuous on $\Omega$.
+\end{proof}
+\noindent In contrast to the first pass, the factor in front of $Y_2$ is small because of the hypothesis $\varkappa N\eta\ge\mathfrak E_3$ (and not because of a square root); the gain is the factor $1/\varkappa$ times $\im\msc$, which is what excludes eigenvalues outside the spectrum in Section~\ref{sec:norm}.
+
+\begin{proposition}[Averaged law, far regime]\label{prop:S4}
+Let $z\in\mathbb L\cap\bD^{\rm far}$. There is a closed event $\cG^{\rm f}(z)\subset\cG_{\rm col}(z)$ with $\PP(\cG_{\rm col}(z)\setminus\cG^{\rm f}(z))\le e^{-p_2}$ on which
+\[
+ \Lambda(z)\le K^{b+2}\Big(\frac{\im\msc(z)}{N\eta}+\frac1{(N\eta)^2}+\frac1N\Big).
+\]
+Namely, $\cG^{\rm f}(z)$ is the set of points of $\cG_{\rm col}(z)$ at which this inequality holds.
+\end{proposition}
+\begin{proof}
+All quantities are evaluated at $z$; $u:=N\eta\ge\frac12N^{1/2}\ge1$, $p:=p_2$, $\cG_{\rm c}:=\cG_{\rm col}(z)\subset\cG(z)$. Recall $4\le|E|\le\Emax+1$ and $\eta\le10$, so $|z|\le\Emax+11$.
+
+\emph{Step 1: a pointwise bound on $\cG_{\rm c}$.} Fix a point of $\cG_{\rm c}$. By Theorem~\ref{thm:weak}(b), $\max_i|G_{ii}|\le\frac12$; hence $\im m\le\frac12$ and, as in the proof of Lemma~\ref{lem:farstep} ($u^{-1}\le u^{-1/2}$, $N^{-1/2}=\eta^{1/2}u^{-1/2}\le\sqrt{10}\,u^{-1/2}$),
+\[
+ \Psi_m=\sqrt{\frac{\im m}{u}}+\frac1u+\frac1{\sqrt N}\le6u^{-1/2}\le6\sqrt2\,N^{-1/4},\qquad\fL\Psi_m\le9N^{\frac1{32}-\frac14}\le\tfrac18\quad(N\ge N_0),
+\]
+by (S2), (S4). By Lemma~\ref{lem:levels}(S5), $|X_i|\le\fL\Psi_m$ and $|A_i|\le\fL|G_{ii}|\Psi_m^2\le\frac12\fL\Psi_m^2$ for all $i$. Hence, with $\Upsilon_i=A_i+X_i$ (Definition~\ref{def:XA}),
+\[
+ \Upsilon_{\max}\le\tfrac32\fL\Psi_m\le\tfrac3{16},\qquad|\avg\Upsilon|\le|\avg X|+\tfrac12\fL\Psi_m^2 .
+\]
+Since $|E|\ge4$ and $\max_i|G_{ii}|\le1$, Lemma~\ref{lem:stabfar} applies: $\Ld\le\frac12\Upsilon_{\max}\le\frac34\fL\Psi_m$ and
+\[
+ \Lambda\le\tfrac18|\avg\Upsilon|+\tfrac98\Ld^2\big(|z|+1+\Upsilon_{\max}\big)\le\tfrac18|\avg X|+\Big[\tfrac1{16}\fL+\tfrac{81}{128}\big(\Emax+12+\tfrac3{16}\big)\fL^2\Big]\Psi_m^2\le\tfrac18|\avg X|+\tfrac13\mathfrak E_0'\,\Psi_m^2,
+\]
+where $\mathfrak E_0':=3(\Emax+14)\fL^2$. By $(\alpha+\beta+\gamma)^2\le3(\alpha^2+\beta^2+\gamma^2)$ and $\im m\le\im\msc+\Lambda$: $\Psi_m^2\le3\big(\frac{\im\msc+\Lambda}{u}+\frac1{u^2}+\frac1N\big)$. By (S2) and (T5),
+$\mathfrak E_0'\le45\,\Emax\fL^2\le45K^{10\fa+7}\le K^{10\fa+8}\le N^{1/16}$, so $\mathfrak E_0'/u\le2N^{\frac1{16}-\frac12}\le\frac12$. Absorbing the term $\frac{\mathfrak E_0'}{u}\Lambda$ we get
+\begin{equation}\tag{7.f}\label{eq:a5-7f}
+ \Lambda\le\tfrac14|\avg X|+2\mathfrak E_0'\Big(\frac{\im\msc}{u}+\frac1{u^2}+\frac1N\Big)\qquad\text{on }\cG_{\rm c}.
+\end{equation}
+(No square root and no branch: in the far regime the equation for $\Lambda$ is linear up to a small quadratic term.)
+
+\emph{Step 2: moments.} Let $Y_{\rm f}:=\norm{\Lambda\bone_{\cG_{\rm c}}}_p$. Since $\Lambda\le\eta^{-1}+1\le2N^{1/2}+1\le2N$, $Y_{\rm f}\le2N$ and, by (T6), $\norm\Lambda_p\le Y_{\rm f}+N^{-8}$. From \eqref{eq:Phistar} with $p=p_2$ and $\im m\le\im\msc+\Lambda$,
+$\Phi_*^2\le\frac1N+\frac{\im\msc}{u}+\frac{\Lambda}{u}+\frac{p_2}{u^2}$; by (T5), $\mathfrak F/u\le2N^{\frac1{16}-\frac12}\le1$. So Corollary~\ref{cor:FA} gives
+\[
+ \norm{\avg X}_p\le\mathfrak F\Big(\frac1N+\frac{\im\msc}{u}+\frac{p_2}{u^2}\Big)+\frac{\mathfrak F}{u}Y_{\rm f}+2N^{-8}.
+\]
+Multiply \eqref{eq:a5-7f} by $\bone_{\cG_{\rm c}}$ and take $L^p$-norms; since $\frac{\mathfrak F}{4u}\le\frac12$ and $Y_{\rm f}<\infty$, the term with $Y_{\rm f}$ is absorbed, and with $N^{-8}\le\frac1N$:
+\[
+ Y_{\rm f}\le\big(\tfrac12\mathfrak F+4\mathfrak E_0'+1\big)\Big(\frac{\im\msc}{u}+\frac1N\Big)+\frac{\frac12\mathfrak Fp_2+4\mathfrak E_0'}{u^2}\le B_{\rm f}:=K^{b}\Big(\frac{\im\msc}{u}+\frac1{u^2}+\frac1N\Big),
+\]
+because $\mathfrak E_0'\le K^{10\fa+8}\le K^{12\fa+11}$, $\frac12\mathfrak F+4\mathfrak E_0'+1\le6K^{12\fa+11}\le K^b$ and $\frac12\mathfrak Fp_2+4\mathfrak E_0'\le K^{12\fa+11}\big(\frac{K+2}2+4\big)\le K^b$.
+
+\emph{Step 3: Markov's inequality.} As in the previous proof: $B_{\rm f}>0$, $eB_{\rm f}\le K^{b+2}\big(\frac{\im\msc}{u}+\frac1{u^2}+\frac1N\big)$, and $\PP(\cG_{\rm c}\setminus\cG^{\rm f}(z))\le\PP(\Lambda\bone_{\cG_{\rm c}}>eB_{\rm f})\le e^{-p_2}$; $\cG^{\rm f}(z)$ is closed.
+\end{proof}
+
+\subsection{From the lattice to the domain; conclusion}
+\begin{lemma}[Lipschitz extension]\label{lem:lip}
+Let $N\ge13$ and $K\ge1$. For every $z\in\bD_K$ there is $z'\in\mathbb L\cap\bD^{\rm near}$ with $|z-z'|\le2N^{-4}$, $\im z'\ge\im z-N^{-4}$, and then, for every Hermitian $N\times N$ matrix $H$:
+$|\Lambda(z)-\Lambda(z')|+|\Ld(z)-\Ld(z')|+|\Lo(z)-\Lo(z')|\le8N^{-2}$, $|\im\msc(z)-\im\msc(z')|\le4N^{-3}$, $|\frac1{N\im z}-\frac1{N\im z'}|\le N^{-3}$.
+More precisely one can take $z'=E'+\ii\eta'$ with
+\[
+ E':=\operatorname{sgn}(E)\,N^{-4}\lfloor|E|N^4\rfloor,\qquad\eta':=10-N^{-4}\lfloor(10-\eta)N^4\rfloor ;
+\]
+then $z'\in\bD_K$, $|E'|\le|E|$, $|E-E'|<N^{-4}$, $\eta\le\eta'<\eta+N^{-4}$, and each of $|\Lambda(z)-\Lambda(z')|$, $|\Ld(z)-\Ld(z')|$, $|\Lo(z)-\Lo(z')|$ is at most $2N^{-2}$.
+\end{lemma}
+\begin{proof}
+Let $z=E+\ii\eta\in\bD_K$, i.e.\ $|E|\le5$ and $K^{C_1}N^{-1}\le\eta\le10$ \eqref{eq:DK}, and define $E',\eta'$ as stated. Then $E'\in N^{-4}\Z$, $|E'|\le|E|\le5$ and $|E-E'|<N^{-4}$.
+The integer $k:=\lfloor(10-\eta)N^4\rfloor$ satisfies $k\ge0$ and $(10-\eta)N^4-1<k\le(10-\eta)N^4$, so $\eta'=10-kN^{-4}\in10-N^{-4}\Z_{\ge0}$ and $\eta\le\eta'<\eta+N^{-4}$; in particular $K^{C_1}N^{-1}\le\eta'\le10$.
+Hence $z'\in\bD_K\subset\bD^{\rm near}$ (as $K^{C_1-1}\le K^{C_1}$) and $z'$ belongs to the lattice of Definition~\ref{def:domains}, so $z'\in\mathbb L\cap\bD^{\rm near}$. Moreover $|z-z'|<\sqrt2\,N^{-4}$ and $\im z'\ge\im z$.
+
+Both imaginary parts are at least $\eta_0:=\eta\ge K^{C_1}N^{-1}\ge N^{-1}$. By Lemma~\ref{lem:basic}(c), for $F\in\{\Lambda,\Ld,\Lo\}$,
+\[
+ |F(z)-F(z')|\le\big(\eta_0^{-2}+\eta_0^{-1}+1\big)|z-z'|\le(N^2+N+1)\sqrt2\,N^{-4}\le2N^{-2}\qquad(N\ge13);
+\]
+the sum of the three differences is therefore at most $6N^{-2}\le8N^{-2}$. By Lemma~\ref{lem:msc}(f), $|\im\msc(z)-\im\msc(z')|\le|\msc(z)-\msc(z')|\le(1+\eta_0^{-1})|z-z'|\le(1+N)\sqrt2\,N^{-4}\le4N^{-3}$.
+Finally $\big|\frac1{N\eta}-\frac1{N\eta'}\big|=\frac{\eta'-\eta}{N\eta\eta'}\le\frac{N^{-4}}{N\cdot N^{-2}}=N^{-3}$.
+\end{proof}
+
+\medskip\noindent\textbf{Proof of Theorem~\ref{thm:K}\,(i),(ii).} Let
+\[
+ \Xi_K^{(1)}:=\bigcap_{z\in\mathbb L\cap\bD^{\rm near}}\cG^2(z).
+\]
+This is a closed subset of $\Omega$, and by Proposition~\ref{prop:S2} and $|\mathbb L|\le N^{10}$ (Definition~\ref{def:domains}), $\PP\big((\Xi_K^{(1)})^c\big)\le N^{20}e^{-p_1}$. Fix a point of $\Xi_K^{(1)}$. Then Proposition~\ref{prop:S2}(b),(c) hold at all points of $\mathbb L\cap\bD^{\rm near}$.
+Let $z=E+\ii\eta\in\bD_K$ and let $z'=E'+\ii\eta'$ be the lattice point of Lemma~\ref{lem:lip} (recall $N\ge13$ by (S1)); thus $\eta\le\eta'$, and $N\eta\le10N$.
+
+\emph{\textup{(i)}.} By Proposition~\ref{prop:S2}(b) at $z'$ and Lemma~\ref{lem:lip},
+\[
+ \Lambda(z)\le\Lambda(z')+2N^{-2}\le\frac{K^{b+4}}{N\eta'}+2N^{-2}\le\frac{K^{b+4}}{N\eta}+\frac{20}{N}\cdot\frac{1}{N\eta}\le\frac{2K^{b+4}}{N\eta}\le\frac{K^{b+5}}{N\eta},
+\]
+where we used $2N^{-2}=\frac{2\eta}{N}\cdot\frac1{N\eta}\le\frac{20}N\cdot\frac1{N\eta}$.
+
+\emph{\textup{(ii)}.} By Proposition~\ref{prop:S2}(c) at $z'$, Lemma~\ref{lem:lip} and $\eta'\ge\eta$,
+\[
+ \Ld(z)+\Lo(z)\le K^{b+5}\Big(\sqrt{\frac{\im\msc(z)+4N^{-3}}{N\eta}}+\frac1{N\eta}\Big)+4N^{-2}.
+\]
+Since $1\le N\eta\le10N$, we have $\sqrt{4N^{-3}/(N\eta)}\le2N^{-3/2}\le\frac1{10N}\le\frac1{N\eta}$ (as $N\ge400$), and $4N^{-2}\le\frac{40}{N}\cdot\frac1{N\eta}\le\frac{K^{b+5}}{N\eta}$. Hence, by $\sqrt{\alpha+\beta}\le\sqrt\alpha+\sqrt\beta$,
+\[
+ \Ld(z)+\Lo(z)\le K^{b+5}\sqrt{\frac{\im\msc(z)}{N\eta}}+\frac{3K^{b+5}}{N\eta}\le K^{b+6}\Big(\sqrt{\frac{\im\msc(z)}{N\eta}}+\frac1{N\eta}\Big).
+\]
+Since $C_2\ge b+7$ by \eqref{eq:a5-T3} and $K\ge1$, parts (i) and (ii) of Theorem~\ref{thm:K} hold at every point of $\Xi_K^{(1)}$, for all $z\in\bD_K$ simultaneously (with one spare power of $K$). \qed
+\section{Outside the spectrum: the norm bound \eqref{eq:443}}\label{sec:norm}
+The standing assumptions and conditions of Section~\ref{sec:strong} remain in force. Recall that $\norm H=\max_j|\lambda_j|$ (Lemma~\ref{lem:weyl}(a)) and that, by Lemma~\ref{lem:basic}(e), for every $E\in\R$ and $\eta>0$:
+\begin{equation}\tag{8.a}\label{eq:a5-8a}
+ N\eta\,\im m(E+\ii\eta)<\tfrac12\quad\Longrightarrow\quad H\text{ has no eigenvalue in }[E-\eta,E+\eta].
+\end{equation}
+We also use $\im m\le\im\msc+\Lambda$. Both edges are treated directly (the lattice $\mathbb L$, the domains and all statements of Sections~\ref{sec:weak}--\ref{sec:strong} are symmetric under $E\mapsto-E$); no reflection $H\mapsto-H$ is needed.
+
+\subsection{Exclusion of eigenvalues in three ranges}
+\begin{proposition}[No eigenvalues outside $2+K^{C_3}N^{-2/3}$]\label{prop:norm}
+There is a closed event $\Xi_K^{(2)}$ with $\PP((\Xi_K^{(2)})^c)\le N^{21}e^{-p_1}+N^{6}e^{-p_2}$ on which $\max_j|\lambda_j|\le2+K^{C_3}N^{-2/3}$, where $C_3=2b+12=24\fa+36$.
+\end{proposition}
+\begin{proof}
+We define two heights of the lattice,
+\[
+ \eta_f:=10-N^{-4}\big\lfloor(10-\tfrac12N^{-1/2})N^4\big\rfloor,\qquad\eta_e:=10-N^{-4}\big\lfloor(10-N^{-2/3})N^4\big\rfloor ,
+\]
+so that $\eta_f,\eta_e\in10-N^{-4}\Z_{\ge0}$ and (as in the proof of Lemma~\ref{lem:lip})
+\[
+ \tfrac12N^{-1/2}\le\eta_f<\tfrac12N^{-1/2}+N^{-4}\le N^{-1/2},\qquad N^{-2/3}\le\eta_e<N^{-2/3}+N^{-4}\le2N^{-2/3},
+\]
+and two finite sets of energies,
+\[
+ \mathbb E_f:=\big\{E\in N^{-4}\Z:\ 4.5\le|E|\le\Emax+1\big\},\qquad\mathbb E_e:=\big\{E\in N^{-4}\Z:\ 2+\tfrac12K^{C_3}N^{-2/3}\le|E|\le5\big\}.
+\]
+As in the justification of Definition~\ref{def:domains}, $|\mathbb E_f|\le5N^{4+1/32}\le N^5$ and $|\mathbb E_e|\le10N^4+1\le N^5$.
+
+\emph{Step 1 (crude bound: no eigenvalue with $|\lambda|>\Emax$).} Let $\mathcal N_0:=\{\norm H\le\Emax\}$, a closed set (Lemma~\ref{lem:weyl}(a),(d)). By (S1) the hypotheses of Lemma~\ref{lem:norm0} hold for $\kappa:=K_w=K^2$, and $25K_w^{\fa}\sqrt{C_0\log N}=\Emax$ (Definition~\ref{def:levels}). Hence
+\[
+ \PP(\mathcal N_0^c)\le N^2\fa\,e^{-K^2}+2e^{-N\log N}\le(N^2\fa+1)\,e^{-K^2},
+\]
+because $K^2\le K^{6\fa+6}\le N^{1/32}$ by (S4), so that $K^2+\log2\le N\log N$.
+
+\emph{Step 2 (far regime: no eigenvalue with $4.5\le|\lambda|\le\Emax$).} Let $E\in\mathbb E_f$ and $z:=E+\ii\eta_f$; then $z\in\mathbb L\cap\bD^{\rm far}$. Fix a point of $\cG^{\rm f}(z)$. By Lemma~\ref{lem:msc}(g), $\im\msc(z)\le\eta_f/8$, and by Proposition~\ref{prop:S4} and $N\eta_f\ge\frac12N^{1/2}$,
+\[
+ \im m(z)\le\frac{\eta_f}8+K^{b+2}\Big(\frac1{8N}+\frac1{(N\eta_f)^2}+\frac1N\Big)\le\frac{\eta_f}8+\frac{41}{8}\cdot\frac{K^{b+2}}{N}.
+\]
+Since $\eta_f\le N^{-1/2}$ and $K^{b+2}\le N^{3/32}$ (T5),
+\[
+ N\eta_f\,\im m(z)\le\frac{N\eta_f^2}8+\frac{41}{8}K^{b+2}\eta_f\le\frac18+6N^{\frac3{32}-\frac12}\le\frac38<\frac12\qquad(N\ge N_0).
+\]
+By \eqref{eq:a5-8a}, $H$ has no eigenvalue in $[E-\eta_f,E+\eta_f]$. Now let $x\in\R$ with $4.5\le|x|\le\Emax$ and put $E:=\operatorname{sgn}(x)N^{-4}\lceil|x|N^4\rceil$. Then $|x|\le|E|<|x|+N^{-4}\le\Emax+1$, so $E\in\mathbb E_f$, and $|x-E|<N^{-4}\le\eta_f$.
+Consequently, on $\bigcap_{E\in\mathbb E_f}\cG^{\rm f}(E+\ii\eta_f)$ there is no eigenvalue $\lambda$ with $4.5\le|\lambda|\le\Emax$.
+
+\emph{Step 3 (near the edges: no eigenvalue with $2+K^{C_3}N^{-2/3}\le|\lambda|\le5$).} Let $E\in\mathbb E_e$ and $z:=E+\ii\eta_e$. By (T5), $K^{C_1-1}N^{-1}\le N^{-2/3}\le\eta_e$, so $z\in\mathbb L\cap\bD^{\rm near}$. Since $|E|>2$, $\kappa=|E|-2$, and by \eqref{eq:a5-T3},
+\begin{equation}\tag{8.b}\label{eq:a5-8b}
+ \kappa\ge\tfrac12K^{C_3}N^{-2/3}\ge\tfrac12K^{2b+12}N^{-2/3},\qquad\sqrt\kappa\ge\tfrac1{\sqrt2}K^{b+6}N^{-1/3},\qquad\eta_e\le2N^{-2/3}\le\kappa .
+\end{equation}
+Hence $\varkappa N\eta_e\ge\sqrt\kappa\,N^{1/3}\ge\frac1{\sqrt2}K^{b+6}\ge K^{b+3}=\mathfrak E_3$: the point $z$ is of type (a), and Proposition~\ref{prop:S3} applies. Fix a point of $\cG^3(z)$.
+Since $|E|>2$ and $\kappa\ge\eta_e$, \eqref{eq:imm} gives $\im\msc(z)\le4\eta_e/\varkappa$, and $\varkappa\ge\sqrt\kappa$. By \eqref{eq:improved},
+\[
+ \Lambda(z)\le K^{b+2}\Big(\frac{4}{N\varkappa^2}+\frac1{\varkappa(N\eta_e)^2}\Big)\le K^{b+2}\Big(\frac{4}{N\kappa}+\frac{1}{\sqrt\kappa\,(N\eta_e)^2}\Big).
+\]
+We multiply by $N\eta_e$ and use \eqref{eq:a5-8b} and $N^{1/3}\le N\eta_e\le2N^{1/3}$:
+\begin{align*}
+ N\eta_e\,\im\msc(z)&\le\frac{4N\eta_e^2}{\sqrt\kappa}\le\frac{16\sqrt2\,N^{-1/3}}{K^{b+6}N^{-1/3}}=\frac{16\sqrt2}{K^{b+6}}\le\frac18,\\
+ N\eta_e\cdot\frac{4K^{b+2}}{N\kappa}&=\frac{4K^{b+2}\eta_e}{\kappa}\le\frac{16\,K^{b+2}}{K^{2b+12}}\le\frac1{16},\\
+ N\eta_e\cdot\frac{K^{b+2}}{\sqrt\kappa\,(N\eta_e)^2}&=\frac{K^{b+2}}{\sqrt\kappa\,N\eta_e}\le\frac{\sqrt2\,K^{b+2}}{K^{b+6}}\le\frac1{16}.
+\end{align*}
+(These are the three places where the exponent of the norm bound is fixed: they need $\frac12C_3>b+2$, and $C_3=2b+12$ leaves room.) So $N\eta_e\,\im m(z)\le\frac18+\frac1{16}+\frac1{16}=\frac14<\frac12$, and by \eqref{eq:a5-8a} there is no eigenvalue in $[E-\eta_e,E+\eta_e]$.
+Now let $x\in\R$ with $2+K^{C_3}N^{-2/3}\le|x|\le5$ and put $E:=\operatorname{sgn}(x)N^{-4}\lfloor|x|N^4\rfloor$. Then $|x|-N^{-4}<|E|\le|x|\le5$ and $|E|\ge2+K^{C_3}N^{-2/3}-N^{-4}\ge2+\frac12K^{C_3}N^{-2/3}$ (as $N^{-4}\le\frac12N^{-2/3}$), so
+$E\in\mathbb E_e$, and $|x-E|<N^{-4}\le\eta_e$. Consequently, on $\bigcap_{E\in\mathbb E_e}\cG^3(E+\ii\eta_e)$ there is no eigenvalue $\lambda$ with $2+K^{C_3}N^{-2/3}\le|\lambda|\le5$.
+
+\emph{Conclusion.} Let
+\[
+ \Xi_K^{(2)}:=\mathcal N_0\ \cap\bigcap_{E\in\mathbb E_f}\cG^{\rm f}(E+\ii\eta_f)\ \cap\bigcap_{E\in\mathbb E_e}\cG^3(E+\ii\eta_e).
+\]
+It is closed (Propositions~\ref{prop:S3}, \ref{prop:S4}). At a point of $\Xi_K^{(2)}$ every eigenvalue satisfies $|\lambda|\le\Emax$ (Step 1), not $4.5\le|\lambda|\le\Emax$ (Step 2), and not $2+K^{C_3}N^{-2/3}\le|\lambda|\le5$ (Step 3); the three ranges cover $[2+K^{C_3}N^{-2/3},\infty)$, so $|\lambda|<2+K^{C_3}N^{-2/3}$.
+
+\emph{Probability.} For $z\in\mathbb L\cap\bD^{\rm far}$: $\PP(\cG^{\rm f}(z)^c)\le\PP(\cG_{\rm col}(z)^c)+\PP(\cG_{\rm col}(z)\setminus\cG^{\rm f}(z))\le460\,\fa N^8e^{-K^2}+e^{-p_2}$ (Definition~\ref{def:domains}, Proposition~\ref{prop:S4}).
+For $z\in\mathbb L\cap\bD^{\rm near}$ of type (a): $\PP(\cG^3(z)^c)\le\PP(\cG^2(z)^c)+\PP(\cG^2(z)\setminus\cG^3(z))\le N^{10}e^{-p_1}+e^{-p_2}$ (Propositions~\ref{prop:S2}, \ref{prop:S3}). With Step~1, the union bound and $K^2\ge p_1$,
+\[
+ \PP\big((\Xi_K^{(2)})^c\big)\le\big(N^2\fa+1+460\,\fa N^{13}+N^{15}\big)e^{-p_1}+2N^5e^{-p_2}\le N^{21}e^{-p_1}+N^6e^{-p_2}\qquad(N\ge N_0).\qedhere
+\]
+\end{proof}
+
+\begin{remark}
+The original excludes eigenvalues in $[2+N^{-2/3}(\log N)^{9L},5]$ by Lemma~4.5 and cites a moment bound for $\PP(\lambda_N\ge3)$ (Lemma~4.6, from [EYY]). NP has no such external bound; this is why the far regime $4\le|E|\le\Emax+1$ is carried through Sections~\ref{sec:weak}--\ref{sec:strong}.
+The cost is small because stability there is a contraction (Lemmas~\ref{lem:stabfar}, \ref{lem:farstep}) and Theorem~\ref{thm:FA} is uniform in $E$. The three ranges overlap ($[2+K^{C_3}N^{-2/3},5]$, $[4.5,\Emax]$, $(\Emax,\infty)$), so no gap can occur at their junctions.
+The far regime is used at the single height $\eta_f\approx\frac12N^{-1/2}$, where $\im\msc\le\eta_f/8$ contributes $\frac18$ to $N\eta_f\im m$ and all other terms are $O(K^{b+2}N^{-1/2})$.
+\end{remark}
+
+\subsection{The event \texorpdfstring{$\Xi_K$}{Xi\_K}; proof of Theorem \ref{thm:K}\,(i)--(iii)}\label{sec:XiK}
+\begin{definition}[The event of Theorem~\ref{thm:K}]\label{def:XiK}
+For $N\ge N_0$, $\nu\in\mathcal E_N(\vth,\dpm,C_0)$ and $K$ as in \eqref{eq:Krange}, let
+\[
+ \Xi_K:=\Xi_K^{(1)}\cap\Xi_K^{(2)},
+\]
+with $\Xi_K^{(1)}=\bigcap_{z\in\mathbb L\cap\bD^{\rm near}}\cG^2(z)$ from the end of Section~\ref{sec:strong} and $\Xi_K^{(2)}$ from Proposition~\ref{prop:norm}. Explicitly, $\Xi_K$ is the set of $x\in\Omega$ such that
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em,itemsep=0pt]
+\item $x\in\cG(z)$ for all $z\in\mathbb L\cap\bD^{\rm near}$ and for all $z\in{\rm col}(E+\ii\eta_f)$, $E\in\mathbb E_f$ \quad(large deviation events, level $K_w=K^2$);
+\item $|\avg X(z)|\le\frac{K\mathfrak E}{N\eta}\big(\varkappa+\frac{\mathfrak E}{N\eta}\big)$ for all $z=E+\ii\eta\in\mathbb L\cap\bD^{\rm near}$ \quad(first pass, level $p_1$);
+\item $\Lambda(z)\le K^{b+2}\big(\frac{\im\msc}{\varkappa N\eta}+\frac1{\varkappa(N\eta)^2}\big)$ for $z=E+\ii\eta_e$, $E\in\mathbb E_e$, and $\Lambda(z)\le K^{b+2}\big(\frac{\im\msc}{N\eta}+\frac1{(N\eta)^2}+\frac1N\big)$ for $z=E+\ii\eta_f$, $E\in\mathbb E_f$ \quad(second pass, level $p_2$);
+\item $\norm H\le\Emax$.
+\end{enumerate}
+\end{definition}
+\noindent $\Xi_K$ is a closed, hence Borel, subset of $\Omega$: it is defined by finitely many inequalities ``$\le$'' between continuous functions of $x$ (Lemmas~\ref{lem:weyl}(e), \ref{lem:good}). The description (i)--(iv) is the definition unfolded:
+$\cG^2(z)=\bigcap_{z'\in{\rm col}(z)}\big(\cG_{\rm col}(z')\cap\{|\avg X(z')|\le\dots\}\big)$, and the columns of the points of $\mathbb L\cap\bD^{\rm near}$ lie in $\mathbb L\cap\bD^{\rm near}$.
+
+\begin{proposition}[Probability of $\Xi_K$]\label{prop:XiK}
+For $N\ge N_0$: $\ \PP(\Xi_K^c)\le2N^{21}e^{-p_1}+N^6e^{-p_2}\le e^{-K/2}$.
+\end{proposition}
+\begin{proof}
+By the end of Section~\ref{sec:strong} and Proposition~\ref{prop:norm}, $\PP(\Xi_K^c)\le N^{20}e^{-p_1}+N^{21}e^{-p_1}+N^6e^{-p_2}\le2N^{21}e^{-K^{3/2}}+N^6e^{-K}$, since $p_1\ge K^{3/2}$ and $p_2\ge K$ \eqref{eq:a5-T1}.
+Let $\mathsf L:=\log N$ and assume $\mathsf L^2\ge46$ (i.e.\ $N\ge e^{7}$). Since $K\ge\mathsf L^3$ \eqref{eq:Krange} and $K\ge1$: $\ \frac12K\ge\frac12\mathsf L^3\ge23\,\mathsf L\ge22\,\mathsf L+\log4$. Hence
+\[
+ 2N^{21}e^{-K^{3/2}}\le2N^{21}e^{-K}\le\tfrac12e^{-K/2},\qquad N^6e^{-K}\le\tfrac12e^{-K/2},
+\]
+and the sum is at most $e^{-K/2}$.
+\end{proof}
+
+\medskip\noindent\textbf{Proof of Theorem~\ref{thm:K}.} Let the model parameters be normalised as in Convention~\ref{conv:const}, and let $N_0$ be the threshold described in Appendix~\ref{app:ledger} (paragraph ``Thresholds''); in particular $N_0\ge e^{7}$.
+Let $N\ge N_0$, $\kk\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vth,\dpm,C_0)$ and $K$ as in \eqref{eq:Krange}. The event $\Xi_K$ of Definition~\ref{def:XiK} is measurable and $\PP(\Xi_K^c)\le e^{-K/2}$ (Proposition~\ref{prop:XiK}).
+At every point of $\Xi_K\subset\Xi_K^{(1)}$, parts (i) and (ii) hold for all $z\in\bD_K$ (end of Section~\ref{sec:strong}). At every point of $\Xi_K\subset\Xi_K^{(2)}$, part (iii) holds (Proposition~\ref{prop:norm}; $C_3=2b+12$ is the value in \eqref{eq:ledger0}).
+Finally, since $N\ge e^6$ and the relations \eqref{eq:ledgerrel} hold for the values \eqref{eq:ledger0} (Appendix~\ref{app:ledger}), Proposition~\ref{prop:rig} shows that parts (iv) and (v) hold at every point at which (i) and (iii) hold, in particular on $\Xi_K$. \qed
+
+\begin{remark}[What the event contains]\label{rem:XiK}
+On $\Xi_K$ more is true than Theorem~\ref{thm:K} states: the bounds of Proposition~\ref{prop:S2} with the exponents $b+4$, $b+5$ at all points of $\mathbb L\cap\bD^{\rm near}$, and the improved bounds \eqref{eq:improved} at the heights $\eta_e$, $\eta_f$ on the sets $\mathbb E_e$, $\mathbb E_f$.
+The improved bound \eqref{eq:improved} at \emph{all} lattice points of type (a), and the far-regime bound of Proposition~\ref{prop:S4} at all points of $\mathbb L\cap\bD^{\rm far}$, hold on a smaller closed event $\Xi_K^{(4)}\subset\Xi_K$ whose complement has probability at most $2N^{21}e^{-p_1}+2N^{10}e^{-p_2}\le e^{-K/2}$ as well (see (X4) in Section~\ref{sec:export}).
+The three levels are visible in Definition~\ref{def:XiK}: the set where (i) or (iv) fails has probability at most $47\fa N^{14}e^{-K^2}$; the set where (i) holds and (ii) fails has probability at most $N^{10}e^{-p_1}$;
+the set where (i), (ii) hold and (iii) fails has probability at most $2N^{5}e^{-p_2}$. The passage from one level to the next costs the factor $40\log N$ of \eqref{eq:levelrel}, which is spent in (T6).
+\end{remark}

@@ -1,0 +1,246 @@
+\section{Deterministic toolbox}\label{sec:det}
+Everything in this section is deterministic: $H$ is a fixed Hermitian $N\times N$ matrix (with entries in $\kk\subset\C$) and $B$ a fixed matrix satisfying (A), (B), (C).
+
+\subsection{The function $\msc$ and the semicircle law}
+We use the following facts about the principal square root $\sqrt\zeta$, $\zeta\in\C\setminus(-\infty,0]$ (the unique $s$ with $s^2=\zeta$, $\re s>0$).
+Let $\mathbb Q_1:=\{s\in\C:\re s>0,\ \im s>0\}$ be the open first quadrant.
+\begin{itemize}[leftmargin=2em,itemsep=1pt]
+\item[(S1)] If $\im\zeta>0$ then $\sqrt\zeta\in\mathbb Q_1$. Indeed, for $s=a+\ii b=\sqrt\zeta$ we have $a>0$ and $2ab=\im\zeta>0$, so $b>0$.
+\item[(S2)] If $\im\zeta>0$ then $\sqrt{-\bar\zeta}=\ii\,\ol{\sqrt\zeta}$. Indeed, with $s=a+\ii b=\sqrt\zeta\in\mathbb Q_1$: $(\ii\bar s)^2=-\bar s^2=-\bar\zeta$ and $\ii\bar s=b+\ii a$ has positive real part.
+\item[(S3)] If $s,s'\in\mathbb Q_1$ then $\im(ss')=\re s\,\im s'+\im s\,\re s'>0$.
+\item[(S4)] $\zeta\mapsto\sqrt\zeta$ is holomorphic on $\C\setminus(-\infty,0]$ (Mathlib).
+\end{itemize}
+
+\begin{lemma}[Algebra of $\msc$]\label{lem:msc} \infra\
+Let $z=E+\ii\eta$ with $\eta>0$, $w:=\sqrt{z-2}\sqrt{z+2}$ (principal roots) and $m:=\msc(z)=(-z+w)/2$. Then:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item $m^2+zm+1=0$, $\im m>0$, $m\ne0$, $m=-1/(z+m)$, $-z-m=1/m$; and $m$ is the only root of $X^2+zX+1$ with positive imaginary part (the other root is $1/m$).
+\item $\im m\,(|z+m|^2-1)=\eta$; hence $|m|<1$, $|m|^2=\frac{\im m}{\im m+\eta}$, $1-|m|^2=\frac{\eta}{\im m+\eta}$ and $\im m=\eta\frac{|m|^2}{1-|m|^2}$.
+\item $\dfrac1{|z|+1}\le|m|\le1$ and $\im m\ge\dfrac{\eta}{(|z|+1)^2}$.
+\item $w=z+2m$, $w^2=z^2-4$ and $1-m^2=-m\,w$; hence $|1-m^2|=|m|\,|z-2|^{1/2}|z+2|^{1/2}$.
+\item With $P:=|z-2||z+2|-|z|^2+4$ and $Q:=|z-2||z+2|+|z|^2-4$:
+\[
+ (\im w)^2=\eta^2+\tfrac12P,\qquad \im m=\tfrac12(\im w-\eta)=\dfrac{P}{4(\im w+\eta)},\qquad PQ=16\eta^2 ;
+\]
+in particular $P>0$ and $Q>0$.
+\item \emph{Lipschitz:} for $\im z,\im z'\ge\eta_0>0$:\quad $|\msc(z)-\msc(z')|\le\frac{\eta_0+1}{\eta_0}|z-z'|$.
+\item \emph{Far regime:} if $|E|\ge4$ then $|m|\le1/3$, $\im m\le\eta/8$ and $|1-m^2|\ge8/9$.
+\item \emph{Symmetry:} $\msc(-\bar z)=-\ol{\msc(z)}$; hence $|\msc|$, $\im\msc$ and $|1-\msc^2|$ take the same values at $E+\ii\eta$ and at $-E+\ii\eta$.
+\item $\msc$ is holomorphic on $\C_+$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Let $p:=\sqrt{z-2}$, $q:=\sqrt{z+2}$. Since $\im(z\pm2)=\eta>0$, (S1) gives $p,q\in\mathbb Q_1$, and $w=pq$ satisfies $w^2=p^2q^2=(z-2)(z+2)=z^2-4$.
+
+(a) We compute
+\[
+ m^2+zm+1=\tfrac14(z^2-2zw+w^2)+\tfrac12(-z^2+zw)+1=\tfrac14(w^2-z^2+4)=0 .
+\]
+Next we show $b:=\im w>\eta$. By (S3), $b>0$. Write $w=a+\ii b$. Taking real and imaginary parts of $w^2=z^2-4$: $a^2-b^2=E^2-\eta^2-4$ and $ab=E\eta$.
+Suppose $b\le\eta$. Then $|a|=|E|\eta/b\ge|E|$, so $a^2-b^2\ge E^2-\eta^2>E^2-\eta^2-4$, a contradiction. Hence $b>\eta$ and $\im m=\frac12(b-\eta)>0$.
+From $m(m+z)=-1$ we get $m\ne0$, $z+m\ne0$, $m=-1/(z+m)$ and $-z-m=1/m$. Finally $(X-m)(X-1/m)=X^2-(m+1/m)X+1=X^2+zX+1$, so the roots are $m$ and $1/m$, and
+$\im(1/m)=-\im m/|m|^2<0$.
+
+(b) By (a), $m=-1/(z+m)=-\ol{(z+m)}/|z+m|^2$, so $\im m=\im(z+m)/|z+m|^2=(\eta+\im m)/|z+m|^2$, which is the first identity. Since $\im m>0$ and $\eta>0$ it gives $|z+m|>1$, hence
+$|m|=1/|z+m|<1$ and $|m|^2=|z+m|^{-2}=\im m/(\im m+\eta)$. The other two formulas are rearrangements.
+
+(c) $|m|\le1$ by (b), and $|m|=1/|z+m|\ge1/(|z|+|m|)\ge1/(|z|+1)$. By (b), $\im m=\eta/(|z+m|^2-1)\ge\eta/((|z|+1)^2-1)\ge\eta/(|z|+1)^2$.
+
+(d) $w=z+2m$ by the definition of $m$. By (a), $1=-m^2-zm$, so $1-m^2=-2m^2-zm=-m(2m+z)=-mw$. Taking absolute values, $|w|=|p||q|=|z-2|^{1/2}|z+2|^{1/2}$.
+
+(e) For any complex number $w=a+\ii b$: $b^2=\frac12(|w|^2-\re(w^2))$. Here $|w|^2=|w^2|=|z-2||z+2|$ and $\re(w^2)=\re(z^2-4)=E^2-\eta^2-4=|z|^2-4-2\eta^2$. Hence
+$(\im w)^2=\frac12(|z-2||z+2|-|z|^2+4)+\eta^2=\eta^2+\frac12P$. By the proof of (a), $\im w>\eta>0$, so $P=2((\im w)^2-\eta^2)>0$ and
+\[
+ \im m=\tfrac12(\im w-\eta)=\frac{(\im w)^2-\eta^2}{2(\im w+\eta)}=\frac{P}{4(\im w+\eta)} .
+\]
+Finally $PQ=|z^2-4|^2-(|z|^2-4)^2=\big(|z|^4-8\re(z^2)+16\big)-\big(|z|^4-8|z|^2+16\big)=8(|z|^2-\re z^2)=16\eta^2$, and $Q=16\eta^2/P>0$.
+
+(f) Let $m=\msc(z)$, $m'=\msc(z')$. By (a), $1/(z+m)=-m$ and $1/(z'+m')=-m'$, so
+\[
+ m-m'=\frac1{z'+m'}-\frac1{z+m}=\frac{(z-z')+(m-m')}{(z+m)(z'+m')}=\big((z-z')+(m-m')\big)\,mm',
+\]
+i.e.\ $(m-m')(1-mm')=(z-z')mm'$. By (b) and $0<\im m\le|m|<1$: $1-|m|^2=\frac{\im z}{\im z+\im m}\ge\frac{\im z}{\im z+1}\ge\frac{\eta_0}{\eta_0+1}$, since $t\mapsto t/(t+1)$ is increasing; the same holds for $m'$.
+Hence $|1-mm'|\ge1-|m||m'|\ge1-\max(|m|^2,|m'|^2)\ge\frac{\eta_0}{\eta_0+1}$, and $|mm'|\le1$. This gives the claim.
+
+(g) If $|E|\ge4$ then $|z+m|\ge|z|-|m|\ge|E|-1\ge3$, so $|m|=1/|z+m|\le\frac13$; by (b), $\im m=\eta/(|z+m|^2-1)\le\eta/8$; and $|1-m^2|\ge1-|m|^2\ge\frac89$.
+
+(h) $-\bar z\pm2=-\ol{(z\mp2)}$ and $\im(z\mp2)>0$, so by (S2): $\sqrt{-\bar z-2}=\ii\,\ol{\sqrt{z+2}}$ and $\sqrt{-\bar z+2}=\ii\,\ol{\sqrt{z-2}}$. The product is $-\ol{w}$, hence
+$\msc(-\bar z)=\frac12(\bar z-\bar w)=-\ol{\msc(z)}$. The map $\mu\mapsto-\bar\mu$ preserves $|\mu|$, $\im\mu$ and $|1-\mu^2|$ (as $1-(-\bar\mu)^2=\ol{1-\mu^2}$).
+
+(i) For $z\in\C_+$ the numbers $z\pm2$ lie in $\C_+\subset\C\setminus(-\infty,0]$; apply (S4).
+\end{proof}
+
+\begin{lemma}[Size of $\msc$ in the near regime]\label{lem:mscsize} \infra\
+Let
+\[
+ c_*:=\tfrac1{150},\qquad C_*:=4 .
+\]
+For $|E|\le5$, $0<\eta\le10$ (recall $\kappa=||E|-2|$, $\varkappa=\sqrt{\kappa+\eta}$):
+\begin{align}
+ &\tfrac1{13}\le|\msc|\le1,\qquad c_*\varkappa\le|1-\msc^2|\le C_*\varkappa,\label{eq:alpha}\\
+ &c_*\varkappa\le\im\msc\le C_*\varkappa\ \ \text{if }|E|\le2\text{ or }\kappa\le\eta;\qquad
+ c_*\frac{\eta}{\varkappa}\le\im\msc\le C_*\frac{\eta}{\varkappa}\ \ \text{if }|E|>2\text{ and }\kappa\ge\eta.\label{eq:imm}
+\end{align}
+In particular $c_*\eta\le\im\msc\le\varkappa\le C_*\varkappa\le C_*^2c_*^{-1}|1-\msc^2|$ on this domain.
+More precisely, on this domain:
+$\frac{2^{1/4}}{13}\varkappa\le|1-\msc^2|\le149^{1/4}\varkappa$;
+$\ \frac1{81}\varkappa\le\im\msc\le\varkappa$ if $|E|\le2$;
+$\ \frac1{92}\varkappa\le\im\msc\le\frac1{\sqrt2}\varkappa$ if $|E|>2$, $\kappa<\eta$;
+$\ \frac1{27}\frac\eta\varkappa\le\im\msc\le\frac1{\sqrt2}\frac\eta\varkappa$ if $|E|>2$, $\kappa\ge\eta$.
+\end{lemma}
+\begin{proof}
+Write $m=\msc(z)$. By Lemma~\ref{lem:msc}(h) the quantities $|m|$, $\im m$, $|1-m^2|$ are unchanged under $E\mapsto-E$, and so are $\kappa$ and $\varkappa$. Hence we may assume $0\le E\le5$; then $\kappa=|E-2|$.
+
+\emph{Proof of \eqref{eq:alpha}.} $|z|\le\sqrt{125}<11.2$, so $|m|\ge1/(|z|+1)\ge\frac1{13}$ by Lemma~\ref{lem:msc}(c), and $|m|\le1$. Since $E\ge0$: $2\le|z+2|\le|7+10\ii|=\sqrt{149}$, and $|z-2|=\sqrt{\kappa^2+\eta^2}$ satisfies
+$(\kappa+\eta)/\sqrt2\le|z-2|\le\kappa+\eta$. By Lemma~\ref{lem:msc}(d), $|1-m^2|=|m|\,|z-2|^{1/2}|z+2|^{1/2}$, so
+\[
+ \tfrac{2^{1/4}}{13}\,\varkappa=\tfrac1{13}\big(\tfrac{\kappa+\eta}{\sqrt2}\cdot2\big)^{1/2}\le|1-m^2|\le\big((\kappa+\eta)\sqrt{149}\big)^{1/2}=149^{1/4}\varkappa,
+\]
+and $2^{1/4}/13>0.09>c_*$, $149^{1/4}<3.5<C_*$.
+
+\emph{Preparations for \eqref{eq:imm}.} Let $R:=|z-2||z+2|\ge0$ and $S:=|z|^2-4=E^2+\eta^2-4$, so that $P=R-S$ and $Q=R+S$ in the notation of Lemma~\ref{lem:msc}(e). That lemma gives $P>0$, $Q>0$,
+\begin{equation}\tag{F1}\label{eq:a1-F1}
+ R^2-S^2=PQ=16\eta^2,\qquad\text{hence}\qquad \max(|S|,4\eta)\le R=\sqrt{S^2+16\eta^2}\le|S|+4\eta,
+\end{equation}
+and, with $\im w=\sqrt{\eta^2+P/2}$,
+\begin{equation}\tag{F2}\label{eq:a1-F2}
+ \im m=\tfrac12\Big(\sqrt{\eta^2+\tfrac12P}-\eta\Big)=\frac{P}{4\big(\sqrt{\eta^2+\frac12P}+\eta\big)} .
+\end{equation}
+By the first expression, for fixed $\eta$ the right side of \eqref{eq:a1-F2} is an increasing function of $P\in(0,\infty)$. Since $\sqrt{P/2}\le\sqrt{\eta^2+P/2}\le\eta+\sqrt{P/2}$, the second expression gives
+\begin{equation}\tag{F3}\label{eq:a1-F3}
+ \frac{P}{4\big(2\eta+\sqrt{P/2}\big)}\le\im m\le\frac{\sqrt P}{2\sqrt2},
+\end{equation}
+and the left side of \eqref{eq:a1-F3} is also increasing in $P$.
+
+\emph{Case A: $E>2$ and $\kappa\ge\eta$.} Here $E=2+\kappa$, $0<\kappa\le3$, $\eta\le\kappa$, and $S=(E-2)(E+2)+\eta^2=\kappa(4+\kappa)+\eta^2$. So $S\ge4\kappa>0$ and, using $\eta^2\le\kappa^2\le3\kappa$, $S\le7\kappa+3\kappa=10\kappa$.
+By \eqref{eq:a1-F1}, $2S\le Q=R+S\le2S+4\eta$, hence $8\kappa\le Q\le24\kappa$ and
+\[
+ \frac{2\eta^2}{3\kappa}\le P=\frac{16\eta^2}{Q}\le\frac{2\eta^2}{\kappa} .
+\]
+By \eqref{eq:a1-F3}, $\im m\le\sqrt{2\eta^2/\kappa}/(2\sqrt2)=\eta/(2\sqrt\kappa)$; and since $\sqrt{P/2}\le\eta/\sqrt\kappa$,
+\[
+ \im m\ge\frac{P}{4(2\eta+\eta/\sqrt\kappa)}=\frac{P\sqrt\kappa}{4\eta(2\sqrt\kappa+1)}\ge\frac{\eta}{6\sqrt\kappa\,(2\sqrt\kappa+1)}\ge\frac{\eta}{6(2\sqrt3+1)\sqrt\kappa}\ge\frac{\eta}{27\sqrt\kappa} .
+\]
+As $\kappa\le\varkappa^2=\kappa+\eta\le2\kappa$, i.e.\ $\varkappa/\sqrt2\le\sqrt\kappa\le\varkappa$, we get
+\[
+ \frac1{27}\,\frac\eta\varkappa\le\im m\le\frac1{\sqrt2}\,\frac\eta\varkappa\qquad(\text{Case A}).
+\]
+
+\emph{Case B: $E>2$ and $\kappa<\eta$.} Again $S=\kappa(4+\kappa)+\eta^2>0$, and now $S\le7\kappa+10\eta\le17\eta$ (using $\kappa\le3$, $\eta\le10$, $\kappa<\eta$). By \eqref{eq:a1-F1}, $4\eta\le R\le Q\le2S+4\eta\le38\eta$, hence
+$\frac8{19}\eta\le P\le4\eta$. By \eqref{eq:a1-F3}, $\im m\le\sqrt{4\eta}/(2\sqrt2)=\sqrt{\eta/2}\le\varkappa/\sqrt2$. For the lower bound we use the monotonicity of the left side of \eqref{eq:a1-F3} in $P$ and $\eta\le10$:
+\[
+ \im m\ge\frac{\frac8{19}\eta}{4\big(2\eta+\sqrt{4\eta/19}\big)}=\frac{2\sqrt\eta}{19\big(2\sqrt\eta+2/\sqrt{19}\big)}\ge\frac{2\sqrt\eta}{19\,(2\sqrt{10}+0.46)}\ge\frac{\sqrt\eta}{65} .
+\]
+Since $\varkappa^2=\kappa+\eta<2\eta$, $\sqrt\eta>\varkappa/\sqrt2$ and
+\[
+ \frac1{92}\,\varkappa\le\im m\le\frac1{\sqrt2}\,\varkappa\qquad(\text{Case B}).
+\]
+
+\emph{Case C: $0\le E\le2$.} Here $\kappa=2-E\in[0,2]$ and $E^2-4=-\kappa(4-\kappa)$, so $S=\eta^2-\kappa(4-\kappa)$, which may have either sign.
+
+\emph{Upper bound.} By \eqref{eq:a1-F1}, $P=R-S\le|S|-S+4\eta=2\max(-S,0)+4\eta\le2\kappa(4-\kappa)+4\eta\le8(\kappa+\eta)$, so by \eqref{eq:a1-F3} $\im m\le\sqrt{8\varkappa^2}/(2\sqrt2)=\varkappa$.
+
+\emph{Lower bound on $P$.} We claim $P\ge\frac13\varkappa^2$.
+If $S\le0$: by \eqref{eq:a1-F1}, $P=R+|S|\ge R\ge4\eta$ and $P\ge2|S|=2\kappa(4-\kappa)-2\eta^2\ge4\kappa-2\eta^2$. If moreover $\eta\le1$, then $P\ge4\kappa-2\eta$, and adding half of $P\ge4\eta$ gives $\frac32P\ge4\kappa$; so
+$P\ge\max(\frac83\kappa,4\eta)\ge\frac12(\frac83\kappa+4\eta)\ge\frac43(\kappa+\eta)$. If $\eta>1$, then $\kappa\le2<2\eta$ and $P\ge4\eta>\frac43(\kappa+\eta)$.
+If $S>0$: then $\eta^2>\kappa(4-\kappa)\ge2\kappa$, which implies $\kappa<\eta$ (if $\eta\le2$ then $\kappa<\eta^2/2\le\eta$; if $\eta>2$ then $\kappa\le2<\eta$). By \eqref{eq:a1-F1}, $Q\le2S+4\eta\le2\eta^2+4\eta$, so
+$P=16\eta^2/Q\ge8\eta/(\eta+2)\ge\frac23\eta>\frac13(\kappa+\eta)$, using $\eta\le10$. This proves the claim.
+
+\emph{Lower bound on $\im m$.} By the monotonicity of the left side of \eqref{eq:a1-F3} and the claim,
+$\im m\ge\frac{\varkappa^2/3}{4(2\eta+\varkappa/\sqrt6)}$. Since $\eta\le\varkappa^2$ and $\eta\le10$ we have $\eta=\sqrt\eta\sqrt\eta\le\sqrt{10}\,\varkappa$, so $2\eta+\varkappa/\sqrt6\le(2\sqrt{10}+0.41)\varkappa\le6.74\,\varkappa$ and
+\[
+ \frac1{81}\,\varkappa\le\im m\le\varkappa\qquad(\text{Case C}).
+\]
+
+\emph{Conclusion.} If $|E|\le2$, the first statement of \eqref{eq:imm} is Case C. If $|E|>2$ and $\kappa<\eta$ it is Case B. If $|E|>2$ and $\kappa=\eta$, Case A applies and $\eta/\varkappa=\varkappa/2$ (as $\varkappa^2=2\eta$), so
+$\frac1{54}\varkappa\le\im m\le\frac1{2\sqrt2}\varkappa$. The second statement of \eqref{eq:imm} is Case A. All the lower constants are $\ge\frac1{150}=c_*$ and all the upper constants are $\le4=C_*$.
+
+For the last assertion: $\im m\ge\eta/(|z|+1)^2$ by Lemma~\ref{lem:msc}(c), and $(|z|+1)^2\le(\sqrt{125}+1)^2<150$, so $\im m\ge c_*\eta$. In Cases B and C, $\im m\le\varkappa$; in Case A, $\im m\le\eta/\varkappa\le\varkappa$ because $\eta\le\varkappa^2$.
+Finally $\varkappa\le c_*^{-1}|1-m^2|$ by \eqref{eq:alpha} and $C_*\ge1$.
+\end{proof}
+
+\begin{lemma}[Stieltjes representation]\label{lem:stieltjes} \infra\
+For $\im z>0$:\quad $\displaystyle\msc(z)=\int_{-2}^2\frac{\rhosc(x)}{x-z}\,\rd x$. Moreover $\displaystyle\int_{-2}^2\rhosc(x)\,\rd x=1$.
+\end{lemma}
+\begin{proof}
+Let $m:=\msc(z)$. By Lemma~\ref{lem:msc}(a),(b): $0<|m|<1$ and $z=-(m+1/m)$. The integrand is continuous on $[-2,2]$ because $x-z\ne0$ for real $x$.
+The function $\theta\mapsto2\cos\theta$ is continuously differentiable and maps $[0,\pi]$ onto $[-2,2]$, with $\rhosc(2\cos\theta)=\frac1{2\pi}\sqrt{4\sin^2\theta}=\frac1\pi\sin\theta$ for $\theta\in[0,\pi]$.
+The substitution $x=2\cos\theta$, $\rd x=-2\sin\theta\,\rd\theta$, gives for every continuous $g:[-2,2]\to\C$
+\begin{equation}\tag{$\Theta$}\label{eq:a1-Theta}
+ \int_{-2}^2g(x)\rhosc(x)\,\rd x=\frac2\pi\int_0^\pi g(2\cos\theta)\sin^2\theta\,\rd\theta .
+\end{equation}
+For $g=1$ this is $\frac2\pi\int_0^\pi\sin^2\theta\,\rd\theta=\frac1\pi\int_0^\pi(1-\cos2\theta)\,\rd\theta=1$, which is the second claim. For $g(x)=1/(x-z)$ we have
+\[
+ 2\cos\theta-z=2\cos\theta+m+\frac1m=\frac{1+2m\cos\theta+m^2}{m},\qquad 1+2m\cos\theta+m^2=(1+me^{\ii\theta})(1+me^{-\ii\theta})\ne0,
+\]
+so
+\[
+ \int_{-2}^2\frac{\rhosc(x)}{x-z}\,\rd x=\frac{2m}{\pi}\int_0^\pi\sin\theta\cdot\frac{\sin\theta}{1+2m\cos\theta+m^2}\,\rd\theta .
+\]
+\emph{Claim:} for every real $\theta$,
+\[
+ \frac{\sin\theta}{1+2m\cos\theta+m^2}=\sum_{k=0}^\infty(-m)^k\sin((k+1)\theta),
+\]
+the series being absolutely convergent with $|(-m)^k\sin((k+1)\theta)|\le|m|^k$. Indeed, by the geometric series ($|me^{\pm\ii\theta}|<1$) and $\sin((k+1)\theta)=\frac1{2\ii}(e^{\ii(k+1)\theta}-e^{-\ii(k+1)\theta})$,
+\begin{align*}
+ \sum_{k=0}^\infty(-m)^k\sin((k+1)\theta)&=\frac1{2\ii}\Big(\frac{e^{\ii\theta}}{1+me^{\ii\theta}}-\frac{e^{-\ii\theta}}{1+me^{-\ii\theta}}\Big)\\
+ &=\frac1{2\ii}\cdot\frac{e^{\ii\theta}(1+me^{-\ii\theta})-e^{-\ii\theta}(1+me^{\ii\theta})}{(1+me^{\ii\theta})(1+me^{-\ii\theta})}=\frac{\sin\theta}{1+2m\cos\theta+m^2}.
+\end{align*}
+Since $\sum_k|m|^k<\infty$, the series may be integrated term by term against $\sin\theta$ on $[0,\pi]$ (dominated convergence). For integers $k\ge0$,
+\[
+ \int_0^\pi\sin\theta\,\sin((k+1)\theta)\,\rd\theta=\frac12\int_0^\pi\big(\cos(k\theta)-\cos((k+2)\theta)\big)\rd\theta=\begin{cases}\pi/2,&k=0,\\0,&k\ge1,\end{cases}
+\]
+because $\int_0^\pi\cos(j\theta)\,\rd\theta=0$ for every integer $j\ge1$. Therefore the integral equals $\frac{2m}\pi\cdot\frac\pi2=m$.
+\end{proof}
+
+\begin{lemma}[Semicircle distribution function and classical locations]\label{lem:nsc} \infra\
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item $\rhosc$ is continuous and even, $0\le\rhosc\le\frac1\pi$, $\rhosc>0$ exactly on $(-2,2)$, and $\rhosc$ is nonincreasing on $[0,\infty)$. The function $\nsc$ is continuously differentiable with $\nsc'=\rhosc$; it is
+nondecreasing and $\frac1\pi$-Lipschitz, $\nsc(E)=0$ for $E\le-2$, $\nsc(E)=1$ for $E\ge2$, $\nsc$ is strictly increasing on $[-2,2]$, $\nsc(-E)=1-\nsc(E)$ for all $E$, and $\nsc(0)=\frac12$.
+\item \emph{Edge:} for $0\le u\le2$:\quad $\dfrac{\sqrt u}{\sqrt2\,\pi}\le\rhosc(-2+u)\le\dfrac{\sqrt u}{\pi}$\quad and\quad $\dfrac{\sqrt2}{3\pi}u^{3/2}\le\nsc(-2+u)\le\dfrac{2}{3\pi}u^{3/2}$.
+The two upper bounds hold for all $u\ge0$.
+\item \emph{Classical locations:} for $1\le j\le N$ the infimum defining $\gamma_j$ in \eqref{eq:sc} is attained, $\gamma_j\in(-2,2]$, $N\nsc(\gamma_j)=j$, $\gamma_N=2$, $\gamma_j<\gamma_{j+1}$, and $\gamma_{N-j}=-\gamma_j$ for $1\le j\le N-1$. Moreover
+\begin{align*}
+ 2.8\,(j/N)^{2/3}&\le\gamma_j+2\le3.6\,(j/N)^{2/3}&&\text{if }j\le N/2,\\
+ 2.8\,\big(\tfrac{N-j}N\big)^{2/3}&\le2-\gamma_j\le3.6\,\big(\tfrac{N-j}N\big)^{2/3}&&\text{if }j\ge N/2.
+\end{align*}
+\item \emph{Bulk}: for $0<c\le2$ and $|x|\le2-c/4$:\quad $\rhosc(x)\ge\frac1{2\pi}\sqrt{c-c^2/16}$.
+\item \emph{Counting the $\gamma_j$}: for every bounded interval $I\subset\R$ (open, closed or half-open):\quad $\#\{j\in\{1,\dots,N\}:\ \gamma_j\in I\}\le N|I|/\pi+1$.
+\item \emph{Density versus distribution function:} for all $x\in\R$:\quad $\rhosc(x)\ge\frac13\min\big(\nsc(x),1-\nsc(x)\big)^{1/3}$. Consequently, for all real $a\le b$,
+\[
+ (b-a)\,\min\big(\nsc(a),\,1-\nsc(b)\big)^{1/3}\le3\,\big(\nsc(b)-\nsc(a)\big).
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) The statements on $\rhosc$ are read off from \eqref{eq:sc} ($\sqrt{(4-x^2)_+}\le2$). Since $\rhosc$ is continuous with compact support, $\nsc$ is well defined and continuously differentiable with $\nsc'=\rhosc$ (fundamental theorem of calculus);
+it is nondecreasing because $\rhosc\ge0$, and $|\nsc(E)-\nsc(E')|=|\int_{E'}^E\rhosc|\le|E-E'|/\pi$. $\nsc(E)=0$ for $E\le-2$ because $\rhosc=0$ on $(-\infty,-2]$; $\nsc(E)=\int_{-2}^2\rhosc=1$ for $E\ge2$ by Lemma~\ref{lem:stieltjes}.
+For $-2\le a<b\le2$, $\nsc(b)-\nsc(a)=\int_a^b\rhosc>0$ since $\rhosc$ is continuous and positive on $(a,b)$. Since $\rhosc$ is even, $\nsc(-E)=\int_{-\infty}^{-E}\rhosc=\int_E^\infty\rhosc=1-\nsc(E)$; for $E=0$ this gives $\nsc(0)=\frac12$.
+
+(b) For $0\le u\le4$, $\rhosc(-2+u)=\frac1{2\pi}\sqrt{u(4-u)}$. If $0\le u\le2$ then $2\le4-u\le4$, which gives $\frac{\sqrt{2u}}{2\pi}\le\rhosc(-2+u)\le\frac{2\sqrt u}{2\pi}$. The upper bound $\rhosc(-2+u)\le\sqrt u/\pi$ holds for all $u\ge0$ (for $u\ge4$ the left side is $0$).
+Integrating over $[0,u]$, $\nsc(-2+u)=\int_0^u\rhosc(-2+s)\,\rd s$ and $\int_0^u\sqrt s\,\rd s=\frac23u^{3/2}$ give the bounds on $\nsc$.
+
+(c) Fix $j\in\{1,\dots,N\}$ and let $A_j:=\{x\in\R:N\nsc(x)\ge j\}$. By (a), $2\in A_j$, $A_j\subset(-2,\infty)$ (as $\nsc=0<j/N$ on $(-\infty,-2]$), $A_j$ is closed (continuity) and an up-set (monotonicity). So $\gamma_j=\min A_j\in(-2,2]$ and $\nsc(\gamma_j)\ge j/N$.
+For $x<\gamma_j$ we have $\nsc(x)<j/N$; letting $x\uparrow\gamma_j$, continuity gives $\nsc(\gamma_j)\le j/N$. Hence $N\nsc(\gamma_j)=j$.
+Since $\nsc(x)<1$ for $x<2$ (strict monotonicity on $[-2,2]$) and $\nsc(2)=1$, $\gamma_N=2$. Since $\nsc$ is nondecreasing and $\nsc(\gamma_j)=j/N<(j+1)/N=\nsc(\gamma_{j+1})$, we get $\gamma_j<\gamma_{j+1}$.
+For $1\le j\le N-1$: $\gamma_j\in(-2,2)$ and $\nsc(-\gamma_j)=1-j/N=\nsc(\gamma_{N-j})$; as $\nsc$ is injective on $[-2,2]$, $-\gamma_j=\gamma_{N-j}$.
+
+Let $j\le N/2$. Then $\nsc(0)=\frac12\ge j/N$, so $\gamma_j\le0$ and $u:=\gamma_j+2\in(0,2]$. By (b), $\frac{\sqrt2}{3\pi}u^{3/2}\le\frac jN\le\frac2{3\pi}u^{3/2}$, i.e.
+\[
+ \Big(\frac{3\pi}2\Big)^{2/3}\Big(\frac jN\Big)^{2/3}\le u\le\Big(\frac{3\pi}{\sqrt2}\Big)^{2/3}\Big(\frac jN\Big)^{2/3},\qquad\Big(\frac{3\pi}2\Big)^{2/3}>2.8,\quad\Big(\frac{3\pi}{\sqrt2}\Big)^{2/3}<3.6 .
+\]
+Let $j\ge N/2$. If $j=N$ both sides of the claim vanish. If $j<N$, then $N-j\le N/2$ and $2-\gamma_j=2+\gamma_{N-j}$, so the claim follows from the case just proved.
+
+(d) If $|x|\le2-c/4$ then $4-x^2\ge4-(2-c/4)^2=c-c^2/16>0$.
+
+(e) If no $\gamma_j$ lies in $I$ there is nothing to prove. Otherwise let $j_1\le j_2$ be the smallest and the largest index with $\gamma_j\in I$. By (c) and the Lipschitz bound in (a),
+$\frac{j_2-j_1}N=\nsc(\gamma_{j_2})-\nsc(\gamma_{j_1})\le\frac{\gamma_{j_2}-\gamma_{j_1}}\pi\le\frac{|I|}\pi$, and the number of indices is at most $j_2-j_1+1$.
+
+(f) Let $\tau(x):=\min(\nsc(x),1-\nsc(x))$. If $|x|\ge2$ then $\tau(x)=0$ and the inequality is trivial. Let $-2<x\le0$ and $u:=x+2\in(0,2]$. Then $\nsc(x)\le\frac12$, so $\tau(x)=\nsc(x)\le\frac2{3\pi}u^{3/2}$ by (b), i.e.\ $\sqrt u\ge(\frac{3\pi}2\tau(x))^{1/3}$, and by (b) again
+\[
+ \rhosc(x)\ge\frac{\sqrt u}{\sqrt2\,\pi}\ge\frac{(3\pi/2)^{1/3}}{\sqrt2\,\pi}\,\tau(x)^{1/3}\ge\tfrac13\,\tau(x)^{1/3},
+\]
+since $(3\pi/2)^{1/3}/(\sqrt2\pi)>0.37$. For $0<x<2$ use $\rhosc(x)=\rhosc(-x)$ and $\tau(x)=\tau(-x)$.
+For the consequence, let $a\le b$ and $\tau_0:=\min(\nsc(a),1-\nsc(b))$. For $x\in[a,b]$, $\nsc(a)\le\nsc(x)\le\nsc(b)$, hence $\tau(x)\ge\tau_0$ and $\rhosc(x)\ge\frac13\tau_0^{1/3}$. Integrating over $[a,b]$:
+$\nsc(b)-\nsc(a)\ge\frac13(b-a)\tau_0^{1/3}$.
+\end{proof}

@@ -1,0 +1,289 @@
+\subsection{The smoothed counting functional and determinant ratios}\label{sec:X}
+
+Throughout this subsection $\eta>0$ and $E_1\le E_2$ are arbitrary real numbers, $z_i:=E_i+i\eta$ $(i=1,2)$, and everything is
+deterministic: no property of $N$, of the ensemble, or of the parameters of \S\ref{sec:inputs} is used. For a complex valued function
+$g$ of the spectral parameter we write, as in \S\ref{sec:inputs},
+\[
+\br{g}:=g(z_2)-g(z_1).
+\]
+
+\paragraph{Matrices.} For $n\ge0$ and a Hermitian matrix $A\in M_n(\C)$ (a real symmetric matrix is regarded as a Hermitian one),
+$G_A(z):=(A-z)^{-1}$ exists for all $z\in\C_+$ by Lemma~\ref{lem:basic}(a), and $\lambda_1(A)\le\dots\le\lambda_n(A)$ are the
+eigenvalues of $A$. The case $n=0$ (the empty matrix, with the conventions of \S\ref{sec:resid}: its determinant is $1$, its trace is $0$, and an empty
+sum is $0$) is admitted only because the minor of a $1\times1$ matrix is empty; it never needs a separate argument.
+
+\paragraph{The principal logarithm.} $\Log:\C\setminus(-\infty,0]\to\C$ is the principal branch of the logarithm,
+$\Log w=\log|w|+i\operatorname{Arg}w$ with $\operatorname{Arg}w\in(-\pi,\pi)$. It is holomorphic on $\C\setminus(-\infty,0]$, with
+$\frac{d}{dw}\Log w=\frac1w$ and $\exp(\Log w)=w$. The identities of Lemma~\ref{lem:ratio} and Corollary~\ref{cor:Xchange} use $\Log$ on all of $\C\setminus(-\infty,0]$
+(by \eqref{eq:b1:nocut} the relevant numbers never meet the cut). The bounds \eqref{eq:b1:L1}--\eqref{eq:b1:L3} below are used only for numbers $1+\zeta$ with $|\zeta|\le\frac12$;
+they lie in the half plane $\{\re w\ge\frac12\}$, which does not meet the cut $(-\infty,0]$. We shall use three bounds: for all
+$\zeta\in\C$ with $|\zeta|\le\frac12$,
+\begin{align}
+|\Log(1+\zeta)|&\le2|\zeta|,\tag{L1}\label{eq:b1:L1}\\
+\big|\Log(1+\zeta)-\zeta+\tfrac12\zeta^2\big|&\le\tfrac23|\zeta|^3,\tag{L2}\label{eq:b1:L2}\\
+\big|\Log(1+\zeta)-\zeta+\tfrac12\zeta^2-\tfrac13\zeta^3\big|&\le\tfrac12|\zeta|^4.\tag{L3}\label{eq:b1:L3}
+\end{align}
+
+\begin{proof}[Proof of \eqref{eq:b1:L1}--\eqref{eq:b1:L3}]
+Fix $\zeta$ with $|\zeta|\le\frac12$. For $s\in[0,1]$ we have $|1+s\zeta|\ge1-s|\zeta|\ge\frac12$ and $\re(1+s\zeta)\ge\frac12$, so
+$\varphi(s):=\Log(1+s\zeta)$ is continuously differentiable on $[0,1]$ with $\varphi'(s)=\zeta/(1+s\zeta)$ (chain rule) and $\varphi(0)=0$.
+By the fundamental theorem of calculus, $\Log(1+\zeta)=\int_0^1\frac{\zeta}{1+s\zeta}\,ds$. For every integer $k\ge0$ and every $w\ne-1$,
+\[
+\frac1{1+w}=\sum_{j=0}^{k-1}(-w)^j+\frac{(-w)^k}{1+w}
+\]
+(multiply by $1+w$; the sum telescopes). Put $w=s\zeta$, multiply by $\zeta$ and integrate over $s\in[0,1]$, using $\int_0^1s^j\,ds=\frac1{j+1}$:
+\[
+\Log(1+\zeta)-\sum_{j=1}^{k}\frac{(-1)^{j-1}\zeta^j}{j}=\int_0^1\frac{\zeta\,(-s\zeta)^k}{1+s\zeta}\,ds,\qquad
+\Big|\int_0^1\frac{\zeta\,(-s\zeta)^k}{1+s\zeta}\,ds\Big|\le\int_0^12|\zeta|^{k+1}s^k\,ds=\frac{2|\zeta|^{k+1}}{k+1}.
+\]
+The cases $k=0$, $k=2$, $k=3$ are \eqref{eq:b1:L1}, \eqref{eq:b1:L2}, \eqref{eq:b1:L3}.
+\end{proof}
+
+Finally, we use $\pi>3$ in the form $\frac1\pi<\frac13$, and the following trivial remark: for a function $\xi$ of the spectral parameter,
+\begin{equation}\label{eq:b1:br}
+\big|\im\br{\xi}\big|\le|\im\xi(z_1)|+|\im\xi(z_2)|\le|\xi(z_1)|+|\xi(z_2)|.
+\end{equation}
+
+\begin{definition}\label{def:X}
+For a Hermitian matrix $A\in M_n(\C)$ (any $n\ge1$),
+\[
+X(A)=X_{E_1,E_2,\eta}(A):=\frac1\pi\int_{E_1}^{E_2}\im\tr G_A(y+i\eta)\,dy ,
+\]
+and $X(A):=0$ for the empty matrix $(n=0)$. The integrand is a continuous function of $y$ (Lemma~\ref{lem:basic}(c)), so the integral is
+an ordinary Riemann integral. For the random matrix, $X(H)=\frac N\pi\int_{E_1}^{E_2}\im m(y+i\eta)\,dy=\tr(\chi_{[E_1,E_2]}*\theta_\eta)(H)$
+with $\theta_\eta(x)=\frac1\pi\frac{\eta}{x^2+\eta^2}$, in the notation of the original (this identification is not used).
+\end{definition}
+
+\begin{lemma}[spectral form]\label{lem:Xspec}\infra{}
+Let $A\in M_n(\C)$ be Hermitian, $n\ge0$. Then
+\[
+X(A)=\sum_{j=1}^nf(\lambda_j(A)),\qquad f(\lambda):=\frac1\pi\Big[\arctan\frac{E_2-\lambda}\eta-\arctan\frac{E_1-\lambda}\eta\Big]\in[0,1)\quad(\lambda\in\R).
+\]
+Consequently $0\le X(A)\le n$. Moreover,
+\begin{align*}
+\textup{(a)}\quad&f(\lambda)\ge1-\frac\eta\pi\Big(\frac1{E_2-\lambda}+\frac1{\lambda-E_1}\Big)&&\text{if }E_1<\lambda<E_2,\\
+\textup{(b)}\quad&f(\lambda)\le\frac\eta\pi\min\Big(\frac1{E_1-\lambda},\ \frac{E_2-E_1}{(E_1-\lambda)^2}\Big)&&\text{if }\lambda<E_1,
+\end{align*}
+and \textup{(c)} for Hermitian $A,A'\in M_n(\C)$: $\ |X(A)-X(A')|\le\dfrac{n\,(E_2-E_1)}{\pi\eta^2}\,\|A-A'\|$. In particular $A\mapsto X(A)$ is continuous
+on the Hermitian $n\times n$ matrices.
+\end{lemma}
+\begin{proof}
+\emph{Spectral form.} For $n=0$ both sides are $0$. Let $n\ge1$ and write $\lambda_j:=\lambda_j(A)$. By Lemma~\ref{lem:basic}(d) applied to
+$A$ (the lemma holds for Hermitian matrices of any size), for every $y\in\R$,
+\[
+\im\tr G_A(y+i\eta)=\sum_{j=1}^n\im\frac1{\lambda_j-y-i\eta}=\sum_{j=1}^n\frac{\eta}{(\lambda_j-y)^2+\eta^2}.
+\]
+For fixed $\lambda\in\R$ the function $y\mapsto\arctan\frac{y-\lambda}\eta$ is differentiable on $\R$ with derivative
+$\frac1\eta\big(1+\frac{(y-\lambda)^2}{\eta^2}\big)^{-1}=\frac{\eta}{(\lambda-y)^2+\eta^2}$, which is continuous. By the fundamental theorem of calculus,
+\[
+\int_{E_1}^{E_2}\frac{\eta\,dy}{(\lambda-y)^2+\eta^2}=\arctan\frac{E_2-\lambda}\eta-\arctan\frac{E_1-\lambda}\eta=\pi f(\lambda).
+\]
+Summing over $\lambda=\lambda_j$ and dividing by $\pi$ gives $X(A)=\sum_jf(\lambda_j)$. Since $\arctan$ is nondecreasing with values in
+$(-\frac\pi2,\frac\pi2)$ and $E_1\le E_2$, we get $0\le\pi f(\lambda)<\pi$, i.e.\ $f(\lambda)\in[0,1)$, and therefore $0\le X(A)\le n$.
+
+\emph{Two inequalities for $\arctan$.} For $x>0$,
+\begin{equation}\label{eq:b1:atan1}
+\frac\pi2-\arctan x=\arctan\frac1x\le\frac1x ,
+\end{equation}
+because $\arctan x+\arctan\frac1x=\frac\pi2$ for $x>0$ and $\arctan s\le s$ for $s\ge0$ (the function $s-\arctan s$ vanishes at $0$ and has the
+derivative $1-\frac1{1+s^2}\ge0$). For $0<b\le a$, the mean value theorem gives a $\xi\in[b,a]$ with
+\begin{equation}\label{eq:b1:atan2}
+\arctan a-\arctan b=\frac{a-b}{1+\xi^2}\le\frac{a-b}{1+b^2}\le\frac{a-b}{b^2}.
+\end{equation}
+
+\emph{\textup{(a)}.} Let $E_1<\lambda<E_2$ and $x_2:=\frac{E_2-\lambda}\eta>0$, $x_1:=\frac{\lambda-E_1}\eta>0$. Since $\arctan$ is odd,
+$\pi f(\lambda)=\arctan x_2+\arctan x_1\ge\pi-\frac1{x_2}-\frac1{x_1}$ by \eqref{eq:b1:atan1}; this is (a).
+
+\emph{\textup{(b)}.} Let $\lambda<E_1$ and $b:=\frac{E_1-\lambda}\eta>0$, $a:=\frac{E_2-\lambda}\eta\ge b$. Then
+$\pi f(\lambda)=\arctan a-\arctan b\le\frac\pi2-\arctan b\le\frac1b=\frac{\eta}{E_1-\lambda}$ by \eqref{eq:b1:atan1}, and
+$\pi f(\lambda)\le\frac{a-b}{b^2}=\frac{\eta\,(E_2-E_1)}{(E_1-\lambda)^2}$ by \eqref{eq:b1:atan2}.
+
+\emph{\textup{(c)}.} For $n=0$ there is nothing to prove. For $n\ge1$ and every $y\in\R$, Lemma~\ref{lem:basic}(h) (with $n$ in place of $N$) gives
+$|\tr G_A(y+i\eta)-\tr G_{A'}(y+i\eta)|\le n\eta^{-2}\|A-A'\|$. Since $|\im\xi|\le|\xi|$, integrating over $y\in[E_1,E_2]$ and dividing by $\pi$ gives (c).
+\end{proof}
+
+\noindent\emph{Remark (measurability).} The map $x\mapsto H(x)$ is linear, hence continuous (Lemma~\ref{lem:weyl}(d)), and so are the maps
+$x\mapsto H(x)^{[p]}$ (an entry set to zero, Definition~\ref{def:hyb}) and $x\mapsto H(x)^{(a)}$ (a row and column removed).
+By (c), the functions $x\mapsto X(H(x))$, $X(H(x)^{[p]})$, $X(H(x)^{(a)})$, $X\big((H(x)^{[p]})^{(a)}\big)$ are continuous on $\Omega$, in particular Borel.
+
+\begin{lemma}[ratio lemma]\label{lem:ratio}\infra{}
+Let $A\in M_n(\C)$, $B\in M_m(\C)$ be Hermitian $(n,m\ge0)$ and $p_A(y):=\det(A-y-i\eta)$ for $y\in\R$ (so $p_A\equiv1$ if $n=0$).
+\begin{itemize}\itemsep0pt
+\item[\textup{(i)}] $p_A$ is a polynomial function of $y$ with complex coefficients, $p_A(y)\ne0$ for all $y\in\R$, and
+\[
+p_A'(y)=-\,p_A(y)\,\tr G_A(y+i\eta)\qquad(y\in\R).
+\]
+\item[\textup{(ii)}] Let $D:[E_1,E_2]\to\C$ satisfy $D(y)\,p_B(y)=\kappa\,p_A(y)$ for all $y\in[E_1,E_2]$, with a constant $\kappa\in\C\setminus\{0\}$, and
+\begin{equation}\label{eq:b1:cut}
+D(y)\notin(-\infty,0]\qquad\text{for \emph{all} }y\in[E_1,E_2].
+\end{equation}
+Then
+\begin{equation}\label{eq:b1:ratio}
+X(A)-X(B)=-\frac1\pi\im\big[\Log D(E_2)-\Log D(E_1)\big].
+\end{equation}
+If moreover $|D(E_i)-1|\le\frac12$ for $i=1,2$, then
+\begin{equation}\label{eq:b1:ratiobd}
+|X(A)-X(B)|\le\tfrac2\pi\big(|D(E_1)-1|+|D(E_2)-1|\big).
+\end{equation}
+Condition \eqref{eq:b1:cut} holds in particular if $|D(y)-1|\le\frac12$ for all $y\in[E_1,E_2]$.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+(i) For $n=0$ the claim reads $0=0$. Let $n\ge1$. By the spectral theorem there are a unitary matrix $U$ and the real diagonal matrix
+$\Lambda=\operatorname{diag}(\lambda_1(A),\dots,\lambda_n(A))$ with $A=U\Lambda U^*$ (as in the proof of Lemma~\ref{lem:basic}(d)). For $z\in\C$,
+$A-z=U(\Lambda-z)U^*$ and $\det U\det U^*=\det(UU^*)=1$, so $\det(A-z)=\prod_{j=1}^n(\lambda_j(A)-z)$. Hence, with $\lambda_j:=\lambda_j(A)$,
+\[
+p_A(y)=\prod_{j=1}^n(\lambda_j-i\eta-y),
+\]
+a polynomial in $y$. Each factor has imaginary part $-\eta\ne0$, so $p_A(y)\ne0$. By the product rule (each factor has derivative $-1$),
+\[
+p_A'(y)=-\sum_{j=1}^n\prod_{k\ne j}(\lambda_k-i\eta-y)=-\,p_A(y)\sum_{j=1}^n\frac1{\lambda_j-y-i\eta}=-\,p_A(y)\,\tr G_A(y+i\eta),
+\]
+the last step by Lemma~\ref{lem:basic}(d).
+
+(ii) Define $\widetilde D(y):=\kappa\,p_A(y)/p_B(y)$ for all $y\in\R$. By (i) this is a quotient of two polynomial functions whose denominator
+has no real zero; hence $\widetilde D:\R\to\C$ is continuously differentiable, $\widetilde D(y)\ne0$, and
+\begin{equation}\label{eq:b1:logder}
+\frac{\widetilde D'(y)}{\widetilde D(y)}=\frac{p_A'(y)}{p_A(y)}-\frac{p_B'(y)}{p_B(y)}=\tr G_B(y+i\eta)-\tr G_A(y+i\eta)\qquad(y\in\R).
+\end{equation}
+By hypothesis $\widetilde D=D$ on $[E_1,E_2]$. If $E_1=E_2$ both sides of the claimed identity vanish; let $E_1<E_2$.
+For every $y\in[E_1,E_2]$ the number $\widetilde D(y)=D(y)$ lies in $\C\setminus(-\infty,0]$ by \eqref{eq:b1:cut}, and $\Log$ is
+complex differentiable at each point of $\C\setminus(-\infty,0]$ with derivative $1/w$. By the chain rule the function
+$\ell(y):=\Log\widetilde D(y)$ is differentiable at every $y\in[E_1,E_2]$, with
+\[
+\ell'(y)=\frac{\widetilde D'(y)}{\widetilde D(y)}=\tr G_B(y+i\eta)-\tr G_A(y+i\eta),
+\]
+and $\ell'$ is continuous on $[E_1,E_2]$. By the fundamental theorem of calculus (applied to the real and imaginary parts of $\ell$),
+\[
+\Log D(E_2)-\Log D(E_1)=\ell(E_2)-\ell(E_1)=\int_{E_1}^{E_2}\big(\tr G_B(y+i\eta)-\tr G_A(y+i\eta)\big)\,dy .
+\]
+Taking $\frac1\pi\im$ of both sides and using Definition~\ref{def:X} (also for $n=0$ or $m=0$, where the corresponding trace is $0$) gives
+$\frac1\pi\im\big[\Log D(E_2)-\Log D(E_1)\big]=X(B)-X(A)$, which is \eqref{eq:b1:ratio}. For \eqref{eq:b1:ratiobd} apply \eqref{eq:b1:L1} with
+$\zeta=D(E_i)-1$: $|\im\Log D(E_i)|\le|\Log D(E_i)|\le2|D(E_i)-1|$ for $i=1,2$. Finally, the closed disc $\{|w-1|\le\frac12\}$ lies in the half
+plane $\{\re w\ge\frac12\}$, which gives the last assertion.
+\end{proof}
+
+\noindent\emph{Remarks.} (1) \emph{The branch; why a condition on the whole segment.} The identity \eqref{eq:b1:ratio} uses that the curve
+$y\mapsto D(y)$, $y\in[E_1,E_2]$, does not meet the cut $(-\infty,0]$ of the principal branch; a condition at the endpoints alone is not
+sufficient in general. If it is known only that $D(E_1),D(E_2)\notin(-\infty,0]$, then by \eqref{eq:b1:logder} the function
+$y\mapsto\widetilde D(y)\exp\big(-\!\int_{E_1}^y(\tr G_B-\tr G_A)(s+i\eta)\,ds\big)$ has derivative $0$, hence
+$\exp\big(\Log D(E_2)-\Log D(E_1)\big)=\exp\big(\int_{E_1}^{E_2}(\tr G_B-\tr G_A)(y+i\eta)\,dy\big)$, and one can only conclude that
+\[
+X(A)-X(B)+\tfrac1\pi\im\big[\Log D(E_2)-\Log D(E_1)\big]\in2\mathbb Z .
+\]
+The even integer can be nonzero (numerically it is $\pm2$ for about a third of random $6\times6$ pairs $A=B+{}$a positive matrix of rank $3$).
+(2) The hypothesis $|D-1|\le\frac12$ on the whole segment is a special case of \eqref{eq:b1:cut}; see the last sentence of (ii).
+In Lemma~\ref{lem:det} we show that for the two ratios that occur in Part~II (replacement of one entry, removal of one row and column)
+condition \eqref{eq:b1:cut} holds \emph{automatically}, at every point of $\C_+$. Thus no smallness condition along the segment is needed for the
+exact formulas of Corollary~\ref{cor:Xchange}; smallness is needed only at the two endpoints $z_1,z_2$, where the logarithm is expanded.
+(3) The function $D$ is not assumed to be continuous: it is determined by $D=\kappa p_A/p_B$.
+
+\begin{lemma}[one entry: $2\times2$ determinant]\label{lem:det}
+Let $Q\in M_N(\C)$ be Hermitian, $R(z):=G_Q(z)$, $p=(a,b)$ with $1\le a\le b\le N$, and $v\in\K$ ($v\in\R$ if $a=b$). Let $V_p(v)$ be the matrix of
+Definition~\ref{def:hyb}: $V_p(v)=vE^{(ab)}+\bar vE^{(ba)}$ if $a\ne b$ (its only nonzero entries are $v$ at $(a,b)$ and $\bar v$ at $(b,a)$), and
+$V_p(v)=vE^{(aa)}$ if $a=b$. For all $z\in\C_+$,
+\[
+\det(Q+V_p(v)-z)=\det(Q-z)\cdot D_p(v;z)
+\]
+with
+\[
+D_p(v;z)=\begin{cases}1+u(v;z)-w(v;z),& a\ne b,\\ 1+vR_{aa}(z),& a=b,\end{cases}\qquad
+\begin{aligned}u(v;z)&:=vR_{ba}(z)+\bar vR_{ab}(z),\\ w(v;z)&:=|v|^2g(z),\quad g:=R_{aa}R_{bb}-R_{ab}R_{ba}.\end{aligned}
+\]
+Moreover, the principal logarithm can be applied to $D_p$ and to $-R_{aa}$ at every point of $\C_+$:
+\begin{equation}\label{eq:b1:nocut}
+D_p(v;z)\in\C\setminus(-\infty,0]\qquad\text{and}\qquad-R_{aa}(z)\in\C\setminus(-\infty,0]\qquad\text{for all }z\in\C_+ .
+\end{equation}
+\textup{(The statement and its proof hold for every $v\in\C$ if $a\ne b$; for $\K=\R$ the matrix $Q$ is real symmetric and $v$ is real.)}
+\end{lemma}
+\begin{proof}
+Write $V:=V_p(v)$; it is Hermitian, so $Q+V$ is Hermitian. Since $(Q-z)R=1$, we have $Q+V-z=(Q-z)(1+RV)$ and therefore
+\begin{equation}\label{eq:b1:det1}
+\det(Q+V-z)=\det(Q-z)\cdot\det(1_N+RV).
+\end{equation}
+\emph{Reduction to the block.} Let $m:=2$, $(i_1,i_2):=(a,b)$ if $a\ne b$, and $m:=1$, $i_1:=a$ if $a=b$. Let $U$ be the $N\times m$ matrix whose columns are the
+standard basis vectors $e_{i_1},\dots,e_{i_m}$, and
+\[
+C:=\begin{pmatrix}0&v\\ \bar v&0\end{pmatrix}\ \ (a\ne b),\qquad C:=(v)\ \ (a=b).
+\]
+Then $UCU^*=\sum_{k,l=1}^mC_{kl}\,e_{i_k}e_{i_l}^*=V$, and $U^*RU=(R_{i_ki_l})_{k,l=1}^m=:R_P$ is the block of $R$ with rows and columns in $P:=\{a,b\}$.
+We use the identity
+\begin{equation}\label{eq:b1:sylv}
+\det(1_N+\mathsf X\mathsf Y)=\det(1_m+\mathsf Y\mathsf X)\qquad\text{for all }\mathsf X\in M_{N\times m}(\C),\ \mathsf Y\in M_{m\times N}(\C)
+\end{equation}
+(Mathlib: \texttt{Matrix.det\_one\_add\_mul\_comm}). For completeness: apply the block determinant formula \textup{(BD)} from the proof of
+Lemma~\ref{lem:schur} to the $(N+m)\times(N+m)$ matrix $\mathcal M:=\big(\begin{smallmatrix}1_N&-\mathsf X\\ \mathsf Y&1_m\end{smallmatrix}\big)$. With the
+lower right block $1_m$ as pivot it gives $\det\mathcal M=\det(1_m)\det(1_N+\mathsf X\mathsf Y)$; with the upper left block $1_N$ as pivot (which is
+\textup{(BD)} after the simultaneous relabelling of rows and columns that exchanges the two blocks) it gives $\det\mathcal M=\det(1_N)\det(1_m+\mathsf Y\mathsf X)$.
+
+By \eqref{eq:b1:sylv} with $\mathsf X=RU$ and $\mathsf Y=CU^*$,
+\begin{equation}\label{eq:b1:det2}
+\det(1_N+RV)=\det\big(1_N+(RU)(CU^*)\big)=\det\big(1_m+CU^*RU\big)=\det(1_m+CR_P).
+\end{equation}
+\emph{The small determinant.} If $a=b$ then $\det(1_1+CR_P)=1+vR_{aa}$. If $a\ne b$ then
+\[
+CR_P=\begin{pmatrix}0&v\\ \bar v&0\end{pmatrix}\begin{pmatrix}R_{aa}&R_{ab}\\ R_{ba}&R_{bb}\end{pmatrix}
+=\begin{pmatrix}vR_{ba}&vR_{bb}\\ \bar vR_{aa}&\bar vR_{ab}\end{pmatrix},
+\]
+\begin{align*}
+\det(1_2+CR_P)&=(1+vR_{ba})(1+\bar vR_{ab})-|v|^2R_{aa}R_{bb}\\
+&=1+vR_{ba}+\bar vR_{ab}-|v|^2\big(R_{aa}R_{bb}-R_{ab}R_{ba}\big)=1+u-w .
+\end{align*}
+Together with \eqref{eq:b1:det1} and \eqref{eq:b1:det2} this proves the determinant identity.
+
+\emph{Proof of \eqref{eq:b1:nocut}.} Fix $z=y+i\eta'\in\C_+$ ($\eta'>0$) and write $R=R(z)$. By Lemma~\ref{lem:basic}(a), $\im R_{aa}>0$. Hence
+$\im(-R_{aa})<0$, so $-R_{aa}$ is not real. If $a=b$, then $\im D_p(v;z)=v\,\im R_{aa}\ne0$ for $v\ne0$, and $D_p(0;z)=1$. Let now $a\ne b$.
+If $v=0$ then $D_p=1$; let $v\ne0$. Since $C^2=|v|^2\,1_2$, the matrix $C$ is invertible with $C^{-1}=|v|^{-2}C$ and $\det C=-|v|^2$, so
+\begin{equation}\label{eq:b1:DM}
+D_p(v;z)=\det(1_2+CR_P)=\det C\cdot\det(C^{-1}+R_P)=-|v|^2\det\mathsf M,\qquad\mathsf M:=|v|^{-2}C+R_P .
+\end{equation}
+By the identity $R-R^*=2i\eta'RR^*$ (proof of Lemma~\ref{lem:basic}(b)) and $C=C^*$,
+\[
+\frac1{2i}(\mathsf M-\mathsf M^*)=\frac1{2i}\,U^*(R-R^*)U=\eta'\,U^*RR^*U=:\mathsf T,\qquad
+\langle x,\mathsf Tx\rangle=\eta'\,|R^*Ux|^2>0\quad\text{for }x\in\C^2\setminus\{0\},
+\]
+because $Ux\ne0$ and $R^*$ is invertible. Let $\mu\in\C$ be an eigenvalue of $\mathsf M$ and $x$ a corresponding eigenvector with $|x|=1$. Then
+$\mu=\langle x,\mathsf Mx\rangle$ and $\im\mu=\frac1{2i}\big(\langle x,\mathsf Mx\rangle-\overline{\langle x,\mathsf Mx\rangle}\big)=\langle x,\mathsf Tx\rangle>0$.
+Thus both roots $\mu_1,\mu_2$ of the characteristic polynomial of the $2\times2$ matrix $\mathsf M$ lie in $\C_+$, and $\det\mathsf M=\mu_1\mu_2$.
+Suppose that $\det\mathsf M=r$ with a real $r\ge0$. Then $r\ne0$ and $\mu_2=r/\mu_1=r\,\overline{\mu_1}/|\mu_1|^2$ has negative imaginary part, a contradiction.
+Hence $\det\mathsf M\notin[0,\infty)$, and by \eqref{eq:b1:DM} $D_p(v;z)\notin(-\infty,0]$.
+\end{proof}
+
+\begin{corollary}[exact formulas for the change of $X$]\label{cor:Xchange}
+Let $Q$, $p=(a,b)$, $v$ be as in Lemma~\ref{lem:det}.
+\begin{itemize}\itemsep0pt
+\item[\textup{(i)}] \emph{(one entry)} Without any further hypothesis,
+\[
+X(Q+V_p(v))-X(Q)=-\frac1\pi\im\br{\Log D_p(v;\cdot)}.
+\]
+\item[\textup{(ii)}] \emph{(one row and column)} Let $Q^{(a)}$ be the minor of $Q$ with row and column $a$ removed and $X(Q^{(a)})=X_{E_1,E_2,\eta}(Q^{(a)})$ the
+functional of Definition~\ref{def:X} for this $(N-1)\times(N-1)$ matrix. Without any further hypothesis,
+\[
+X(Q)-X(Q^{(a)})=\frac1\pi\im\br{\Log(-R_{aa})} ,
+\]
+and if $|R_{aa}(z_i)+1|\le\frac12$ for $i=1,2$, then $\ |X(Q)-X(Q^{(a)})|\le\tfrac2\pi\big(|R_{aa}(z_1)+1|+|R_{aa}(z_2)+1|\big)$.
+\end{itemize}
+In particular \textup{(i)} holds if $|D_p(v;y+i\eta)-1|\le\frac12$ for all $y\in[E_1,E_2]$, and \textup{(ii)} holds, with the bound, if
+$|R_{aa}(y+i\eta)+1|\le\frac12$ for all $y\in[E_1,E_2]$.
+\end{corollary}
+\begin{proof}
+(i) Apply Lemma~\ref{lem:ratio}(ii) to $A:=Q+V_p(v)$, $B:=Q$ (both Hermitian, $n=m=N$), $D(y):=D_p(v;y+i\eta)$ and $\kappa:=1$: the relation
+$D(y)\,p_Q(y)=p_{Q+V_p(v)}(y)$ is Lemma~\ref{lem:det} at $z=y+i\eta$, and condition \eqref{eq:b1:cut} is \eqref{eq:b1:nocut}. Since
+$D(E_i)=D_p(v;z_i)$, \eqref{eq:b1:ratio} is the claim.
+
+(ii) By Lemma~\ref{lem:schur}\,(I6) for the matrix $Q$ and the index $a$ (recall $R_{aa}\ne0$), for every $z\in\C_+$,
+$\det(Q-z)=\det(Q^{(a)}-z)/R_{aa}(z)$, that is,
+\[
+\big(-R_{aa}(y+i\eta)\big)\,p_Q(y)=-\,p_{Q^{(a)}}(y)\qquad(y\in\R).
+\]
+Apply Lemma~\ref{lem:ratio}(ii) to $A:=Q^{(a)}$ $(n=N-1)$, $B:=Q$ $(m=N)$, $D(y):=-R_{aa}(y+i\eta)$ and $\kappa:=-1$; condition \eqref{eq:b1:cut} is
+again \eqref{eq:b1:nocut}. Then \eqref{eq:b1:ratio} reads $X(Q^{(a)})-X(Q)=-\frac1\pi\im\br{\Log(-R_{aa})}$, and \eqref{eq:b1:ratiobd} with
+$|D(E_i)-1|=|R_{aa}(z_i)+1|$ is the bound.
+\end{proof}
+
+\noindent\emph{Remarks.} (1) By \eqref{eq:b1:nocut} the exact formulas need no information on $R$ along the segment $[E_1,E_2]+i\eta$: the resolvent
+enters only through the entries $R_{kl}(z_i)$, $k,l\in\{a,b\}$, at the two endpoints $z_1,z_2$. (Smallness conditions on the whole
+segment are therefore not needed to stay on the principal branch; nevertheless the good sets of \S\ref{sec:step} are defined with conditions on the whole segment.
+See the remark after Lemma~\ref{lem:expand} for what this means for the use of Theorem~\ref{thm:21}.)
+(2) Both identities were checked numerically for real symmetric and complex Hermitian matrices, including large $v$, small $\eta$ and windows
+inside the spectrum, where $|D_p-1|$ is not small.

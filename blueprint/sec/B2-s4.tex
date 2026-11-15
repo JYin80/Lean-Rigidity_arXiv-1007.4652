@@ -1,0 +1,107 @@
+\subsection{From the law of $\lambda_N$ to the functional, via rigidity}\label{sec:sandwich}
+This subsection replaces Lemma~6.1 and Corollary~6.2 of the original. It uses (BB2) only (not (2.19), not (2.26) of the original), and no
+averaging over the window edge is needed, because only the event $\{\lambda_N<E\}$ is considered.
+
+\begin{lemma}[classical locations at the edge]\label{lem:gamma}
+For $N\ge1$ and $1\le j\le N$:\quad $2-\gamma_j\ge\Big(\dfrac{3\pi(N-j)}{2N}\Big)^{2/3}$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:nsc}(c), $\gamma_j\in(-2,2]$ and $n_{sc}(\gamma_j)=j/N$; by Lemma~\ref{lem:nsc}(a), $n_{sc}(2)=1$ and $n_{sc}'=\varrho_{sc}$. Put $r:=2-\gamma_j\in[0,4)$. Since
+$\varrho_{sc}$ is even, Lemma~\ref{lem:nsc}(b) (upper bound, valid for all $u\ge0$) gives $\varrho_{sc}(2-u)=\varrho_{sc}(-2+u)\le\sqrt u/\pi$ for $u\ge0$. Hence,
+substituting $x=2-u$,
+\[
+\frac{N-j}N=n_{sc}(2)-n_{sc}(\gamma_j)=\int_{\gamma_j}^2\varrho_{sc}(x)\,dx=\int_0^{r}\varrho_{sc}(2-u)\,du\le\frac1\pi\int_0^r\sqrt u\,du=\frac2{3\pi}\,r^{3/2}.
+\]
+Thus $r^{3/2}\ge\frac{3\pi(N-j)}{2N}\ge0$, and since $s\mapsto s^{2/3}$ is nondecreasing on $[0,\infty)$, $r\ge\big(\frac{3\pi(N-j)}{2N}\big)^{2/3}$.
+\end{proof}
+
+\begin{proposition}[sandwich]\label{prop:sandwich}
+Let $\eg\in(0,\frac1{10}]$, $N\ge N_1(\Par,\eg)$ (Lemma~\ref{lem:N0}), and let $L_0,W,E_L,\eta,\e=\eg/2,\ell$ be as in \eqref{eq:B2par}, \eqref{eq:B2par2}.
+For $E\in[2-2W,\,2+W]$ put
+\[
+X^\pm_E:=X_{E\pm\ell,\,E_L,\,\eta}\qquad\text{(Definition~\ref{def:X}; note $E-\ell<E+\ell<E_L$).}
+\]
+Let $q:\R\to[0,1]$ be a Borel function with $q=1$ on $(-\infty,\frac19]$ and $q=0$ on $[\frac29,\infty)$. Then for every $\K\in\{\R,\C\}$ and every ensemble $M$ of size
+$N$ over $\K$ with $\fA(\Par)$, the functions $x\mapsto q(X^\pm_E(H(x)))$ are Borel, the set $\{x:\lambda_N(H(x))<E\}$ is open, and
+\[
+\E_M\,q\big(X^-_E(H)\big)-N^{-20}\ \le\ \P_M(\lambda_N<E)\ \le\ \E_M\,q\big(X^+_E(H)\big)+N^{-20}.
+\]
+\end{proposition}
+\begin{proof}
+\emph{Step 0: preliminaries and the rigidity event.} By (N5), $0<2\ell\le W$, so $\ell<W$, and for $E\in[2-2W,2+W]$:
+$E-\ell<E+\ell\le2+W+\ell<2+2W=E_L$. Hence both windows $[E\pm\ell,E_L]$ are nondegenerate intervals and $X^\pm_E$ are defined. By Lemma~\ref{lem:Xspec}(c) and the
+measurability remark after it, $x\mapsto X^\pm_E(H(x))$ is continuous on $\Omega$, so $x\mapsto q(X^\pm_E(H(x)))$ is Borel, with values in $[0,1]$.
+By Lemma~\ref{lem:weyl}(d), $x\mapsto\lambda_j(H(x))$ is continuous for every $j$, so $\{\lambda_N<E\}$ is open. Let
+\[
+\cR:=\Big\{x\in\Omega:\ |\lambda_j-\gamma_j|<(\log N)^{L_0}\big[\min(j,N-j+1)\big]^{-1/3}N^{-2/3}\ \text{ for all }j\in\{1,\dots,N\}\Big\}.
+\]
+$\cR$ is open (a finite intersection of open sets), and $\Omega\setminus\cR$ is the event of (BB2) with $L=L_0$, which is admissible by (N1). By (BB2) and (N3),
+\begin{equation}\label{eq:B2Rc}
+\P_M(\Omega\setminus\cR)\le Ce^{-c(\log N)^{\phi L_0}}\le N^{-20}.
+\end{equation}
+On $\cR$ we have, since $\gamma_N=2$, $\min(N,1)=1$ and $\min(j,N-j+1)\ge1$:
+\begin{equation}\label{eq:B2R12}
+\text{(R1)}\quad|\lambda_N-2|<(\log N)^{L_0}N^{-2/3}=W,\qquad\qquad\text{(R2)}\quad\lambda_j<\gamma_j+W\quad\text{for all }j.
+\end{equation}
+Recall from Lemma~\ref{lem:Xspec} that $X_{E_1,E_2,\eta}(A)=\sum_jf(\lambda_j(A))$ with $f=f_{E_1,E_2,\eta}\ge0$.
+
+\emph{Step 1: on $\cR\cap\{\lambda_N\ge E\}$ we have $X^-_E(H)>\frac29$.} Take $E_1=E-\ell$, $E_2=E_L$. Then $\lambda_N-E_1\ge E-E_1=\ell>0$, and by (R1)
+$E_2-\lambda_N>2+2W-(2+W)=W\ge2\ell>\ell$. So $E_1<\lambda_N<E_2$, and Lemma~\ref{lem:Xspec}(a), \eqref{eq:B2etaell} and (N5) give
+\[
+f(\lambda_N)\ge1-\frac\eta\pi\Big(\frac1{E_2-\lambda_N}+\frac1{\lambda_N-E_1}\Big)\ge1-\frac{2\eta}{\pi\ell}=1-\frac6\pi N^{-\e}\ge\frac89 .
+\]
+Since all terms of $\sum_jf(\lambda_j)$ are nonnegative, $X^-_E(H)\ge f(\lambda_N)\ge\frac89>\frac29$.
+
+\emph{Step 2: on $\cR\cap\{\lambda_N<E\}$ we have $X^+_E(H)\le\frac19$.} Take $E_1=E+\ell$, $E_2=E_L$. Then
+$E_2-E_1=2+2W-E-\ell\le2+2W-(2-2W)=4W$. For every $j$, $\lambda_j\le\lambda_N<E$, so $d_j:=E_1-\lambda_j>\ell>0$, and Lemma~\ref{lem:Xspec}(b) applies:
+\begin{equation}\label{eq:B2fb}
+f(\lambda_j)\le\frac\eta\pi\min\Big(\frac1{d_j},\ \frac{E_2-E_1}{d_j^2}\Big)\le\frac\eta\pi\min\Big(\frac1{d_j},\ \frac{4W}{d_j^2}\Big).
+\end{equation}
+Index the eigenvalues from the top: $j=N-k+1$, $k\in\{1,\dots,N\}$, and let $K_1:=\lfloor4(\log N)^{3L_0/2}\rfloor+1$, so $4(\log N)^{3L_0/2}<K_1\le4(\log N)^{3L_0/2}+1$.
+
+\emph{The top eigenvalues, $k\le K_1$.} By \eqref{eq:B2fb}, $d_j>\ell$ and \eqref{eq:B2etaell}: $f(\lambda_j)\le\frac{\eta}{\pi d_j}<\frac\eta{\pi\ell}=\frac3\pi N^{-\e}$.
+There are at most $K_1$ such indices, so their total contribution is at most $\frac3\pi K_1N^{-\e}$.
+
+\emph{The other eigenvalues, $k\ge K_1+1$.} Put $a_k:=\big(\frac{3\pi(k-1)}{2N}\big)^{2/3}$. By Lemma~\ref{lem:gamma} (note $N-j=k-1$), $2-\gamma_j\ge a_k$. By (R2) and
+$E\ge2-2W$, dropping $\ell>0$:
+\[
+d_j=E+\ell-\lambda_j>E-\gamma_j-W\ge(2-\gamma_j)-3W\ge a_k-3W.
+\]
+Since $k-1\ge K_1>4(\log N)^{3L_0/2}$, we have $(k-1)^{2/3}>4^{2/3}(\log N)^{L_0}$, hence
+$a_k>(3\pi/2)^{2/3}4^{2/3}(\log N)^{L_0}N^{-2/3}=(6\pi)^{2/3}W\ge6W$, because $(6\pi)^2\ge6^3$ (as $\pi\ge\sqrt6$). Therefore $3W<\frac12a_k$ and $d_j>\frac12a_k>0$.
+By \eqref{eq:B2fb},
+\[
+f(\lambda_j)\le\frac\eta\pi\cdot\frac{4W}{d_j^2}\le\frac{16\,\eta W}{\pi\,a_k^2}=\kappa_0\,\eta WN^{4/3}(k-1)^{-4/3},\qquad
+\kappa_0:=\frac{16}\pi\Big(\frac2{3\pi}\Big)^{4/3}.
+\]
+We have $\kappa_0\le1$: indeed $\kappa_0^3=\frac{16^3}{\pi^3}\cdot\frac{2^4}{3^4\pi^4}=\frac{65536}{81\,\pi^7}<\frac{65536}{81\cdot3^7}=\frac{65536}{177147}<1$, using $\pi>3$.
+Moreover, for every integer $m_0\ge1$, $\sum_{m=1}^{m_0}m^{-4/3}\le1+\sum_{m=2}^{m_0}\int_{m-1}^mx^{-4/3}dx=1+3\big(1-m_0^{-1/3}\big)\le4$, since
+$m^{-4/3}\le x^{-4/3}$ for $x\in[m-1,m]$. With $m=k-1$ ranging over a subset of $\{1,\dots,N-1\}$, the total contribution of the indices $k\ge K_1+1$ is at most
+$4\eta WN^{4/3}$, and by \eqref{eq:B2par}, \eqref{eq:B2par2},
+\[
+\eta WN^{4/3}=N^{-2/3-\eg}\cdot(\log N)^{L_0}N^{-2/3}\cdot N^{4/3}=N^{-2\e}(\log N)^{L_0}.
+\]
+
+\emph{Conclusion of Step 2.} Adding the two groups and using (N5),
+\[
+X^+_E(H)\le\frac3\pi K_1N^{-\e}+4N^{-2\e}(\log N)^{L_0}\le\frac3\pi\big(4(\log N)^{3L_0/2}+1\big)N^{-\e}+4N^{-2\e}(\log N)^{L_0}\le\frac19 .
+\]
+
+\emph{Step 3: integration.} We claim that at every point of $\Omega$,
+\begin{equation}\label{eq:B2pw}
+q\big(X^-_E(H)\big)\le\mathbf 1(\lambda_N<E)+\mathbf 1_{\Omega\setminus\cR},\qquad
+\mathbf 1(\lambda_N<E)\le q\big(X^+_E(H)\big)+\mathbf 1_{\Omega\setminus\cR}.
+\end{equation}
+For the first: if $x\in\cR$ and $\lambda_N\ge E$, then $X^-_E(H)>\frac29$ by Step 1, so $q(X^-_E(H))=0$; in all other cases the right side is $\ge1\ge q$.
+For the second: if $x\in\cR$ and $\lambda_N<E$, then $X^+_E(H)\le\frac19$ by Step 2, so $q(X^+_E(H))=1$; if $\lambda_N\ge E$ the left side is $0\le$ the right side
+(as $q\ge0$); if $x\notin\cR$ the right side is $\ge1$. All functions in \eqref{eq:B2pw} are bounded and Borel (Step 0). Taking $\E_M$ and using \eqref{eq:B2Rc}
+gives the two inequalities of the proposition.
+\end{proof}
+
+\noindent\emph{Why rigidity at the scale $W\gg\ell$ suffices.} The input (BB2) locates $\lambda_N$ only up to $W=(\log N)^{L_0}N^{-2/3}$, which is much larger than
+the shift $\ell=\frac13N^{-2/3-\e}$ of the window; the proposition never asks (BB2) to locate the top eigenvalues at the scale $\ell$. In Step~1 only the single
+eigenvalue $\lambda_N$ is used, and its distance $\ge\ell$ to the left end $E-\ell$ of the window comes from the event $\{\lambda_N\ge E\}$ itself. In Step~2 the event
+$\{\lambda_N<E\}$ puts \emph{every} eigenvalue at distance $>\ell$ to the left of $E+\ell$; hence each of the top $K_1\approx4(\log N)^{3L_0/2}$ eigenvalues contributes at most
+$\eta/(\pi\ell)=\frac3\pi N^{-\e}$, wherever it is, and their number is only polylogarithmic. Only the remaining eigenvalues are placed by \eqref{eq:rigidity} ((2.25) of the original; bound (R2)); they lie
+at distance $\ge\frac12a_k\gg W$ below $E$, where an error $W$ in their location is harmless, and they contribute at most $4N^{-2\e}(\log N)^{L_0}$ in total.
+In particular no averaging over the window edge, no bound on the counting function ((2.19), (2.26) of the original) and no monotonicity of $q$ are needed.

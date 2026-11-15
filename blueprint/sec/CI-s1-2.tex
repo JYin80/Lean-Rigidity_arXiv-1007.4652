@@ -1,0 +1,380 @@
+\section{Statement of Theorem 2.3 and overview of the route}\label{sec:C1}
+
+Part~III proves Theorem~\ref{thm:23} of NP. The only results of Parts~I and~II used are those listed in \S\ref{sec:reqA}; Theorem~\ref{thm:21} is not used.
+Statements numbered with a letter (such as Lemma~\ref{c2:transfer}) are auxiliary statements.
+References of the form ``Part~I, Lemma~$x$'' are to the numbered statements of Part~I.
+\emph{Local notation.} The constants $c_0$, $c_1$, $C_1'$, $C_1''$, $C_\sharp$, $C_\star$, the thresholds $N_*$, $N_K$, $N_2$, $N_3$, $N_4$, $N_6$, $N_c$, $N_{\rm q}$, and the functions $\Psi$, $\Lambda$ of Part~III are defined
+where they first occur and are used only in Part~III; they are unrelated to the quantities with the same names in Parts~I and~II (for instance the exponent $c_0$ and the
+constant $C_1$ of Appendix~\ref{app:ledger}, or $\Psi$ in Section~\ref{sec:edge}). The letter $\delta$ without index denotes only the exponent of Theorem~\ref{thm:23}.
+
+\subsection{Setting and notation}\label{ss:notation}
+
+Throughout, $\K\in\{\R,\C\}$ and $\beta:=\dim_\R\K\in\{1,2\}$; $N\ge 1$.
+\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
+\item $\cH=\cH_N(\K)$ is the real vector space of self-adjoint $N\times N$ matrices over $\K$ with the inner product
+$\la X,Y\ra:=\Tr(XY)$, norm $|X|:=(\Tr X^2)^{1/2}=(\sum_{i,j}|X_{ij}|^2)^{1/2}$, dimension $d=N+\beta N(N-1)/2$.
+Orthonormal basis: $E_{ii}$; $X_{ij}:=(E_{ij}+E_{ji})/\sqrt2$ $(i<j)$; and, if $\beta=2$, $Y_{ij}:=\mathrm{i}(E_{ij}-E_{ji})/\sqrt2$ $(i<j)$ (Lemma \ref{c3:GE} and the paragraph before it).
+Lebesgue measure $\rd H$ on $\cH$ is the one normalised by this basis; gradients $\nabla$ and the Laplacian $\Delta_\cH$ refer to $\la\cdot,\cdot\ra$. $\|A\|$ is the operator norm.
+\item $U_\beta(N)$ is the orthogonal ($\beta=1$) or unitary ($\beta=2$) group. $\Phi:\cH\to\R$ is \emph{invariant} if $\Phi(UHU^*)=\Phi(H)$ for all $U\in U_\beta(N)$, $H\in\cH$.
+\item $\Sig:=\{x\in\R^N:x_1<\dots<x_N\}$, $\cSig$ its closure; $\lambda:\cH\to\cSig$ is the vector of ordered eigenvalues
+$\lambda_1(H)\le\dots\le\lambda_N(H)$, counted with multiplicity. By (RA4) of \S\ref{sec:reqA}, $\lambda$ is $1$-Lipschitz from $(\cH,|\cdot|)$ to $(\R^N,|\cdot|_\infty)$, hence continuous and Borel. For $x\in\R^N$, $\diag x\in\cH$.
+\item \emph{Ensembles.} An ensemble of size $N$ over $\K$ is a family $\nu=(\nu_{ij})_{1\le i\le j\le N}$ of Borel probability measures on $\K$ (Part~I, Definition~\ref{def:ens}); its matrix is $H(x)$, $x\sim\PP_\nu=\bigotimes_{i\le j}\nu_{ij}$, and its variances are $\sigma_{ij}^2=\int|y|^2\nu_{ij}(\rd y)$.
+$\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ is the class of ensembles satisfying (R), (D), (Z), (A), (B), (C) (Part~I, Definition~\ref{def:ass}); we write $\delta_\pm$ for the pair $(\delta_-,\delta_+)$.
+\item \emph{Gaussian ensemble.} $\sigma^2:=2/(\beta N)$ and $\bG=\bG_{N,\beta}$ is the centred Gaussian measure on $\cH$ with covariance $\sigma^2\,\mathrm{Id}$ (Definition \ref{c3:def:gauss} with $\mathcal E=\cH$). By Lemma \ref{c3:GE}, $\bG(\rd H)=(2\pi\sigma^2)^{-d/2}\exp\big(-\tfrac{\beta N}{4}\Tr H^2\big)\rd H$;
+a random $V\in\cH$ has law $\bG$ iff its entries $v_{ij}$, $i\le j$, are independent, $v_{ii}\sim N(0,2/(\beta N))$ real,
+and for $i<j$: $v_{ij}\sim N(0,1/N)$ real if $\beta=1$, while $\sqrt2\,\mathrm{Re}\,v_{ij},\sqrt2\,\mathrm{Im}\,v_{ij}$ are i.i.d.\ $N(0,1/N)$ if $\beta=2$
+(so $\E|v_{ij}|^2=1/N$, and $\E v_{ij}^2=0$ if $\beta=2$). This is the GOE ($\beta=1$, diagonal variance $2/N$; PD-06) resp.\ the GUE ($\beta=2$), exactly the matrix $V$ of the setting of Theorem~\ref{thm:23} in Part~I.
+$V$ always denotes a $\bG$-distributed matrix. We put $\tau_{ij}^2:=\E|v_{ij}|^2$, i.e.\ $\tau_{ij}^2=1/N$ ($i\ne j$), $\tau_{ii}^2=2/(\beta N)$.
+\item \emph{The flow.} Let $\nu$ be an ensemble and let $H_0$ and $V$ be random elements of $\cH$, defined on one probability space $(\widehat\Omega,\widehat{\mathcal F},\P)$, independent, with $H_0\overset{d}=H(x)$ under $\PP_\nu$ and $V\sim\bG$ (e.g.\ $\widehat\Omega=\Omega\times\cH$ with $\PP_\nu\otimes\bG$). $\E$ is the expectation on $\widehat\Omega$. For $t\in[0,\infty]$ put
+\begin{equation}\label{Ht}
+a_t:=e^{-t/2},\qquad s_t:=1-e^{-t},\qquad H_t:=a_tH_0+s_t^{1/2}V\qquad(e^{-\infty}:=0,\ \text{so }H_\infty=V).
+\end{equation}
+NP takes \eqref{Ht} (the original's (2.29)) as the \emph{definition}; the matrix SDE (2.28) is not used.
+\item $\mu=\mu_{N,\beta}:=\lambda_*\bG$ (law of the ordered eigenvalues of $V$) and $\nu_t:=$ law of $\lambda(H_t)$; both are Borel probability measures on $\cSig$, and $\nu_\infty=\mu$.
+\item \emph{Semicircle} (Part~I, \eqref{eq:sc}): $\rhosc(x)=\frac1{2\pi}\sqrt{(4-x^2)_+}$, $\nsc(E)=\int_{-\infty}^E\rhosc$; the classical locations $\gamma_j$ satisfy $N\nsc(\gamma_j)=j$, $-2<\gamma_1<\dots<\gamma_N=2$; $\gamma:=(\gamma_1,\dots,\gamma_N)\in\Sig$.
+For $x\in\R^N$ the empirical counting function is $\fn_x(E):=N^{-1}\#\{j:x_j\le E\}$; thus $\fn_{\lambda(H)}$ is the function $\fn$ of Part~I for the matrix $H$.
+For $0<c\le2$ we put $\varrho_*(c):=\frac1{2\pi}\sqrt{c-c^2/16}$.
+\item \emph{Test functions.} For $O:\R^n\to\R$: $\|O\|_\infty:=\sup|O|$ and $\Lip(O):=\sup_{u\ne v}|O(u)-O(v)|/|u-v|$, Euclidean norm on $\R^n$.
+\item \emph{Density-free correlation functionals} (PD-05). For a bounded Borel $O:\R^n\to\R$, $1\le n\le N$, $E'\in\R$, $\varrho>0$ and $x\in\R^N$,
+\begin{equation}\label{defX}
+\cX^{O}_{E',\varrho}(x):=\sum_{\substack{i_1,\dots,i_n\in\{1,\dots,N\}\\ \text{pairwise distinct}}}O\big(N\varrho(x_{i_1}-E'),\dots,N\varrho(x_{i_n}-E')\big),\qquad C_{N,n}:=\frac{N^n(N-n)!}{N!}.
+\end{equation}
+If $p^{(n)}[P]$ denotes the $n$-point marginal of the symmetrisation of a probability measure $P$ on $\R^N$, then $N^n\int F\,\rd p^{(n)}[P]=C_{N,n}\int\sum_{i_1,\dots,i_n\text{ distinct}}F(x_{i_1},\dots,x_{i_n})\,P(\rd x)$ for bounded Borel $F$
+(Part~I, comment (a) after Theorem~\ref{thm:23} there); so $C_{N,n}\int\cX^O_{E',\varrho}\rd P$ is the $n$-point correlation function of $P$ tested against the rescaled observable, and when densities exist the left side of \eqref{eq:abstrthm2} below is the left side of (2.36) of the original (with $\varrho=\rhosc(E)$). The formulation needs no densities.
+\end{itemize}
+
+\subsection{The theorem}
+
+The theorem is stated exactly as in Part~I (Theorem~\ref{thm:23} there); it is repeated here so that Part~III can be read on its own.
+
+\renewcommand{\restatedname}{Theorem~\ref*{thm:23}}
+\begin{restated}[strong local ergodicity of Dyson Brownian motion; restated from Section~\ref*{sec:main}]
+Let $\vartheta,\delta_-,\delta_+,C_0>0$, $\eps'>0$, $\delta>0$, $0<c\le2$, $n\ge1$ and $\rho_O>0$.
+There is a constant $C$ depending only on $(\eps',\delta,c,n,\rho_O,\vartheta,\delta_-,\delta_+,C_0)$ such that for all $N\ge\max(n,3)$,
+$\K\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$, every Lipschitz function $O:\R^n\to\R$ with support in $[-\rho_O,\rho_O]^n$, and all
+$E\in[-2+c,2-c]$, $b\in(0,c/2)$ and $t\ge N^{-1+\delta+\eps'}$, with $\varrho:=\rhosc(E)$:
+\begin{multline}\tag{\ref*{eq:abstrthm2}}
+ \Big|\int_{E-b}^{E+b}\frac{\rd E'}{2b}\;C_{N,n}\Big(\E\,\cX^{O}_{E',\varrho}\big(\lambda(H_t)\big)-\E\,\cX^{O}_{E',\varrho}\big(\lambda(V)\big)\Big)\Big|\\
+ \le C\,\big(\|O\|_\infty+\Lip(O)\big)\,N^{2\eps'}\Big[b^{-1}N^{-1+\eps'}+b^{-1/2}N^{-\delta/2}\Big].
+\end{multline}
+\end{restated}
+
+\noindent Here $H_t$ is \eqref{Ht} with $H_0$ the matrix of $\nu$. The left side depends only on the law of $H_0$, so the choice of the probability space $\widehat\Omega$ is immaterial.
+Since $O$ is Lipschitz with compact support it is bounded and continuous; $|\cX^O_{E',\varrho}|\le N^n\|O\|_\infty$, and $(E',\hat\omega)\mapsto\cX^O_{E',\varrho}(\lambda(H_t(\hat\omega)))$ is continuous in $E'$ and Borel in $\hat\omega$, hence jointly measurable;
+so all expectations and the $E'$-integral in \eqref{eq:abstrthm2} exist. Because the left side is linear in $O$, the theorem is equivalent to its special case $\|O\|_\infty+\Lip(O)\le1$.
+Theorem \ref{thm:23} is a corollary of the following sharper statement, which is what Part~III proves.
+
+\begin{theorem}[Quantitative form]\label{thm:sharp}
+Let $\vartheta,\delta_-,\delta_+,C_0>0$, $0<c\le2$, $n\ge1$ and $\rho_O>0$. There are $A_1\ge1$, $N_{\rm q}\ge3$ and $C_1'>0$, depending only on
+$(c,n,\rho_O,\vartheta,\delta_-,\delta_+,C_0)$, such that for all $N\ge\max(N_{\rm q},n)$, $\K\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$, every Lipschitz $O:\R^n\to\R$ with support in $[-\rho_O,\rho_O]^n$, all $t>0$ with $Nt\ge (\log N)^{2}$,
+all $E\in[-2+c,2-c]$ and all $b\in(0,c/2)$:
+\begin{equation}\label{sharp}
+\text{l.h.s.\ of \eqref{eq:abstrthm2}}\;\le\;C_1'\big(\|O\|_\infty+\Lip(O)\big)\,e^{A_1(\log\log N)^2}\Big[\,b^{-1}N^{-1}+b^{-1/2}\,(Nt)^{-1/2}\Big].
+\end{equation}
+\end{theorem}
+
+\begin{auxremark}[What Section~\ref{sec:C8} proves]\label{c1:oblig}
+Theorems \ref{thm:sharp} and \ref{thm:23} are proved in \S\ref{sec:C8}, where the following is established:
+\begin{enumerate}[label=(O\arabic*),leftmargin=2.4em,itemsep=1pt]
+\item Theorem \ref{thm:sharp} with $A_1$, $N_{\rm q}$, $C_1'$ depending only on $(c,n,\rho_O,\vartheta,\delta_\pm,C_0)$, the dependence on $O$ being only through $\rho_O$ and the factor $\|O\|_\infty+\Lip(O)$ (Remark \ref{rem:Odep}); $\Lip$ is with respect to the Euclidean norm (coordinatewise Lipschitz constants are bounded by it).
+\item The deduction of Theorem \ref{thm:23}. The elementary argument is: let $N_2\ge\max(N_{\rm q},n,3)$ depend on $(\eps',\delta,A_1,N_{\rm q},n)$ and be such that $e^{A_1(\log\log N)^2}\le N^{\eps'}$ and $N^{\delta+\eps'}\ge(\log N)^2$ for $N\ge N_2$.
+For $N\ge N_2$ and $t\ge N^{-1+\delta+\eps'}$ one has $Nt\ge(\log N)^2$, $(Nt)^{-1/2}\le N^{-\delta/2}$ and $N^{-1}\le N^{-1+\eps'}$, so \eqref{sharp} gives \eqref{eq:abstrthm2} with $C=C_1'$.
+For $\max(n,3)\le N<N_2$ the left side of \eqref{eq:abstrthm2} is at most $2C_{N,n}\frac{N!}{(N-n)!}\|O\|_\infty=2N^n\|O\|_\infty\le2N_2^n\|O\|_\infty$, and the right side is at least $C\|O\|_\infty b^{-1/2}N^{-\delta/2}\ge C\|O\|_\infty(c/2)^{-1/2}N_2^{-\delta/2}$;
+so $C:=\max\big(C_1',\,2(c/2)^{1/2}N_2^{\,n+\delta/2}\big)$ works. Every quantity here depends only on $(\eps',\delta,c,n,\rho_O,\vartheta,\delta_\pm,C_0)$.
+\item The H\"older corollary (Corollary \ref{cor:cont}) and the remark that merely continuous $O$ is not covered (Remark \ref{rem:contO}).
+\end{enumerate}
+The inputs prepared in the present section and in \S\ref{sec:C2} are: the notation \eqref{Ht}, \eqref{defX}; the constants $A_0,L,D$ of \eqref{defL}; the good set $\Xi$ \eqref{good} with Lemmas \ref{lem:goodC}, \ref{lem:Q}, \ref{lem:countC}.
+\end{auxremark}
+
+\begin{remark}[Differences from the original]\label{rem:diff}
+The differences between Theorem~\ref{thm:23} and (2.36) of the original, and between the route of Part~III and that of the original, are listed in Appendix~\ref{app:diff}
+(items PD-04, PD-05, PD-06, PD-16, PD-21 of \S\ref{app:diffPD}, and \S\ref{sec:diff}).
+\end{remark}
+
+\subsection{Overview of the proof and why this route}\label{ss:overview}
+
+The original derives (2.36) from [ESYY, Thm 2.1], whose proof needs: the eigenvalue density $f_t$ as a solution of $\partial_tf=Lf$ on $\Sig$ (stochastic calculus, or the Weyl integration formula and second-order perturbation theory; a Markov semigroup on $\Sig$ with singular drift and uniqueness at the walls $x_i=x_{i+1}$);
+the logarithmic Sobolev inequality for the local relaxation measure $\omega$ (Bakry--\'Emery); and an auxiliary $\omega$-reversible dynamics with a $\Gamma_2$ computation (the ``Dirichlet form inequality'', [ESYY, Thm 4.1--4.3]).
+None of this is available in Mathlib. NP keeps the \emph{idea} (relative entropy with respect to a local relaxation measure) but replaces every analytic tool:
+
+\begin{enumerate}[leftmargin=1.8em,itemsep=2pt,label=(\Roman*)]
+\item \emph{Flow at matrix level, restricted to invariant densities} (\S\ref{sec:C3}--\S\ref{sec:C4}). The matrix Ornstein--Uhlenbeck semigroup $T_u$ is explicit (Mehler formula \eqref{Mehler}). If $f_s=\rd\nu_s/\rd\mu$, then $\Phi_t:=T_{t-s}(f_s\circ\lambda)$ is $C^\infty$, positive and invariant, and $f_t(x):=\Phi_t(\diag x)$ is a version of $\rd\nu_t/\rd\mu$ which is a \emph{smooth symmetric function on all of $\R^N$} (Proposition \ref{prop:U9}).
+A $2\times2$ Givens-rotation identity (Lemma \ref{lem:givens}) gives $(A\Phi)(\diag x)=(L\varphi)(x)$ for every invariant $C^2$ function, so $\partial_tf_t=Lf_t$ holds classically off the walls. No eigenvalue perturbation theory, no Haar measure, no Weyl integration formula, no boundary analysis.
+\item \emph{Joint eigenvalue density of G$\beta$E by ergodicity} (\S\ref{sec:C5}). The explicit measure $\mu^*\propto\Delta^\beta e^{-\beta N|x|^2/4}$ on $\Sig$ is invariant under the radial flow (integration by parts on $\Sig$ along coordinate lines; the weight vanishes on the walls because $\beta\ge1$), and $T_u\Phi\to\int\Phi\,\rd\bG$ as $u\to\infty$. Hence $\mu=\mu^*$ (Theorem \ref{thm:JD}).
+\item \emph{Pr\'ekopa--Leindler does everything else} (\S\ref{sec:C6}): (a) the LSI for $\omega$ on the convex set $\Sig$ (Theorem \ref{thm:LSI}; Bobkov--Ledoux argument, no semigroup); (b) a sub-Gaussian bound for gap observables under \emph{any} convex log-gas (Theorem \ref{thm:conc}), which with the entropy inequality gives
+$|\int F\,\rd\nu-\int F\,\rd\omega|\le\frac2N\sqrt{C_\star(n-1)|J|\,S(\nu|\omega)}$ (Corollary \ref{cor:gap}). This replaces [ESYY, Thm 4.1] and the auxiliary dynamics entirely, and needs only the relative entropy, not the Dirichlet form.
+\item \emph{Entropy bound} (\S\ref{sec:C7}): $\frac{\rd}{\rd t}S(\nu_t|\omega)\le-\frac{1}{\beta R^2}S(\nu_t|\omega)+\frac{NQ}{2\beta R^4}$ (Proposition \ref{prop:entprod} and (III)(a)); with the a priori bound $S(\nu_s|\mu)\le N^3$ (Lemma \ref{lem:U8}: Gaussian relative entropy and data processing) this gives $S(\nu_t|\omega)\le\frac1N+\frac{32\beta D^2\log N}{t}$ (Theorem \ref{thm:entropy}).
+\item \emph{From gaps to correlation functions} (\S\ref{sec:C8}): deterministic bookkeeping on the good set $\Xi$ of \eqref{good}, on which at most $2\ell/\pi+2D$ eigenvalues lie in a window of size $2\ell/N$ (Lemma \ref{lem:countC}).
+\end{enumerate}
+Here $R>0$ is the confinement scale, $W(x)=|x-\gamma|^2/(2R^2)$, $\omega\propto e^{-NW}\mu$ (Definition \ref{def:omega}), and $Q:=7D^2N^{-1}$ bounds $\E|\lambda(H_r)-\gamma|^2$ uniformly in $r\in[0,\infty]$ by rigidity (Lemma \ref{lem:Q}). The choice $R^2=t/(8\beta\log N)$ yields \eqref{sharp}.
+The only input from the random-matrix part of NP is Theorem~\ref{thm:22} (rigidity), applied at each fixed time to the rescaled matrix $\widetilde H_t$, which belongs to one class $\mathcal E_N$ for all $t$ (Lemma \ref{lem:U11}).
+\section{Inputs from Part~I; $H_t$ and G$\beta$E as ensembles}\label{sec:C2}
+
+\subsection{Required from Part~I}\label{sec:reqA}
+
+Part~III uses exactly the following statements of Part~I, as they are stated there, and Lemma \ref{c3:GE} of \S\ref{sec:C3} (the Gaussian ensemble on $\cH$). Nothing else from Parts~I and~II is used.
+
+\begin{enumerate}[leftmargin=2.4em,itemsep=2pt,label=(RA\arabic*)]
+\item \textbf{Theorem \ref{thm:22} of Part~I (rigidity)}: \emph{for all $\vartheta,\delta_-,\delta_+,C_0>0$ there are $A_0>1$, $C,c>0$, $\phi\in(0,1)$ and $N_0$, depending only on $(\vartheta,\delta_-,\delta_+,C_0)$, such that for every $N\ge N_0$, $\K\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ and every real $L$ with $A_0\log\log N\le L\le\log(10N)/(10\log\log N)$ \textup{(}Part~I, \eqref{eq:Lbound}\textup{)}:}
+\begin{gather*}
+\PP_\nu\Big(\exists j:\ |\lambda_j-\gamma_j|\ge(\log N)^L[\min(j,N-j+1)]^{-1/3}N^{-2/3}\Big)\le Ce^{-c(\log N)^{\phi L}},\\
+\PP_\nu\Big(\sup_{|E|\le5}|\fn(E)-\nsc(E)|\ge\frac{(\log N)^L}{N}\Big)\le Ce^{-c(\log N)^{\phi L}},
+\end{gather*}
+\emph{where $\lambda_j=\lambda_j(H(x))$ and $\fn=\fn_{\lambda(H(x))}$.} The class $\mathcal E_N$ (Part~I, Definition \ref{def:ass}) imposes only (R), (D), (Z), (A), (B), (C) on \emph{arbitrary} Borel probability entry laws; in particular it contains Gaussian convolutions and rescaled Gaussian ensembles once these conditions are verified (Lemma \ref{lem:U11}).
+\item \textbf{Monotonicity} (Part~I, Lemma \ref{lem:mono}(ii)): $\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)\subset\mathcal E_N(\vartheta',\delta'_-,\delta'_+,C_0')$ if $0<\vartheta'\le\vartheta$, $0<\delta'_\pm\le\delta_\pm$, $C_0'\ge C_0$.
+\item \textbf{Scaling} (Part~I, Lemma \ref{lem:mono}(v)): if a Borel probability measure $\mu_0$ on $\K$ with $s^2=\int|y|^2\rd\mu_0<\infty$ satisfies $\mu_0(\{|y|>xs\})\le\vartheta^{-1}e^{-x^\vartheta}$ for all $x\ge1$, then for every real $a$ its image under $y\mapsto ay$ has second moment $a^2s^2$ and satisfies the same bound, with the same $\vartheta$, relative to $|a|s$; centring and $\mu_0(\R)=1$ are preserved.
+\item \textbf{Weyl} (Part~I, Lemma \ref{lem:weyl}(a),(b)): for Hermitian $A,A'$, $\|A\|=\max_k|\lambda_k(A)|$ and $|\lambda_k(A)-\lambda_k(A')|\le\|A-A'\|$ for all $k$.
+Consequently $\|A\|^2=\max_k\lambda_k(A)^2\le\sum_k\lambda_k(A)^2=\Tr A^2=|A|^2$ (spectral theorem), so $\lambda:(\cH,|\cdot|)\to(\R^N,|\cdot|_\infty)$ is $1$-Lipschitz; $\lambda$ is continuous and Borel, and so is every function of the form $\Theta\circ\lambda$ with $\Theta$ Borel.
+\item \textbf{Semicircle facts} (Part~I, Lemma \ref{lem:nsc}(a),(c),(d),(e)): $0\le\rhosc\le1/\pi$; $\nsc$ is nondecreasing, $\frac1\pi$-Lipschitz, strictly increasing on $[-2,2]$, $\nsc=0$ on $(-\infty,-2]$, $\nsc=1$ on $[2,\infty)$;
+$\gamma_j\in(-2,2]$, $N\nsc(\gamma_j)=j$, $\gamma_N=2$; $\rhosc(x)\ge\varrho_*(c)$ for $|x|\le2-c/4$ $(0<c\le2)$; and $\#\{j:\gamma_j\in I\}\le N|I|/\pi+1$ for every bounded interval $I$.
+\item \textbf{Moments} (Part~I, Lemma \ref{lem:moments}(a)): if $0<\vartheta\le1$ and $\mu_0$ is a Borel probability measure on $\C$ with $\mu_0(\{|y|>xs\})\le\vartheta^{-1}e^{-x^\vartheta}$ for all $x\ge1$, then $\int|y|^q\rd\mu_0\le(C_\vartheta q)^{q/\vartheta}s^q$ for every real $q\ge1$, with $C_\vartheta=90/\vartheta$.
+\end{enumerate}
+Theorem~\ref{thm:21} is not needed: the local density bound (``Assumption IV'' of [ESYY]) follows from the counting-function estimate in Theorem~\ref{thm:22}, see Lemma \ref{lem:countC}.
+Note also that every ensemble has a vanishing entry $h_{ij}=0$ a.s.\ whenever $\sigma_{ij}=0$ (Part~I, remark after Definition~\ref{def:ass}).
+
+\subsection{The ensembles $\widetilde H_t$ and $\widetilde V$}
+
+For $t\in[0,\infty]$ let $a_t,s_t$ be as in \eqref{Ht} and
+\begin{equation}\label{tildeH}
+\kappa_t:=\Big(1+\frac{(2-\beta)\,s_t}{\beta N}\Big)^{-1/2}=\begin{cases}(1+s_t/N)^{-1/2},&\beta=1,\\ 1,&\beta=2,\end{cases}\qquad \widetilde H_t:=\kappa_tH_t,\qquad \widetilde V:=\widetilde H_\infty=\kappa_\infty V .
+\end{equation}
+For $\beta=2$ nothing is rescaled. For $\beta=1$ the rescaling compensates the diagonal variance $2/N$ of the GOE (PD-06), see Lemma \ref{lem:U11}(a).
+
+\begin{auxlemma}[Matrices with independent entries are ensembles]\label{c2:transfer}
+Let $M$ be a random element of $\cH$ on some probability space $(\Omega_1,\mathcal F_1,\P_1)$ whose entries $(m_{ij})_{1\le i\le j\le N}$ are independent, and let $\nu_{ij}$ be the law of $m_{ij}$. Then $\nu=(\nu_{ij})_{i\le j}$ is an ensemble with $\nu_{ii}(\R)=1$, and for every Borel set $S\subset\cH$: $\P_1(M\in S)=\PP_\nu(H(x)\in S)$.
+In particular, for every Borel $S'\subset\R^N$, $\P_1(\lambda(M)\in S')=\PP_\nu(\lambda(H(x))\in S')$, and $\E_1\Theta(M)=\int\Theta(H(x))\PP_\nu(\rd x)$ for every Borel $\Theta\ge0$ on $\cH$.
+\end{auxlemma}
+
+\begin{proof}
+Let $X:=(m_{ij})_{i\le j}$, a random element of $\Omega=\K^{\mathcal P_N}$. Since finitely many random variables are independent iff their joint law is the product of their laws, $X_*\P_1=\bigotimes_{i\le j}\nu_{ij}=\PP_\nu$. The diagonal entries of $M\in\cH$ are real, so $\nu_{ii}(\R)=1$.
+At every point of $\Omega_1$, $M=H(X)$: for $i<j$, $H(X)_{ij}=m_{ij}$ and $H(X)_{ji}=\overline{m_{ij}}=m_{ji}$ because $M$ is self-adjoint; $H(X)_{ii}=\mathrm{Re}\,m_{ii}=m_{ii}$.
+Since $x\mapsto H(x)$ is continuous (it is $\R$-linear), $H^{-1}(S)$ is Borel and $\P_1(M\in S)=\P_1(X\in H^{-1}(S))=\PP_\nu(H^{-1}(S))$. The other two statements follow with $S:=\lambda^{-1}(S')$ (Borel by (RA4)) and by the transformation formula for image measures.
+\end{proof}
+
+\begin{auxlemma}[Gaussian tails]\label{c2:gausstail}
+(a) If $\xi$ is a real centred Gaussian variable with variance $\tau^2>0$, then $\P(|\xi|>y\tau)\le2e^{-y^2/2}$ for all $y\ge0$.
+(b) If $V\sim\bG$, then $\P(|v_{ij}|>y\tau_{ij})\le4e^{-y^2/2}$ for all $i\le j$ and $y\ge0$.
+\end{auxlemma}
+
+\begin{proof}
+(a) For $\lambda\in\R$, completing the square gives $\E e^{\lambda\xi}=\int\frac{1}{\sqrt{2\pi}\tau}e^{\lambda u-u^2/(2\tau^2)}\rd u=e^{\lambda^2\tau^2/2}\int\frac{1}{\sqrt{2\pi}\tau}e^{-(u-\lambda\tau^2)^2/(2\tau^2)}\rd u=e^{\lambda^2\tau^2/2}$.
+By Markov's inequality applied to $e^{\lambda\xi}$ with $\lambda:=y/\tau$: $\P(\xi>y\tau)\le e^{-\lambda y\tau}\E e^{\lambda\xi}=e^{-y^2+y^2/2}=e^{-y^2/2}$. The same bound holds for $-\xi$, which has the same law; add the two.
+
+(b) By Lemma \ref{c3:GE}(ii), $v_{ii}$ is real centred Gaussian with variance $\tau_{ii}^2$, and so is $v_{ij}$ ($i<j$) if $\beta=1$; (a) gives the bound $2e^{-y^2/2}$. If $\beta=2$ and $i<j$, then $v_{ij}=(\xi+\mathrm i\eta)/\sqrt2$ with $\xi,\eta$ real centred Gaussian of variance $1/N=\tau_{ij}^2$.
+If $|v_{ij}|>y\tau_{ij}$ then $\xi^2+\eta^2>2y^2\tau_{ij}^2$, so $|\xi|>y\tau_{ij}$ or $|\eta|>y\tau_{ij}$; by (a) the probability is at most $4e^{-y^2/2}$.
+\end{proof}
+
+\begin{lemma}[$\widetilde H_t$ and $\widetilde V$ are ensembles with uniform parameters]\label{lem:U11}
+Let $N\ge3$, $\vartheta,\delta_-,\delta_+,C_0>0$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ over $\K$, and let $H_0,V,H_t$ be as in \eqref{Ht}. Put
+\begin{equation*}
+\tilde\vartheta:=\tfrac1{14}\min(\vartheta,1),\qquad\tilde\delta_\pm:=\tfrac34\min(\delta_\pm,1),\qquad\tilde C_0:=\max(C_0,2).
+\end{equation*}
+Then for every $t\in[0,\infty]$:
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item the entries $h^t_{ij}:=a_th_{ij}+s_t^{1/2}v_{ij}$ $(i\le j)$ of $H_t$ are independent and centred, with
+$\sigma_{t,ij}^2:=\E|h^t_{ij}|^2=e^{-t}\sigma_{ij}^2+s_t\tau_{ij}^2$, and $\sum_{i=1}^N\sigma^2_{t,ij}=\kappa_t^{-2}$ for every $j$;
+\item the laws $\tilde\nu^t_{ij}$ of the entries $\kappa_th^t_{ij}$ of $\widetilde H_t$ form an ensemble $\tilde\nu^t\in\mathcal E_N(\tilde\vartheta,\tilde\delta_-,\tilde\delta_+,\tilde C_0)$ over $\K$, and $\widetilde H_t$ has the law of $H(x)$ under $\PP_{\tilde\nu^t}$.
+In particular (case $t=\infty$) $\widetilde V$ is the matrix of an ensemble in $\mathcal E_N(\tilde\vartheta,\tilde\delta_-,\tilde\delta_+,\tilde C_0)$; this ensemble does not depend on $\nu$.
+\item \emph{(deterministic)} $1\ge\kappa_t\ge(1+1/N)^{-1/2}$, $0\le\kappa_t^{-1}-1\le\frac1{2N}$, and at every sample point
+\[
+\lambda(H_t)=\kappa_t^{-1}\lambda(\widetilde H_t),\qquad |\lambda_j(H_t)-\lambda_j(\widetilde H_t)|\le\frac{|\lambda_j(\widetilde H_t)|}{2N},\qquad \fn_{\lambda(H_t)}(e)=\fn_{\lambda(\widetilde H_t)}(\kappa_te)\quad(e\in\R).
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write $a=a_t$, $s=s_t$, $\kappa=\kappa_t$ and $r:=(2-\beta)s/(\beta N)\in[0,1/N]$, so that $\kappa^{-2}=1+r$ and $a^2+s=e^{-t}+s=1$.
+
+\emph{(a)} $H_0=H(X)$ in law, with $X\sim\PP_\nu$, so the entries $(h_{ij})_{i\le j}$ of $H_0$ are independent (functions of distinct coordinates of $X$); the entries $(v_{ij})_{i\le j}$ of $V$ are independent (Lemma \ref{c3:GE}(ii)); and $H_0$, $V$ are independent.
+Hence the joint law of the $2|\mathcal P_N|$ variables $(h_{ij},v_{ij})_{i\le j}$ is the product of their laws, and the variables $h^t_{ij}$, being functions of the disjoint blocks $\{h_{ij},v_{ij}\}$, are independent.
+All of them are square integrable ($\sigma_{ij}^2\le C_0/N$ by (C)); $\E h_{ij}=0$ by (Z) and $\E v_{ij}=0$, so $\E h^t_{ij}=0$ and, by independence, $\E[\overline{h_{ij}}v_{ij}]=0$, whence $\E|h^t_{ij}|^2=a^2\E|h_{ij}|^2+s\E|v_{ij}|^2=e^{-t}\sigma_{ij}^2+s\tau_{ij}^2$.
+By (A) and the values of $\tau_{ij}^2$: $\sum_i\sigma^2_{t,ij}=e^{-t}+s\big(\frac{N-1}N+\frac2{\beta N}\big)=e^{-t}+s+s\frac{2-\beta}{\beta N}=1+r=\kappa^{-2}$.
+
+\emph{(b)} $\widetilde H_t=\kappa H_t\in\cH$ has the independent entries $\kappa h^t_{ij}$, $i\le j$, by (a); Lemma \ref{c2:transfer} shows that $\tilde\nu^t$ is an ensemble with real diagonal (R) and that $\widetilde H_t$ has the law of $H(x)$ under $\PP_{\tilde\nu^t}$. Its variances are $\tilde\sigma_{ij}^2:=\kappa^2\sigma^2_{t,ij}$. We verify the conditions of Part~I, Definition \ref{def:ass}.
+
+\emph{(Z)} and \emph{(A)}: $\E\kappa h^t_{ij}=0$ by (a), and $\sum_i\tilde\sigma_{ij}^2=\kappa^2\kappa^{-2}=1$ by (a).
+
+\emph{(C)}: $\kappa\le1$, $\sigma_{ij}^2\le C_0/N$ and $\tau_{ij}^2\le2/N$ give $\tilde\sigma_{ij}^2\le e^{-t}C_0/N+2s/N\le\max(C_0,2)/N$.
+
+\emph{(B)}: let $B=(\sigma_{ij}^2)$, $\widetilde B=(\tilde\sigma_{ij}^2)$, and $v\in\R^N$ with $\sum_iv_i=0$. The variance matrix of $V$ is $(\tau_{ij}^2)=N^{-1}\mathbf 1\mathbf 1^{\mathsf T}+\frac{2-\beta}{\beta N}I$, and $\la v,\mathbf 1\mathbf 1^{\mathsf T}v\ra=(\sum_iv_i)^2=0$. Hence
+\[
+\la v,\widetilde Bv\ra=\kappa^2\big(e^{-t}\la v,Bv\ra+r|v|^2\big)=\frac{e^{-t}\la v,Bv\ra+r|v|^2}{1+r}.
+\]
+Put $\bar\delta_\pm:=\min(\delta_\pm,1)$. Using (B) for $\nu$ (if $t=\infty$ the term $e^{-t}\la v,Bv\ra$ vanishes and (B) is not needed):
+\[
+|v|^2-\la v,\widetilde Bv\ra\ge\frac{1+r-e^{-t}(1-\delta_+)-r}{1+r}|v|^2=\frac{s+e^{-t}\delta_+}{1+r}|v|^2\ge\frac{\bar\delta_+(s+e^{-t})}{1+r}|v|^2=\frac{\bar\delta_+}{1+r}|v|^2,
+\]
+\[
+|v|^2+\la v,\widetilde Bv\ra\ge\frac{1+r+e^{-t}(-1+\delta_-)+r}{1+r}|v|^2=\frac{s+e^{-t}\delta_-+2r}{1+r}|v|^2\ge\frac{\bar\delta_-}{1+r}|v|^2 .
+\]
+Since $1+r\le1+1/N\le4/3$ ($N\ge3$), $\frac{\bar\delta_\pm}{1+r}\ge\tilde\delta_\pm$, i.e.\ $(-1+\tilde\delta_-)|v|^2\le\la v,\widetilde Bv\ra\le(1-\tilde\delta_+)|v|^2$.
+
+\emph{(D)} with $\tilde\vartheta$: by (RA3) applied with the factor $\kappa$ it suffices to show, for fixed $(i,j)$, $\sigma_t:=\sigma_{t,ij}$ and all real $x\ge1$,
+\begin{equation}\tag{T}\label{c2:tail}
+\P\big(|h^t_{ij}|>x\sigma_t\big)\le\tilde\vartheta^{-1}e^{-x^{\tilde\vartheta}}.
+\end{equation}
+Put $\bar\vartheta:=\min(\vartheta,1)$, so $\tilde\vartheta=\bar\vartheta/14$ and, by (RA2), $\nu_{ij}(\{|y|>x\sigma_{ij}\})\le\bar\vartheta^{-1}e^{-x^{\bar\vartheta}}$ for $x\ge1$.
+\emph{Case $1\le x<2$.} Then $x^{\tilde\vartheta}\le2^{1/14}<1.06$ and $\tilde\vartheta^{-1}e^{-x^{\tilde\vartheta}}\ge14e^{-1.06}>4$, which exceeds the left side of \eqref{c2:tail}.
+\emph{Case $x\ge2$.} If $|h^t_{ij}|>x\sigma_t$ then $a|h_{ij}|>x\sigma_t/2$ or $s^{1/2}|v_{ij}|>x\sigma_t/2$.
+For the first event: if $a\sigma_{ij}=0$ then $ah_{ij}=0$ a.s.\ (if $\sigma_{ij}=0$ then $h_{ij}=0$ a.s.), and the event has probability $0$ (strict inequality); otherwise $a\sigma_{ij}\le\sigma_t$ and the event is contained in $\{|h_{ij}|>\frac x2\sigma_{ij}\}$, of probability $\le\bar\vartheta^{-1}e^{-(x/2)^{\bar\vartheta}}$ since $x/2\ge1$.
+For the second event: if $s=0$ it is empty; otherwise $s^{1/2}\tau_{ij}\le\sigma_t$ and the event is contained in $\{|v_{ij}|>\frac x2\tau_{ij}\}$, of probability $\le4e^{-x^2/8}$ by Lemma \ref{c2:gausstail}(b).
+Now let $y:=x^{\bar\vartheta/2}\ge1$. Then $(x/2)^{\bar\vartheta}=2^{-\bar\vartheta}y^2\ge y^2/2\ge y-1$, because $y^2-2y+2=(y-1)^2+1>0$.
+Further, with $u:=x^{1/2}$, $x^2/8-x^{1/2}+1=u^4/8-u+1\ge1-\frac34 2^{1/3}>0$ (the minimum over $u\ge0$ is attained at $u^3=2$, and $(\frac34)^3\cdot2=\frac{27}{32}<1$); since $\bar\vartheta/2\le\frac12$ and $x\ge1$, $x^2/8\ge x^{1/2}-1\ge y-1$.
+Hence the left side of \eqref{c2:tail} is at most $(\bar\vartheta^{-1}+4)e\,e^{-y}\le5e\,\bar\vartheta^{-1}e^{-x^{\bar\vartheta/2}}\le14\bar\vartheta^{-1}e^{-x^{\tilde\vartheta}}=\tilde\vartheta^{-1}e^{-x^{\tilde\vartheta}}$, where we used $\bar\vartheta\le1$, $5e<14$, and $x^{\tilde\vartheta}\le x^{\bar\vartheta/2}$ (as $x\ge1$, $\tilde\vartheta\le\bar\vartheta/2$).
+This proves \eqref{c2:tail}, so $\tilde\nu^t\in\mathcal E_N(\tilde\vartheta,\tilde\delta_-,\tilde\delta_+,\tilde C_0)$. For $t=\infty$, $h^\infty_{ij}=v_{ij}$ and nothing depends on $\nu$.
+
+\emph{(c)} $\kappa^{-2}=1+r\in[1,1+1/N]$ gives the bounds on $\kappa$, and $\kappa^{-1}-1=\sqrt{1+r}-1\le r/2\le1/(2N)$.
+For $c>0$ and Hermitian $A$, the eigenvalues of $cA$ counted with multiplicity are $c\lambda_1(A)\le\dots\le c\lambda_N(A)$, so $\lambda(cA)=c\lambda(A)$; with $A=\widetilde H_t$, $c=\kappa^{-1}$ this is the first identity, and the second follows: $|\lambda_j(H_t)-\lambda_j(\widetilde H_t)|=(\kappa^{-1}-1)|\lambda_j(\widetilde H_t)|$.
+Finally $\fn_{\lambda(H_t)}(e)=N^{-1}\#\{j:\kappa^{-1}\lambda_j(\widetilde H_t)\le e\}=N^{-1}\#\{j:\lambda_j(\widetilde H_t)\le\kappa e\}$.
+\end{proof}
+
+\subsection{Standing constants, the good set, and the quantity $Q$}
+
+\noindent\textbf{Standing choice of constants.} Fix $(\vartheta,\delta_-,\delta_+,C_0)$ and let $(\tilde\vartheta,\tilde\delta_-,\tilde\delta_+,\tilde C_0)$ be as in Lemma \ref{lem:U11}.
+Let $(A_0,C_R,c_R,\phi,N_0)$ be the constants $(A_0,C,c,\phi,N_0)$ of Theorem \ref{thm:22} of Part~I (RA1) for the parameters $(\tilde\vartheta,\tilde\delta_-,\tilde\delta_+,\tilde C_0)$; they depend only on $(\vartheta,\delta_\pm,C_0)$. For $N\ge3$ set
+\begin{equation}\label{defL}
+L:=A_0\log\log N,\qquad D:=(\log N)^{L}+2=e^{A_0(\log\log N)^2}+2 .
+\end{equation}
+Since $(\log\log N)^2/\log N\to0$ and $\log\log N\to\infty$, there is $N_*=N_*(\vartheta,\delta_\pm,C_0)\ge\max(N_0,16)$ such that for all $N\ge N_*$
+\begin{equation}\tag{N$_*$}\label{c2:Nstar}
+10A_0(\log\log N)^2\le\log(10N)\qquad\text{and}\qquad\phi A_0\log\log N\ge2 .
+\end{equation}
+For $N\ge N_*$, $L$ satisfies Part~I, \eqref{eq:Lbound}, so Theorem \ref{thm:22} applies with this $L$; moreover $A_0(\log\log N)^2\le\frac1{10}\log(10N)\le\frac15\log N$, i.e.
+\begin{equation}\tag{D$_*$}\label{c2:Dsmall}
+(\log N)^L\le N^{1/5},\qquad D\le N^{1/5}+2 .
+\end{equation}
+The \emph{good set} is
+\begin{equation}\label{good}
+\Xi:=\Big\{x\in\cSig:\ \sup_{|e|\le4}|\fn_x(e)-\nsc(e)|\le\frac DN\ \text{ and }\ |x_j-\gamma_j|\le D\,[\min(j,N+1-j)]^{-1/3}N^{-2/3}\ \text{ for all }j\Big\}.
+\end{equation}
+
+\begin{auxlemma}[Measurability]\label{c2:Xi}
+For every $a>0$ and every $\Delta\ge0$, the function $x\mapsto\sup_{|e|\le a}|\fn_x(e)-\nsc(e)|$ is Borel on $\R^N$, and $\{x\in\cSig:\sup_{|e|\le a}|\fn_x(e)-\nsc(e)|\le\Delta\}$ is Borel. In particular $\Xi$ is a Borel subset of $\cSig$.
+\end{auxlemma}
+
+\begin{proof}
+For fixed $e$, $x\mapsto\fn_x(e)=N^{-1}\sum_j\mathbf 1\{x_j\le e\}$ is Borel. For fixed $x$, $e\mapsto\fn_x(e)$ is right-continuous: if $e_k\downarrow e$, then for $k$ large no $x_j$ lies in $(e,e_k]$, so $\fn_x(e_k)=\fn_x(e)$; and $\nsc$ is continuous (RA5).
+Let $J_0:=(\mathbb Q\cap[-a,a])\cup\{a\}$. Every $e\in[-a,a)$ is the limit of a decreasing sequence in $J_0\cap(e,a]$, so $|\fn_x(e)-\nsc(e)|\le\sup_{e'\in J_0}|\fn_x(e')-\nsc(e')|$; hence the supremum over $[-a,a]$ equals the supremum over the countable set $J_0$, which is Borel.
+The second condition in \eqref{good} defines a closed set. Intersections of Borel sets are Borel.
+\end{proof}
+
+\begin{lemma}[Good event, uniformly in $t$]\label{lem:goodC}
+For every $K>0$ there is $N_K=N_K(K,\vartheta,\delta_\pm,C_0)\ge N_*$ such that for all $N\ge N_K$, $\K\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ and all $t\in[0,\infty]$:
+\[
+\P\big(\lambda(H_t)\notin\Xi\big)\le N^{-K};\qquad\text{in particular (}t=\infty\text{)}\quad\mu(\Xi^c)=\P(\lambda(V)\notin\Xi)\le N^{-K}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $N_K\ge N_*$ be such that for $N\ge N_K$: $c_R\log N\ge K+\max(0,\log(2C_R))$ (note $\log N\ge1$ as $N\ge16$). Fix $N\ge N_K$, $\nu$, $t$, and write $m_j:=\min(j,N+1-j)$.
+
+\emph{Step 1 (the event from Theorem~\ref{thm:22}).} Let
+\[
+S:=\Big\{y\in\cSig:\ |y_j-\gamma_j|<(\log N)^Lm_j^{-1/3}N^{-2/3}\ \forall j,\ \ \sup_{|e|\le5}|\fn_y(e)-\nsc(e)|<\frac{(\log N)^L}N\Big\},
+\]
+a Borel set by Lemma \ref{c2:Xi} (the first condition defines an open set). By Lemma \ref{lem:U11}(b), $\tilde\nu^t\in\mathcal E_N(\tilde\vartheta,\tilde\delta_-,\tilde\delta_+,\tilde C_0)$ and $\widetilde H_t$ has the law of $H(x)$ under $\PP_{\tilde\nu^t}$.
+The complement $\cSig\setminus S$ is the union of the two sets whose $\PP_{\tilde\nu^t}$-probabilities are bounded in (RA1). Since $N\ge N_*\ge N_0$ and $L$ is admissible,
+\[
+\P\big(\lambda(\widetilde H_t)\notin S\big)=\PP_{\tilde\nu^t}\big(\lambda(H(x))\notin S\big)\le2C_R\exp\big(-c_R(\log N)^{\phi L}\big).
+\]
+
+\emph{Step 2 (deterministic transfer).} Let $y\in S$ and $x:=\kappa_t^{-1}y$. We show $x\in\Xi$. By Lemma \ref{lem:U11}(c) this gives $\{\lambda(\widetilde H_t)\in S\}\subset\{\lambda(H_t)\in\Xi\}$.
+By \eqref{c2:Dsmall}, $(\log N)^LN^{-2/3}\le N^{1/5-2/3}\le1$, so $|y_j|\le|\gamma_j|+1\le3$. With $0\le\kappa_t^{-1}-1\le\frac1{2N}$ and $N^{-1}=N^{-1/3}N^{-2/3}\le m_j^{-1/3}N^{-2/3}$ (as $m_j\le N$):
+\begin{align*}
+|x_j-\gamma_j|&\le|y_j-\gamma_j|+(\kappa_t^{-1}-1)|y_j|\le(\log N)^Lm_j^{-1/3}N^{-2/3}+\tfrac3{2N}\\
+&\le\big((\log N)^L+2\big)m_j^{-1/3}N^{-2/3}=D\,m_j^{-1/3}N^{-2/3}.
+\end{align*}
+For $|e|\le4$: $\fn_x(e)=\fn_y(\kappa_te)$ (as $\kappa_t>0$), $|\kappa_te|\le4\le5$, and $0\le1-\kappa_t=\kappa_t(\kappa_t^{-1}-1)\le\frac1{2N}$; since $\nsc$ is $\frac1\pi$-Lipschitz (RA5),
+\[
+|\fn_x(e)-\nsc(e)|\le|\fn_y(\kappa_te)-\nsc(\kappa_te)|+\frac{(1-\kappa_t)|e|}{\pi}<\frac{(\log N)^L}N+\frac{4}{2\pi N}<\frac DN .
+\]
+So $x\in\Xi$.
+
+\emph{Step 3 (probability).} By \eqref{c2:Nstar}, $(\log N)^{\phi L}=(\log N)^{\phi A_0\log\log N}\ge(\log N)^2$. Hence, using $\log N\ge1$ and the choice of $N_K$,
+\begin{align*}
+2C_R\exp\big(-c_R(\log N)^{\phi L}\big)&\le\exp\big(\log(2C_R)-c_R(\log N)^2\big)\\
+&\le\exp\big(\log(2C_R)-(K+\max(0,\log(2C_R)))\log N\big)\le N^{-K}.
+\end{align*}
+With Steps 1 and 2, $\P(\lambda(H_t)\notin\Xi)\le\P(\lambda(\widetilde H_t)\notin S)\le N^{-K}$. For $t=\infty$, $\lambda(H_\infty)=\lambda(V)$ has law $\mu$.
+(The events are measurable: $\Xi$ and $S$ are Borel and $\lambda$ is continuous.)
+\end{proof}
+
+\begin{lemma}[Assumption III: the quantity $Q$]\label{lem:Q}
+There is $N_3=N_3(\vartheta,\delta_\pm,C_0)$ such that for all $N\ge N_3$, $\K$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ and all $t\in[0,\infty]$,
+\begin{equation}\label{Qbound}
+\E|\lambda(H_t)-\gamma|^2\le 7D^2N^{-1},\qquad\text{in particular}\qquad \int|x-\gamma|^2\mu(\rd x)\le7D^2N^{-1}.
+\end{equation}
+We write $Q:=7D^2N^{-1}$.
+\end{lemma}
+
+\begin{proof}
+Let $M:=(360/\tilde\vartheta)^{2/\tilde\vartheta}$ (depends only on $\vartheta$) and $N_3:=\max(N_6,\lceil\frac83M+8\rceil)$, with $N_6$ from Lemma \ref{lem:goodC} for $K=6$. Fix $N\ge N_3$, $\nu$, $t$; write $m_j:=\min(j,N+1-j)$.
+
+\emph{On $\Xi$.} Each value $k\ge1$ of $m_j$ is taken for at most two indices $j$, and $m_j\le\lceil N/2\rceil$. For $m\ge1$, $\sum_{k=1}^mk^{-2/3}\le1+\int_1^mu^{-2/3}\rd u=3m^{1/3}-2\le3m^{1/3}$ (as $k^{-2/3}\le\int_{k-1}^ku^{-2/3}\rd u$ for $k\ge2$). Hence for $x\in\Xi$:
+\[
+|x-\gamma|^2\le D^2N^{-4/3}\sum_{j=1}^Nm_j^{-2/3}\le D^2N^{-4/3}\cdot2\cdot3\lceil N/2\rceil^{1/3}\le6D^2N^{-1}.
+\]
+
+\emph{Off $\Xi$.} By the spectral theorem $\sum_j\lambda_j(H_t)^2=\Tr H_t^2$; with $|\gamma_j|\le2$ and $\kappa_t^{-2}\le1+\frac1N\le\frac43$,
+\[
+|\lambda(H_t)-\gamma|^2\le2|\lambda(H_t)|^2+2|\gamma|^2\le2\kappa_t^{-2}\Tr\widetilde H_t^2+8N\le Y:=\tfrac83\Tr\widetilde H_t^2+8N .
+\]
+Write $\tilde h_{ij}$ for the entries of $\widetilde H_t$ and $\tilde\sigma_{ij}^2=\E|\tilde h_{ij}|^2$. By Lemma \ref{lem:U11}(b), for $i\le j$ the law of $\tilde h_{ij}$ satisfies (D) with $\tilde\vartheta\le1$, so (RA6) with $q=4$ gives $\E|\tilde h_{ij}|^4\le(4C_{\tilde\vartheta})^{4/\tilde\vartheta}\tilde\sigma_{ij}^4=M^2\tilde\sigma_{ij}^4$; the same holds for $i>j$ since $|\tilde h_{ij}|=|\tilde h_{ji}|$.
+By Minkowski's inequality in $L^2(\P)$ and (A) for $\tilde\nu^t$,
+\[
+\big(\E(\Tr\widetilde H_t^2)^2\big)^{1/2}\le\sum_{i,j=1}^N\big(\E|\tilde h_{ij}|^4\big)^{1/2}\le M\sum_{i,j}\tilde\sigma_{ij}^2=MN,\qquad\text{so}\qquad(\E Y^2)^{1/2}\le\big(\tfrac83M+8\big)N .
+\]
+By the Cauchy--Schwarz inequality and Lemma \ref{lem:goodC} with $K=6$,
+\[
+\E\big[|\lambda(H_t)-\gamma|^2\mathbf 1\{\lambda(H_t)\notin\Xi\}\big]\le(\E Y^2)^{1/2}\,\P(\lambda(H_t)\notin\Xi)^{1/2}\le\big(\tfrac83M+8\big)N\cdot N^{-3}\le N^{-1}\le D^2N^{-1},
+\]
+since $N\ge\frac83M+8$ and $D\ge1$. Adding the two parts gives $\E|\lambda(H_t)-\gamma|^2\le7D^2N^{-1}$. The case $t=\infty$ is the statement for $\mu$.
+\end{proof}
+
+\begin{lemma}[Deterministic consequences of $x\in\Xi$]\label{lem:countC}
+Let $N\ge3$, let $D\ge0$ be any number and $\Xi$ be defined by \eqref{good} with this $D$. Let $0<c\le2$, $\varrho_*:=\varrho_*(c)$, $\ell>0$, and assume
+\begin{equation}\tag{H$_\ell$}\label{c2:counthyp}
+\frac{D+\ell}{N\varrho_*}\le\frac c8 .
+\end{equation}
+Let $x\in\Xi$.
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item (local density) For every $e\in[-3,3]$: $\#\{i:|x_i-e|\le\ell/N\}\le 2\ell/\pi+2D=:K_\ell$.
+\item (bulk localisation) If $x_i\in[-2+\frac38c,2-\frac38c]$ or $\gamma_i\in[-2+\frac38c,2-\frac38c]$, then $|x_i-\gamma_i|\le\xi_0:=D/(N\varrho_*)$.
+\item (index sets) For $E\in[-2+c,2-c]$ and $b\in(0,c/2)$, the set $J:=\{i:\gamma_i\in[E-b,E+b]\}$ has $|J|\le 2Nb/\pi+1$, and
+$\mathcal B:=\{i:\operatorname{dist}(\gamma_i,\{E-b,E+b\})\le\xi_0+\ell/N\}$ has $|\mathcal B|\le 4(D/\varrho_*+\ell)/\pi+2$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Note $0<\varrho_*\le\frac{\sqrt2}{2\pi}<\frac1\pi$ (since $c-c^2/16\le c\le2$), so \eqref{c2:counthyp} gives $\ell/N\le\varrho_*c/8<\frac1{4\pi}<1$ and $D/N<\varrho_*c/8$.
+We use repeatedly: for $u<w$, $\#\{i:x_i\in(u,w]\}=N(\fn_x(w)-\fn_x(u))$, and, for $|u|,|w|\le4$, $|\fn_x(\cdot)-\nsc(\cdot)|\le D/N$ at $u$ and at $w$ (definition of $\Xi$).
+
+(a) Let $0<\eta<1-\ell/N$, $u:=e-\ell/N-\eta$ and $w:=e+\ell/N$; then $-4\le u<w\le4$. Since $[e-\ell/N,e+\ell/N]\subset(u,w]$ and $\nsc$ is $\frac1\pi$-Lipschitz (RA5),
+\[
+\#\{i:|x_i-e|\le\ell/N\}\le N(\fn_x(w)-\fn_x(u))\le N(\nsc(w)-\nsc(u))+2D\le\frac{2\ell+N\eta}{\pi}+2D .
+\]
+Letting $\eta\downarrow0$ gives the claim.
+
+(b) \emph{Step 1: $|x_i|\le4$.} If $x_i\in[-2+\frac38c,2-\frac38c]$ this is clear. Let $\gamma_i\in[-2+\frac38c,2-\frac38c]$. The interval $[-2+\frac c4,-2+\frac38c]$ has length $c/8$ and lies in $\{|y|\le2-c/4\}$, where $\rhosc\ge\varrho_*$ (RA5); hence
+$\nsc(-2+\frac38c)\ge\varrho_*c/8>D/N$, and by symmetry ($\nsc(-y)=1-\nsc(y)$) $1-\nsc(2-\frac38c)>D/N$. As $\nsc$ is nondecreasing and $\nsc(\gamma_i)=i/N$:
+\[
+\frac iN>\frac DN\qquad\text{and}\qquad1-\frac iN>\frac DN .
+\]
+If $x_i>4$, then $\#\{j:x_j\le4\}\le i-1$, so $\fn_x(4)\le\frac{i-1}N$ while $\nsc(4)=1$; the definition of $\Xi$ gives $1-\frac{i-1}N\le\frac DN$, contradicting $1-\frac iN>\frac DN$.
+If $x_i<-4$, then $\fn_x(-4)\ge\frac iN$ while $\nsc(-4)=0$; so $\frac iN\le\frac DN$, a contradiction. Hence $|x_i|\le4$.
+
+\emph{Step 2: $|\nsc(x_i)-\nsc(\gamma_i)|\le D/N$.} Since $x_1\le\dots\le x_i$, $\fn_x(x_i)\ge\frac iN$, so $\nsc(x_i)\ge\fn_x(x_i)-\frac DN\ge\frac iN-\frac DN=\nsc(\gamma_i)-\frac DN$.
+For the other inequality: if $x_i=-4$ then $\nsc(x_i)=0\le\nsc(\gamma_i)+\frac DN$. Otherwise, for $e\in[-4,x_i)$, $\fn_x(e)\le\frac{i-1}N$ (only $x_j$ with $j<i$ can be $\le e$), so $\nsc(e)\le\frac{i-1}N+\frac DN$; letting $e\uparrow x_i$ and using continuity, $\nsc(x_i)\le\nsc(\gamma_i)+\frac DN$.
+
+\emph{Step 3: conclusion.} Let $p\in\{x_i,\gamma_i\}$ be a point of $[-2+\frac38c,2-\frac38c]$ and $q$ the other point. The interval $[p-\frac c8,p+\frac c8]$ lies in $\{|y|\le2-\frac c4\}$, where $\rhosc\ge\varrho_*$.
+If $|q-p|>c/8$, then the segment between $p$ and $q$ contains a subinterval of length $c/8$ of $[p-\frac c8,p+\frac c8]$, so $|\nsc(q)-\nsc(p)|\ge\varrho_*c/8>D/N$ (monotonicity of $\nsc$), contradicting Step 2.
+Hence $|q-p|\le c/8$, the segment between $p$ and $q$ lies in $\{|y|\le2-\frac c4\}$, and $D/N\ge|\nsc(q)-\nsc(p)|=|\int_p^q\rhosc|\ge\varrho_*|q-p|$, i.e.\ $|x_i-\gamma_i|\le D/(N\varrho_*)=\xi_0$.
+
+(c) By (RA5), $|J|=\#\{i:\gamma_i\in[E-b,E+b]\}\le N\cdot2b/\pi+1$. With $\rho:=\xi_0+\ell/N$, $\{y:\operatorname{dist}(y,\{E-b,E+b\})\le\rho\}=[E-b-\rho,E-b+\rho]\cup[E+b-\rho,E+b+\rho]$ is a union of two intervals of length $2\rho$; by (RA5),
+$|\mathcal B|\le2(2N\rho/\pi+1)=4(N\xi_0+\ell)/\pi+2=4(D/\varrho_*+\ell)/\pi+2$.
+\end{proof}
+
+\begin{auxremark}[Use of the constants]\label{c2:rem}
+In \S\ref{sec:C8}, Lemma \ref{lem:countC} is applied with $D$ from \eqref{defL} and $\ell=\rho_O/\varrho_*(c)$ (enlarged to $\ell\ge1$ if desired); \eqref{c2:counthyp} then holds for $N\ge N(c,\rho_O,\vartheta,\delta_\pm,C_0)$ by \eqref{c2:Dsmall}.
+All thresholds of this section ($N_*$, $N_K$, $N_3$) and the constants $A_0$, $D$, $Q$ depend only on $(\vartheta,\delta_\pm,C_0)$ (and on $K$ for $N_K$); none depends on $t\in[0,\infty]$, on $\K$, on the ensemble, or on $O$.
+\end{auxremark}

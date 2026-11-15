@@ -1,0 +1,324 @@
+\section{Model, assumptions and main results}\label{sec:main}
+
+\subsection{The ensemble}
+Let $\kk\in\{\R,\C\}$ ($\kk=\R$: real symmetric case, $\beta=1$; $\kk=\C$: complex Hermitian case, $\beta=2$), $N\ge3$, and
+$\mathcal P_N:=\{(i,j): 1\le i\le j\le N\}$.
+
+\begin{definition}[Ensemble]\label{def:ens}
+An \emph{ensemble} (of size $N$ over $\kk$) is a family $\nu=(\nu_{ij})_{(i,j)\in\mathcal P_N}$ of Borel probability measures on $\kk$.
+The probability space is $\Omega:=\kk^{\mathcal P_N}$ with the product $\sigma$-algebra and the product law $\PP=\PP_\nu:=\bigotimes_{(i,j)\in\mathcal P_N}\nu_{ij}$; $\EE$ is the expectation with respect to $\PP$.
+For $x\in\Omega$ the matrix $H=H(x)=(h_{ij})_{i,j=1}^N$ is
+\[
+ h_{ij}:=x_{ij}\ (i<j),\qquad h_{ji}:=\ol{x_{ij}}\ (i<j),\qquad h_{ii}:=\re x_{ii}.
+\]
+Thus $H(x)$ is Hermitian (symmetric if $\kk=\R$) at \emph{every} point $x\in\Omega$, the entries $(h_{ij})_{i\le j}$ are independent, and
+$h_{ij}$ has law $\nu_{ij}$ for $i<j$ (also for $i=j$ if $\nu_{ii}(\R)=1$).
+We put
+\begin{equation}\label{eq:aver}
+ \sigma_{ij}^2:=\int_{\kk}|y|^2\,\nu_{ij}(\rd y)\in[0,\infty]\ \ (i\le j),\qquad \sigma_{ji}:=\sigma_{ij},\qquad B:=(\sigma_{ij}^2)_{i,j=1}^N .
+\end{equation}
+\end{definition}
+
+\begin{definition}[Assumptions]\label{def:ass}
+Let $\vth,\delta_-,\delta_+,C_0>0$. The ensemble $\nu$ belongs to the class $\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$ (over $\kk$) if:
+\begin{description}[leftmargin=2.2em,itemsep=1pt]
+\item[(R)] $\nu_{ii}(\R)=1$ for all $i$ (real diagonal).
+\item[(D)] \emph{Subexponential decay:} for all $(i,j)\in\mathcal P_N$ and all real $x\ge1$,
+\begin{equation}\label{eq:subexp}
+ \nu_{ij}\big(\{y\in\kk:\ |y|> x\,\sigma_{ij}\}\big)\le \vth^{-1}\exp(-x^{\vth}).
+\end{equation}
+\item[(Z)] \emph{Centring (zero mean):} $\int y\,\nu_{ij}(\rd y)=0$ for all $(i,j)\in\mathcal P_N$ (the integral exists because $\sigma_{ij}<\infty$, by \textup{(A)}).
+\item[(A)] $\sum_{i=1}^N\sigma_{ij}^2=1$ for every $j$.
+\item[(B)] For every $v\in\R^N$ with $\sum_iv_i=0$:\quad $(-1+\delta_-)\,|v|^2\le \langle v,Bv\rangle\le(1-\delta_+)\,|v|^2$.
+\item[(C)] $\sigma_{ij}^2\le C_0/N$ for all $i,j$.
+\end{description}
+The labels \textup{(A), (B), (C)} are those of the original; the conditions \textup{(D)} and \textup{(Z)} are (2.17) and (2.1) of the original.
+\end{definition}
+\noindent Vanishing variances $\sigma_{ij}=0$ are allowed; then $\nu_{ij}$ is the point mass at $0$ (trivially, or by \eqref{eq:subexp}: $\nu_{ij}(\{|y|>0\})\le\vth^{-1}e^{-x^\vth}$ for all $x\ge1$) and $h_{ij}=0$ almost surely. No statement in NP divides by $\sigma_{ij}$,
+and every event comparing $|h_{ij}|$ with a multiple of $\sigma_{ij}$ uses a strict inequality, as in \eqref{eq:subexp}.
+All moments of $h_{ij}$ are finite: if $\vth\le1$ (which may be assumed, by Lemma~\ref{lem:mono}(ii)), then $\EE|h_{ij}|^q\le(C_\vth q)^{q/\vth}\sigma_{ij}^q$ for every real $q\ge1$, with $C_\vth=90/\vth$ (Lemma~\ref{lem:moments}(a)); for $\vth>1$ the same bound holds with $\vth$ replaced by $1$.
+Since $B$ is symmetric, (A) says that all row sums and all column sums of $B$ equal $1$.
+
+Elementary properties of the class (equivalence of (B) with the spectral condition (2.3) of the original, monotonicity in the parameters, behaviour under $H\mapsto aH$) are collected in Lemma~\ref{lem:mono}.
+
+\subsection{Green function, semicircle law, control parameters}\label{sec:green}
+For $z=E+\ii\eta$, $\eta>0$, and for $H$ Hermitian,
+\begin{equation}\label{eq:green}
+ G(z):=(H-z)^{-1},\qquad m(z):=\frac1N\tr G(z)=\frac1N\sum_{j=1}^NG_{jj}(z).
+\end{equation}
+(If $\kk=\R$, $H$ is regarded as a complex matrix.) The Stieltjes transform of the semicircle law is defined \emph{algebraically} by
+\begin{equation}\label{eq:defmsc}
+ \msc(z):=\tfrac12\big(-z+\sqrt{z-2}\,\sqrt{z+2}\,\big)\qquad(\im z>0),
+\end{equation}
+with the principal branch of both square roots; by Lemma~\ref{lem:msc} it is the unique solution of
+$\msc(z)+\frac1{z+\msc(z)}=0$ with $\im\msc(z)>0$, and by Lemma~\ref{lem:stieltjes} it is the Stieltjes transform of $\rhosc$. Further,
+\begin{equation}\label{eq:sc}
+ \rhosc(x):=\frac{\sqrt{(4-x^2)_+}}{2\pi},\quad \nsc(E):=\int_{-\infty}^E\rhosc(x)\,\rd x,\quad
+ \gamma_j:=\inf\{x\in\R:\ N\nsc(x)\ge j\}\ \ (1\le j\le N),
+\end{equation}
+so that $N\nsc(\gamma_j)=j$ and $-2<\gamma_1<\dots<\gamma_{N-1}<\gamma_N=2$ (Lemma~\ref{lem:nsc}). The eigenvalues of $H$, counted with multiplicity, are
+$\lambda_1\le\lambda_2\le\dots\le\lambda_N$, and the empirical counting function is
+\[
+ \fn(E):=\frac1N\#\{j:\lambda_j\le E\}\qquad(E\in\R).
+\]
+We set
+\begin{equation}\label{eq:defLambda}
+ v_k:=G_{kk}-\msc,\quad \Ld:=\max_k|G_{kk}-\msc|,\quad \Lo:=\max_{k\ne l}|G_{kl}|,\quad \Lambda:=|m-\msc|,
+\end{equation}
+all depending on $z$. For $L>0$,
+\begin{equation}\label{eq:defS}
+ \bS_L:=\big\{z=E+\ii\eta:\ |E|\le5,\ N^{-1}(\log N)^{10L}<\eta\le10\big\}.
+\end{equation}
+\emph{Measurability.} For fixed $z$ the functions $x\mapsto\lambda_j(H(x))$, $G_{ij}(z)$, $m(z)$, $\Lambda(z)$, $\Ld(z)$, $\Lo(z)$ are continuous on $\Omega$
+(Lemma~\ref{lem:weyl}(d),(e)), hence Borel measurable. The counting function $x\mapsto\fn(E)$ is \emph{not} continuous on $\Omega$ (it is integer valued up to the factor $1/N$);
+it is a Borel function, because $\{x:\fn(E)\ge k/N\}=\{x:\lambda_k(H(x))\le E\}$ is closed, and $\sup_{E\in J}|\fn(E)-\nsc(E)|$, for $J=\R$ or $J$ a compact interval,
+is a Borel function on $\Omega$, being equal to a supremum over a countable set of $E$'s (Lemma~\ref{lem:weyl}(f)).
+For a possibly non-measurable set $S\subset\Omega$, $\PP^*(S):=\inf\{\PP(S'):S\subset S',\ S'\text{ measurable}\}$ denotes the outer probability.
+
+\subsection{The four main theorems}
+
+\begin{theorem}[Strong local semicircle law]\label{thm:21}
+For all $\vth,\delta_-,\delta_+,C_0>0$ there exist constants $A_0>1$, $C>0$, $c>0$, $\phi\in(0,1)$ and $N_0$, depending only on
+$(\vth,\delta_-,\delta_+,C_0)$, such that for every $N\ge N_0$, every $\kk\in\{\R,\C\}$, every ensemble
+$\nu\in\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$ and every real $L$ with
+\begin{equation}\label{eq:Lbound}
+ A_0\log\log N\le L\le\frac{\log(10N)}{10\log\log N}
+\end{equation}
+the following hold.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
+\item
+\begin{equation}\label{eq:Lambdafinal}
+ \PP^*\Big(\bigcup_{z\in\bS_L}\Big\{\Lambda(z)\ge\frac{(\log N)^{4L}}{N\eta}\Big\}\Big)\le C\exp\big[-c(\log N)^{\phi L}\big].
+\end{equation}
+\item
+\begin{equation}\label{eq:Lambdaodfinal}
+ \PP^*\Big(\bigcup_{z\in\bS_L}\Big\{\Ld(z)+\Lo(z)\ge(\log N)^{4L}\sqrt{\frac{\im\msc(z)}{N\eta}}+\frac{(\log N)^{4L}}{N\eta}\Big\}\Big)\le C\exp\big[-c(\log N)^{\phi L}\big].
+\end{equation}
+\item
+\begin{equation}\label{eq:443}
+ \PP\Big(\max_{1\le j\le N}|\lambda_j|\ge2+N^{-2/3}(\log N)^{9L}\Big)\le C\exp\big[-c(\log N)^{\phi L}\big].
+\end{equation}
+\end{enumerate}
+In \textup{(i)} and \textup{(ii)}, $\eta=\im z$. More precisely, there is one measurable event of probability at least $1-C\exp[-c(\log N)^{\phi L}]$ on which none of the events in
+\eqref{eq:Lambdafinal}, \eqref{eq:Lambdaodfinal}, \eqref{eq:443} occurs, for any $z\in\bS_L$.
+\end{theorem}
+
+\begin{theorem}[Rigidity of eigenvalues]\label{thm:22}
+For all $\vth,\delta_-,\delta_+,C_0>0$ there exist $A_0>1$, $C,c>0$, $\phi\in(0,1)$ and $N_0$, depending only on
+$(\vth,\delta_-,\delta_+,C_0)$, such that for every $N\ge N_0$, $\kk\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$ and $L$ satisfying \eqref{eq:Lbound}:
+\begin{equation}\label{eq:rigidity}
+ \PP\Big(\exists j\in\{1,\dots,N\}:\ |\lambda_j-\gamma_j|\ge(\log N)^L\big[\min(j,N-j+1)\big]^{-1/3}N^{-2/3}\Big)\le C\exp\big[-c(\log N)^{\phi L}\big],
+\end{equation}
+\begin{equation}\label{eq:nn}
+ \PP\Big(\sup_{|E|\le5}\big|\fn(E)-\nsc(E)\big|\ge\frac{(\log N)^L}{N}\Big)\le C\exp\big[-c(\log N)^{\phi L}\big].
+\end{equation}
+\end{theorem}
+\noindent In \eqref{eq:nn} the supremum itself is used; it need not be attained, since $\fn$ is only right-continuous in $E$. The constants $(A_0,C,c,\phi,N_0)$ can be taken
+the same in Theorems~\ref{thm:21} and~\ref{thm:22} (Proposition~\ref{prop:reduction}).
+
+\medskip
+\noindent\textbf{Setting of Theorem~\ref{thm:23}.} Let $H$ be the matrix of an ensemble $\nu$ of size $N$ over $\kk$, and let $V$ be a Gaussian matrix independent of $H$, defined on a common probability space:
+$V$ is Hermitian (symmetric if $\kk=\R$), the entries $(V_{ij})_{i\le j}$ are independent, $V_{ii}$ is a real centred Gaussian variable with variance $2/(\beta N)$, and for $i<j$:
+$V_{ij}$ is a real centred Gaussian with variance $1/N$ if $\kk=\R$, and $V_{ij}=(\xi_{ij}+\ii\zeta_{ij})/\sqrt2$ with $\xi_{ij},\zeta_{ij}$ independent real centred Gaussians of variance $1/N$ if $\kk=\C$.
+(This is the GOE for $\beta=1$ and the GUE for $\beta=2$; $\EE|V_{ij}|^2=1/N$ for $i<j$.) For $t\ge0$ put
+\[
+ H_t:=e^{-t/2}H+(1-e^{-t})^{1/2}V .
+\]
+The matrix $H_t$ has the law at time $t$ of the matrix Ornstein--Uhlenbeck flow started from $H$ (Dyson Brownian motion at the level of eigenvalues); NP uses only this formula, which is (2.29) of the original.
+For a Hermitian matrix $A$ write $\lambda(A):=(\lambda_1(A),\dots,\lambda_N(A))\in\R^N$ for its ordered eigenvalues.
+For a bounded Borel function $O:\R^n\to\R$, $1\le n\le N$, $E'\in\R$, $\varrho>0$ and $x\in\R^N$ put
+\[
+ \mathcal X^{O}_{E',\varrho}(x):=\sum_{\substack{i_1,\dots,i_n\in\{1,\dots,N\}\\ \text{pairwise distinct}}}O\big(N\varrho(x_{i_1}-E'),\dots,N\varrho(x_{i_n}-E')\big),\qquad C_{N,n}:=\frac{N^n(N-n)!}{N!}.
+\]
+For $O:\R^n\to\R$ let $\norm O_\infty:=\sup|O|$ and $\operatorname{Lip}(O):=\sup_{u\ne v}|O(u)-O(v)|/|u-v|$ (Euclidean norm on $\R^n$).
+
+\begin{theorem}[Strong local ergodicity of Dyson Brownian motion]\label{thm:23}
+Let $\vth,\delta_-,\delta_+,C_0>0$, $\eps'>0$, $\delta>0$, $0<c\le2$, $n\ge1$ and $\rho_O>0$.
+There is a constant $C$ depending only on $(\eps',\delta,c,n,\rho_O,\vth,\delta_-,\delta_+,C_0)$ such that for all $N\ge\max(n,3)$,
+$\kk\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$, every Lipschitz function $O:\R^n\to\R$ with support in $[-\rho_O,\rho_O]^n$, and all
+$E\in[-2+c,2-c]$, $b\in(0,c/2)$ and $t\ge N^{-1+\delta+\eps'}$, with $\varrho:=\rhosc(E)$:
+\begin{multline}\label{eq:abstrthm2}
+ \Big|\int_{E-b}^{E+b}\frac{\rd E'}{2b}\;C_{N,n}\Big(\EE\,\mathcal X^{O}_{E',\varrho}\big(\lambda(H_t)\big)-\EE\,\mathcal X^{O}_{E',\varrho}\big(\lambda(V)\big)\Big)\Big|\\
+ \le C\,\big(\norm O_\infty+\operatorname{Lip}(O)\big)\,N^{2\eps'}\Big[b^{-1}N^{-1+\eps'}+b^{-1/2}N^{-\delta/2}\Big].
+\end{multline}
+\end{theorem}
+\noindent\emph{Comments on the formulation.}
+(a) \emph{Correlation functions.} For a Borel probability measure $P$ on $\R^N$ let $P^{\rm sym}:=\frac1{N!}\sum_{\pi}P\circ\pi^{-1}$ be its symmetrisation (the sum is over the
+$N!$ permutations of the coordinates) and let $p^{(n)}[P]$ be the marginal of $P^{\rm sym}$ on the first $n$ coordinates. For every bounded Borel $F:\R^n\to\R$,
+\begin{align*}
+ N^n\int_{\R^n}F\,\rd p^{(n)}[P]&=\frac{N^n}{N!}\sum_\pi\int_{\R^N}F(x_{\pi(1)},\dots,x_{\pi(n)})\,P(\rd x)\\
+ &=C_{N,n}\int_{\R^N}\ \sum_{\substack{i_1,\dots,i_n\\ \text{pairwise distinct}}}F(x_{i_1},\dots,x_{i_n})\,P(\rd x),
+\end{align*}
+because each $n$-tuple of pairwise distinct indices equals $(\pi(1),\dots,\pi(n))$ for exactly $(N-n)!$ permutations $\pi$. Hence, with
+$p^{(n)}_{t,N}:=p^{(n)}[\text{law of }\lambda(H_t)]$ and $p^{(n)}_{V,N}:=p^{(n)}[\text{law of }\lambda(V)]$, the quantity inside the absolute value in \eqref{eq:abstrthm2} is
+\[
+ \int_{E-b}^{E+b}\frac{\rd E'}{2b}\,N^n\!\int_{\R^n}O\big(N\varrho(x_1-E'),\dots,N\varrho(x_n-E')\big)\,\big(p^{(n)}_{t,N}-p^{(n)}_{V,N}\big)(\rd x_1\cdots\rd x_n).
+\]
+When $p^{(n)}_{t,N}$ and $p^{(n)}_{V,N}$ have densities, the change of variables $\alpha_i=N\varrho(x_i-E')$ turns this into the left side of (2.36) of the original
+(with $N^n\,\rd x=\varrho^{-n}\rd\alpha$). The formulation \eqref{eq:abstrthm2} needs no densities. (The integrand is a bounded continuous function of $E'$, since $O$ is bounded and continuous.)
+
+(b) \emph{The reference measure.} The law of $\lambda(V)$ is the Gaussian $\beta$-ensemble: Part~III proves that it has the density
+$Z_{N,\beta}^{-1}\prod_{i<j}(x_j-x_i)^\beta\exp\big(-\frac{\beta N}4\sum_ix_i^2\big)$ on $\{x_1<\dots<x_N\}$, so that $p^{(n)}_{V,N}$ is the $n$-point correlation measure $p^{(n)}_{\mu,N}$ of the equilibrium measure $\mu\propto\exp\big(-\beta N\big[\sum_i\frac{x_i^2}4-\frac1N\sum_{i<j}\log|x_j-x_i|\big]\big)$ that appears in (2.36) of the original.
+Theorem~\ref{thm:23} does not use this identification.
+
+(c) \emph{The class of observables.} The theorem is stated for Lipschitz $O$, with a constant that depends on $O$ only through $\rho_O$ and, linearly, through $\norm O_\infty+\operatorname{Lip}(O)$.
+Since the left side of \eqref{eq:abstrthm2} is linear in $O$, this is equivalent to the statement for observables normalised by $\norm O_\infty+\operatorname{Lip}(O)\le1$.
+The original states the theorem for continuous $O$ with a constant depending on $O$; see Appendix~\ref{app:diff}, item PD-21. A version for H\"older continuous $O$, with a weaker power of $N$, is a corollary proved in Part~III.
+
+(d) For $\kk=\R$ the diagonal entries of $V$ have variance $2/N$, so that $H_t$ does not satisfy \textup{(A)} exactly; Part~III deals with this by a rescaling (cf.\ Lemma~\ref{lem:mono}(v)).
+
+\begin{theorem}[Universality of extreme eigenvalues]\label{thm:24}
+For every $\vth>0$ there exist $\eps>0$ and $\delta>0$ such that for all $\delta_-,\delta_+,C_0>0$ there is $N_0$ with the following property.
+Let $N\ge N_0$, $\kk\in\{\R,\C\}$, and let $\nu^{\mathbf v},\nu^{\mathbf w}\in\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$ be two ensembles over $\kk$ whose first two moments match:
+\begin{equation}\label{eq:2m}
+ \int\ol y^{\,l}y^{u}\,\nu^{\mathbf v}_{ij}(\rd y)=\int\ol y^{\,l}y^{u}\,\nu^{\mathbf w}_{ij}(\rd y)\qquad\text{for all }(i,j)\in\mathcal P_N\text{ and all integers }l,u\ge0\text{ with }l+u\le2 .
+\end{equation}
+Write $\PP^{\mathbf v}:=\PP_{\nu^{\mathbf v}}$, $\PP^{\mathbf w}:=\PP_{\nu^{\mathbf w}}$. Then for all $s\in\R$
+\begin{equation}\label{eq:tw}
+ \PP^{\mathbf v}\big(N^{2/3}(\lambda_N-2)\le s-N^{-\eps}\big)-N^{-\delta}\le\PP^{\mathbf w}\big(N^{2/3}(\lambda_N-2)\le s\big)\le
+ \PP^{\mathbf v}\big(N^{2/3}(\lambda_N-2)\le s+N^{-\eps}\big)+N^{-\delta},
+\end{equation}
+and
+\begin{equation}\label{eq:tw1}
+ \PP^{\mathbf v}\big(N^{2/3}(\lambda_1+2)\ge s+N^{-\eps}\big)-N^{-\delta}\le\PP^{\mathbf w}\big(N^{2/3}(\lambda_1+2)\ge s\big)\le
+ \PP^{\mathbf v}\big(N^{2/3}(\lambda_1+2)\ge s-N^{-\eps}\big)+N^{-\delta}.
+\end{equation}
+\end{theorem}
+\noindent Here $N_0$ does not depend on $s$. By \eqref{eq:2m} with $(l,u)=(1,1)$ the two ensembles have the same matrix of variances $B$.
+Theorems~\ref{thm:23} and~\ref{thm:24} are proved in Parts~III and~II.
+
+\subsection{The level form of Theorems 2.1 and 2.2}
+\begin{lemma}[Elementary properties of the class]\label{lem:mono}
+Let $\nu$ be an ensemble of size $N$ over $\kk$ with $\sigma_{ij}<\infty$ for all $i,j$.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em,itemsep=1pt]
+\item Assume \textup{(A)}, and let $\delta_->0$, $\delta_+>0$. Then \textup{(B)} is equivalent to the spectral condition \textup{(2.3)} of the original:
+$1$ is a simple eigenvalue of $B$ and $\operatorname{Spec}(B)\subset[-1+\delta_-,1-\delta_+]\cup\{1\}$.
+\item \emph{Monotonicity:} $\mathcal E_N(\vth,\delta_-,\delta_+,C_0)\subset\mathcal E_N(\vth',\delta_-',\delta_+',C_0')$ if
+$0<\vth'\le\vth$, $0<\delta_\pm'\le\delta_\pm$, $C_0'\ge C_0$. In particular
+$\mathcal E_N(\vth,\delta_-,\delta_+,C_0)\subset\mathcal E_N\big(\min(\vth,1),\min(\delta_-,1),\min(\delta_+,1),\max(C_0,1)\big)$.
+\item If $\mathcal E_N(\vth,\delta_-,\delta_+,C_0)\ne\emptyset$ then $C_0\ge1$ and (for $N\ge2$) $\delta_-+\delta_+\le2$.
+\item \emph{Reflection:} if $\nu\in\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$ then the ensemble $\nu^-$, $\nu^-_{ij}(S):=\nu_{ij}(-S)$, is in the same class, with the same $B$;
+$H(-x)=-H(x)$, and the law of $H$ under $\PP_{\nu^-}$ is the law of $-H$ under $\PP_\nu$.
+\item \emph{Scaling}: let $a\in\R$ and let $\nu^{a}$ be the ensemble $\nu^a_{ij}:=$ image of $\nu_{ij}$ under $y\mapsto ay$. Then $H(ax)=aH(x)$, the law of $H$ under $\PP_{\nu^a}$ is the law of $aH$ under $\PP_\nu$,
+the variances of $\nu^a$ are $a^2\sigma_{ij}^2$, and each of the conditions \textup{(R)}, \textup{(Z)} and \textup{(D)} for $\nu$ implies the same condition for $\nu^a$,
+\emph{with the same $\vth$} in \textup{(D)}. The same holds for the image of a single $\nu_{ij}$ under $y\mapsto ay$ with $a\in\kk$ $(i<j)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Recall that $B$ is a real symmetric matrix with nonnegative entries. Let $\be:=N^{-1/2}(1,\dots,1)$ and $\be^\perp:=\{v\in\R^N:\sum_iv_i=0\}$.
+
+(i) By (A) and the symmetry of $B$, $(B\be)_i=N^{-1/2}\sum_j\sigma_{ij}^2=N^{-1/2}$, i.e.\ $B\be=\be$. Consequently $\langle\be,Bv\rangle=\langle B\be,v\rangle=\langle\be,v\rangle$, so $B$ maps $\be^\perp$ into itself.
+
+\emph{\textup{(B)} implies the spectral condition.} Let $\mu\in\R$ be an eigenvalue of $B$ and $u\in\R^N\setminus\{0\}$ a real eigenvector, $Bu=\mu u$. Write $u=a\be+v$ with $a\in\R$, $v\in\be^\perp$. Then $a\be+Bv=Bu=\mu a\be+\mu v$ with $Bv\in\be^\perp$, hence
+$a(1-\mu)=0$ and $Bv=\mu v$. If $\mu\ne1$, then $a=0$, $v=u\ne0$ and $\mu|v|^2=\langle v,Bv\rangle\in[(-1+\delta_-)|v|^2,(1-\delta_+)|v|^2]$ by (B), so $\mu\in[-1+\delta_-,1-\delta_+]$.
+If $\mu=1$, then $|v|^2=\langle v,Bv\rangle\le(1-\delta_+)|v|^2$, so $v=0$ because $\delta_+>0$; thus the eigenspace of the eigenvalue $1$ is $\R\be$, and since $B$ is symmetric (hence diagonalisable), $1$ is a simple eigenvalue.
+
+\emph{The spectral condition implies \textup{(B)}.} By the spectral theorem there is an orthonormal basis $u_1,\dots,u_N$ of $\R^N$ with $Bu_\alpha=\mu_\alpha u_\alpha$. Since $1$ is a simple eigenvalue and $B\be=\be$,
+there is exactly one index $\alpha_0$ with $\mu_{\alpha_0}=1$, and $u_{\alpha_0}=\pm\be$. For $\alpha\ne\alpha_0$ we have $\mu_\alpha\ne1$, hence $\mu_\alpha\in[-1+\delta_-,1-\delta_+]$.
+If $v\in\be^\perp$, then $v=\sum_{\alpha\ne\alpha_0}c_\alpha u_\alpha$ with $c_\alpha=\langle u_\alpha,v\rangle$, $|v|^2=\sum_{\alpha\ne\alpha_0}c_\alpha^2$ and
+$\langle v,Bv\rangle=\sum_{\alpha\ne\alpha_0}\mu_\alpha c_\alpha^2\in[(-1+\delta_-)|v|^2,(1-\delta_+)|v|^2]$.
+
+(ii) Conditions (R), (Z), (A) do not involve the parameters. (C) and (B) are weakened when $C_0$ is increased and $\delta_\pm$ are decreased. For \eqref{eq:subexp}: if $x\ge1$ and $0<\vth'\le\vth$ then $x^{\vth'}\le x^{\vth}$ and $\vth^{-1}\le\vth'^{-1}$, so
+$\vth^{-1}\exp(-x^\vth)\le\vth'^{-1}\exp(-x^{\vth'})$. The second statement is the case $\vth'=\min(\vth,1)$, $\delta'_\pm=\min(\delta_\pm,1)$, $C_0'=\max(C_0,1)$.
+
+(iii) By (A) and (C), $1=\sum_{i}\sigma_{ij}^2\le N\cdot C_0/N=C_0$. If $N\ge2$ there is $v\in\be^\perp$ with $|v|=1$, and (B) gives $-1+\delta_-\le\langle v,Bv\rangle\le1-\delta_+$.
+
+(iv) $H(-x)=-H(x)$ is clear from Definition~\ref{def:ens}. The map $x\mapsto-x$ sends the product measure $\PP_\nu$ to the product of the images, which is $\PP_{\nu^-}$; so for every Borel set $S$ of matrices
+$\PP_{\nu^-}(H\in S)=\PP_\nu(H(-x)\in S)=\PP_\nu(-H\in S)$. Since $|-y|=|y|$, the measures $\nu^-_{ij}$ have the same second moments as $\nu_{ij}$, so $B$ and the conditions (A), (B), (C) are unchanged, and
+\eqref{eq:subexp} is unchanged; $\nu^-_{ii}(\R)=\nu_{ii}(\R)=1$ and $\int y\,\nu^-_{ij}(\rd y)=-\int y\,\nu_{ij}(\rd y)=0$.
+
+(v) Let $\mu$ be a Borel probability measure on $\kk$ with $s^2:=\int|y|^2\rd\mu<\infty$, let $a\in\kk$ and let $\mu^a$ be the image of $\mu$ under $y\mapsto ay$. Then $\int|y|^2\rd\mu^a=\int|ay|^2\rd\mu=|a|^2s^2$, so the standard deviation of $\mu^a$ is $|a|s$,
+and $\int y\,\rd\mu^a=a\int y\,\rd\mu$. Suppose $\mu(\{|y|>xs\})\le\vth^{-1}e^{-x^\vth}$ for all $x\ge1$. If $a\ne0$ then for $x\ge1$
+\[
+ \mu^a\big(\{y:|y|>x|a|s\}\big)=\mu\big(\{y:|ay|>x|a|s\}\big)=\mu\big(\{y:|y|>xs\}\big)\le\vth^{-1}e^{-x^\vth};
+\]
+if $a=0$ then $\mu^a$ is the point mass at $0$ and $\mu^a(\{|y|>0\})=0$. So $\mu^a$ satisfies the same bound, with the same $\vth$, relative to its own standard deviation $|a|s$. If $a\in\R$ and $\mu(\R)=1$ then $\mu^a(\R)=1$.
+Applying this to every $\nu_{ij}$ with a real $a$ gives the statements on $\nu^a$; $H(ax)=aH(x)$ holds for real $a$ by Definition~\ref{def:ens}, and the statement on the laws follows as in (iv).
+\end{proof}
+\noindent Under $H\mapsto aH$ the conditions (A), (B), (C) are of course not preserved ($B$ becomes $a^2B$); this is why the rescaling in Part~III has to be combined with a direct verification of (A)--(C).
+
+
+Part~I proves the following statement, in which the single parameter $K$ replaces the powers of $\log N$.
+Let (recall $\fa=1/\vth\ge1$ after the normalisation of Convention~\ref{conv:const})
+\begin{equation}\label{eq:ledger0}
+ C_1:=18\fa+20,\quad C_2:=12\fa+19,\quad C_3:=24\fa+36,\quad C_5:=18\fa+21,\quad C_4:=30\fa+44,\quad c_0:=\frac1{8C_3}.
+\end{equation}
+These values are fixed by the exponent ledger in Appendix~\ref{app:ledger}. The reduction below (Proposition~\ref{prop:reduction}) uses only that $C_1,\dots,C_5\ge1$ and $c_0>0$ are finite numbers depending on $\vth$ alone;
+the proof of parts (iv), (v) in Section~\ref{sec:rig} uses, in addition, only the relations listed in \eqref{eq:ledgerrel} there. For $K\ge1$ let
+\begin{equation}\label{eq:DK}
+ \bD_K:=\big\{z=E+\ii\eta:\ |E|\le5,\ K^{C_1}N^{-1}\le\eta\le10\big\}.
+\end{equation}
+
+\begin{theorem}[Local law and rigidity at level $K$]\label{thm:K}
+For all $\vth,\delta_-,\delta_+,C_0>0$, normalised as in Convention~\ref{conv:const}, there is $N_0$ such that for every $N\ge N_0$, $\kk\in\{\R,\C\}$,
+$\nu\in\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$ and every real $K$ with
+\begin{equation}\label{eq:Krange}
+ (\log N)^3\le K\le N^{c_0}
+\end{equation}
+there is a measurable event $\Xi_K\subset\Omega$ with $\PP(\Xi_K^c)\le e^{-K/2}$ on which:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em,itemsep=1pt]
+\item for all $z\in\bD_K$:\quad $\Lambda(z)\le K^{C_2}/(N\eta)$;
+\item for all $z\in\bD_K$:\quad $\Ld(z)+\Lo(z)\le K^{C_2}\big(\sqrt{\im\msc(z)/(N\eta)}+1/(N\eta)\big)$;
+\item $\max_j|\lambda_j|\le2+K^{C_3}N^{-2/3}$;
+\item $\sup_{E\in\R}|\fn(E)-\nsc(E)|\le K^{C_5}/N$;
+\item for all $j\in\{1,\dots,N\}$:\quad $|\lambda_j-\gamma_j|\le K^{C_4}\,[\min(j,N+1-j)]^{-1/3}N^{-2/3}$.
+\end{enumerate}
+\end{theorem}
+\noindent Parts (i), (ii) are proved in Section~\ref{sec:strong}, part (iii) in Section~\ref{sec:norm}, where the event $\Xi_K$ is defined; parts (iv) and (v) are deterministic consequences of (i) and (iii),
+proved in Section~\ref{sec:rig} (Proposition~\ref{prop:rig}).
+
+\begin{proposition}[Reduction]\label{prop:reduction}
+Theorem~\ref{thm:K} implies Theorems~\ref{thm:21} and~\ref{thm:22}, with the same constants in both theorems: if $(\vth,\delta_-,\delta_+,C_0)$ are given and
+$\bar\vth:=\min(\vth,1)$, $\bar\delta_\pm:=\min(\delta_\pm,1)$, $\bar C_0:=\max(C_0,1)$ are the normalised parameters, $C_1,\dots,C_5,c_0$ are defined by \eqref{eq:ledger0} with $\fa=1/\bar\vth$, then one can take
+\[
+ \phi:=\min\Big\{\frac{10}{C_1},\ \frac{2}{C_2},\ \frac{4}{C_3},\ \frac1{2C_4},\ \frac1{2C_5},\ 5c_0\Big\},\qquad A_0:=\frac3\phi,\qquad C:=1,\qquad c:=\frac12,
+\]
+and $N_0:=\max\{16,\ N_0'\}$, where $N_0'$ is the threshold of Theorem~\ref{thm:K} for the normalised parameters.
+\end{proposition}
+\begin{proof}
+Let $(\vth,\delta_-,\delta_+,C_0)$ be given. By Lemma~\ref{lem:mono}(ii), $\mathcal E_N(\vth,\delta_-,\delta_+,C_0)\subset\mathcal E_N(\bar\vth,\bar\delta_-,\bar\delta_+,\bar C_0)$, and the normalised parameters
+satisfy Convention~\ref{conv:const}. So Theorem~\ref{thm:K} applies to every $\nu\in\mathcal E_N(\vth,\delta_-,\delta_+,C_0)$ with the constants of the normalised parameters, which depend only on $(\vth,\delta_-,\delta_+,C_0)$.
+Note that $C_1,\dots,C_5\ge1$, so $\phi\le10/C_1<1$ (as $C_1\ge38$), $\phi>0$ and $A_0=3/\phi>1$.
+
+Let $N\ge N_0$ and let $L$ satisfy \eqref{eq:Lbound}. Since $N\ge16>e^e$ we have $\log N>e$ and $\ell:=\log\log N>1$; in particular $L\ge A_0\ell>0$. Put
+\[
+ K:=(\log N)^{\phi L}=\exp(\phi L\ell).
+\]
+\emph{Step 1: $K$ satisfies \eqref{eq:Krange}.} From $L\ge A_0\ell$ and $\ell\ge1$: $\phi L\ell\ge\phi A_0\ell^2=3\ell^2\ge3\ell$, so $K\ge e^{3\ell}=(\log N)^3$.
+From the upper bound in \eqref{eq:Lbound}: $10L\ell\le\log(10N)$, so $(\log N)^{10L}=\exp(10L\ell)\le10N$ and
+\[
+ K=\big((\log N)^{10L}\big)^{\phi/10}\le(10N)^{\phi/10}\le N^{\phi/5}\le N^{c_0},
+\]
+where we used $10N\le N^2$ (as $N\ge10$) and $\phi\le5c_0$.
+
+\emph{Step 2: comparison of the powers.} Since $\log N>1$ and $L>0$, the function $s\mapsto(\log N)^{sL}$ is strictly increasing. By the definition of $\phi$,
+$\phi C_1\le10$, $\phi C_2\le2$, $\phi C_3\le4$, $\phi C_4\le\frac12$, $\phi C_5\le\frac12$. Hence
+\begin{gather*}
+ K^{C_1}\le(\log N)^{10L},\qquad K^{C_2}\le(\log N)^{2L}<(\log N)^{4L},\qquad K^{C_3}\le(\log N)^{4L}<(\log N)^{9L},\\
+ K^{C_4}\le(\log N)^{L/2}<(\log N)^{L},\qquad K^{C_5}\le(\log N)^{L/2}<(\log N)^{L}.
+\end{gather*}
+In particular, if $z=E+\ii\eta\in\bS_L$ then $|E|\le5$ and $10\ge\eta>N^{-1}(\log N)^{10L}\ge K^{C_1}N^{-1}$, so $\bS_L\subset\bD_K$.
+
+\emph{Step 3: conclusion.} Let $\Xi_K$ be the event of Theorem~\ref{thm:K} for this $K$. At every point of $\Xi_K$ we have, by Theorem~\ref{thm:K}(i)--(v) and Step 2:
+\begin{itemize}[leftmargin=2em,itemsep=1pt]
+\item for all $z\in\bS_L$: $\Lambda(z)\le K^{C_2}/(N\eta)<(\log N)^{4L}/(N\eta)$;
+\item for all $z\in\bS_L$: $\Ld(z)+\Lo(z)\le K^{C_2}\big(\sqrt{\im\msc/(N\eta)}+1/(N\eta)\big)<(\log N)^{4L}\sqrt{\im\msc/(N\eta)}+(\log N)^{4L}/(N\eta)$ (strict because $1/(N\eta)>0$ and $\im\msc\ge0$);
+\item $\max_j|\lambda_j|\le2+K^{C_3}N^{-2/3}<2+N^{-2/3}(\log N)^{9L}$;
+\item for all $j$: $|\lambda_j-\gamma_j|\le K^{C_4}[\min(j,N+1-j)]^{-1/3}N^{-2/3}<(\log N)^{L}[\min(j,N-j+1)]^{-1/3}N^{-2/3}$;
+\item $\sup_{|E|\le5}|\fn(E)-\nsc(E)|\le\sup_{E\in\R}|\fn(E)-\nsc(E)|\le K^{C_5}/N<(\log N)^L/N$.
+\end{itemize}
+Therefore each of the sets whose probability is estimated in \eqref{eq:Lambdafinal}, \eqref{eq:Lambdaodfinal}, \eqref{eq:443}, \eqref{eq:rigidity}, \eqref{eq:nn} is contained in the measurable set $\Xi_K^c$.
+(The sets in \eqref{eq:443}, \eqref{eq:rigidity} and \eqref{eq:nn} are themselves measurable, by Lemma~\ref{lem:weyl}(d),(f); for the unions over $z\in\bS_L$ in \eqref{eq:Lambdafinal}, \eqref{eq:Lambdaodfinal} we use the outer probability.)
+Its (outer) probability is thus at most
+\[
+ \PP(\Xi_K^c)\le e^{-K/2}=\exp\big[-\tfrac12(\log N)^{\phi L}\big],
+\]
+which is the asserted bound with $C=1$, $c=\frac12$. The last sentence of Theorem~\ref{thm:21} holds with the event $\Xi_K$.
+\end{proof}
+
+\begin{remark}\label{rem:Kstronger}
+Theorem~\ref{thm:K} is slightly stronger than Theorems~\ref{thm:21}--\ref{thm:22}: the lower bound $L\ge A_0\log\log N$ is used only through $K\ge(\log N)^3$,
+the estimate \textup{(iv)} holds for all real $E$, the level $K$ may be as large as a small power of $N$ (which gives error bounds $N^{\eps}$ with probability $1-\exp(-\frac12N^{\eps/C})$, see Section~\ref{sec:export}),
+and the domain may be taken larger ($|E|\le\Emax+1$, see Theorem~\ref{thm:weak} and Section~\ref{sec:export}).
+At the upper endpoint of \eqref{eq:Lbound}, $(\log N)^{10L}=10N$ and the set $\bS_L$ is empty; then \textup{(i)}, \textup{(ii)} of Theorem~\ref{thm:21} hold trivially.
+\end{remark}

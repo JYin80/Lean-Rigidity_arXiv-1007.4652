@@ -1,0 +1,232 @@
+\subsection{Inputs from Part~I, conventions, statement}\label{sec:inputs}
+
+\paragraph{Setting.} We use the model of \S\ref{sec:main}. $\K\in\{\R,\C\}$, $N\ge3$, $\mathcal P_N=\{(i,j):1\le i\le j\le N\}$. An
+\emph{ensemble} $M=(\nu_p)_{p\in\mathcal P_N}$ (of size $N$ over $\K$) is a family of Borel probability measures on $\K$
+(Definition~\ref{def:ens}); the sample space is $\Omega=\K^{\mathcal P_N}$, the law is the product measure $\P_M=\bigotimes_p\nu_p$, $\E_M$ is the
+expectation, and $H=H(x)$ is the Hermitian matrix with $h_{ij}=x_{ij}$, $h_{ji}=\overline{x_{ij}}$ $(i<j)$, $h_{ii}=\re x_{ii}$. Further
+$\sigma_p^2=\sigma_{ij}^2=\int|y|^2\nu_{ij}(dy)$ and $B=(\sigma_{ij}^2)$. For $\Par=(\vartheta,\delta_-,\delta_+,C_0)\in(0,\infty)^4$ we say that
+$M$ \emph{satisfies} $\fA(\Par)$ if $M\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ (Definition~\ref{def:ass}): real diagonal (R), the
+subexponential decay (D) \eqref{eq:subexp} (note the strict inequality $|y|>x\sigma_p$ and
+that nothing is divided by $\sigma_p$), centring (Z), and \textup{(A)}, \textup{(B)}, \textup{(C)}. Two ensembles $M^v=(\nu^v_p)$, $M^w=(\nu^w_p)$
+of the same size over the same $\K$ \emph{have matching second moments} if \eqref{eq:2m} holds (this is (2.40) of the original, stated on the
+laws of the entries); we write $\P^v=\P_{M^v}$, $\E^v=\E_{M^v}$, and similarly for $w$.
+
+\paragraph{Conventions.} For a Hermitian $A\in M_n(\C)$, $n\ge1$, and $z\in\C_+$: $G_A(z)=(A-z)^{-1}$, and $\lambda_1(A)\le\dots\le\lambda_n(A)$
+are the eigenvalues counted with multiplicity; $\lambda_j=\lambda_j(H)$. $\msc$ is the function \eqref{eq:defmsc}, i.e.\ (Lemma~\ref{lem:msc}(a))
+the root of $m^2+zm+1=0$ with $\im m>0$. $\varrho_{sc}$, $n_{sc}$ and the classical locations $\gamma_j$ are those of \eqref{eq:sc}; by
+Lemma~\ref{lem:nsc}(c), $Nn_{sc}(\gamma_j)=j$ and $\gamma_N=2$. $\Lambda_d,\Lambda_o$ and $S_L$ are defined in \eqref{eq:defLambda}, \eqref{eq:defS}.
+$\Log$ is the principal branch of the logarithm on $\C\setminus(-\infty,0]$. For a function $g$ of the spectral parameter and fixed
+$z_1,z_2$ we write $\br{g}:=g(z_2)-g(z_1)$. $\P^*$ denotes outer probability (\S\ref{sec:green}). All logarithms are natural; $\log_+x:=\max(\log x,0)$ for $x>0$ and $\log_+0:=0$.
+\emph{Local constants.} The absolute constants $c_1,c_2,\dots$ of \S\ref{sec:step}, the named constants $C_2,C_3,C_4$, $C_F$, $C_q$, $C_\Phi$, the moment constants $\mathfrak m_k$, the control parameter $\Psi$ and the thresholds $N_1(\Par,\eg)$, $N_0^{\rm edge}(\Par)$
+are defined in this section and are used only here; they are unrelated to the constants and quantities with the same names in Parts~I and~III (for instance the exponents $C_1,\dots,C_5$ of Appendix~\ref{app:ledger},
+the constant $C_F$ of Theorem~\ref{thm:FA}, or the control parameter $\Psi$ of Section~\ref{sec:weak}).
+Likewise $\delta$ denotes only the exponent of Theorem~\ref{thm:24}.
+
+\paragraph{The probabilistic input from Part~I.} Part~II uses Theorems~\ref{thm:21}(ii) and \ref{thm:22} as black boxes, in the following form.
+For every $\Par$ there are constants $A_0>1$, $C>0$, $c>0$, $\phi\in(0,1)$ and $N_0\ge3$, depending only on $\Par$, the same in both
+theorems (see the remark after Theorem~\ref{thm:22}), such that for every $N\ge N_0$, $\K\in\{\R,\C\}$, every ensemble $M$ of size $N$ over $\K$
+with $\fA(\Par)$ and every real $L$ with $A_0\log\log N\le L\le\log(10N)/(10\log\log N)$ \eqref{eq:Lbound}:
+\begin{align*}
+U_L&:=\bigcup_{z\in S_L}\Big\{x\in\Omega:\ \Lambda_d(z)+\Lambda_o(z)\ge(\log N)^{4L}\sqrt{\frac{\im\msc(z)}{N\eta}}+\frac{(\log N)^{4L}}{N\eta}\Big\}\qquad(\eta=\im z),\\
+\textbf{(BB1)}\quad&\P^*_M(U_L)\le Ce^{-c(\log N)^{\phi L}},\\
+\textbf{(BB2)}\quad&\P_M\Big(\exists j:\ |\lambda_j-\gamma_j|\ge(\log N)^{L}\big[\min(j,N-j+1)\big]^{-1/3}N^{-2/3}\Big)\le Ce^{-c(\log N)^{\phi L}}.
+\end{align*}
+(BB1) is \eqref{eq:Lambdaodfinal} and (BB2) is \eqref{eq:rigidity}. The union in (BB1) is over \emph{all} $z\in S_L$, so the bound holds
+simultaneously for all $z\in S_L$; since the union need not be measurable a priori, (BB1) is stated with the outer probability, and
+Theorem~\ref{thm:21} provides in addition one measurable event of probability $\ge1-Ce^{-c(\log N)^{\phi L}}$ on which none of these events occurs.
+We use (BB1) only through the following consequence of the definition of $\P^*$:
+\emph{if $\Omega'\subset\Omega$ is a Borel set with $\Omega'\subset U_L$, then $\P_M(\Omega')\le Ce^{-c(\log N)^{\phi L}}$.}
+The event $\Omega_{\rm edge}$ of Lemma~\ref{lem:edge} is of this kind: it is \emph{open}, in particular Borel (Step~0 of the proof of Lemma~\ref{lem:edge}). The event of (BB2) is closed, because each $x\mapsto\lambda_j(H(x))$ is continuous
+(Lemma~\ref{lem:weyl}(d)).
+\emph{Nothing else from Theorems~\ref{thm:21}--\ref{thm:23} is used:} not \eqref{eq:Lambdafinal}, \eqref{eq:443}, \eqref{eq:nn}; no large deviation
+or fluctuation averaging lemma, no norm bound, no resolvent bound below the scale of $S_L$, and no bound for matrices with an entry or a row removed.
+
+\paragraph{Deterministic and elementary facts from Part~I.} We label them (S1)--(S6) (labels local to this section) and cite them by their numbers in Part~I.
+\begin{itemize}\itemsep0pt
+\item[(S1)] Lemma~\ref{lem:msc}(a)--(c): $\msc(z)^2+z\msc(z)+1=0$, $\im\msc(z)>0$ and $|\msc(z)|\le1$ for $z\in\C_+$.
+\item[(S2)] Lemma~\ref{lem:basic}(a),(c),(d),(h): $G_A(z)$ exists, $\|G_A(z)\|\le(\im z)^{-1}$, $\tr G_A(z)=\sum_j(\lambda_j(A)-z)^{-1}$,
+$G_A-G_B=G_A(B-A)G_B$ for Hermitian $A,B$ of equal size.
+\item[(S3)] Lemma~\ref{lem:schur}: the Schur complement formulas (I2) and the determinant identity (I6), $\det(A-z)=\det(A^{(a)}-z)/G_{aa}$.
+\item[(S4)] Lemma~\ref{lem:weyl}(c),(d): $\lambda_1(A)=-\lambda_n(-A)$ for Hermitian $A\in M_n(\C)$; $x\mapsto H(x)$ is $\R$-linear and
+$x\mapsto\lambda_j(H(x))$ is ($\sqrt2$-Lipschitz) continuous on $\Omega$. Lemma~\ref{lem:mono}(iv): reflection of an ensemble.
+\item[(S5)] Lemma~\ref{lem:moments}: moments under \eqref{eq:subexp}; if $\sigma_p=0$ then $\nu_p=\delta_0$.
+\item[(S6)] Lemma~\ref{lem:split}: splitting of the product law and partial integration (Tonelli, Fubini).
+\end{itemize}
+In addition Lemma~\ref{lem:nsc} (the semicircle distribution function and the classical locations) is used in \S\ref{sec:sandwich}.
+
+\begin{theorem}[Theorem~\ref{thm:24} with explicit exponents]\label{thm:24B}
+Let $\e:=\frac1{100}$ and $\delta:=\frac1{20}$. For every $\Par=(\vartheta,\delta_-,\delta_+,C_0)\in(0,\infty)^4$ there is $N_0^{\rm edge}(\Par)$ such that for
+all $N\ge N_0^{\rm edge}(\Par)$, $\K\in\{\R,\C\}$, all ensembles $M^v,M^w$ of size $N$ over $\K$ which satisfy $\fA(\Par)$ and have matching second moments
+\eqref{eq:2m}, and all $s\in\R$, the inequalities \eqref{eq:tw} (for $\lambda_N$) and \eqref{eq:tw1} (for $\lambda_1$) hold.
+\end{theorem}
+\noindent Theorem~\ref{thm:24B} implies Theorem~\ref{thm:24}: given $\vartheta$, take $\e=\frac1{100}$, $\delta=\frac1{20}$ (absolute constants, the
+same for every $\vartheta$); given $\delta_\pm,C_0$, take $N_0:=N_0^{\rm edge}(\vartheta,\delta_-,\delta_+,C_0)$. The quantifier order is
+$\forall\vartheta\ \exists\e,\delta\ \forall\delta_\pm,C_0\ \exists N_0\ \forall N\ \forall\K,M^v,M^w\ \forall s$.
+In particular $N_0$ depends only on $\Par$, and not on $s$, $\K$, $M^v$, $M^w$. The proof is in \S\ref{sec:proof24}.
+
+\paragraph{Parameters (fixed for the whole section).} Let $A_0,C,c,\phi,N_0$ be the constants of (BB1), (BB2) for the given $\Par$. For
+$N\ge16$ (so that $\log\log N>1$) and a parameter $\eg\in(0,\frac1{10}]$ put
+\begin{equation}\label{eq:B2par}
+L_0:=A_0\log\log N,\qquad W:=(\log N)^{L_0}N^{-2/3},\qquad E_L:=2+2W,
+\end{equation}
+\begin{equation}\label{eq:B2par2}
+\eta:=N^{-2/3-\eg},\qquad \e:=\tfrac12\eg,\qquad \ell:=\tfrac13N^{-2/3-\e},\qquad \Psi:=4N^{-1/3+2\eg},\qquad t:=N^{-1/2+2\eg}.
+\end{equation}
+The comparison branch (\S\ref{sec:step}--\S\ref{sec:gfc}) works with any fixed $\eg\in(0,\frac1{10}]$; the rigidity branch (\S\ref{sec:sandwich})
+and the proof of Theorem~\ref{thm:24B} use $\eg=\frac1{50}$, i.e.\ $\e=\frac1{100}$ (the $\e$ of Theorem~\ref{thm:24B}). Note
+\begin{equation}\label{eq:B2etaell}
+\frac{\eta}{\ell}=3N^{-\eg+\e}=3N^{-\e},\qquad 3\ell=N^{-2/3-\e}.
+\end{equation}
+
+\begin{lemma}[largeness of $N$; elementary]\label{lem:N0}
+Let $\Par$ be given and let $A_0,C,c,\phi,N_0$ be as above. For $\eg\in(0,\frac1{10}]$ put
+\begin{equation}\label{eq:B2ustar}
+u_*:=\max\Big\{\sqrt{\tfrac{48(4A_0+5)}{\eg}},\ \tfrac2{\phi A_0},\ \sqrt{\tfrac{2\,b_2}{\phi A_0}},\ \sqrt{\tfrac{24(1+b_3)}{\eg\vartheta}},\ \log_+\tfrac{\log_+C_0}{2\eg}\Big\},
+\end{equation}
+where $b_2:=\log_+\big((\log_+C+20)/c\big)$ and $b_3:=\log\big(20+\log_+(1/\vartheta)\big)$, and
+\[
+N_1(\Par,\eg):=\max\big\{N_0,\ e^{27},\ \exp(e^{u_*})\big\}.
+\]
+Then $N_1$ depends only on $(\Par,\eg)$, and for every $N\ge N_1$, with the parameters \eqref{eq:B2par}, \eqref{eq:B2par2}:
+\begin{itemize}\itemsep1pt
+\item[\textup{(N1)}] $L_0$ satisfies \eqref{eq:Lbound}, and $\eta>N^{-1}(\log N)^{10L_0}$; hence $y+i\eta\in S_{L_0}$ for every $y\in[-5,5]$, and \textup{(BB1), (BB2)} hold with $L=L_0$.
+\item[\textup{(N2)}] $3(\log N)^{4L_0}\le N^{\eg/2}$ and $2(\log N)^{L_0}+1\le N^{\eg}$; in particular $2W+N^{-2/3}\le N^{-2/3+\eg}$.
+\item[\textup{(N3)}] $Ce^{-c(\log N)^{\phi L_0}}\le N^{-20}$ and $\vartheta^{-1}\exp(-N^{\eg\vartheta})\le N^{-20}$.
+\item[\textup{(N4)}] $C_0^{1/2}\le N^{\eg}$, $\Psi\le\frac18$ and $40\,t\le\Psi$.
+\item[\textup{(N5)}] $\frac3\pi\big(4(\log N)^{3L_0/2}+1\big)N^{-\e}+4N^{-2\e}(\log N)^{L_0}\le\frac19$, $\ \frac6\pi N^{-\e}\le\frac19$, and $2\ell\le W$.
+\end{itemize}
+\end{lemma}
+\noindent This lemma is the only place where the threshold for $N$ is enlarged in the rigidity branch; later statements refer to (N1)--(N5) by number.
+The threshold of the comparison theorem (Theorem~\ref{thm:gfc}) and the final condition (N6) are added in \S\ref{sec:proof24}.
+
+\begin{proof}
+Write $u:=\log\log N$, so that $\log N=e^u$ and $(\log N)^{aL_0}=\exp(aA_0u^2)$ for every $a>0$. Since $N\ge e^{27}$, $\log N\ge27$ and $u\ge\log27>1$.
+Since $N\ge\exp(e^{u_*})$, $u\ge u_*$.
+
+\emph{An elementary inequality.} For $u\ge0$, $e^u=\sum_{k\ge0}u^k/k!\ge u^4/24$. Hence, for $\alpha,\beta\ge0$ and $\gamma>0$:
+\begin{equation}\tag{E}\label{eq:B2E}
+u\ge1\ \text{ and }\ u^2\ge\frac{24(\alpha+\beta)}{\gamma}\quad\Longrightarrow\quad\alpha u^2+\beta\le(\alpha+\beta)u^2\le\frac{\gamma u^4}{24}\le\gamma e^u .
+\end{equation}
+By the choice of $u_*$ we obtain from \eqref{eq:B2E} and directly:
+\begin{align}
+&4A_0u^2+5\le\tfrac{\eg}2\,e^u\qquad&&(\alpha=4A_0,\ \beta=5,\ \gamma=\eg/2),\label{eq:B2U1}\\
+&\phi A_0u^2\ge2u\ \text{ and }\ \phi A_0u^2\ge2b_2,\ \text{ hence }\ \phi A_0u^2\ge u+b_2,\label{eq:B2U2}\\
+&u+b_3\le u^2+b_3\le\eg\vartheta\,e^u\qquad&&(\alpha=1,\ \beta=b_3,\ \gamma=\eg\vartheta),\label{eq:B2U3}\\
+&e^u\ge\frac{\log_+C_0}{2\eg}\qquad&&(u\ge\log_+\tfrac{\log_+C_0}{2\eg}).\label{eq:B2U4}
+\end{align}
+(For \eqref{eq:B2U4}: if $\log_+C_0=0$ it is trivial; otherwise $u\ge\log\frac{\log C_0}{2\eg}$.)
+
+\emph{\textup{(N1)}.} By \eqref{eq:B2U1} and $\eg\le\frac1{10}$: $4A_0u^2\le\frac1{20}e^u$, i.e.\ $80A_0u^2\le\log N$. Hence $10L_0\log\log N=10A_0u^2\le\log N<\log(10N)$,
+which is the upper bound in \eqref{eq:Lbound}; the lower bound holds with equality. Moreover $(\log N)^{10L_0}=\exp(10A_0u^2)\le\exp(\frac18\log N)=N^{1/8}$, so
+$N^{-1}(\log N)^{10L_0}\le N^{-7/8}<N^{-23/30}\le N^{-2/3-\eg}=\eta$, since $\frac23+\eg\le\frac{23}{30}<\frac78$ and $N>1$. For $|y|\le5$ the point $y+i\eta$
+has $|\re|\le5$ and $N^{-1}(\log N)^{10L_0}<\eta\le1\le10$, so it lies in $S_{L_0}$ \eqref{eq:defS}. Finally $N\ge N_0$, so (BB1), (BB2) apply with $L=L_0$.
+
+\emph{\textup{(N2)}.} By \eqref{eq:B2U1}, $\log3+4A_0u^2\le5+4A_0u^2\le\frac{\eg}2\log N$, i.e.\ $3(\log N)^{4L_0}\le N^{\eg/2}$. Since $\log N\ge1$ and $L_0>0$,
+$(\log N)^{L_0}\ge1$, so $2(\log N)^{L_0}+1\le3(\log N)^{L_0}\le3(\log N)^{4L_0}\le N^{\eg/2}\le N^{\eg}$. Multiplying by $N^{-2/3}$ gives $2W+N^{-2/3}\le N^{-2/3+\eg}$.
+
+\emph{\textup{(N3)}.} By \eqref{eq:B2U2}, $(\log N)^{\phi L_0}=\exp(\phi A_0u^2)\ge e^{b_2}e^u\ge\frac{\log_+C+20}c\,\log N$, so
+$c(\log N)^{\phi L_0}\ge(\log_+C+20)\log N\ge\log C+20\log N$ (as $\log N\ge1$), i.e.\ $Ce^{-c(\log N)^{\phi L_0}}\le N^{-20}$.
+By \eqref{eq:B2U3}, $N^{\eg\vartheta}=\exp(\eg\vartheta\log N)=\exp(\eg\vartheta e^u)\ge e^{b_3}e^u=(20+\log_+(1/\vartheta))\log N\ge20\log N+\log(1/\vartheta)$,
+hence $\vartheta^{-1}\exp(-N^{\eg\vartheta})\le\vartheta^{-1}\cdot\vartheta N^{-20}=N^{-20}$.
+
+\emph{\textup{(N4)}.} By \eqref{eq:B2U4}, $\eg\log N\ge\frac12\log C_0$, i.e.\ $C_0^{1/2}\le N^{\eg}$. Since $\eg\le\frac1{10}$, $\frac13-2\eg\ge\frac2{15}$ and
+$N^{1/3-2\eg}\ge N^{2/15}\ge e^{(2/15)\cdot27}=e^{3.6}>32$, i.e.\ $\Psi=4N^{-(1/3-2\eg)}\le\frac18$. Next $\Psi/t=4N^{1/6}\ge4e^{27/6}>40$.
+
+\emph{\textup{(N5)}.} Put $Y:=(\log N)^{3L_0/2}=\exp(\frac32A_0u^2)\ge1$. Then $(\log N)^{L_0}\le Y$, $N^{-2\e}\le N^{-\e}$, $\frac3\pi<1$, so the left side of the first
+inequality is at most $5YN^{-\e}+4YN^{-\e}=9YN^{-\e}$. By \eqref{eq:B2U1} and $\e=\eg/2$: $\log81+\frac32A_0u^2\le5+4A_0u^2\le\e\log N$, i.e.\ $81Y\le N^{\e}$, so
+$9YN^{-\e}\le\frac19$. Also $\frac6\pi N^{-\e}\le2N^{-\e}\le9YN^{-\e}\le\frac19$. Finally $2\ell=\frac23N^{-2/3-\e}\le N^{-2/3}\le(\log N)^{L_0}N^{-2/3}=W$.
+\end{proof}
+
+\noindent\emph{Architecture of the proof of Theorem~\ref{thm:24B}.}
+(1) \S\ref{sec:prelim}: hybrids lie in one class (Lemma~\ref{lem:hyb}); $\msc$ near the edge (Lemma~\ref{lem:mscB}); edge resolvent bounds from (BB1) (Lemma~\ref{lem:edge}).
+(2) \S\ref{sec:X}: the functional $X$ and exact determinant-ratio formulas (deterministic).
+(3) \S\ref{sec:sandwich}: $\E q(X^-_E(H))-N^{-20}\le\P(\lambda_N<E)\le\E q(X^+_E(H))+N^{-20}$, from (BB2) alone.
+(4) \S\ref{sec:step}--\S\ref{sec:decor}: one Lindeberg step. (5) \S\ref{sec:gfc}: telescoping over the $N(N+1)/2$ entries (Theorem~\ref{thm:gfc}).
+(6) \S\ref{sec:proof24}: Proposition~\ref{prop:oneside} combines (3) and (5); Theorem~\ref{thm:24B} follows, for $\lambda_1$ via $H\mapsto-H$.
+The \emph{rigidity branch} (3) uses (BB2) only; the \emph{comparison branch} (4)--(5) uses (BB1) only; they meet in Proposition~\ref{prop:oneside}.
+
+\subsection{Preliminaries: hybrid ensembles and the edge regime}\label{sec:prelim}
+
+\begin{definition}[hybrids, removed entry, negation]\label{def:hyb}
+Let $M^v=(\nu^v_p)$, $M^w=(\nu^w_p)$ be ensembles of size $N$ over $\K$, $\Gamma:=N(N+1)/2=\#\mathcal P_N$, and fix any bijection
+$\varphi:\mathcal P_N\to\{1,\dots,\Gamma\}$; $p_k:=\varphi^{-1}(k)$. For $0\le k\le\Gamma$ the \emph{hybrid} $M_k=(\nu^{(k)}_p)_p$ has
+$\nu^{(k)}_p:=\nu^w_p$ if $\varphi(p)\le k$ and $\nu^{(k)}_p:=\nu^v_p$ otherwise; thus $M_0=M^v$ and $M_\Gamma=M^w$.
+For a pair $p=(a,b)\in\mathcal P_N$ and $v\in\K$ put
+\[
+V_p(v):=vE^{(ab)}+\bar vE^{(ba)}\quad(a<b),\qquad V_p(v):=(\re v)\,E^{(aa)}\quad(a=b),
+\]
+where $E^{(ab)}$ is the matrix unit (so $V_{(a,a)}(v)=vE^{(aa)}$ for real $v$). For a Hermitian $H$ let $H^{[p]}:=H-V_p(h_{ab})$, i.e.\ $H$ with the entries
+$(a,b)$ and $(b,a)$ set to $0$. For an ensemble $M=(\nu_p)$, $-M:=(\nu^-_p)$ denotes the ensemble of the image laws $\nu^-_p(S):=\nu_p(-S)$.
+\end{definition}
+
+\begin{lemma}[stability of the assumptions; structure of one step]\label{lem:hyb}
+Let $M^v,M^w$ be ensembles of size $N$ over $\K$ which satisfy $\fA(\Par)$ and have matching second moments \eqref{eq:2m}.
+\begin{itemize}\itemsep1pt
+\item[\textup{(i)}] $\sigma^v_p=\sigma^w_p$ for all $p\in\mathcal P_N$; hence $B^v=B^w$.
+\item[\textup{(ii)}] Every ensemble $M=(\nu_p)$ with $\nu_p\in\{\nu^v_p,\nu^w_p\}$ for each $p$ satisfies $\fA(\Par)$ \emph{with the same} $\Par$, and its variance
+matrix is $B^v$. In particular every hybrid $M_k$, $0\le k\le\Gamma$, satisfies $\fA(\Par)$.
+\emph{Structure of one step:} let $1\le k\le\Gamma$, $p:=p_k=(a,b)$, $J:=\{p\}$, $J^c:=\mathcal P_N\setminus\{p\}$, and write $x=(x',x_p)$ with $x'=x_{J^c}$. Then
+$\P_{M_{k-1}}$ and $\P_{M_k}$ have the same marginal $\P':=\bigotimes_{q\ne p}\nu^{(k)}_q$ on $\K^{J^c}$, and under each of them $x'$ and $x_p$ are independent,
+$x_p$ having the law $\nu^v_p$ under $\P_{M_{k-1}}$ and $\nu^w_p$ under $\P_{M_k}$. The matrix $Q(x):=H(x)^{[p]}$ depends only on $x'$, and
+$H(x)=Q(x)+V_p(x_p)$ for every $x\in\Omega$. Consequently, for every bounded Borel function $\Phi$ on the Hermitian $N\times N$ matrices,
+\begin{equation}\label{eq:B2step}
+\begin{aligned}
+\E_{M_{k-1}}\Phi(H)&=\int_{\K^{J^c}}\Big[\int_\K\Phi\big(Q(x')+V_p(v)\big)\,\nu^v_p(dv)\Big]\P'(dx'),\\
+\E_{M_{k}}\Phi(H)&=\int_{\K^{J^c}}\Big[\int_\K\Phi\big(Q(x')+V_p(v)\big)\,\nu^w_p(dv)\Big]\P'(dx'),
+\end{aligned}
+\end{equation}
+the inner integrals being Borel functions of $x'$; and $\E_{M_{k-1}}\Theta(Q)=\E_{M_k}\Theta(Q)=\int\Theta(Q(x'))\P'(dx')$ for every bounded Borel $\Theta$.
+\item[\textup{(iii)}] $-M^v$ and $-M^w$ satisfy $\fA(\Par)$ and have matching second moments \eqref{eq:2m}. Moreover $H(-x)=-H(x)$, the law of $H$ under $\P_{-M}$ is the
+law of $-H$ under $\P_M$ (for $M\in\{M^v,M^w\}$), and $\lambda_1(A)=-\lambda_N(-A)$ for every Hermitian $A\in M_N(\C)$.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+(i) For $(l,u)=(1,1)$, \eqref{eq:2m} reads $\int|y|^2\nu^v_p(dy)=\int|y|^2\nu^w_p(dy)$, i.e.\ $(\sigma^v_p)^2=(\sigma^w_p)^2$; both are nonnegative.
+
+(ii) Let $M=(\nu_p)$ with $\nu_p\in\{\nu^v_p,\nu^w_p\}$. The second moment of $\nu_p$ is $\sigma_p^2$ with $\sigma_p:=\sigma^v_p=\sigma^w_p$ by (i), so the variance matrix of $M$ is $B^v$.
+We check the conditions of Definition~\ref{def:ass} one by one.
+(R) and (Z) are properties of each single law $\nu_p$, and they hold for $\nu^v_p$ and for $\nu^w_p$.
+\eqref{eq:subexp} for $M$ asks, for each $p$ and $x\ge1$, that $\nu_p(\{|y|>x\sigma_p\})\le\vartheta^{-1}e^{-x^\vartheta}$ with the standard deviation $\sigma_p$ of $\nu_p$;
+since $\sigma_p=\sigma^v_p=\sigma^w_p$, this is \eqref{eq:subexp} for $M^v$ (if $\nu_p=\nu^v_p$) or for $M^w$ (if $\nu_p=\nu^w_p$) at the pair $p$.
+(A), (B), (C) are conditions on the variance matrix alone, which is $B^v$, and $M^v$ satisfies them with the parameters $\delta_\pm$, $C_0$.
+For the hybrids, $\nu^{(k)}_p\in\{\nu^v_p,\nu^w_p\}$ by Definition~\ref{def:hyb}.
+
+\emph{Structure of one step.} For $q\ne p_k$ we have $\varphi(q)\ne k$, so $\varphi(q)\le k-1$ if and only if $\varphi(q)\le k$; hence $\nu^{(k-1)}_q=\nu^{(k)}_q$. For $q=p_k$:
+$\nu^{(k-1)}_{p}=\nu^v_{p}$ (as $\varphi(p)=k>k-1$) and $\nu^{(k)}_{p}=\nu^w_{p}$. By Lemma~\ref{lem:split}(a), applied with $I=\mathcal P_N$ and $J=\{p\}$,
+$\P_{M_{k-1}}$ is the image of $\P'\otimes\nu^v_p$ and $\P_{M_k}$ the image of $\P'\otimes\nu^w_p$ under $(x',x_p)\mapsto x$; this is the statement on the
+marginals and on independence. By Definition~\ref{def:ens}, the entries of $H(x)$ outside $\{(a,b),(b,a)\}$ are functions of $x'$, and the entries
+$(a,b),(b,a)$ of $H(x)$ are $x_p,\overline{x_p}$ if $a<b$, resp.\ the entry $(a,a)$ is $\re x_p$ if $a=b$. Hence $Q(x)=H(x)-V_p(h_{ab}(x))$ has the entries of $H(x)$
+outside $\{(a,b),(b,a)\}$ and zeros there, so it depends only on $x'$, and $V_p(x_p)=V_p(h_{ab}(x))$ (Definition~\ref{def:hyb}: for $a=b$ only $\re x_p=h_{aa}$ enters)
+gives $H(x)=Q(x)+V_p(x_p)$. The map $(x',v)\mapsto Q(x')+V_p(v)$ is $\R$-linear, hence continuous, so $(x',v)\mapsto\Phi(Q(x')+V_p(v))$ is a bounded Borel function on
+$\K^{J^c}\times\K$. Lemma~\ref{lem:split}(b),(c) (partial integration over the coordinate $x_p$) gives \eqref{eq:B2step}, with inner integrals Borel in $x'$.
+The last statement is \eqref{eq:B2step} for the function $\Phi$ with $\Phi(Q(x')+V_p(v)):=\Theta(Q(x'))$, i.e.\ it is the equality of the marginals on $\K^{J^c}$.
+
+(iii) By Lemma~\ref{lem:mono}(iv), $-M^v$ and $-M^w$ belong to $\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$, $H(-x)=-H(x)$, and the law of $H$ under $\P_{-M}$ is the
+law of $-H$ under $\P_M$. For integers $l,u\ge0$ with $l+u\le2$, the function $\bar y^{\,l}y^u$ is integrable for $\nu^v_p$ and $\nu^w_p$ (it is bounded by $1+|y|^2$),
+and $\int\bar y^{\,l}y^u\,\nu^-_p(dy)=\int\overline{(-y)}^{\,l}(-y)^u\,\nu_p(dy)=(-1)^{l+u}\int\bar y^{\,l}y^u\,\nu_p(dy)$; so \eqref{eq:2m} for $(M^v,M^w)$ implies
+\eqref{eq:2m} for $(-M^v,-M^w)$. The last identity is Lemma~\ref{lem:weyl}(c) with $n=N$.
+\end{proof}
+
+\noindent\emph{Remarks.} (1) The matrix $Q=H^{[p]}$ does \emph{not} satisfy (A) (one variance is removed), so (BB1) is never applied to $Q$; bounds on
+$G_Q$ are derived deterministically from those on $G_H$ (Lemma~\ref{lem:RfromS}). (2) Vanishing variances are allowed throughout: if $\sigma_{p_k}=0$ then
+$\nu^v_{p_k}=\nu^w_{p_k}=\delta_0$ by Lemma~\ref{lem:moments}(a), so $M_{k-1}=M_k$ and the step $k$ is trivial; no statement of this section divides by a variance.
+(3) No union bound over the hybrids is ever taken: each Lindeberg step uses events of its own hybrid only, and the uniformity of all bounds in $k$ is the uniformity
+of (BB1), (BB2) over the class $\fA(\Par)$, which contains every hybrid by (ii).
+
+\begin{lemma}[$\msc$ near the edge]\label{lem:mscB}
+\textup{(a)} For every $z\in\C_+$:
+\[
+(\msc(z)+1)^2=(2-z)\,\msc(z),\qquad\text{hence}\qquad|\msc(z)+1|\le|z-2|^{1/2}\quad\text{and}\quad\im\msc(z)\le|z-2|^{1/2}.
+\]
+\textup{(b)} Let $N\ge1$, $\eg\in(0,\frac1{10}]$, $\eta=N^{-2/3-\eg}$, $y\in\R$ with $|y-2|\le N^{-2/3+\eg}$, and $z=y+i\eta$. Then
+\[
+|z-2|\le2N^{-2/3+\eg},\qquad|\msc(z)+1|\le\sqrt2\,N^{-1/3+\eg/2},\qquad\im\msc(z)\le\sqrt2\,N^{-1/3+\eg/2}.
+\]
+\end{lemma}
+\begin{proof}
+(a) Write $m=\msc(z)$. Then $(m+1)^2=m^2+2m+1=(m^2+zm+1)+(2-z)m=(2-z)m$ by (S1). Since $|m|\le1$ (S1), $|m+1|^2=|2-z||m|\le|z-2|$.
+Finally $\im m=\im(m+1)\le|m+1|$.
+(b) $|z-2|\le|y-2|+\eta\le N^{-2/3+\eg}+N^{-2/3-\eg}\le2N^{-2/3+\eg}$, and by (a) $|\msc(z)+1|$ and $\im\msc(z)$ are at most $(2N^{-2/3+\eg})^{1/2}=\sqrt2N^{-1/3+\eg/2}$.
+\end{proof}
+\noindent This exact identity replaces the asymptotics ``$\im\msc\sim\sqrt{\kappa+\eta}$'' of the original, (6.34). The edge resolvent bounds
+(Lemma~\ref{lem:edge}) follow next; they are derived from (BB1) and Lemma~\ref{lem:mscB}(b).

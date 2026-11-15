@@ -1,0 +1,817 @@
+\section{Probabilistic toolbox}\label{sec:prob}
+Throughout Sections~\ref{sec:prob} and~\ref{sec:weak} the model parameters are normalised as in Convention~\ref{conv:const}: $0<\vth\le1$, $0<\dpm\le1$, $C_0\ge1$, $\fa=1/\vth\ge1$.
+All random variables are complex valued unless said otherwise, $\log$ is the natural logarithm, and $\bone(\cdot)$ denotes an indicator function.
+We use two named constants that depend only on $\vth$:
+\[
+ C_\vth:=90\,\fa,\qquad\qquad\kappa_\vth:=\log\fa+4\fa\log(4C_\vth)\ \ (\ge23).
+\]
+(The bound $\kappa_\vth\ge23$ holds because $\fa\ge1$ and $4\log360>23$.)
+\subsection{Moments and truncation}
+\begin{lemma}[Moments]\label{lem:moments}
+Let $0<\vth\le1$, let $\mu$ be a Borel probability measure on $\C$ and $s\ge0$ with $\mu(\{y:|y|>xs\})\le\vth^{-1}e^{-x^\vth}$ for all $x\ge1$. Then:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item for every real $q\ge1$:\quad $\int|y|^q\,\mu(\rd y)\le(C_\vth q)^{q/\vth}s^q$, with $C_\vth=90/\vth$; if $s=0$ then $\mu=\delta_0$;
+\item \emph{(truncation)} for every $T\ge1$:
+\begin{align*}
+ \int|y|\,\bone(|y|>Ts)\,\mu(\rd y)&\le\Big(\int|y|^2\rd\mu\Big)^{1/2}\vth^{-1/2}e^{-T^\vth/2},\\
+ \int|y|^2\,\bone(|y|>Ts)\,\mu(\rd y)&\le(4C_\vth)^{2\fa}\,s^2\,\vth^{-1/2}e^{-T^\vth/2}.
+\end{align*}
+\end{enumerate}
+In particular, for $\nu\in\mathcal E_N(\vth,\dpm,C_0)$ and all $i,j$: $\EE|h_{ij}|^q\le(C_\vth q)^{\fa q}\sigma_{ij}^q$ for every real $q\ge1$, and for $T\ge1$,
+\[
+ \PP\big(\exists\,i,j:\ |h_{ij}|>T\sigma_{ij}\big)\le\PP\big(\exists\,(i,j)\in\mathcal P_N:\ |x_{ij}|>T\sigma_{ij}\big)\le N^2\vth^{-1}e^{-T^\vth}.
+\]
+\end{lemma}
+\begin{proof}
+(a) \emph{The case $s=0$.} The hypothesis gives $\mu(|y|>0)\le\vth^{-1}e^{-x^\vth}$ for every $x\ge1$; letting $x\to\infty$, $\mu(|y|>0)=0$, i.e.\ $\mu=\delta_0$, and both sides of the moment bound vanish.
+
+\emph{The case $s>0$.} By the layer-cake formula (Mathlib: \texttt{lintegral\_rpow\_eq\_lintegral\_meas\_lt\_mul}) applied to the function $y\mapsto|y|/s$, and since $\mu(\cdot)\le1$,
+\[
+ \int\Big(\frac{|y|}s\Big)^q\mu(\rd y)=\int_0^\infty qx^{q-1}\mu(|y|>xs)\,\rd x\le\int_0^1qx^{q-1}\rd x+\frac q\vth\int_1^\infty x^{q-1}e^{-x^\vth}\rd x .
+\]
+The first integral is $1$. In the second we substitute $x=u^{\fa}$ (so $x^\vth=u$, $\rd x=\fa u^{\fa-1}\rd u$) and put $t:=\fa q\ge1$:
+\begin{align*}
+ \frac q\vth\int_1^\infty x^{q-1}e^{-x^\vth}\rd x&=q\fa^2\int_1^\infty u^{t-1}e^{-u}\rd u\le q\fa^2\int_1^\infty u^{t}e^{-u/2}\,e^{-u/2}\rd u\\
+ &\le q\fa^2(2t)^t\int_0^\infty e^{-u/2}\rd u=2q\fa^2(2t)^t .
+\end{align*}
+Here we used $u^{t-1}\le u^t$ for $u\ge1$ and $\sup_{u>0}u^te^{-u/2}=(2t/e)^t\le(2t)^t$ (the function $u\mapsto t\log u-u/2$ is maximal at $u=2t$).
+Now $q\le2^q\le2^{t}$ and $\fa^2\le e^{2\fa}\le e^{2t}$, so with $X:=(4e^2t)^t\ge1$,
+\[
+ \int\Big(\frac{|y|}s\Big)^q\rd\mu\le1+2\cdot2^te^{2t}(2t)^t=1+2X\le3X\le3^tX=(12e^2\,\fa q)^{\fa q}\le(C_\vth q)^{\fa q},
+\]
+because $12e^2<90$.
+
+(b) Let $R:=\{|y|>Ts\}$; by hypothesis (with $x=T\ge1$) $\mu(R)\le\vth^{-1}e^{-T^\vth}$. By the Cauchy--Schwarz inequality,
+$\int|y|\bone_R\rd\mu\le(\int|y|^2\rd\mu)^{1/2}\mu(R)^{1/2}$ and $\int|y|^2\bone_R\rd\mu\le(\int|y|^4\rd\mu)^{1/2}\mu(R)^{1/2}$, and $\int|y|^4\rd\mu\le(4C_\vth)^{4\fa}s^4$ by (a).
+
+\emph{The ensemble.} Let $(i,j)\in\mathcal P_N$. By Definition~\ref{def:ass}, the measure $\nu_{ij}$ satisfies the hypothesis with $s=\sigma_{ij}$ (this is \eqref{eq:subexp}), and by Definition~\ref{def:ens}
+$|h_{ij}|=|h_{ji}|\le|x_{ij}|$ at every point of $\Omega$ (for $i<j$ with equality; for $i=j$, $h_{ii}=\re x_{ii}$), where $x_{ij}$ has law $\nu_{ij}$. So (a) gives the moment bound, and
+$\{\exists i,j:|h_{ij}|>T\sigma_{ij}\}\subset\bigcup_{(i,j)\in\mathcal P_N}\{|x_{ij}|>T\sigma_{ij}\}$, a union of $N(N+1)/2\le N^2$ events of probability at most $\vth^{-1}e^{-T^\vth}$.
+\end{proof}
+\begin{remark}\label{rem:laws}
+For later use we record what Definitions~\ref{def:ens} and~\ref{def:ass} say about a single entry. Let $i\ne j$. The random variable $h_{ij}$ is the coordinate $x_{\min(i,j),\max(i,j)}$ or its complex conjugate. Hence
+$\EE h_{ij}=0$, $\EE|h_{ij}|^2=\sigma_{ij}^2$ (by \eqref{eq:aver}), and $\PP(|h_{ij}|>x\sigma_{ij})\le\vth^{-1}e^{-x^\vth}$ for $x\ge1$. If $\sigma_{ij}=0$ then $h_{ij}=0$ almost surely.
+For $i=j$, $h_{ii}=x_{ii}$ almost surely by \textup{(R)}, and the same three properties hold.
+\end{remark}
+\subsection{Large deviation bounds}
+Throughout this subsection $X_1,\dots,X_n$ ($n\ge1$) are independent complex random variables, defined on some probability space, with
+\begin{equation}\label{eq:LDhyp}
+ \EE X_i=0,\qquad\EE|X_i|^2=s_i^2\ (s_i\ge0),\qquad\PP(|X_i|>xs_i)\le\vth^{-1}e^{-x^\vth}\ \ (x\ge1),
+\end{equation}
+with $0<\vth\le1$, $\fa=1/\vth$. (If $s_i=0$ then $X_i=0$ almost surely, by Lemma~\ref{lem:moments}(a). If $X_i$ satisfies \eqref{eq:LDhyp}, so does $\ol{X_i}$.) For $\kappa\ge1$ define the \emph{loss factors}
+\begin{equation}\label{eq:loss}
+ \ell(\kappa):=5\,\kappa^{\fa+\frac12},\qquad\ell_2(\kappa,n):=2\,\ell(\kappa)^2\sqrt{2\lceil\log_2n\rceil+2}.
+\end{equation}
+The only probabilistic input is Hoeffding's inequality, in the following form.
+
+\medskip\noindent\textbf{(H)} \emph{Let $\xi_1,\dots,\xi_n$ be independent real random variables with $\EE\xi_i=0$ and $|\xi_i|\le c_i$ almost surely, where $c_i\ge0$ are constants, and let $V:=\sum_ic_i^2$.
+Then for every $\kappa\ge0$:\quad $\PP\big(|\sum_i\xi_i|>\sqrt{2\kappa V}\big)\le2e^{-\kappa}$.}
+
+\smallskip\noindent Indeed, if $V=0$ then every $\xi_i$ vanishes almost surely and the event has probability $0$. If $V>0$: by Hoeffding's lemma a centred random variable with values in $[-c_i,c_i]$ has a sub-Gaussian moment generating function with
+variance proxy $c_i^2$; a sum of independent such variables has variance proxy $V$; and the Chernoff bound gives $\PP(\sum_i\xi_i\ge t)\le\exp(-t^2/(2V))$ for $t\ge0$
+(Mathlib: \texttt{hasSubgaussianMGF\_of\_mem\_Icc\_of\_integral\_eq\_zero}, \texttt{HasSubgaussianMGF.measure\_sum\_ge\_le\_of\_iIndepFun}). Apply this to $(\xi_i)$ and to $(-\xi_i)$ with $t=\sqrt{2\kappa V}$.
+
+\begin{lemma}[Large deviations, tail form]\label{lem:LD} \infra\
+Let $0<\vth\le1$ and $\kappa_\vth=\log\fa+4\fa\log(4C_\vth)$. For all $n\ge1$, all $X$ as in \eqref{eq:LDhyp}, all deterministic $a_i,b_i,B_{ij}\in\C$ and all $\kappa\ge\kappa_\vth+\log n$:
+\begin{align}
+ &\PP\Big(\Big|\sum_ia_iX_i\Big|>\ell(\kappa)\Big(\sum_i|a_i|^2s_i^2\Big)^{1/2}\Big)\le(4+n\vth^{-1})e^{-\kappa},\label{eq:LD1}\\
+ &\PP\Big(\Big|\sum_ib_i(|X_i|^2-s_i^2)\Big|>\ell(\kappa)^2\Big(\sum_i|b_i|^2s_i^4\Big)^{1/2}\Big)\le(4+n\vth^{-1})e^{-\kappa},\label{eq:LD2}\\
+ &\PP\Big(\Big|\sum_{i\ne j}\ol{X_i}B_{ij}X_j\Big|>\tfrac12\ell_2(\kappa,n)\Big(\sum_{i\ne j}s_i^2|B_{ij}|^2s_j^2\Big)^{1/2}\Big)\le20\,n^2\lceil\log_2 2n\rceil\vth^{-1}e^{-\kappa}.\label{eq:LD3}
+\end{align}
+If $Y_1,\dots,Y_{n'}$, $1\le n'\le n$, are random variables on the same probability space such that the $n+n'$ variables $X_1,\dots,X_n,Y_1,\dots,Y_{n'}$ are independent and
+$Y$ satisfies \eqref{eq:LDhyp} with variances $t_j^2$, then for all $B_{ij}\in\C$ $(1\le i\le n,\ 1\le j\le n')$
+\begin{equation}\label{eq:LD4}
+ \PP\Big(\Big|\sum_{i,j}X_iB_{ij}Y_j\Big|>\ell(\kappa)^2\Big(\sum_{i,j}s_i^2|B_{ij}|^2t_j^2\Big)^{1/2}\Big)\le10\,n^2\vth^{-1}e^{-\kappa}.
+\end{equation}
+The same bounds hold with $X_i$ replaced by $\ol{X_i}$ in any position (i.e.\ for $\sum_ia_i\ol{X_i}$, for $\sum_{i\ne j}X_iB_{ij}\ol{X_j}$, and for $\sum_{i,j}\ol{X_i}B_{ij}Y_j$, $\sum_{i,j}X_iB_{ij}\ol{Y_j}$, $\sum_{i,j}\ol{X_i}B_{ij}\ol{Y_j}$).
+All inequalities inside the probabilities are strict; in particular the bounds are meaningful (and true) when some or all $s_i$ vanish.
+\end{lemma}
+\begin{proof}
+Fix $\kappa\ge\kappa_\vth+\log n$ and put $T:=\kappa^{\fa}$, so that $T\ge1$ and $T^\vth=\kappa$.
+
+\emph{Step 1: truncation and recentring of one variable.} Let
+\[
+ \mathcal T:=\{|X_i|\le Ts_i\ \text{for all }i\},\qquad\PP(\mathcal T^c)\le\sum_i\PP(|X_i|>Ts_i)\le n\vth^{-1}e^{-\kappa}
+\]
+by \eqref{eq:LDhyp} with $x=T$. For each $i$ define
+\[
+ X_i^\le:=X_i\bone(|X_i|\le Ts_i),\qquad\mu_i:=\EE X_i^\le,\qquad Y_i:=X_i^\le-\mu_i,
+\]
+\[
+ W_i^\le:=|X_i|^2\bone(|X_i|\le Ts_i),\qquad\rho_i:=\EE\big[|X_i|^2\bone(|X_i|>Ts_i)\big],\qquad V_i:=W_i^\le-\EE W_i^\le=W_i^\le-s_i^2+\rho_i .
+\]
+Since $\EE X_i=0$ we have $\mu_i=-\EE[X_i\bone(|X_i|>Ts_i)]$, so by Lemma~\ref{lem:moments}(b) (applied to the law of $X_i$, with $s=s_i$ and $\int|y|^2\rd\mu=s_i^2$)
+\begin{equation}\tag{T1}\label{eq:T1}
+ |\mu_i|\le s_i\,\vth^{-1/2}e^{-\kappa/2},\qquad0\le\rho_i\le(4C_\vth)^{2\fa}s_i^2\,\vth^{-1/2}e^{-\kappa/2}.
+\end{equation}
+Moreover, at every point, $|X_i^\le|\le Ts_i$, hence $|\mu_i|\le Ts_i$ and
+\begin{equation}\tag{T2}\label{eq:T2}
+ \EE Y_i=0,\quad|Y_i|\le2Ts_i;\qquad\EE V_i=0,\quad|V_i|\le T^2s_i^2 .
+\end{equation}
+(For the last bound: $W_i^\le$ and its expectation both lie in $[0,T^2s_i^2]$.) The families $(Y_i)_i$ and $(V_i)_i$ are independent, because $Y_i$ and $V_i$ are Borel functions of $X_i$. Finally, on the event $\mathcal T$,
+\begin{equation}\tag{T3}\label{eq:T3}
+ X_i=Y_i+\mu_i\qquad\text{and}\qquad|X_i|^2-s_i^2=V_i-\rho_i\qquad\text{for all }i .
+\end{equation}
+
+\emph{Step 2: proof of \eqref{eq:LD1}.} Let $S:=(\sum_i|a_i|^2s_i^2)^{1/2}$. The real random variables $\xi_i:=\re(a_iY_i)$ are independent, centred and bounded by $c_i:=2T|a_i|s_i$ by \eqref{eq:T2}, and $\sum_ic_i^2=4T^2S^2$.
+By (H), $|\sum_i\re(a_iY_i)|\le\sqrt{8\kappa}\,TS$ outside an event of probability at most $2e^{-\kappa}$; the same holds for $\im(a_iY_i)$. Hence there is an event $\mathcal H_1$ with $\PP(\mathcal H_1^c)\le4e^{-\kappa}$ on which
+\[
+ \Big|\sum_ia_iY_i\Big|\le\sqrt{2\cdot8\kappa}\,TS=4T\sqrt\kappa\,S .
+\]
+By \eqref{eq:T1} and the Cauchy--Schwarz inequality, $|\sum_ia_i\mu_i|\le\sum_i|a_i|s_i\vth^{-1/2}e^{-\kappa/2}\le\sqrt n\,S\,\vth^{-1/2}e^{-\kappa/2}\le S$, because $\kappa\ge\log n+\log\fa$.
+Therefore, by \eqref{eq:T3}, on $\mathcal T\cap\mathcal H_1$,
+\[
+ \Big|\sum_ia_iX_i\Big|\le(4T\sqrt\kappa+1)S\le5\kappa^{\fa+\frac12}S=\ell(\kappa)S,
+\]
+and $\PP((\mathcal T\cap\mathcal H_1)^c)\le(4+n\vth^{-1})e^{-\kappa}$. This is \eqref{eq:LD1}.
+
+\emph{Step 3: proof of \eqref{eq:LD2}.} Let $S_2:=(\sum_i|b_i|^2s_i^4)^{1/2}$. The real variables $\re(b_iV_i)=\re(b_i)V_i$ are independent, centred and bounded by $|b_i|T^2s_i^2$ by \eqref{eq:T2}; the sum of the squares of these bounds is $T^4S_2^2$.
+By (H) applied to the real and to the imaginary parts there is an event $\mathcal H_2$ with $\PP(\mathcal H_2^c)\le4e^{-\kappa}$ on which $|\sum_ib_iV_i|\le\sqrt{2\cdot2\kappa}\,T^2S_2=2T^2\sqrt\kappa\,S_2$.
+By \eqref{eq:T1}, $|\sum_ib_i\rho_i|\le\sqrt n\,S_2\,(4C_\vth)^{2\fa}\vth^{-1/2}e^{-\kappa/2}\le S_2$, because $\kappa\ge\log n+\log\fa+4\fa\log(4C_\vth)=\log n+\kappa_\vth$. So by \eqref{eq:T3}, on $\mathcal T\cap\mathcal H_2$,
+\[
+ \Big|\sum_ib_i(|X_i|^2-s_i^2)\Big|\le(2T^2\sqrt\kappa+1)S_2\le3\kappa^{2\fa+\frac12}S_2\le\ell(\kappa)^2S_2 .
+\]
+
+\emph{Step 4: proof of \eqref{eq:LD4}.} Let $\mathsf P_X$ and $\mathsf P_Y$ be the laws of the random vectors $X=(X_1,\dots,X_n)\in\C^n$ and $Y=(Y_1,\dots,Y_{n'})\in\C^{n'}$.
+Since the $n+n'$ variables are independent, the law of $(X,Y)$ on $\C^n\times\C^{n'}$ is the product measure $\mathsf P_X\otimes\mathsf P_Y$, and under $\mathsf P_X$ the coordinate functions $x\mapsto x_i$ are independent and have the laws of the $X_i$; so
+they satisfy \eqref{eq:LDhyp} (Mathlib: \texttt{iIndepFun\_iff\_map\_fun\_eq\_pi\_map}, \texttt{iIndepFun.indepFun\_finset}). For $y\in\C^{n'}$ put
+\[
+ c_i(y):=\sum_jB_{ij}y_j,\qquad R(y):=\Big(\sum_is_i^2|c_i(y)|^2\Big)^{1/2},\qquad r_i:=\Big(\sum_j|B_{ij}|^2t_j^2\Big)^{1/2},
+\]
+and consider the Borel sets
+\begin{align*}
+ \mathcal E_1&:=\Big\{(x,y)\in\C^n\times\C^{n'}:\ \Big|\sum_ix_ic_i(y)\Big|>\ell(\kappa)R(y)\Big\},\\
+ \mathcal E_2&:=\big\{y\in\C^{n'}:\ |c_i(y)|>\ell(\kappa)r_i\text{ for some }i\big\}.
+\end{align*}
+For every fixed $y$, \eqref{eq:LD1} with the deterministic coefficients $a_i=c_i(y)$ gives $\mathsf P_X(\{x:(x,y)\in\mathcal E_1\})\le(4+n\vth^{-1})e^{-\kappa}$. By Tonelli's theorem for the indicator function of $\mathcal E_1$,
+\[
+ \PP\big((X,Y)\in\mathcal E_1\big)=\int_{\C^{n'}}\mathsf P_X\big(\{x:(x,y)\in\mathcal E_1\}\big)\,\mathsf P_Y(\rd y)\le(4+n\vth^{-1})e^{-\kappa}.
+\]
+By \eqref{eq:LD1} for the family $Y$ ($n'$ variables; $\kappa\ge\kappa_\vth+\log n'$ since $n'\le n$) and the coefficients $(B_{ij})_j$, and a union bound over $i$: $\PP(Y\in\mathcal E_2)\le n(4+n'\vth^{-1})e^{-\kappa}$.
+If $(X,Y)\notin\mathcal E_1$ and $Y\notin\mathcal E_2$, then
+\[
+ \Big|\sum_{i,j}X_iB_{ij}Y_j\Big|=\Big|\sum_iX_ic_i(Y)\Big|\le\ell(\kappa)R(Y)\le\ell(\kappa)\Big(\sum_is_i^2\ell(\kappa)^2r_i^2\Big)^{1/2}=\ell(\kappa)^2\Big(\sum_{i,j}s_i^2|B_{ij}|^2t_j^2\Big)^{1/2}.
+\]
+The probability of the exceptional event is at most $\big(4+n\vth^{-1}+4n+nn'\vth^{-1}\big)e^{-\kappa}\le10n^2\vth^{-1}e^{-\kappa}$, since $n'\le n$, $n\ge1$ and $\vth^{-1}\ge1$.
+
+\emph{Step 5: proof of \eqref{eq:LD3} (deterministic decoupling).} If $n=1$ the sum is empty and the event is empty. Let $n\ge2$ and $D:=\lceil\log_2n\rceil\ge1$. Relabel the indices as $0,1,\dots,n-1$. Since $n\le2^D$, every index has a unique binary expansion
+\[
+ i=\sum_{d=1}^D\epsilon_d(i)\,2^{d-1},\qquad\epsilon_d(i)\in\{0,1\}.
+\]
+For $i\ne j$ let $d(i,j):=\max\{d:\epsilon_d(i)\ne\epsilon_d(j)\}$ be the position of the most significant digit in which $i$ and $j$ differ (the set is not empty because the expansion is unique).
+For $d\in\{1,\dots,D\}$ and $\beta\in\{0,1\}$ put
+\[
+ I_{d,\beta}:=\{i:\epsilon_d(i)=\beta\},\qquad\mathcal P_{d,\beta}:=\{(i,j):\ i\ne j,\ d(i,j)=d,\ \epsilon_d(i)=\beta\}.
+\]
+Then: (i) the $2D$ sets $\mathcal P_{d,\beta}$ are pairwise disjoint and their union is $\{(i,j):i\ne j\}$, because a pair $(i,j)$ with $i\ne j$ belongs to $\mathcal P_{d,\beta}$ if and only if $d=d(i,j)$ and $\beta=\epsilon_d(i)$;
+(ii) if $(i,j)\in\mathcal P_{d,\beta}$ then $i\in I_{d,\beta}$ and $j\in I_{d,1-\beta}$, because $\epsilon_d(j)\ne\epsilon_d(i)=\beta$; (iii) $I_{d,0}\cap I_{d,1}=\emptyset$. Consequently
+\begin{equation}\tag{D}\label{eq:decoup}
+ \sum_{i\ne j}\ol{X_i}B_{ij}X_j=\sum_{d=1}^D\sum_{\beta\in\{0,1\}}F_{d,\beta},\qquad F_{d,\beta}:=\sum_{i\in I_{d,\beta}}\ \sum_{j\in I_{d,1-\beta}}\ol{X_i}\,B^{(d,\beta)}_{ij}\,X_j,
+\end{equation}
+where $B^{(d,\beta)}_{ij}:=B_{ij}\bone\big((i,j)\in\mathcal P_{d,\beta}\big)$.
+Fix $(d,\beta)$ and let $n_1:=|I_{d,\beta}|$, $n_2:=|I_{d,1-\beta}|$, so $n_1+n_2=n$. If $n_1=0$ or $n_2=0$ then $F_{d,\beta}=0$. Otherwise the families $(\ol{X_i})_{i\in I_{d,\beta}}$ and $(X_j)_{j\in I_{d,1-\beta}}$ are indexed by disjoint sets, so the $n$ variables together are independent,
+and each family satisfies \eqref{eq:LDhyp}. We apply \eqref{eq:LD4} with ``$n$'' replaced by $\max(n_1,n_2)$: the larger family plays the role of $X$ and the smaller one the role of $Y$ (the bilinear form $\sum_{i,j}u_iB_{ij}v_j$ is unchanged when the two families are exchanged and the matrix is transposed);
+this is allowed because $\kappa\ge\kappa_\vth+\log n\ge\kappa_\vth+\log\max(n_1,n_2)$. So outside an event of probability at most $10\max(n_1,n_2)^2\vth^{-1}e^{-\kappa}\le10n^2\vth^{-1}e^{-\kappa}$,
+\[
+ |F_{d,\beta}|\le\ell(\kappa)^2\Big(\sum_{(i,j)\in\mathcal P_{d,\beta}}s_i^2|B_{ij}|^2s_j^2\Big)^{1/2}.
+\]
+By a union bound over the $2D$ pairs $(d,\beta)$, by \eqref{eq:decoup}, by the Cauchy--Schwarz inequality for the sum over $(d,\beta)$ and by the partition property (i), outside an event of probability at most $20Dn^2\vth^{-1}e^{-\kappa}$,
+\[
+ \Big|\sum_{i\ne j}\ol{X_i}B_{ij}X_j\Big|\le\ell(\kappa)^2\sqrt{2D}\,\Big(\sum_{d,\beta}\ \sum_{(i,j)\in\mathcal P_{d,\beta}}s_i^2|B_{ij}|^2s_j^2\Big)^{1/2}=\ell(\kappa)^2\sqrt{2D}\,\Big(\sum_{i\ne j}s_i^2|B_{ij}|^2s_j^2\Big)^{1/2}.
+\]
+Since $\ell(\kappa)^2\sqrt{2D}\le\ell(\kappa)^2\sqrt{2D+2}=\frac12\ell_2(\kappa,n)$ and $D\le\lceil\log_22n\rceil$, this is \eqref{eq:LD3}.
+
+\emph{Conjugates.} The family $(\ol{X_i})$ satisfies \eqref{eq:LDhyp} with the same $s_i$, and so does any family obtained by conjugating some of the variables; independence is not affected. So \eqref{eq:LD1}, \eqref{eq:LD4} hold with conjugates in any position, and
+\eqref{eq:LD3} for $\sum_{i\ne j}X_iB_{ij}\ol{X_j}$ is \eqref{eq:LD3} for the family $(\ol{X_i})$.
+\end{proof}
+\begin{remark}\label{rem:LDn}
+\textup{(i)} In \eqref{eq:LD1}, \eqref{eq:LD2} the lower bound on $\kappa$ is used only for the recentring; the term $\log n$ compensates the factor $\sqrt n$ lost in $\sum_i|a_i||\mu_i|$.
+\textup{(ii)} Any rule that assigns to each pair $i\ne j$ a digit in which $i$ and $j$ differ would do in Step~5; we use the most significant one.
+\textup{(iii)} The loss factor $\ell_2(\kappa,n)$ is nondecreasing in $n$ and in $\kappa$, and $\ell(\kappa)^2\le\frac1{2\sqrt2}\ell_2(\kappa,n)$.
+\end{remark}
+
+\begin{lemma}[Large deviations, moment form]\label{lem:LDmom} \infra\ 
+In the setting of Lemma~\ref{lem:LD}, for all $n\ge1$, all real $q\ge2$ and all deterministic $a_i,B_{ij}\in\C$:
+\begin{align}
+ \Big\|\sum_ia_iX_i\Big\|_q&\le C_{\rm LD}\,(q+\log n)^{\fa+\frac12}\Big(\sum_i|a_i|^2s_i^2\Big)^{1/2},\label{eq:LDm1}\\
+ \Big\|\sum_{i,j}\ol{X_i}B_{ij}X_j-\sum_is_i^2B_{ii}\Big\|_q&\le C_{\rm LD}\,(q+\log n)^{2\fa+\frac32}\Big(\sum_{i,j}s_i^2|B_{ij}|^2s_j^2\Big)^{1/2},\label{eq:LDm2}
+\end{align}
+where $\norm{F}_q:=(\EE|F|^q)^{1/q}$ and $C_{\rm LD}:=150\,(4\fa+2+\kappa_\vth)^{2\fa+1}$ depends only on $\vth$. The same holds with $X_i$ replaced by $\ol{X_i}$.
+\end{lemma}
+\begin{proof}
+\emph{Step 1: from a tail bound to a moment bound.} We claim: let $F\ge0$ be a random variable, and let $\mathsf c>0$, $\rho>0$, $A\ge0$, $\kappa_0\ge1$ be constants such that
+\begin{equation}\tag{M1}\label{eq:M1}
+ \PP\big(F>\mathsf c\kappa^{\rho}\big)\le A\,e^{-\kappa}\qquad\text{for all }\kappa\ge\kappa_0 .
+\end{equation}
+Then for every real $q\ge1$ and every $\kappa_1\ge\max(\kappa_0,2\rho q)$:
+\begin{equation}\tag{M2}\label{eq:M2}
+ \EE F^q\le\big(\mathsf c\kappa_1^{\rho}\big)^q\big(1+5Ae^{-\kappa_1}\big).
+\end{equation}
+Indeed, put $t_k:=\mathsf c(\kappa_1+k)^\rho$ for $k=0,1,2,\dots$; this sequence is increasing and unbounded, so at every point
+\[
+ F^q\le t_0^q\,\bone(F\le t_0)+\sum_{k\ge0}t_{k+1}^q\,\bone(t_k<F\le t_{k+1})\le t_0^q+\sum_{k\ge0}t_{k+1}^q\,\bone(F>t_k).
+\]
+Taking expectations (monotone convergence) and using \eqref{eq:M1} with $\kappa=\kappa_1+k\ge\kappa_0$,
+\[
+ \EE F^q\le t_0^q+\sum_{k\ge0}t_{k+1}^q\,Ae^{-\kappa_1-k}.
+\]
+Since $1+x\le e^x$ and $\rho q/\kappa_1\le\frac12$: $\ t_{k+1}^q=t_0^q\big(1+\frac{k+1}{\kappa_1}\big)^{\rho q}\le t_0^q\exp\big(\frac{\rho q(k+1)}{\kappa_1}\big)\le t_0^qe^{(k+1)/2}$. Hence
+\[
+ \EE F^q\le t_0^q\Big(1+Ae^{-\kappa_1}e^{1/2}\sum_{k\ge0}e^{-k/2}\Big)=t_0^q\Big(1+\frac{e^{1/2}}{1-e^{-1/2}}Ae^{-\kappa_1}\Big)\le t_0^q\big(1+5Ae^{-\kappa_1}\big),
+\]
+because $e^{1/2}/(1-e^{-1/2})<4.2$. (This discrete summation replaces the layer-cake formula and needs no change of variables.)
+
+\emph{Step 2: proof of \eqref{eq:LDm1}.} Let $S:=(\sum_i|a_i|^2s_i^2)^{1/2}$ and $r:=\fa+\frac12$. If $S=0$, then for every $i$ either $a_i=0$ or $s_i=0$, and in the second case $X_i=0$ almost surely; so $\sum_ia_iX_i=0$ almost surely and \eqref{eq:LDm1} holds.
+Let $S>0$ and $F:=|\sum_ia_iX_i|/S$. By \eqref{eq:LD1}, \eqref{eq:M1} holds with $\mathsf c=5$, $\rho=r$, $\kappa_0=\kappa_\vth+\log n$ and $A=4+n\vth^{-1}\le5n\fa$.
+Take $\kappa_1:=2rq+\log n+\kappa_\vth$. Then $Ae^{-\kappa_1}\le5n\fa\,e^{-\log n-\kappa_\vth}\le5e^{-23}$, since $\kappa_\vth\ge\log\fa+23$. By \eqref{eq:M2},
+$\EE F^q\le2\,(5\kappa_1^r)^q$, and since $q\ge2$ and $2r+\kappa_\vth\ge1$,
+\[
+ \kappa_1\le(2r+\kappa_\vth)(q+\log n),\qquad\norm F_q\le2^{1/q}\cdot5\,\kappa_1^r\le10\,(2\fa+1+\kappa_\vth)^{\fa+\frac12}(q+\log n)^{\fa+\frac12}.
+\]
+The constant is at most $C_{\rm LD}$.
+
+\emph{Step 3: proof of \eqref{eq:LDm2}.} Let $S_B:=(\sum_{i,j}s_i^2|B_{ij}|^2s_j^2)^{1/2}$, $D:=\lceil\log_2n\rceil$ and
+\[
+ \mathcal Q:=\sum_{i,j}\ol{X_i}B_{ij}X_j-\sum_is_i^2B_{ii}=\sum_iB_{ii}\big(|X_i|^2-s_i^2\big)+\sum_{i\ne j}\ol{X_i}B_{ij}X_j .
+\]
+Both $(\sum_i|B_{ii}|^2s_i^4)^{1/2}$ and $(\sum_{i\ne j}s_i^2|B_{ij}|^2s_j^2)^{1/2}$ are at most $S_B$. So by \eqref{eq:LD2} (with $b_i=B_{ii}$) and \eqref{eq:LD3}, for every $\kappa\ge\kappa_\vth+\log n$,
+\[
+ \PP\Big(|\mathcal Q|>\big(\ell(\kappa)^2+\tfrac12\ell_2(\kappa,n)\big)S_B\Big)\le\big(4+n\vth^{-1}+20n^2\lceil\log_22n\rceil\vth^{-1}\big)e^{-\kappa}\le25\,n^3\fa\,e^{-\kappa},
+\]
+where we used $\lceil\log_22n\rceil=1+\lceil\log_2n\rceil\le n$ (as $2^{n-1}\ge n$) and $4+n\fa+20n^3\fa\le25n^3\fa$. By \eqref{eq:loss},
+\[
+ \ell(\kappa)^2+\tfrac12\ell_2(\kappa,n)=c_n\,\kappa^{2\fa+1},\qquad c_n:=25\big(1+\sqrt{2D+2}\big).
+\]
+If $S_B=0$, the tail bound for $\kappa\to\infty$ shows $\mathcal Q=0$ almost surely. Let $S_B>0$ and $F:=|\mathcal Q|/S_B$. Then \eqref{eq:M1} holds with $\mathsf c=c_n$, $\rho=2r=2\fa+1$, $\kappa_0=\kappa_\vth+\log n$, $A=25n^3\fa$.
+Because of the prefactor $n^3$ we take
+\[
+ \kappa_1:=4rq+3\log n+\kappa_\vth\qquad\big(\ge\max(\kappa_0,\,2\rho q)\big),
+\]
+so that $Ae^{-\kappa_1}\le25\fa e^{-\kappa_\vth}\le25e^{-23}$ and, by \eqref{eq:M2}, $\EE F^q\le2\,(c_n\kappa_1^{2\fa+1})^q$. It remains to bound $c_n$ and $\kappa_1$ by powers of $q+\log n$. First,
+$D\le\log_2n+1$, so $2D+2\le\frac2{\log2}\log n+4\le3(q+\log n)$ (as $\frac2{\log 2}<3$ and $3q\ge6$), and $1\le\sqrt{(q+\log n)/2}$; hence
+\[
+ c_n\le25\big(\tfrac1{\sqrt2}+\sqrt3\big)\sqrt{q+\log n}\le75\sqrt{q+\log n}.
+\]
+Second, $4r=4\fa+2\ge3$ and $q\ge2$ give $\kappa_1\le(4\fa+2+\kappa_\vth)(q+\log n)$. Therefore
+\[
+ \norm{\mathcal Q}_q=S_B\norm F_q\le2^{1/q}\cdot75\,(4\fa+2+\kappa_\vth)^{2\fa+1}(q+\log n)^{2\fa+\frac32}S_B\le C_{\rm LD}(q+\log n)^{2\fa+\frac32}S_B .
+\]
+The statement for $\ol{X_i}$ follows by applying the lemma to the family $(\ol{X_i})$, which satisfies \eqref{eq:LDhyp} with the same $s_i$.
+\end{proof}
+\subsection{Row events at a fixed spectral parameter}
+\paragraph{Coordinates, rows and partial integration.} Let $\nu\in\mathcal E_N(\vth,\dpm,C_0)$; recall $\Omega=\kk^{\mathcal P_N}$ and $\PP=\bigotimes_{(i,j)\in\mathcal P_N}\nu_{ij}$ (Definition~\ref{def:ens}).
+A \emph{coordinate} is an element of $\mathcal P_N$; for $i,j\in\{1,\dots,N\}$ we write $\{i,j\}$ for the coordinate $(\min(i,j),\max(i,j))$. For $\mathcal Q\subset\mathcal P_N$ let $\mathcal Q^c:=\mathcal P_N\setminus\mathcal Q$,
+$\PP_{\mathcal Q}:=\bigotimes_{(i,j)\in\mathcal Q}\nu_{ij}$ on $\kk^{\mathcal Q}$, and write $x=(x_{\mathcal Q^c},x_{\mathcal Q})$ for $x\in\Omega$.
+A function $f$ on $\Omega$ \emph{does not depend on $\mathcal Q$} if $f(x)=f(x')$ whenever $x_{\mathcal Q^c}=x'_{\mathcal Q^c}$. For $T\subset\{1,\dots,N\}$,
+\[
+ \mathcal Q(T):=\big\{(i,j)\in\mathcal P_N:\ \{i,j\}\cap T\ne\emptyset\big\}\qquad(\text{the coordinates in the rows }T).
+\]
+By Lemma~\ref{lem:split} (whose statement and proof use nothing from Sections~\ref{sec:prob}--\ref{sec:weak}; it is placed at the end of this section only in order to keep the numbering of the other statements),
+the law $\PP$ is the product $\PP_{\mathcal Q^c}\otimes\PP_{\mathcal Q}$, and the partial integral
+\[
+ (P_{\mathcal Q}f)(x):=\int_{\kk^{\mathcal Q}}f(x_{\mathcal Q^c},y)\,\PP_{\mathcal Q}(\rd y)
+\]
+is defined for every measurable $f:\Omega\to[0,\infty]$, and for complex $f$ at every point $x$ where $\int|f(x_{\mathcal Q^c},y)|\PP_{\mathcal Q}(\rd y)<\infty$. We write
+$P_T:=P_{\mathcal Q(T)}$ (integration over the rows in $T$), $P_i:=P_{\{i\}}$ and $Q_i:=1-P_i$.
+
+The entries of the minor $H^{(T)}$ are the $h_{kl}$ with $k,l\notin T$, and these are functions of the coordinates $\{k,l\}\notin\mathcal Q(T)$. Hence, for fixed $z$,
+\begin{equation}\tag{R}\label{eq:rowdep}
+ H^{(T)},\quad G^{(T)}(z),\quad m^{(T)}(z)\qquad\text{do not depend on }\mathcal Q(T).
+\end{equation}
+On the other hand, for $i\ne j$, the row variables $(h_{ik})_{k\ne i}$ are functions of the coordinates in $\mathcal Q_i:=\{\{i,k\}:k\ne i\}\subset\mathcal Q(\{i\})$, and the two families $(h_{ik})_{k\notin\{i,j\}}$, $(h_{lj})_{l\notin\{i,j\}}$ are functions of the coordinates in
+\[
+ \mathcal Q_{ij}:=\big\{\{i,k\}:k\notin\{i,j\}\big\}\ \cup\ \big\{\{l,j\}:l\notin\{i,j\}\big\}\subset\mathcal Q(\{i,j\}),
+\]
+where the two sets on the right are disjoint (if $\{i,k\}=\{l,j\}$ with $k\ne j$ and $i\ne j$, then $i=j$ or $k=j$, which is excluded).
+
+\begin{definition}[Good event at $z$]\label{def:good}
+For $z\in\C_+$ and $\kappa\ge1$ let $\cG_\kappa(z)\subset\Omega$ be the event on which
+\begin{enumerate}[label=\textup{(G\arabic*)},leftmargin=2.8em,itemsep=0pt]
+\item $|h_{kl}|\le\kappa^{\fa}\sigma_{kl}$ for all $k,l$;
+\item $|Z_i|\le\ell_2(\kappa,N)\big(\sum^{(i)}_{k,l}\sigma_{ik}^2|G^{(i)}_{kl}|^2\sigma_{il}^2\big)^{1/2}$ for all $i$;
+\item $\big|\sum^{(i)}_kh_{ik}G^{(i)}_{kj}\big|\le\ell(\kappa)\big(\sum^{(i)}_k\sigma_{ik}^2|G^{(i)}_{kj}|^2\big)^{1/2}$ and $\big|\sum^{(i)}_kG^{(i)}_{jk}h_{ki}\big|\le\ell(\kappa)\big(\sum^{(i)}_k|G^{(i)}_{jk}|^2\sigma_{ki}^2\big)^{1/2}$ for all $i\ne j$;
+\item $\big|\sum^{(ij)}_{k,l}h_{ik}G^{(ij)}_{kl}h_{lj}\big|\le\ell(\kappa)^2\big(\sum^{(ij)}_{k,l}\sigma_{ik}^2|G^{(ij)}_{kl}|^2\sigma_{lj}^2\big)^{1/2}$ for all $i\ne j$.
+\end{enumerate}
+Here $G^{(T)}=G^{(T)}(z)$, $Z_i=Z_i(z)$ is as in Definition~\ref{def:XA}, and $\ell,\ell_2$ are the loss factors \eqref{eq:loss}.
+\end{definition}
+
+\begin{lemma}[Probability and consequences of the good event]\label{lem:good}
+Let $\nu\in\mathcal E_N(\vth,\dpm,C_0)$, $z\in\C_+$, $\kappa\ge\kappa_\vth+\log N$. Then $\cG_\kappa(z)$ is a closed (in particular measurable) subset of $\Omega$ and
+$\PP(\cG_\kappa(z)^c)\le46\,\vth^{-1}N^4e^{-\kappa}\le CN^5e^{-\kappa}$.
+On $\cG_\kappa(z)$, with
+\begin{equation}\label{eq:Psim}
+ \Psi_m(z):=\sqrt{\frac{\im m(z)}{N\eta}}+\frac1{N\eta}+\frac1{\sqrt N},
+\end{equation}
+we have for all $i\ne j$ (no a priori assumption on $G$):
+\begin{align}
+ |X_i|&\le2C_0\,\ell_2(\kappa,N)\,\Psi_m,\label{eq:Xi}\\
+ |A_i|&\le2C_0^2\,\ell(\kappa)^2\,|G_{ii}|\,\Psi_m^2,\label{eq:Ai}\\
+ |G_{ij}|&\le3C_0\,\ell(\kappa)^2\,|G_{ii}|\,|G^{(i)}_{jj}|\,\Psi_m.\label{eq:Gij}
+\end{align}
+\end{lemma}
+\begin{proof}
+\emph{Measurability.} For fixed $z$ the functions $h_{kl}$, $G^{(T)}_{kl}(z)$ and $Z_i(z)$ are continuous on $\Omega$ (Lemma~\ref{lem:weyl}(e)). Each of the conditions (G1)--(G4) is a finite conjunction of inequalities $|f|\le g$ between continuous functions; so $\cG_\kappa(z)$ is closed.
+
+\emph{Probability of \textup{(G1)}.} By Lemma~\ref{lem:moments} with $T=\kappa^{\fa}\ge1$, (G1) fails with probability at most $N^2\vth^{-1}e^{-\kappa}$.
+
+\emph{Probability of \textup{(G2)}.} Fix $i$ and let $n:=N-1$. For $k\ne i$ put $X_k:=h_{ki}=\ol{h_{ik}}$. By Definition~\ref{def:XA},
+\[
+ Z_i=\sum^{(i)}_{k,l}\ol{X_k}\,G^{(i)}_{kl}X_l-\sum^{(i)}_k\sigma_{ik}^2G^{(i)}_{kk}=\sum^{(i)}_kG^{(i)}_{kk}\big(|X_k|^2-\sigma_{ik}^2\big)+\sum^{(i)}_{k\ne l}\ol{X_k}\,G^{(i)}_{kl}X_l .
+\]
+Fix a point $x'\in\kk^{\mathcal Q_i^c}$. By \eqref{eq:rowdep} the numbers $G^{(i)}_{kl}$ are determined by $x'$. By Lemma~\ref{lem:split}(e), on the probability space $(\kk^{\mathcal Q_i},\PP_{\mathcal Q_i})$ the coordinate functions $y\mapsto y_{\{i,k\}}$, $k\ne i$, are independent with laws $\nu_{\{i,k\}}$;
+$X_k$ is such a coordinate or its conjugate, so by Remark~\ref{rem:laws} the family $(X_k)_{k\ne i}$ satisfies \eqref{eq:LDhyp} with $s_k=\sigma_{ik}$. Since $\kappa\ge\kappa_\vth+\log n$, \eqref{eq:LD2} (with $b_k=G^{(i)}_{kk}$) and \eqref{eq:LD3} (with $B_{kl}=G^{(i)}_{kl}$) show that, outside a set of $\PP_{\mathcal Q_i}$-probability at most
+\[
+ p_2:=\big(4+n\vth^{-1}+20n^2\lceil\log_22n\rceil\vth^{-1}\big)e^{-\kappa}\le25N^3\vth^{-1}e^{-\kappa}
+\]
+(we used $\lceil\log_22n\rceil\le n$), we have
+\[
+ |Z_i|\le\ell(\kappa)^2\Big(\sum^{(i)}_k\sigma_{ik}^4|G^{(i)}_{kk}|^2\Big)^{1/2}+\tfrac12\ell_2(\kappa,n)\Big(\sum^{(i)}_{k\ne l}\sigma_{ik}^2|G^{(i)}_{kl}|^2\sigma_{il}^2\Big)^{1/2}\le\ell_2(\kappa,N)\Big(\sum^{(i)}_{k,l}\sigma_{ik}^2|G^{(i)}_{kl}|^2\sigma_{il}^2\Big)^{1/2},
+\]
+by Remark~\ref{rem:LDn}(iii). Thus the set $\mathcal B_i\subset\Omega$ where (G2) fails for the index $i$ (an open set) satisfies $\PP_{\mathcal Q_i}(\{y:(x',y)\in\mathcal B_i\})\le p_2$ for every $x'$, and Lemma~\ref{lem:split}(b) gives $\PP(\mathcal B_i)\le p_2$.
+
+\emph{Probability of \textup{(G3)}.} Fix $i\ne j$. As before, for fixed $x'\in\kk^{\mathcal Q_i^c}$ the coefficients $G^{(i)}_{kj}$, $G^{(i)}_{jk}$ ($k\ne i$) are constants and the families $(h_{ik})_{k\ne i}$, $(h_{ki})_{k\ne i}$ satisfy \eqref{eq:LDhyp} with $s_k=\sigma_{ik}$ under $\PP_{\mathcal Q_i}$. By \eqref{eq:LD1} and Lemma~\ref{lem:split}(b),
+each of the two inequalities in (G3) fails with probability at most $(4+n\vth^{-1})e^{-\kappa}\le5N\vth^{-1}e^{-\kappa}$.
+
+\emph{Probability of \textup{(G4)}.} Fix $i\ne j$ (recall $N\ge3$) and $x'\in\kk^{\mathcal Q_{ij}^c}$. By \eqref{eq:rowdep} the numbers $G^{(ij)}_{kl}$ are determined by $x'$. Under $\PP_{\mathcal Q_{ij}}$ the $2(N-2)$ coordinate functions are independent; hence the variables
+$X_k:=h_{ik}$ $(k\notin\{i,j\})$ and $Y_l:=h_{lj}$ $(l\notin\{i,j\})$ are altogether independent, and the two families satisfy \eqref{eq:LDhyp} with $s_k=\sigma_{ik}$, $t_l=\sigma_{lj}$. By \eqref{eq:LD4} with $n=n'=N-2$ and Lemma~\ref{lem:split}(b), (G4) fails for $(i,j)$ with probability at most $10N^2\vth^{-1}e^{-\kappa}$.
+
+\emph{Union bound.} There are $N$ indices $i$ and $N(N-1)$ ordered pairs $i\ne j$. So
+\[
+ \PP(\cG_\kappa(z)^c)\le\big(N^2+25N^4+2\cdot5N^3+10N^4\big)\vth^{-1}e^{-\kappa}\le46\,\vth^{-1}N^4e^{-\kappa}.
+\]
+
+\emph{Consequences.} From now on we work at a point of $\cG_\kappa(z)$ and write $\ell=\ell(\kappa)$, $\ell_2=\ell_2(\kappa,N)$. Let $T\subset\{1,\dots,N\}$ with $|T|\le2$ and $a,b\in T$. By (C) and the Ward identity for the minor $H^{(T)}$ (Lemma~\ref{lem:basic}(b)),
+\begin{equation}\tag{W}\label{eq:WardT}
+ \sum^{(T)}_{k}\sigma_{ak}^2|G^{(T)}_{kl}|^2\le\frac{C_0}N\cdot\frac{\im G^{(T)}_{ll}}{\eta},\qquad\sum^{(T)}_{k}|G^{(T)}_{lk}|^2\sigma_{ka}^2\le\frac{C_0}N\cdot\frac{\im G^{(T)}_{ll}}{\eta}\qquad(l\notin T),
+\end{equation}
+\begin{equation}\tag{W$'$}\label{eq:WardT2}
+ \sum^{(T)}_{k,l}\sigma_{ak}^2|G^{(T)}_{kl}|^2\sigma_{lb}^2\le\frac{C_0}N\sum^{(T)}_l\sigma_{lb}^2\frac{\im G^{(T)}_{ll}}\eta\le\frac{C_0^2}{N^2}\sum^{(T)}_l\frac{\im G^{(T)}_{ll}}\eta=C_0^2\,\frac{\im m^{(T)}}{N\eta}\le C_0^2\Big(\frac{\im m}{N\eta}+\frac{|T|}{(N\eta)^2}\Big),
+\end{equation}
+where the last step is (I5) of Lemma~\ref{lem:schur} (and $\im G^{(T)}_{ll}>0$).
+
+\emph{Proof of \eqref{eq:Xi}.} $X_i=h_{ii}-Z_i$. By (G1) and (C), $|h_{ii}|\le\kappa^{\fa}\sqrt{C_0/N}\le C_0\ell_2N^{-1/2}$ (as $\ell_2\ge\kappa^{\fa}$ and $C_0\ge1$). By (G2) and \eqref{eq:WardT2} with $T=\{i\}$, $a=b=i$,
+$|Z_i|\le\ell_2C_0\big(\sqrt{\im m/(N\eta)}+1/(N\eta)\big)$. Hence $|X_i|\le C_0\ell_2\Psi_m$.
+
+\emph{Proof of \eqref{eq:Ai}.} By the last formula of Lemma~\ref{lem:sce}, by (G3) and \eqref{eq:WardT} with $T=\{i\}$, $a=i$, $l=j$ (for each of the two factors), and then by (C) and (I5),
+\[
+ \frac{|A_i|}{|G_{ii}|}\le\sigma_{ii}^2+\sum_{j\ne i}\sigma_{ij}^2\,\ell^2\,\frac{C_0}N\frac{\im G^{(i)}_{jj}}\eta\le\frac{C_0}N+\ell^2C_0^2\,\frac{\im m^{(i)}}{N\eta}\le C_0^2\ell^2\Big(\frac1N+\frac{\im m}{N\eta}+\frac1{(N\eta)^2}\Big)\le C_0^2\ell^2\Psi_m^2 .
+\]
+
+\emph{Proof of \eqref{eq:Gij}.} By the second formula of (I2) in Lemma~\ref{lem:schur}, (G1), (C), (G4) and \eqref{eq:WardT2} with $T=\{i,j\}$, $a=i$, $b=j$,
+\[
+ \frac{|G_{ij}|}{|G_{ii}||G^{(i)}_{jj}|}\le|h_{ij}|+\Big|\sum^{(ij)}_{k,l}h_{ik}G^{(ij)}_{kl}h_{lj}\Big|\le\kappa^{\fa}\sqrt{\frac{C_0}N}+\ell^2C_0\Big(\sqrt{\frac{\im m}{N\eta}}+\frac{\sqrt2}{N\eta}\Big)\le\sqrt2\,C_0\ell^2\Psi_m .
+\]
+The three bounds are slightly better than \eqref{eq:Xi}--\eqref{eq:Gij}.
+\end{proof}
+\subsection{A crude bound on the norm}
+\begin{lemma}[A priori norm bound]\label{lem:norm0}
+Let $\nu\in\mathcal E_N(\vth,\dpm,C_0)$, $N\ge N_0:=\max\{13,\sqrt{C_0}\}$, $\kappa\ge\kappa_\vth+3\log N$. Then
+\[
+ \PP\Big(\norm H>25\,\kappa^{\fa}\sqrt{C_0\log N}\Big)\le N^2\vth^{-1}e^{-\kappa}+2e^{-N\log N}.
+\]
+\end{lemma}
+\begin{proof}
+Let $T:=\kappa^{\fa}\ge1$ and $\mathcal T:=\{x\in\Omega:\ |x_{ij}|\le T\sigma_{ij}\text{ for all }(i,j)\in\mathcal P_N\}$; by Lemma~\ref{lem:moments}, $\PP(\mathcal T^c)\le N^2\vth^{-1}e^{-\kappa}$.
+
+\emph{Step 1: truncation and recentring.} For $(i,j)\in\mathcal P_N$ put
+\[
+ \mu_{ij}:=\EE\big[x_{ij}\bone(|x_{ij}|\le T\sigma_{ij})\big]\in\kk,\qquad\wh x_{ij}:=x_{ij}\bone(|x_{ij}|\le T\sigma_{ij})-\mu_{ij},
+\]
+and let $\wh H:=H(\wh x)$, $M:=H(\mu)$ be the Hermitian matrices that Definition~\ref{def:ens} associates with the points $\wh x=(\wh x_{ij})$ and $\mu=(\mu_{ij})$ of $\Omega$; both have entries in $\kk$.
+The random variables $\wh x_{ij}$, $(i,j)\in\mathcal P_N$, are independent (each is a Borel function of the coordinate $x_{ij}$), centred, and
+\[
+ |\wh x_{ij}|\le2T\sigma_{ij},\qquad|\mu_{ij}|\le\sigma_{ij}\vth^{-1/2}e^{-\kappa/2}\le\sqrt{C_0/N}\,\vth^{-1/2}e^{-\kappa/2},
+\]
+by the centering condition of Definition~\ref{def:ass}, Lemma~\ref{lem:moments}(b) and (C), exactly as in Step~1 of the proof of Lemma~\ref{lem:LD}. Since $x\mapsto H(x)$ is $\R$-linear (Lemma~\ref{lem:weyl}(d)) and $x=\wh x+\mu$ on $\mathcal T$,
+\[
+ H=\wh H+M\quad\text{on }\mathcal T,\qquad\norm M\le\Big(\sum_{i,j}|M_{ij}|^2\Big)^{1/2}\le N\max_{(i,j)}|\mu_{ij}|\le\sqrt{NC_0\fa}\;e^{-\kappa/2}\le1 .
+\]
+The last inequality holds because $\kappa\ge\log\fa+3\log N$ and $N^2\ge C_0$.
+
+\emph{Step 2: one vector.} Fix $y\in\kk^N$ with $|y|\le1$. Since $\wh H$ is Hermitian with $\wh H_{ii}=\re\wh x_{ii}$ and $\wh H_{ij}=\wh x_{ij}$, $\wh H_{ji}=\ol{\wh x_{ij}}$ for $i<j$,
+\[
+ \langle y,\wh Hy\rangle=\sum_i\xi_{ii}+\sum_{i<j}\xi_{ij},\qquad\xi_{ii}:=|y_i|^2\re\wh x_{ii},\qquad\xi_{ij}:=2\re\big(\ol{y_i}\,\wh x_{ij}\,y_j\big)\ \ (i<j).
+\]
+The $\xi_{ij}$, $(i,j)\in\mathcal P_N$, are independent, real, centred, with $|\xi_{ii}|\le2T\sigma_{ii}|y_i|^2$ and $|\xi_{ij}|\le4T\sigma_{ij}|y_i||y_j|$, and by (C)
+\[
+ V:=\sum_i4T^2\sigma_{ii}^2|y_i|^4+\sum_{i<j}16T^2\sigma_{ij}^2|y_i|^2|y_j|^2\le8T^2\sum_{i,j}\sigma_{ij}^2|y_i|^2|y_j|^2\le\frac{8T^2C_0}N|y|^4\le\frac{8T^2C_0}N .
+\]
+By (H) of Section~\ref{sec:prob} with $\kappa$ replaced by $4N\log N$: $\ \PP\big(|\langle y,\wh Hy\rangle|>8T\sqrt{C_0\log N}\big)\le2e^{-4N\log N}$, because $\sqrt{2\cdot4N\log N\cdot V}\le8T\sqrt{C_0\log N}$.
+
+\emph{Step 3: the net.} Let $\mathcal N\subset\kk^N$ be the net of Lemma~\ref{lem:net}; $|\mathcal N|\le e^{3N\log N}$ as $N\ge13$, and every $y\in\mathcal N$ has $|y|\le1$. By Step~2 and a union bound, outside an event $\mathcal H_3$ with
+$\PP(\mathcal H_3)\le2e^{3N\log N-4N\log N}=2e^{-N\log N}$ we have $\max_{y\in\mathcal N}|\langle y,\wh Hy\rangle|\le8T\sqrt{C_0\log N}$, hence $\norm{\wh H}\le16T\sqrt{C_0\log N}$ by Lemma~\ref{lem:net}
+(applicable since $\wh H$ is Hermitian with entries in $\kk$). On $\mathcal T\setminus\mathcal H_3$, by Step~1,
+\[
+ \norm H\le\norm{\wh H}+\norm M\le16T\sqrt{C_0\log N}+1\le25\,\kappa^{\fa}\sqrt{C_0\log N},
+\]
+since $T\sqrt{C_0\log N}\ge1$. The set $\{\norm H>t\}$ is open in $\Omega$ (Lemma~\ref{lem:weyl}(a),(d)), hence measurable, and it is contained in $\mathcal T^c\cup\mathcal H_3$.
+\end{proof}
+\subsection{Levels}\label{sec:levels}
+\begin{definition}[The three levels]\label{def:levels}
+Given $K$ as in \eqref{eq:Krange} put
+\[
+ K_w:=K^2,\qquad p_1:=2\lceil K^{3/2}/2\rceil,\qquad p_2:=2\lceil K/2\rceil,\qquad\cG(z):=\cG_{K_w}(z),
+\]
+\[
+ \fL:=3C_0^2\,\ell_2(K_w,N)\ \ (\le K^{4\fa+3}\text{ for }N\ge N_0),\qquad\Emax:=25K_w^{\fa}\sqrt{C_0\log N}\ \ (\le K^{2\fa+1}\text{ for }N\ge N_0).
+\]
+\end{definition}
+\noindent So $\PP(\cG(z)^c)\le CN^5e^{-K^2}$ and on $\cG(z)$: $|X_i|\le\fL\Psi_m$, $|A_i|\le\fL|G_{ii}|\Psi_m^2$, $|G_{ij}|\le\fL|G_{ii}||G^{(i)}_{jj}|\Psi_m$ (see Lemma~\ref{lem:levels}).
+The weak law is proved at level $K_w$; fluctuation averaging is used with $p=p_1$ (first pass) and $p=p_2$ (second pass). The relations used are
+\begin{equation}\label{eq:levelrel}
+ K_w\ge40\,p_1\log N,\qquad p_1\ge40\,p_2\log N,\qquad p_2\ge K\ge(\log N)^3\qquad(N\ge N_0),
+\end{equation}
+which hold because $K^{1/2}\ge(\log N)^{3/2}\ge 41\log N$ for $N\ge N_0$.
+
+The next lemma collects, once and for all, the elementary inequalities between $N$, $K$, $\fL$, $\Emax$ that are used in Section~\ref{sec:weak}. We recall from \eqref{eq:ledger0} and \eqref{eq:Krange} that $(\log N)^3\le K\le N^{c_0}$; of the exponent ledger we use only
+\begin{equation}\tag{L}\label{eq:ledgerA3}
+ C_1-1\ \ge\ 12\fa+18,\qquad\qquad c_0\,(6\fa+6)\ \le\ \tfrac1{32}.
+\end{equation}
+Both hold for the values in \eqref{eq:ledger0}: $C_1-1=18\fa+19$ and $c_0=1/(192\fa+288)$.
+
+\begin{lemma}[Standing inequalities]\label{lem:levels}
+Assume \eqref{eq:ledgerA3}. For every constant $K_0\ge1$ depending only on the model parameters there is $N_0$, depending only on the model parameters and on $K_0$, such that for all $N\ge N_0$ and all $K$ with $(\log N)^3\le K\le N^{c_0}$:
+\begin{enumerate}[label=\textup{(S\arabic*)},leftmargin=2.8em,itemsep=1pt]
+\item $K\ge K_0$, $\ N\ge13$, $\ N^2\ge C_0$, and $K_w=K^2\ge\kappa_\vth+3\log N$;
+\item $150\le\fL\le K^{4\fa+3}$ and $1\le\Emax\le K^{2\fa+1}$;
+\item the relations \eqref{eq:levelrel} hold, and $K^{3/2}\le p_1\le2K^{3/2}$;
+\item $K^{6\fa+6}\le N^{1/32}$ and $K_0\,N^{1/32}\le N^{1/8}$;
+\item for every $z\in\C_+$: $\PP(\cG(z)^c)\le46\,\vth^{-1}N^4e^{-K^2}$, and on $\cG(z)$, for all $i\ne j$,
+\[
+ |X_i|\le\fL\Psi_m,\qquad|A_i|\le\fL|G_{ii}|\Psi_m^2,\qquad|G_{ij}|\le\fL|G_{ii}||G^{(i)}_{jj}|\Psi_m .
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Let $\mathsf L:=\log N$. Since $K\ge\mathsf L^3$, every condition of the form ``$K\ge$ a constant'' or ``$K^{\alpha}\ge c\,\mathsf L^{\beta}$ with $3\alpha>\beta$'' holds for $N\ge N_0$.
+
+(S1) $N\ge13$ and $N^2\ge C_0$ for $N\ge N_0$; $K\ge\mathsf L^3\ge K_0$ and $K^2\ge\mathsf L^6\ge\kappa_\vth+3\mathsf L$ for $N\ge N_0$.
+
+(S2) By \eqref{eq:loss}, $\fL=150\,C_0^2\,K^{4\fa+2}\sqrt{2\lceil\log_2N\rceil+2}\ge150$, and $2\lceil\log_2N\rceil+2\le3\mathsf L+4\le4\mathsf L$ for $\mathsf L\ge4$. So $\fL\le K^{4\fa+3}$ as soon as $K\ge300\,C_0^2\mathsf L^{1/2}$,
+which holds when $\mathsf L^{5/2}\ge300C_0^2$. Similarly $\Emax=25K^{2\fa}\sqrt{C_0\mathsf L}\le K^{2\fa+1}$ when $\mathsf L^{5/2}\ge25\sqrt{C_0}$, and $\Emax\ge1$.
+
+(S3) By definition $K^{3/2}\le p_1\le K^{3/2}+2\le2K^{3/2}$ and $K\le p_2\le K+2$. If $\mathsf L\ge41^2$ then $K^{1/2}\ge\mathsf L^{3/2}\ge41\mathsf L$, hence
+$40p_1\mathsf L\le40K^{3/2}\mathsf L+80\mathsf L\le41K^{3/2}\mathsf L\le K^2$ (using $K^{3/2}\ge80$) and $40p_2\mathsf L\le41K\mathsf L\le K^{3/2}\le p_1$.
+
+(S4) $K^{6\fa+6}\le N^{c_0(6\fa+6)}\le N^{1/32}$ by \eqref{eq:ledgerA3}, and $K_0\le N^{3/32}$ for $N\ge N_0$.
+
+(S5) By (S1), $\kappa:=K_w$ satisfies the hypothesis of Lemma~\ref{lem:good}. The three bounds follow from \eqref{eq:Xi}--\eqref{eq:Gij} because $C_0\ge1$, $2C_0\ell_2(K_w,N)\le\fL$ and $2C_0^2\ell(K_w)^2\le3C_0\ell(K_w)^2\cdot C_0\le3C_0^2\ell_2(K_w,N)=\fL$ (Remark~\ref{rem:LDn}(iii): $\ell^2\le\ell_2$).
+\end{proof}
+\noindent\emph{Convention.} In Section~\ref{sec:weak}, ``for $N\ge N_0$'' means: (S1)--(S5) hold with a constant $K_0$ that is the maximum of the finitely many explicit constants (depending only on the model parameters) appearing in the proofs;
+each use is marked by ``(S1)'', \dots, or by the words ``for $N\ge N_0$''. $N_0$ is very large (for instance \eqref{eq:levelrel} is derived from $\log N\ge41^2$); this is harmless for the statements.
+\subsection{Splitting of the product law}\label{sec:split}
+The following lemma is pure measure theory: it does not use the assumptions (A)--(C), \eqref{eq:subexp}, or anything else from Sections~\ref{sec:prob}--\ref{sec:weak}.
+It is used in the proof of Lemma~\ref{lem:good} and, systematically, in Section~\ref{sec:FA}.
+
+\begin{lemma}[Splitting of the product law; partial integration]\label{lem:split}
+Let $I$ be a finite set and $(\nu_\iota)_{\iota\in I}$ Borel probability measures on $\kk$. For $J\subset I$ let $\kk^J$ carry the product $\sigma$-algebra (which is its Borel $\sigma$-algebra) and the product measure $\PP_J:=\bigotimes_{\iota\in J}\nu_\iota$;
+$\kk^\emptyset$ is a one-point space and $\PP_\emptyset$ its unit mass. Fix $J\subset I$, put $J^c:=I\setminus J$, and for $x\in\kk^I$ write $x_J:=(x_\iota)_{\iota\in J}$.
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item \emph{(Splitting)} The map $\pi_J:\kk^I\to\kk^{J^c}\times\kk^J$, $x\mapsto(x_{J^c},x_J)$, is a bijection, it is measurable and so is its inverse, and it maps $\PP_I$ to the product measure: $(\pi_J)_*\PP_I=\PP_{J^c}\otimes\PP_J$.
+We identify $x$ with $(x_{J^c},x_J)$.
+\item \emph{(Tonelli)} For every measurable $f:\kk^I\to[0,\infty]$ the function
+\[
+ (P_Jf)(x):=\int_{\kk^J}f(x_{J^c},y)\,\PP_J(\rd y)
+\]
+is measurable, depends only on $x_{J^c}$, and $\int f\,\rd\PP_I=\int P_Jf\,\rd\PP_I$. In particular, if $\mathcal B\subset\kk^I$ is measurable, $p\ge0$, and $\PP_J(\{y:(x',y)\in\mathcal B\})\le p$ for every $x'\in\kk^{J^c}$, then $\PP_I(\mathcal B)\le p$.
+\item \emph{(Fubini)} Let $f:\kk^I\to\C$ be $\PP_I$-integrable. The set $\mathcal D_f$ of all $x$ with $\int|f(x_{J^c},y)|\PP_J(\rd y)<\infty$ is measurable, depends only on $x_{J^c}$, and has $\PP_I(\mathcal D_f)=1$.
+Define $P_Jf$ by the formula in \textup{(b)} on $\mathcal D_f$ and by $0$ on the complement. Then $P_Jf$ is measurable and integrable, depends only on $x_{J^c}$, and $\int f\,\rd\PP_I=\int P_Jf\,\rd\PP_I$.
+\item \emph{(Conditional expectation $=$ integration over one factor)} Let $f$ be as in \textup{(c)} and let $g:\kk^I\to\C$ be bounded, measurable and independent of the coordinates in $J$ (i.e.\ $g(x)=g(\wt x)$ whenever $x_{J^c}=\wt x_{J^c}$). Then
+$P_J(gf)=g\,P_Jf$ and
+\[
+ \int g\,f\,\rd\PP_I=\int g\,P_Jf\,\rd\PP_I .
+\]
+Equivalently: $P_Jf$ is a version of the conditional expectation of $f$ given the $\sigma$-algebra generated by the coordinates $x_\iota$, $\iota\in J^c$.
+\item \emph{(Independence; freezing)} Under $\PP_I$ the coordinate functions $x\mapsto x_\iota$, $\iota\in I$, are independent and $x_\iota$ has law $\nu_\iota$; the random vectors $x_{J^c}$ and $x_J$ are independent with laws $\PP_{J^c}$ and $\PP_J$.
+For every fixed $x'\in\kk^{J^c}$, the coordinate functions $y\mapsto y_\iota$, $\iota\in J$, on the probability space $(\kk^J,\PP_J)$ are independent with laws $\nu_\iota$, and $(P_Jf)(x',\cdot)$ is the expectation of the random variable $y\mapsto f(x',y)$ on this space.
+\item \emph{(Tower property)} The statements \textup{(a)--(e)} hold for the index set $J$ and any $J_1\subset J$ in place of $I$ and $J$: $\PP_J=\PP_{J\setminus J_1}\otimes\PP_{J_1}$. Consequently, for measurable $f:\kk^I\to[0,\infty]$ and $J_1\subset J$:
+$P_JP_{J_1}f=P_Jf$ at every point of $\kk^I$.
+\end{enumerate}
+For the ensemble of Definition~\ref{def:ens} the lemma applies with $I=\mathcal P_N$, $\kk^I=\Omega$, $\PP_I=\PP$ and $J=\mathcal Q\subset\mathcal P_N$; then $P_J$ is the operator $P_{\mathcal Q}$ of Section~\ref{sec:prob}, and $P_T=P_{\mathcal Q(T)}$.
+\end{lemma}
+\begin{proof}
+(a) The inverse of $\pi_J$ is the map that glues $(x',y)\in\kk^{J^c}\times\kk^J$ to the point $x$ with $x_\iota=x'_\iota$ for $\iota\in J^c$ and $x_\iota=y_\iota$ for $\iota\in J$. A map into a product space is measurable if and only if its coordinates are;
+every coordinate of $\pi_J$ and of $\pi_J^{-1}$ is a coordinate function, hence measurable. The measures $(\pi_J)_*\PP_I$ and $\PP_{J^c}\otimes\PP_J$ are probability measures on $\kk^{J^c}\times\kk^J$. On a box
+$R=\prod_{\iota\in J^c}A_\iota\times\prod_{\iota\in J}A_\iota$ with Borel sets $A_\iota\subset\kk$ they agree:
+\[
+ \PP_I\big(\pi_J^{-1}(R)\big)=\PP_I\Big(\prod_{\iota\in I}A_\iota\Big)=\prod_{\iota\in I}\nu_\iota(A_\iota)=\PP_{J^c}\Big(\prod_{\iota\in J^c}A_\iota\Big)\PP_J\Big(\prod_{\iota\in J}A_\iota\Big).
+\]
+The boxes form a $\pi$-system that generates the product $\sigma$-algebra ($I$ is finite), so the two measures are equal by the uniqueness theorem for finite measures.
+(Mathlib: \texttt{MeasureTheory.measurePreserving\_piEquivPiSubtypeProd}.)
+
+(b) Let $F:=f\circ\pi_J^{-1}$, a measurable function on $\kk^{J^c}\times\kk^J$. By Tonelli's theorem, $\varphi(x'):=\int F(x',y)\PP_J(\rd y)$ is a measurable function of $x'\in\kk^{J^c}$ and $\int F\,\rd(\PP_{J^c}\otimes\PP_J)=\int\varphi\,\rd\PP_{J^c}$.
+By (a) and the change of variables formula for image measures, $\int f\,\rd\PP_I=\int F\,\rd(\PP_{J^c}\otimes\PP_J)$. Now $P_Jf=\varphi\circ\mathrm{pr}$, where $\mathrm{pr}(x):=x_{J^c}$; this is measurable and depends only on $x_{J^c}$. By (a), the image of $\PP_I$ under $\mathrm{pr}$ is the first marginal of
+$\PP_{J^c}\otimes\PP_J$, i.e.\ $\PP_{J^c}$; hence $\int P_Jf\,\rd\PP_I=\int\varphi\,\rd\PP_{J^c}=\int f\,\rd\PP_I$. For the last claim take $f=\bone_{\mathcal B}$: then $(P_Jf)(x)=\PP_J(\{y:(x_{J^c},y)\in\mathcal B\})\le p$ at every point, so $\PP_I(\mathcal B)=\int P_Jf\,\rd\PP_I\le p$.
+
+(c) By (b) applied to $|f|$, the function $P_J|f|$ is measurable, depends only on $x_{J^c}$, and $\int P_J|f|\rd\PP_I=\int|f|\rd\PP_I<\infty$; so $\mathcal D_f=\{P_J|f|<\infty\}$ is measurable, depends only on $x_{J^c}$, and has full measure.
+Write $f=f_1-f_2+\ii(f_3-f_4)$ with $f_k\ge0$ measurable and $f_k\le|f|$. On $\mathcal D_f$ all $P_Jf_k$ are finite and $P_Jf=P_Jf_1-P_Jf_2+\ii(P_Jf_3-P_Jf_4)$ by linearity of the integral; so $P_Jf$ is measurable, depends only on $x_{J^c}$, $|P_Jf|\le P_J|f|$,
+and (b) for each $f_k$ gives $\int P_Jf\,\rd\PP_I=\int f\,\rd\PP_I$ (the complement of $\mathcal D_f$ is a null set).
+
+(d) Fix $x$. Since $g(x_{J^c},y)=g(x)$ for all $y$: if $x\in\mathcal D_f$ then $x\in\mathcal D_{gf}$ and $(P_J(gf))(x)=g(x)(P_Jf)(x)$. If $x\notin\mathcal D_f$ then $(P_Jf)(x)=0$ by convention, and also $(P_J(gf))(x)=0$:
+either $g(x)\ne0$, and then $x\notin\mathcal D_{gf}$; or $g(x)=0$, and then $y\mapsto(gf)(x_{J^c},y)$ vanishes identically. So $P_J(gf)=g\,P_Jf$ at every point. Now (c) for the integrable function $gf$ gives $\int gf\,\rd\PP_I=\int P_J(gf)\,\rd\PP_I=\int g\,P_Jf\,\rd\PP_I$.
+For the reformulation: $P_Jf$ is integrable and depends only on $x_{J^c}$, so it is measurable with respect to $\Sigma:=\sigma(x_\iota:\iota\in J^c)$ (it equals $\varphi\circ\mathrm{pr}$ with $\varphi$ measurable);
+and every bounded $\Sigma$-measurable $g$ is of the form $\wt g\circ\mathrm{pr}$, hence independent of the coordinates in $J$. The displayed identity for all such $g$ is the defining property of the conditional expectation $\EE[f\,|\,\Sigma]$.
+
+(e) By definition of the product measure the joint law of the coordinate functions under $\PP_I$ is $\bigotimes_\iota\nu_\iota$, which is the definition of independence with marginal laws $\nu_\iota$; the same for $\PP_J$.
+By (a), the joint law of $(x_{J^c},x_J)$ is $\PP_{J^c}\otimes\PP_J$. The last statement is the definition of $P_Jf$.
+
+(f) The first sentence is (a)--(e) for the finite index set $J$, the measures $(\nu_\iota)_{\iota\in J}$ and the subset $J_1$. For the consequence fix $x\in\kk^I$ and apply (b), in this setting, to the nonnegative measurable function $y\mapsto f(x_{J^c},y)$ on $\kk^J$:
+\[
+ (P_Jf)(x)=\int_{\kk^{J}}\Big[\int_{\kk^{J_1}}f\big(x_{J^c},y_{J\setminus J_1},y''\big)\PP_{J_1}(\rd y'')\Big]\PP_J(\rd y)=\int_{\kk^J}(P_{J_1}f)(x_{J^c},y)\,\PP_J(\rd y)=(P_JP_{J_1}f)(x).\qedhere
+\]
+\end{proof}
+\begin{remark}\label{rem:split}
+\textup{(i)} In Section~\ref{sec:FA} the lemma is used through the calculus (F0)--(F4) of Lemma~\ref{lem:FAfub}, for functions of polynomial growth; for those, $\mathcal D_f=\Omega$ and no exceptional null set occurs.
+\textup{(ii)} A typical use of \textup{(b)} is the following ``conditional'' large deviation principle: if an event $\mathcal B$ is such that, for every fixed value $x'$ of the coordinates outside $J$, a large deviation bound for independent variables indexed by $J$
+shows $\PP_J(\{y:(x',y)\in\mathcal B\})\le p$, then $\PP(\mathcal B)\le p$. No regular conditional probability is needed.
+\end{remark}
+\section{Entrywise bounds and the weak local law}\label{sec:weak}
+From now on $N\ge N_0$, $\nu\in\mathcal E_N(\vth,\dpm,C_0)$ and $K$ in the range \eqref{eq:Krange} are fixed; $K_w,p_1,p_2,\fL,\Emax,\cG(z)$ are as in Definition~\ref{def:levels}, and (S1)--(S5) of Lemma~\ref{lem:levels} are in force
+(in particular the two ledger inequalities \eqref{eq:ledgerA3}). Recall $z=E+\ii\eta$, $\kappa=||E|-2|$, $\varkappa=\sqrt{\kappa+\eta}$, the constants $c_*,C_*$ of Lemma~\ref{lem:mscsize}, $C_s=1+\sqrt{C_0}/\delta_{\min}$ of Lemma~\ref{lem:vecstab},
+$\lambda_{\rm st}=1/(576C_s)$ of \eqref{eq:lambda1}, and $w=\avg v$, $w_0=\msc(1-\msc^2)$, $D=\max_i|v_i-w|$, $\Upsilon_{\max}=\max_i|\Upsilon_i|$ of Lemma~\ref{lem:stabnear}. We use the row form of (A): $\sum_j\sigma_{ij}^2=1$ for every $i$ (since $\sigma_{ij}=\sigma_{ji}$).
+
+\subsection{Domains and the lattice}
+\begin{definition}\label{def:domains}
+\begin{align*}
+ \bD^{\rm near}&:=\{z:\ |E|\le5,\ K^{C_1-1}N^{-1}\le\eta\le10\},\\
+ \bD^{\rm far}&:=\{z:\ 4\le|E|\le\Emax+1,\ \tfrac12N^{-1/2}\le\eta\le10\},\\
+ \mathbb L&:=(\bD^{\rm near}\cup\bD^{\rm far})\cap\big(N^{-4}\Z+\ii(10-N^{-4}\Z_{\ge 0})\big),\\
+ |\mathbb L|&\le N^{10}.
+\end{align*}
+For $z=E+\ii\eta\in\mathbb L$ the \emph{column} above $z$ is ${\rm col}(z):=\{E+\ii\eta'\in\mathbb L:\ \eta'\ge\eta\}$ (the lattice points with the same $E$ between $z$ and $E+10\ii$), and
+$\cG_{\rm col}(z):=\bigcap_{z'\in{\rm col}(z)}\cG(z')$. Thus $\PP(\cG_{\rm col}(z)^c)\le CN^{9}e^{-K^2}$, and $\cG_*:=\bigcap_{z\in\mathbb L}\cG(z)$ has $\PP(\cG_*^c)\le CN^{15}e^{-K^2}$.
+\end{definition}
+\noindent\emph{Justification of the claims in Definition~\ref{def:domains}.} A point of $\mathbb L$ is $E+\ii\eta$ with $E\in N^{-4}\Z$, $|E|\le\Emax+1$, and $\eta=10-kN^{-4}>0$ with an integer $k\ge0$.
+There are at most $2(\Emax+1)N^4+1\le5\Emax N^4\le5N^{4+1/32}$ such $E$ (by (S2), (S4): $1\le\Emax\le K^{2\fa+1}\le N^{1/32}$) and at most $10N^4$ such $\eta$; so $|\mathbb L|\le50N^{8+1/32}\le N^{10}$.
+\begin{itemize}[leftmargin=2em,itemsep=1pt]
+\item \emph{Structure of a column.} Let $z=E+\ii\eta\in\mathbb L$, $\eta=10-k_*N^{-4}$, and $z_k:=E+\ii(10-kN^{-4})$ for $k=0,\dots,k_*$. The conditions defining $\bD^{\rm near}$ and $\bD^{\rm far}$ are of the form ``$E\in$ a set, $\eta_{\min}\le\eta\le10$''.
+Hence if $z\in\bD^{\rm near}$ then $z_k\in\bD^{\rm near}$ for all $k\le k_*$, and likewise for $\bD^{\rm far}$. So ${\rm col}(z)=\{z_0,\dots,z_{k_*}\}$, $z_0=E+10\ii$, $z_{k_*}=z$, $|{\rm col}(z)|\le10N^4$, and all points of the column lie in each of the two domains that contains $z$.
+\item \emph{Probabilities.} $\cG(z')$ is closed (Lemma~\ref{lem:good}), so $\cG_{\rm col}(z)$ and $\cG_*$ are closed. By (S5) and the union bound, $\PP(\cG_{\rm col}(z)^c)\le460\,\vth^{-1}N^8e^{-K^2}$ and $\PP(\cG_*^c)\le46\,\vth^{-1}N^{14}e^{-K^2}$.
+\item \emph{Sizes.} For $z\in\bD^{\rm near}$: $N\eta\ge K^{C_1-1}\ge K^{12\fa+18}$ by \eqref{eq:ledgerA3}, $\eta\ge N^{-1}$, and $|z|\le\sqrt{125}$. For $z\in\bD^{\rm far}$: $N\eta\ge\frac12N^{1/2}$ and $|z|\le\Emax+11$.
+\end{itemize}
+\noindent For $z\in\bD^{\rm near}$ we use the control parameter
+\begin{equation}\label{eq:Psi}
+ \Psi(z):=\sqrt{\frac{\im\msc(z)+\Lambda(z)}{N\eta}}+\frac1{N\eta}.
+\end{equation}
+\subsection{One-point estimates}
+The statements of this subsection are deterministic: they hold at every point of the indicated event, for one fixed $z$.
+\begin{lemma}[Bounds under the a priori assumption, near regime]\label{lem:apriori}
+Let $z\in\bD^{\rm near}$. On $\cG(z)\cap\{\Ld(z)+\Lo(z)\le\lambda_{\rm st}\}$, for all $i\ne j$:
+\begin{align}
+ &\tfrac3{52}\le|G_{ii}|\le\tfrac54,\qquad|G^{(i)}_{jj}|\le2,\qquad\Psi_m\le C\Psi,\qquad\Psi\le1,\label{eq:ap1}\\
+ &\Lo\le C\fL\Psi,\qquad\max_i|X_i|\le C\fL\Psi,\qquad\max_i|A_i|\le C\fL\Psi^2,\qquad\Upsilon_{\max}\le C\fL\Psi,\label{eq:ap2}\\
+ &|w^2-w_0w|\le|\avg X|+\mathfrak E_0\Big(\frac{\im\msc+\Lambda}{N\eta}+\frac1{(N\eta)^2}\Big)+\tfrac34\Lambda^2,\qquad\mathfrak E_0:=C\fL^2\ (\le K^{8\fa+7}),\label{eq:ap3}\\
+ &D\le C\fL\Psi+C\Lambda^2,\qquad\Ld\le\Lambda+D.\label{eq:ap4}
+\end{align}
+The constants are explicit: \eqref{eq:ap1} holds with $C=14$; \eqref{eq:ap2} with the constants $35$, $14$, $245$, $259$ (in this order); $\mathfrak E_0:=6\cdot10^6\,C_s^2\,\fL^2$; \eqref{eq:ap4} reads $D\le1036\,C_s\fL\Psi+144\,C_s\Lambda^2$.
+Moreover, on the same event,
+\begin{equation}\tag{5.2$'$}\label{eq:ap1b}
+ \Psi\le\frac2{\sqrt{N\eta}},\qquad\fL\Psi\le1,\qquad|w^2-w_0w|\le C_a\,\fL\Psi+\tfrac3{10}\Lambda^2,\qquad C_a:=3\cdot10^6\,C_s^2 .
+\end{equation}
+\end{lemma}
+\begin{proof}
+We work at a point of the event and write $u:=N\eta$. By Definition~\ref{def:domains}, \eqref{eq:ledgerA3} and (S2), $u\ge K^{12\fa+18}\ge4K^{8\fa+6}\ge4\fL^2\ge16$.
+
+\emph{\eqref{eq:ap1} and the first two claims of \eqref{eq:ap1b}.} Since $\Ld\le\lambda_{\rm st}$, Lemma~\ref{lem:stabnear} gives $\frac3{52}\le|G_{ii}|\le\frac54$ and $\Lambda\le\Ld\le\lambda_{\rm st}$. By (I3) of Lemma~\ref{lem:schur} with $A=\{i\}$,
+$|G^{(i)}_{jj}|\le|G_{jj}|+|G_{ji}||G_{ij}|/|G_{ii}|\le\frac54+\frac{52}3\lambda_{\rm st}^2\le2$. Next, $\im m\le\im\msc+|m-\msc|=\im\msc+\Lambda$, and by Lemma~\ref{lem:msc}(c) with $|z|\le\sqrt{125}$, $\im\msc\ge\eta/(|z|+1)^2\ge\eta/169$; hence
+$N^{-1/2}\le13\sqrt{\im\msc/(N\eta)}$ and
+\[
+ \Psi_m=\sqrt{\frac{\im m}{N\eta}}+\frac1{N\eta}+\frac1{\sqrt N}\le14\Big(\sqrt{\frac{\im\msc+\Lambda}{N\eta}}+\frac1{N\eta}\Big)=14\,\Psi .
+\]
+Since $\im\msc\le|\msc|\le1$ and $\Lambda\le1$: $\Psi\le\sqrt{2/u}+1/u\le(\sqrt2+\frac14)u^{-1/2}\le2u^{-1/2}$ (as $u^{-1/2}\le\frac14$). So $\Psi\le\frac12\le1$ and $\fL\Psi\le2\fL u^{-1/2}\le1$.
+
+\emph{\eqref{eq:ap2}.} By (S5) and \eqref{eq:ap1}: $|X_i|\le\fL\Psi_m\le14\fL\Psi$; $|A_i|\le\fL|G_{ii}|\Psi_m^2\le\frac54\cdot196\,\fL\Psi^2=245\,\fL\Psi^2$; $|G_{ij}|\le\fL|G_{ii}||G^{(i)}_{jj}|\Psi_m\le\frac54\cdot2\cdot14\,\fL\Psi=35\,\fL\Psi$;
+and $\Upsilon_{\max}\le\max_i(|X_i|+|A_i|)\le(14+245\Psi)\fL\Psi\le259\,\fL\Psi$.
+
+\emph{\eqref{eq:ap4}.} This is \eqref{eq:Dbound}: $D\le4C_s\Upsilon_{\max}+144C_s\Lambda^2\le1036\,C_s\fL\Psi+144C_s\Lambda^2$, and $\Ld\le\Lambda+D$.
+
+\emph{\eqref{eq:ap3} and the last claim of \eqref{eq:ap1b}.} By \eqref{eq:quad} (in the explicit form stated in Lemma~\ref{lem:stabnear}) and $\avg\Upsilon=\avg A+\avg X$,
+\[
+ |w^2-w_0w|\le|\avg X|+|\avg A|+40C_s^2\Upsilon_{\max}^2+(90+72C_s)\Lambda^3 .
+\]
+Here $(90+72C_s)\Lambda^3\le162\,C_s\lambda_{\rm st}\Lambda^2\le\frac3{10}\Lambda^2$ because $\Lambda\le\lambda_{\rm st}=1/(576C_s)$ and $C_s\ge1$; and by \eqref{eq:ap2}, $|\avg A|\le245\fL\Psi^2$, $\Upsilon_{\max}^2\le259^2\fL^2\Psi^2$. Since $\fL\ge1$, $C_s\ge1$ and $245+40\cdot259^2\le3\cdot10^6$,
+\[
+ |w^2-w_0w|\le|\avg X|+3\cdot10^6\,C_s^2\fL^2\,\Psi^2+\tfrac3{10}\Lambda^2 .
+\]
+With $\Psi^2\le2\frac{\im\msc+\Lambda}{N\eta}+\frac2{(N\eta)^2}$ this is \eqref{eq:ap3} with $\mathfrak E_0=6\cdot10^6C_s^2\fL^2$ (and $\frac3{10}$ instead of $\frac34$).
+For the last claim of \eqref{eq:ap1b} we use instead $|\avg X|\le14\fL\Psi$, $|\avg A|\le245\fL\Psi$ (as $\Psi\le1$) and $\fL^2\Psi^2\le\fL\Psi$ (as $\fL\Psi\le1$):
+$|w^2-w_0w|\le(14+245+40\cdot259^2C_s^2)\fL\Psi+\frac3{10}\Lambda^2\le3\cdot10^6C_s^2\,\fL\Psi+\frac3{10}\Lambda^2$.
+Finally, by (S2), $\mathfrak E_0\le6\cdot10^6C_s^2\cdot(300C_0^2)^2\log N\cdot K^{8\fa+4}\le K^{8\fa+7}$ for $N\ge N_0$, since $K^3\ge(\log N)^9$ (see the proof of (S2) for the bound on $\fL$).
+\end{proof}
+
+\begin{lemma}[Weak dichotomy, near regime]\label{lem:weakdich}
+There are constants $U_w\ge1$ and $C$ (depending only on $C_s$, i.e.\ on the model parameters) such that for $z\in\bD^{\rm near}$, on $\cG(z)\cap\{\Ld+\Lo\le\lambda_{\rm st}\}$, with $\varkappa_w(z):=U_w\fL^{2/3}(N\eta)^{-1/3}$:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=0pt]
+\item $\Lambda\le C\big(\varkappa+\fL^{2/3}(N\eta)^{-1/3}\big)$;
+\item if $\varkappa\ge\varkappa_w$ and $\Lambda\le|w_0|/2$, then $\Lambda\le C\fL(\varkappa N\eta)^{-1/2}\le|w_0|/4$;
+\item if $\varkappa<\varkappa_w$, or if $\varkappa\ge\varkappa_w$ and $\Lambda\le|w_0|/2$, then
+$\Ld+\Lo\le K\fL(N\eta)^{-1/3}\le\lambda_{\rm st}/2$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+We work at a point of the event, write $u:=N\eta$, and use Lemma~\ref{lem:apriori}. Two elementary facts will be used.
+
+\smallskip\noindent\textbf{(E1)} \emph{If $x,b,c,e\ge0$ are reals with $x^2\le bx+c+e\sqrt x$, then $x\le\frac43b+\sqrt{4c/3}+e^{2/3}$.} Indeed, by Young's inequality ($\alpha\beta\le\frac14\alpha^4+\frac34\beta^{4/3}$ with $\alpha=\sqrt x$, $\beta=e$), $e\sqrt x\le\frac14x^2+\frac34e^{4/3}$; so
+$x^2\le\frac43bx+\frac43c+e^{4/3}$, and the last statement of Lemma~\ref{lem:scalar} gives $x\le\frac43b+(\frac43c+e^{4/3})^{1/2}\le\frac43b+\sqrt{4c/3}+e^{2/3}$.
+
+\smallskip\noindent\textbf{(E2)} \emph{$\im\msc\le C_*\varkappa$ and $\frac{c_*}{13}\varkappa\le|w_0|\le C_*\varkappa$ on $\bD^{\rm near}$.} The second statement is part of Lemma~\ref{lem:stabnear}. For the first: by \eqref{eq:imm}, either $\im\msc\le C_*\varkappa$, or $\im\msc\le C_*\eta/\varkappa\le C_*\varkappa$ because $\eta\le\kappa+\eta=\varkappa^2$.
+
+\smallskip By \eqref{eq:ap1b}, (E2) and $\sqrt{\alpha+\beta}\le\sqrt\alpha+\sqrt\beta$,
+\begin{equation}\tag{5.a}\label{eq:wd1}
+ |w^2-w_0w|\le C_a\fL\Psi+\tfrac3{10}\Lambda^2,\qquad\Psi\le\sqrt{\frac{C_*\varkappa}u}+\sqrt{\frac\Lambda u}+\frac1u .
+\end{equation}
+
+\emph{(a).} Since $\Lambda=|w|$: $\Lambda^2\le|w_0|\Lambda+|w^2-w_0w|$, so by \eqref{eq:wd1}, $\frac7{10}\Lambda^2\le|w_0|\Lambda+C_a\fL\Psi$, i.e.\ $\Lambda^2\le b\Lambda+c+e\sqrt\Lambda$ with
+\[
+ b:=\tfrac{10}7|w_0|\le\tfrac{10}7C_*\varkappa,\qquad c:=\tfrac{10}7C_a\fL\Big(\sqrt{\frac{C_*\varkappa}u}+\frac1u\Big),\qquad e:=\tfrac{10}7C_a\fL u^{-1/2}.
+\]
+By (E1), using $\frac43\cdot\frac{10}7\le2$:
+\[
+ \Lambda\le2C_*\varkappa+\sqrt{2C_a}\,C_*^{1/4}\,\fL^{1/2}\varkappa^{1/4}u^{-1/4}+\sqrt{2C_a}\,\fL^{1/2}u^{-1/2}+(2C_a)^{2/3}\fL^{2/3}u^{-1/3}.
+\]
+Now $\fL^{1/2}\varkappa^{1/4}u^{-1/4}=\varkappa^{1/4}\big(\fL^{2/3}u^{-1/3}\big)^{3/4}\le\varkappa+\fL^{2/3}u^{-1/3}$ (weighted arithmetic--geometric mean inequality) and $\fL^{1/2}u^{-1/2}\le\fL^{2/3}u^{-1/3}$ (as $\fL u\ge1$).
+This proves (a) with $C:=C_{(a)}:=2C_*+4C_aC_*$ (a crude upper bound for the sum of the four coefficients; recall $C_*,C_a\ge1$).
+
+\emph{(b).} Assume $\varkappa\ge\varkappa_w$ and $\Lambda\le|w_0|/2$. Then $|w-w_0|\ge|w_0|/2$, so $\frac12|w_0|\Lambda\le|w^2-w_0w|$; by \eqref{eq:wd1} and $\frac3{10}\Lambda^2\le\frac3{20}|w_0|\Lambda$,
+\[
+ \tfrac7{20}|w_0|\Lambda\le C_a\fL\Psi .
+\]
+In $\Psi$ we use $\Lambda\le\frac12|w_0|\le\frac12C_*\varkappa$, so $\im\msc+\Lambda\le\frac32C_*\varkappa$ and $\Psi\le\sqrt{3C_*\varkappa/(2u)}+1/u$. With $|w_0|\ge\frac{c_*}{13}\varkappa$ (E2),
+\[
+ \Lambda\le\frac{20\cdot13\,C_a\fL}{7c_*\varkappa}\Big(\sqrt{\frac{3C_*\varkappa}{2u}}+\frac1u\Big)\le C_b\,\fL\Big(\frac1{\sqrt{\varkappa u}}+\frac1{\varkappa u}\Big),\qquad C_b:=\frac{38\,C_a}{c_*}\sqrt{\tfrac32C_*}\ .
+\]
+Since $\varkappa\ge\varkappa_w\ge u^{-1/3}$ (as $U_w,\fL\ge1$) we have $\varkappa u\ge u^{2/3}\ge1$, hence $(\varkappa u)^{-1}\le(\varkappa u)^{-1/2}$ and
+\[
+ \Lambda\le2C_b\,\fL\,(\varkappa u)^{-1/2}.
+\]
+This is the first inequality in (b), with $C=2C_b$. The second one, $2C_b\fL(\varkappa u)^{-1/2}\le\frac{c_*}{52}\varkappa\ (\le\frac14|w_0|)$, is equivalent to $\varkappa^{3/2}\ge\frac{104C_b}{c_*}\fL u^{-1/2}$, i.e.\ to
+$\varkappa\ge(104C_b/c_*)^{2/3}\fL^{2/3}u^{-1/3}$. It holds because $\varkappa\ge\varkappa_w$, if we define
+\[
+ U_w:=\max\Big\{1,\ \Big(\frac{104\,C_b}{c_*}\Big)^{2/3}\Big\}.
+\]
+
+\emph{(c).} \emph{First case: $\varkappa<\varkappa_w$.} By (a), $\Lambda\le C_{(a)}(U_w+1)\fL^{2/3}u^{-1/3}$.
+\emph{Second case: $\varkappa\ge\varkappa_w$ and $\Lambda\le|w_0|/2$.} By (b) and $\varkappa\ge\varkappa_w\ge\fL^{2/3}u^{-1/3}$: $\ \Lambda\le2C_b\fL\,\varkappa^{-1/2}u^{-1/2}\le2C_b\,\fL^{2/3}u^{-1/3}$.
+So in both cases, with $C_c:=\max\{C_{(a)}(U_w+1),2C_b\}$ and using $\fL\ge1$,
+\[
+ \Lambda\le C_c\,\fL^{2/3}u^{-1/3}\le C_c\,\fL\,u^{-1/3}.
+\]
+By \eqref{eq:ap2}, \eqref{eq:ap4}, \eqref{eq:ap1b}, and $144C_s\Lambda\le144C_s\lambda_{\rm st}=\frac14$,
+\[
+ \Lo\le35\fL\Psi\le70\,\fL u^{-1/2},\qquad\Ld\le\Lambda+D\le\tfrac54\Lambda+1036\,C_s\fL\Psi\le\tfrac54\Lambda+2072\,C_s\,\fL u^{-1/2}.
+\]
+Since $u^{-1/2}\le u^{-1/3}$,
+\[
+ \Ld+\Lo\le\big(\tfrac54C_c+2072\,C_s+70\big)\fL u^{-1/3}\le K\fL u^{-1/3}
+\]
+for $N\ge N_0$ (by (S1), with $K_0\ge\frac54C_c+2072C_s+70$). Finally $K\fL u^{-1/3}\le\lambda_{\rm st}/2$ is equivalent to $u\ge(2K\fL/\lambda_{\rm st})^3=(1152C_s)^3K^3\fL^3$, and by (S2), \eqref{eq:ledgerA3} and (S1) (with $K_0\ge(1152C_s)^{1/2}$)
+\[
+ (1152C_s)^3K^3\fL^3\le(1152C_s)^3K^{12\fa+12}\le K^{12\fa+18}\le K^{C_1-1}\le u .\qedhere
+\]
+\end{proof}
+
+\begin{lemma}[Initial estimate]\label{lem:initial}
+For every $z$ with $\eta=10$ (any $E\in\R$): on $\cG(z)$, $\ \max_i|G_{ii}|\le\frac1{10}$ and $\Ld+\Lo\le4\fL N^{-1/2}$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:basic}(a) (for $H$ and for its minors), $|G_{ii}|\le\eta^{-1}=\frac1{10}$, $|G^{(i)}_{jj}|\le\frac1{10}$, and $\im m\le\max_i|G_{ii}|\le\frac1{10}$. Hence
+\[
+ \Psi_m=\sqrt{\frac{\im m}{10N}}+\frac1{10N}+\frac1{\sqrt N}\le\Big(\frac1{10}+\frac1{10}+1\Big)N^{-1/2}=\tfrac65N^{-1/2}.
+\]
+By (S5): $|X_i|\le\frac65\fL N^{-1/2}$; $|A_i|\le\fL\cdot\frac1{10}\cdot\frac{36}{25}N^{-1}\le\frac1{10}\fL N^{-1/2}$ (as $N\ge3$); $\Lo\le\fL\cdot\frac1{100}\cdot\frac65N^{-1/2}$. So $\Upsilon_{\max}\le\frac{13}{10}\fL N^{-1/2}$.
+By the second identity in \eqref{eq:sce1}, $|\msc|\le1$ (Lemma~\ref{lem:msc}(b)) and $\sum_j\sigma_{ij}^2=1$,
+\[
+ |v_i|=|\msc|\,|G_{ii}|\,\Big|\sum_j\sigma_{ij}^2v_j-\Upsilon_i\Big|\le\tfrac1{10}\big(\Ld+\Upsilon_{\max}\big)\quad\text{for all }i,\qquad\text{so}\quad\Ld\le\tfrac19\Upsilon_{\max}\le\tfrac3{20}\fL N^{-1/2}.
+\]
+Altogether $\Ld+\Lo\le\frac15\fL N^{-1/2}\le4\fL N^{-1/2}$. No a priori assumption and no stability analysis is needed.
+\end{proof}
+
+\begin{lemma}[One step, far regime]\label{lem:farstep}
+Let $z\in\bD^{\rm far}$ and $\lambda_f(z):=\frac1{2(|z|+3)}$. On $\cG(z)\cap\{\max_i|G_{ii}|\le1,\ \Lo\le\lambda_f(z)\}$:
+\begin{gather*}
+ \max_i|G_{ii}|\le\tfrac12,\qquad\frac1{|G_{ii}|}\le|z|+2,\\
+ \Ld\le\fL\Psi_m\le6\fL(N\eta)^{-1/2},\qquad\Lo\le\tfrac12\fL\Psi_m\le3\fL(N\eta)^{-1/2}\le\tfrac12\lambda_f(z).
+\end{gather*}
+\end{lemma}
+\begin{proof}
+Let $u:=N\eta\ge\frac12N^{1/2}\ge1$. Since $\im m\le\max_i|G_{ii}|\le1$, $u^{-1}\le u^{-1/2}$ and $N^{-1/2}=\eta^{1/2}u^{-1/2}\le\sqrt{10}\,u^{-1/2}$,
+\[
+ \Psi_m\le\big(1+1+\sqrt{10}\big)u^{-1/2}\le6u^{-1/2}\le6\sqrt2\,N^{-1/4}.
+\]
+By (S2), (S4): $\fL\le K^{4\fa+3}\le N^{1/32}$, so $2\fL\Psi_m\le17N^{1/32-1/4}\le\frac14$ for $N\ge N_0$ ((S4) with $K_0\ge68$); in particular $\Psi_m\le1$. By (S5),
+\[
+ \Upsilon_{\max}\le\max_i\big(|X_i|+|A_i|\big)\le\fL\Psi_m+\fL\Psi_m^2\le2\fL\Psi_m\le\tfrac14 .
+\]
+Since $|E|\ge4$ and $\max_i|G_{ii}|\le1$, Lemma~\ref{lem:stabfar} applies: $\Ld\le\frac12\Upsilon_{\max}\le\fL\Psi_m\le6\fL u^{-1/2}$ and $\Ld\le\frac18$; with $|\msc|\le\frac13$ (Lemma~\ref{lem:msc}(g)), $|G_{ii}|\le\frac13+\frac18\le\frac12$; and
+$1/|G_{ii}|\le|z|+1+\Upsilon_{\max}\le|z|+2$. By (I3) of Lemma~\ref{lem:schur} with $A=\{i\}$, for $j\ne i$,
+\[
+ |G^{(i)}_{jj}|\le|G_{jj}|+\frac{|G_{ji}||G_{ij}|}{|G_{ii}|}\le\frac12+\lambda_f(z)^2(|z|+2)\le\frac12+\frac1{4(|z|+3)}\le1 .
+\]
+Then (S5) gives $|G_{ij}|\le\fL\cdot\frac12\cdot1\cdot\Psi_m\le3\fL u^{-1/2}$ for all $i\ne j$. Finally, $|z|+3\le\Emax+14\le15\Emax\le15K^{2\fa+1}$ by (S2), so
+\[
+ 3\fL u^{-1/2}\cdot\frac2{\lambda_f(z)}=12(|z|+3)\fL u^{-1/2}\le12\cdot15\cdot\sqrt2\;K^{6\fa+4}N^{-1/4}\le255\,N^{1/32-1/4}\le1
+\]
+for $N\ge N_0$, by (S4) with $K_0\ge255$. This is $\Lo\le\frac12\lambda_f(z)$.
+\end{proof}
+\subsection{The continuity argument}
+\begin{theorem}[Weak local law on the lattice; deterministic form]\label{thm:weak}
+For every $z\in\mathbb L$, on the event $\cG_{\rm col}(z)$:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=0pt]
+\item if $z\in\bD^{\rm near}$: $\ \Ld(z)+\Lo(z)\le K\fL(N\eta)^{-1/3}\le\lambda_{\rm st}/2$; and if moreover $\varkappa(z)\ge\varkappa_w(z)$, then $\Lambda(z)\le|w_0(z)|/4$;
+\item if $z\in\bD^{\rm far}$: $\ \max_i|G_{ii}(z)|\le\frac12$ and $\Ld(z)+\Lo(z)\le9\fL(N\eta)^{-1/2}$;
+\item in both cases the event
+\begin{equation}\label{eq:Xiev}
+ \Xi(z):=\Big\{\Ld(z)\le\tfrac12|\msc(z)|,\ \ \Lo(z)\le\frac{|\msc(z)|}{16\,p_1}\Big\}
+\end{equation}
+holds. Hence $\PP(\Xi(z)^c)\le CN^9e^{-K^2}$ for every $z\in\mathbb L$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Fix $z=E+\ii\eta\in\mathbb L$ and let ${\rm col}(z)=\{z_0,\dots,z_{k_*}\}$, $z_k=E+\ii\eta_k$, $\eta_k=10-kN^{-4}$, $z_{k_*}=z$, as in the justification of Definition~\ref{def:domains}. We fix a point of
+$\cG_{\rm col}(z)=\bigcap_{k\le k_*}\cG(z_k)$; all quantities below are evaluated at this point, and the argument is deterministic. We shall use the following Lipschitz bounds for consecutive points of the column ($|z_k-z_{k+1}|=N^{-4}$).
+
+\smallskip\noindent\textbf{(Lip)} \emph{Let $0\le k<k_*$ and $\eta_0:=\eta_{k+1}$ (the smaller of the two imaginary parts). Then
+\[
+ |F(z_k)-F(z_{k+1})|\le\big(\eta_0^{-2}+\eta_0^{-1}+1\big)N^{-4}\ \ \text{for }F\in\{\Lambda,\Ld,\Lo\},\qquad|G_{ii}(z_k)-G_{ii}(z_{k+1})|\le\eta_0^{-2}N^{-4},
+\]
+and $|w_0(z_k)-w_0(z_{k+1})|\le4(1+\eta_0^{-1})N^{-4}$.} The first two bounds are Lemma~\ref{lem:basic}(c). For the third, write $m=\msc(z_k)$, $m'=\msc(z_{k+1})$; then
+$w_0(z_k)-w_0(z_{k+1})=(m-m')\big(1-m^2-mm'-m'^2\big)$, $|m|,|m'|\le1$, and $|m-m'|\le(1+\eta_0^{-1})N^{-4}$ by Lemma~\ref{lem:msc}(f).
+
+\medskip\emph{Near regime: proof of \textup{(a)}.} Let $z\in\bD^{\rm near}$; then $z_k\in\bD^{\rm near}$ for all $k\le k_*$, in particular $\eta_k\ge N^{-1}$, and (Lip) gives, for $N\ge13$ (see (S1)),
+\begin{equation}\tag{5.b}\label{eq:lipnear}
+\begin{aligned}
+ |F(z_k)-F(z_{k+1})|&\le(N^2+N+1)N^{-4}\le2N^{-2}\qquad(F\in\{\Lambda,\Ld,\Lo\}),\\
+ |w_0(z_k)-w_0(z_{k+1})|&\le4(N+1)N^{-4}\le N^{-2}.
+\end{aligned}
+\end{equation}
+We prove by induction on $k\in\{0,\dots,k_*\}$ the statement
+\[
+ \mathcal H_k:\qquad\Ld(z_k)+\Lo(z_k)\le K\fL(N\eta_k)^{-1/3}\le\frac{\lambda_{\rm st}}2,\qquad\text{and}\quad\Lambda(z_k)\le\frac{|w_0(z_k)|}4\ \text{ if }\ \varkappa(z_k)\ge\varkappa_w(z_k).
+\]
+Recall that $K\fL(N\eta_k)^{-1/3}\le\lambda_{\rm st}/2$ holds for every point of $\bD^{\rm near}$ (end of the proof of Lemma~\ref{lem:weakdich}), and that $|w_0(z_k)|\ge\frac{c_*}{13}\varkappa(z_k)\ge\frac{c_*}{13}\eta_k^{1/2}$.
+
+\emph{$\mathcal H_0$.} Here $\eta_0=10$. By Lemma~\ref{lem:initial} (on $\cG(z_0)$), $\Ld+\Lo\le4\fL N^{-1/2}\le K\fL(10N)^{-1/3}$ (as $K\ge9$), and $\Lambda\le\Ld\le4\fL N^{-1/2}\le4N^{-15/32}\le\frac{c_*}{52}\sqrt{10}\le\frac14|w_0(z_0)|$ for $N\ge N_0$
+(by (S2), (S4), $\fL\le N^{1/32}$).
+
+\emph{$\mathcal H_k\Rightarrow\mathcal H_{k+1}$.} Assume $\mathcal H_k$, $k<k_*$. By \eqref{eq:lipnear}, at $z_{k+1}$,
+\[
+ \Ld(z_{k+1})+\Lo(z_{k+1})\le\frac{\lambda_{\rm st}}2+4N^{-2}\le\lambda_{\rm st}
+\]
+for $N\ge N_0$ (namely $N^2\ge8/\lambda_{\rm st}$; this follows from (S4) with $K_0\ge8/\lambda_{\rm st}$). Since our point lies in $\cG(z_{k+1})$, we are on the event $\cG(z_{k+1})\cap\{\Ld+\Lo\le\lambda_{\rm st}\}$ of Lemma~\ref{lem:weakdich} at $z_{k+1}\in\bD^{\rm near}$.
+
+\emph{Case 1: $\varkappa(z_{k+1})<\varkappa_w(z_{k+1})$.} Lemma~\ref{lem:weakdich}(c) gives $\Ld+\Lo\le K\fL(N\eta_{k+1})^{-1/3}$ at $z_{k+1}$; the second part of $\mathcal H_{k+1}$ is void.
+
+\emph{Case 2: $\varkappa(z_{k+1})\ge\varkappa_w(z_{k+1})$.} The function $\eta\mapsto\varkappa(E+\ii\eta)\,(N\eta)^{1/3}=\sqrt{\kappa+\eta}\,(N\eta)^{1/3}$ is increasing ($\kappa$ depends only on $E$), and $\varkappa\ge\varkappa_w$ means $\varkappa\,(N\eta)^{1/3}\ge U_w\fL^{2/3}$. Since $\eta_k>\eta_{k+1}$,
+also $\varkappa(z_k)\ge\varkappa_w(z_k)$, so $\mathcal H_k$ gives $\Lambda(z_k)\le|w_0(z_k)|/4$. By \eqref{eq:lipnear},
+\[
+ \Lambda(z_{k+1})\le\Lambda(z_k)+2N^{-2}\le\tfrac14|w_0(z_k)|+2N^{-2}\le\tfrac14|w_0(z_{k+1})|+3N^{-2}\le\tfrac12|w_0(z_{k+1})|,
+\]
+where the last step uses $|w_0(z_{k+1})|\ge\frac{c_*}{13}\eta_{k+1}^{1/2}\ge\frac{c_*}{13}N^{-1/2}$ and $N^{3/2}\ge156/c_*$ ($N\ge N_0$). So the hypotheses of Lemma~\ref{lem:weakdich}(b) and of the second alternative of (c) hold at $z_{k+1}$, and we get
+$\Lambda(z_{k+1})\le|w_0(z_{k+1})|/4$ and $\Ld+\Lo\le K\fL(N\eta_{k+1})^{-1/3}$ at $z_{k+1}$.
+
+In both cases $\mathcal H_{k+1}$ holds. This proves $\mathcal H_{k_*}$, which is (a).
+
+\medskip\emph{Far regime: proof of \textup{(b)}.} Let $z\in\bD^{\rm far}$; then $z_k\in\bD^{\rm far}$ for all $k\le k_*$, in particular $\eta_k\ge\frac12N^{-1/2}$, so $\eta_k^{-2}\le4N$ and (Lip) gives
+\begin{equation}\tag{5.c}\label{eq:lipfar}
+ |G_{ii}(z_k)-G_{ii}(z_{k+1})|\le4N^{-3},\qquad|\Lo(z_k)-\Lo(z_{k+1})|\le(4N+2N^{1/2}+1)N^{-4}\le5N^{-3}.
+\end{equation}
+We prove by induction on $k$ the statement
+\[
+ \mathcal F_k:\qquad\max_i|G_{ii}(z_k)|\le1\qquad\text{and}\qquad\Lo(z_k)\le\lambda_f(z_k).
+\]
+\emph{$\mathcal F_0$.} By Lemma~\ref{lem:initial}, $\max_i|G_{ii}(z_0)|\le\frac1{10}$ and $\Lo(z_0)\le4\fL N^{-1/2}\le4N^{-15/32}$, while $\lambda_f(z_0)=\frac1{2(|z_0|+3)}\ge\frac1{30K^{2\fa+1}}\ge\frac1{30}N^{-1/32}$ (as in the proof of Lemma~\ref{lem:farstep}); so $\Lo(z_0)\le\lambda_f(z_0)$ for $N\ge N_0$.
+
+\emph{$\mathcal F_k\Rightarrow\mathcal F_{k+1}$.} Assume $\mathcal F_k$, $k<k_*$. Our point lies in $\cG(z_k)$, so Lemma~\ref{lem:farstep} at $z_k$ gives $\max_i|G_{ii}(z_k)|\le\frac12$ and $\Lo(z_k)\le\frac12\lambda_f(z_k)$. Since $|z_{k+1}|\le|z_k|$ (same $E$, smaller $\eta$), $\lambda_f(z_{k+1})\ge\lambda_f(z_k)$.
+By \eqref{eq:lipfar}, $\max_i|G_{ii}(z_{k+1})|\le\frac12+4N^{-3}\le1$ and
+\[
+ \Lo(z_{k+1})\le\tfrac12\lambda_f(z_k)+5N^{-3}\le\tfrac12\lambda_f(z_{k+1})+5N^{-3}\le\lambda_f(z_{k+1}),
+\]
+because $\lambda_f(z_{k+1})\ge\frac1{30}N^{-1/32}\ge10N^{-3}$. This is $\mathcal F_{k+1}$.
+
+So $\mathcal F_{k_*}$ holds, and Lemma~\ref{lem:farstep} at $z=z_{k_*}$ (on $\cG(z)$) gives $\max_i|G_{ii}(z)|\le\frac12$, $\Ld(z)\le6\fL(N\eta)^{-1/2}$ and $\Lo(z)\le3\fL(N\eta)^{-1/2}$. This is (b).
+
+\medskip\emph{Proof of \textup{(c)}.} \emph{Near regime.} By Lemma~\ref{lem:mscsize}, $|\msc(z)|\ge\frac1{13}$. By (a), $\Ld\le\lambda_{\rm st}/2\le\frac1{1152}\le\frac12|\msc|$. By (a), (S2), (S3) and \eqref{eq:ledgerA3},
+\[
+ \Lo\cdot\frac{16p_1}{|\msc|}\le K\fL(N\eta)^{-1/3}\cdot16\cdot2K^{3/2}\cdot13\le416\,K^{4\fa+\frac{11}2}\big(K^{12\fa+18}\big)^{-1/3}=416\,K^{-1/2}\le1
+\]
+for $N\ge N_0$ ((S1) with $K_0\ge416^2$).
+
+\emph{Far regime.} By Lemma~\ref{lem:msc}(c), $|\msc(z)|\ge\frac1{|z|+1}\ge\frac1{15K^{2\fa+1}}$. By (b) (more precisely by the two bounds at the end of its proof), $N\eta\ge\frac12N^{1/2}$, (S2), (S3), (S4),
+\begin{align*}
+ \frac{2\Ld}{|\msc|}&\le12\sqrt2\,\fL N^{-1/4}\cdot15K^{2\fa+1}\le255\,K^{6\fa+4}N^{-1/4}\le1,\\
+ \Lo\cdot\frac{16p_1}{|\msc|}&\le3\sqrt2\,\fL N^{-1/4}\cdot32K^{3/2}\cdot15K^{2\fa+1}\le2037\,K^{6\fa+\frac{11}2}N^{-1/4}\le1,
+\end{align*}
+for $N\ge N_0$ ((S4) with $K_0\ge2037$: $K^{6\fa+6}\le N^{1/32}$ and $2037N^{1/32}\le N^{1/8}$).
+
+\emph{Probability.} $\Xi(z)$ is closed, hence measurable (the functions $\Ld(z)$, $\Lo(z)$ are continuous on $\Omega$, Lemma~\ref{lem:weyl}(e)). We have shown $\cG_{\rm col}(z)\subset\Xi(z)$, so by Definition~\ref{def:domains},
+$\PP(\Xi(z)^c)\le\PP(\cG_{\rm col}(z)^c)\le460\,\vth^{-1}N^8e^{-K^2}\le CN^9e^{-K^2}$.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:weak} corresponds to Theorem~3.1 of the original (errors $(N\eta)^{-1/3}$, $(N\eta)^{-1/2}$ up to powers of $K$). It is used below only through the a priori event $\Xi(z)$ and the bounds of Lemma~\ref{lem:apriori}.
+The induction is deterministic: probability enters only through $\PP(\cG(z)^c)\le CN^5e^{-K^2}$ and a union bound over ${\rm col}(z)$.
+\end{remark}
+\begin{remark}[What Section~\ref{sec:weak} uses from the exponent ledger]\label{rem:ledgerA3}
+Only \eqref{eq:ledgerA3}: $C_1-1\ge12\fa+18$ (used for $N\eta\ge4\fL^2$ in Lemma~\ref{lem:apriori}, for $K\fL(N\eta)^{-1/3}\le\lambda_{\rm st}/2$ in Lemma~\ref{lem:weakdich}(c), and for $\Lo\le|\msc|/(16p_1)$ in Theorem~\ref{thm:weak}(c)), and $c_0(6\fa+6)\le\frac1{32}$
+(used for $|\mathbb L|\le N^{10}$ and in the far regime). Both hold for the values \eqref{eq:ledger0} (Appendix~\ref{app:ledger}).
+\end{remark}

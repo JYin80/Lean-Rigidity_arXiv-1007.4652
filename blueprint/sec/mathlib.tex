@@ -1,0 +1,164 @@
+\section{Facts used from Mathlib}\label{app:mathlib}
+This appendix lists the standard facts that NP uses without proof, all of which are available in Mathlib; each fact is listed once, followed (in brackets) by the places where it is used.
+
+\emph{Status of the names.} A Mathlib name without mark has been checked to exist; a name marked $^\circ$ is an expected name that must still be checked against the version of Mathlib
+used for the formalization. Names that occur only in Section~\ref{sec:edge} are not marked individually and should be checked as well.
+
+\subsection{Linear algebra and matrices}
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]\raggedright
+\item \emph{Spectral theorem for Hermitian matrices} over $\kk\in\{\R,\C\}$: real eigenvalues and an orthonormal eigenbasis (\texttt{Matrix.IsHermitian.eigenvalues}, \texttt{.eigenvectorBasis},
+\texttt{.spectral\_theorem}, \texttt{.eigenvectorUnitary}; for $\kk=\R$ the unitary group is the orthogonal group). Note that \texttt{eigenvalues\textsubscript{0}} is \emph{decreasing}, so NP's $\lambda_k$ is
+\texttt{eigenvalues\textsubscript{0}} with the index reversed. Consequences used: the characteristic polynomial is invariant under unitary conjugation;
+$\det(A-z)=\prod_j(\lambda_j(A)-z)$ (\texttt{Matrix.IsHermitian.det\_eq\_prod\_eigenvalues}); $\tr A^2=\sum_k\lambda_k(A)^2$ (\texttt{Matrix.IsHermitian.trace\_eq\_sum\_eigenvalues} applied to $A^2$);
+the eigenvalues of $cA$, $c>0$. \hfill[Lemma~\ref{lem:mono}(i); Lemma~\ref{lem:basic}(d)--(g), Lemma~\ref{lem:weyl}; \S\ref{sec:edge} (through Lemma~\ref{lem:basic}(d)); \S\S\ref{sec:C1}, \ref{sec:C2}; \S\S\ref{sec:C4}, \ref{sec:C5}]
+\item \emph{Finite-dimensional linear algebra}: an injective endomorphism of a finite-dimensional space is bijective (\texttt{LinearMap.injective\_iff\_surjective}$^\circ$); a one-sided inverse of a square
+matrix is two-sided (\texttt{Matrix.mul\_eq\_one\_comm}$^\circ$); $\dim(V\cap W)\ge\dim V+\dim W-n$ (\texttt{Submodule.finrank\_sup\_add\_finrank\_inf\_eq}$^\circ$); the inverse of a symmetric matrix is symmetric;
+inverse of a diagonal matrix. \hfill[\S\ref{sec:det}; \S\ref{sec:FA}]
+\item \emph{Determinants}: multiplicativity; $|\det U|=1$ for unitary $U$, $\det O=\pm1$ for orthogonal $O$; the determinant and the inverse of a $2\times2$ matrix (\texttt{Matrix.det\_fin\_two},
+\texttt{Matrix.inv\_def}$^\circ$, \texttt{Matrix.adjugate\_fin\_two}$^\circ$); $\det(1+\mathsf X\mathsf Y)=\det(1+\mathsf Y\mathsf X)$ for rectangular $\mathsf X,\mathsf Y$ (\texttt{Matrix.det\_one\_add\_mul\_comm});
+a $2\times2$ complex matrix has two eigenvalues counted with multiplicity whose product is its determinant (algebraic closedness of $\C$; \texttt{Matrix.det\_eq\_prod\_roots\_charpoly}).
+\hfill[\S\ref{sec:det}; \S\ref{sec:edge}; \S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}]
+\item \emph{Block matrices}: the block inverse formula \eqref{eq:BI} (\texttt{Matrix.invOf\_fromBlocks\textsubscript{22}\_eq}) and the block determinant formula \eqref{eq:BD}
+(\texttt{Matrix.det\_fromBlocks\textsubscript{22}}, \texttt{Matrix.det\_fromBlocks\textsubscript{11}}); invariance of inverse and determinant under reindexing
+(\texttt{Matrix.det\_submatrix\_equiv\_self}$^\circ$, \texttt{Matrix.inv\_submatrix\_equiv}$^\circ$). Both block formulas are also proved in Step~0 of the proof of Lemma~\ref{lem:schur} from the determinant
+of block triangular matrices. \hfill[\S\ref{sec:det}; \S\ref{sec:FA} (through Lemma~\ref{lem:schur}); \S\ref{sec:edge}]
+\item \emph{Matrix powers and geometric sums}: entries of matrix powers as sums over index sequences (induction on \texttt{pow\_succ}); $(1-T)\sum_{n<n_0}T^n=1-T^{n_0}$ (\texttt{mul\_neg\_geom\_sum}$^\circ$);
+$(u+v)^p-v^p=u\sum_{i<p}(u+v)^iv^{p-1-i}$ (\texttt{Commute.geom\_sum\textsubscript{2}\_mul}$^\circ$). \hfill[\S\ref{sec:FA}]
+\item \emph{Trace, adjoint, unitary groups, permutations}: $\tr(AB)=\tr(BA)$ (\texttt{Matrix.trace\_mul\_comm}$^\circ$), cyclicity of the trace; $(AB)^*=B^*A^*$; the unitary and orthogonal groups
+(\texttt{Matrix.unitaryGroup}); permutation matrices (\texttt{Matrix.PEquiv.toMatrix}$^\circ$ / \texttt{Equiv.Perm.permMatrix}$^\circ$); Parseval in a finite-dimensional inner product space
+(\texttt{OrthonormalBasis.sum\_inner\_mul\_inner}$^\circ$). \hfill[\S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}]
+\item \emph{Inequalities in $\C^n$}: Cauchy--Schwarz. \hfill[\S\ref{sec:det}]
+\end{enumerate}
+
+\subsection{Measure theory and integration}
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]\raggedright
+\item \emph{Product measures}: \texttt{MeasureTheory.Measure.pi}, \texttt{MeasureTheory.Measure.prod}; uniqueness of a product measure from its values on boxes (\texttt{MeasureTheory.Measure.pi\_eq}$^\circ$);
+splitting of a finite product over a subset of the index set (\texttt{MeasureTheory.measurePreserving\_piEquivPiSubtypeProd}$^\circ$; this is Lemma~\ref{lem:split}(a), which is also proved in the text
+from the uniqueness of measures on a generating $\pi$-system); splitting off one coordinate of $\R^N$ is measure preserving (\texttt{MeasureTheory.volume\_preserving\_piFinSuccAbove}$^\circ$);
+$\mathrm{Leb}^{2d}=\mathrm{Leb}^d\otimes\mathrm{Leb}^d$ (\texttt{MeasureTheory.volume\_pi}, \texttt{measurePreserving\_sumPiEquivProdPi}$^\circ$); measure-preserving coordinate permutations of $\R^N$.
+\hfill[\S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:FA}; \S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}]
+\item \emph{Tonelli and Fubini} (\texttt{MeasureTheory.lintegral\_prod}$^\circ$, \texttt{MeasureTheory.integral\_prod}$^\circ$), including the measurability of partial integrals and marginals
+(\texttt{Measurable.lintegral\_prod\_right'}$^\circ$, \texttt{MeasureTheory.StronglyMeasurable.integral\_prod\_right'}$^\circ$), on $\R^2$, $\R^3$, $\R^N$ and for series.
+\hfill[Lemmas~\ref{lem:stieltjes}, \ref{lem:HS}, \ref{lem:count}; \S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:FA}; \S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Image measures and change of variables}: $\int g\,\rd(T_*\mu)=\int g\circ T\,\rd\mu$ (\texttt{MeasureTheory.Measure.map}, \texttt{MeasureTheory.Measure.map\_apply}, \texttt{MeasureTheory.lintegral\_map},
+\texttt{MeasureTheory.integral\_map}); image of a product measure under a coordinatewise map; measures with density (\texttt{withDensity}$^\circ$).
+\hfill[Lemma~\ref{lem:mono}(iv),(v); \S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:edge}; \S\S\ref{sec:C1}, \ref{sec:C2}; \S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Lebesgue measure on finite-dimensional spaces}: $\mathrm{Leb}^d$ as the product \texttt{MeasureTheory.Measure.pi}; the image of an additive Haar measure under an invertible linear map is
+$|\det|^{-1}$ times it (\texttt{MeasureTheory.Measure.map\_linearMap\_addHaar\_eq\_smul\_addHaar}$^\circ$); translation invariance; equivalently, the volume of a finite-dimensional inner product space and its
+invariance under linear isometries (\texttt{LinearIsometryEquiv.measurePreserving}$^\circ$, \texttt{OrthonormalBasis.volume\_parallelepiped}$^\circ$); scaling on $\R$ (\texttt{Real.volume\_preimage\_mul\_left}$^\circ$);
+inner regularity of Lebesgue measure on Borel subsets of $\R$ by compact sets (\texttt{MeasurableSet.measure\_eq\_iSup\_isCompact}$^\circ$; Theorem~\ref{thm:PL}, Step~2). \hfill[\S\ref{sec:C3}; \S\ref{sec:C6}]
+\item \emph{Convergence theorems}: monotone convergence (\texttt{MeasureTheory.lintegral\_iSup}$^\circ$); Fatou's lemma (\texttt{MeasureTheory.lintegral\_liminf\_le}$^\circ$); dominated convergence, also along
+filters (\texttt{MeasureTheory.tendsto\_integral\_filter\_of\_dominated\_convergence}$^\circ$) and for series. \hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}; \S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Parametric integrals}: continuity (\texttt{MeasureTheory.continuousOn\_of\_dominated}$^\circ$), also over a compact interval; differentiation under the integral sign with a dominating function
+(\texttt{hasFDerivAt\_integral\_of\_dominated\_of\_fderiv\_le}$^\circ$, \texttt{hasDerivAt\_integral\_of\_dominated\_loc\_of\_deriv\_le}$^\circ$). \hfill[\S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Layer cake}: $\int f=\int_0^\infty|\{f>r\}|\,\rd r$ for Borel $f\ge0$ and its power version (\texttt{MeasureTheory.lintegral\_rpow\_eq\_lintegral\_meas\_lt\_mul};
+\texttt{MeasureTheory.lintegral\_eq\_lintegral\_meas\_lt}$^\circ$). \hfill[Lemma~\ref{lem:moments}; Theorem~\ref{thm:PL}, Step~3]
+\item \emph{Radon--Nikodym}: \texttt{MeasureTheory.Measure.rnDeriv}$^\circ$, \texttt{Measure.withDensity\_rnDeriv\_eq}$^\circ$; $\int F\,\rd\nu=\int F\frac{\rd\nu}{\rd\omega}\rd\omega$ for $\nu\ll\omega$;
+$\nu'=f\mu$, $\omega=\psi\mu\Rightarrow\nu'=(f/\psi)\omega$. \hfill[\S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Uniqueness of measures}: finite Borel measures on a metric space that agree on all bounded continuous functions are equal
+(\texttt{MeasureTheory.ext\_of\_forall\_integral\_eq\_of\_IsFiniteMeasure}$^\circ$ or \texttt{MeasureTheory.ext\_of\_forall\_lintegral\_eq\_of\_IsFiniteMeasure}$^\circ$). \hfill[\S\S\ref{sec:C4}, \ref{sec:C5}]
+\item \emph{Outer measure}: $\PP(\Omega')\le\PP^*(U)$ for $\Omega'\subset U$ (\texttt{MeasureTheory.measure\_mono}; in Mathlib a measure evaluated on an arbitrary set is its outer measure).
+\hfill[statement of Theorem~\ref{thm:21}; \S\ref{sec:edge}]
+\item \emph{The Bochner integral}: linearity and monotonicity (\texttt{MeasureTheory.integral\_mono}, \texttt{integral\_indicator\_one}); $|\int f|\le\int|f|$ (\texttt{MeasureTheory.norm\_integral\_le\_integral\_norm});
+$\int\im(c\,\xi)=\im(c\int\xi)$ and $\int\bar\xi=\overline{\int\xi}$ for integrable complex $\xi$ (\texttt{integral\_im}, \texttt{integral\_conj}, \texttt{integral\_const\_mul}); continuous linear maps commute with
+Bochner integrals (\texttt{ContinuousLinearMap.integral\_comp\_comm}$^\circ$); a probability measure with a finite third absolute moment integrates all polynomials of degree $\le3$.
+\hfill[\S\ref{sec:edge}; \S\ref{sec:C3}]
+\item \emph{$L^p$ inequalities} (on a probability space, $p\ge1$ real): H\"older's inequality for finitely many functions (\texttt{ENNReal.lintegral\_prod\_norm\_pow\_le}$^\circ$); Minkowski's inequality
+(\texttt{ENNReal.lintegral\_Lp\_add\_le}$^\circ$, \texttt{MeasureTheory.eLpNorm\_add\_le}$^\circ$); monotonicity of $L^q$-norms (\texttt{MeasureTheory.eLpNorm\_le\_eLpNorm\_of\_exponent\_le}$^\circ$);
+Jensen's inequality for $|\cdot|^q$ (\texttt{ConvexOn.map\_integral\_le}$^\circ$); $\norm f_p\le\norm g_p$ for $0\le f\le g$, $\norm{c\,\bone_A}_p=c\,\PP(A)^{1/p}$, $\norm{f\bone_{A^c}}_p\le\sup|f|\cdot\PP(A^c)^{1/p}$,
+$\norm{f^{1/2}}_p\le\norm f_p^{1/2}$ for $f\ge0$; the Cauchy--Schwarz inequality $\int|fg|\le(\int|f|^2)^{1/2}(\int|g|^2)^{1/2}$, in particular $|\int\bone_Af|\le\PP(A)^{1/2}(\int|f|^2)^{1/2}$ and
+$L^2\subset L^1$ (\texttt{MeasureTheory.integral\_mul\_le\_Lp\_mul\_Lq\_of\_nonneg} with $p=q=2$). In Sections~\ref{sec:strong}--\ref{sec:norm} all functions to which these are applied are bounded
+and continuous on $\Omega$ times indicators of closed sets, so integrability is automatic. \hfill[\S\ref{sec:FA}; \S\S\ref{sec:strong}, \ref{sec:norm}; \S\ref{sec:edge}; \S\S\ref{sec:C1}, \ref{sec:C2}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Markov's (Chebyshev's) inequality} $\PP(f>t)\le t^{-p}\EE f^p$ for $f\ge0$, $t>0$ (\texttt{MeasureTheory.mul\_meas\_ge\_le\_lintegral}$^\circ$ applied to $f^p$). \hfill[\S\ref{sec:FA}; \S\S\ref{sec:strong}, \ref{sec:norm}; \S\S\ref{sec:C1}, \ref{sec:C2}; \S\ref{sec:C3}]
+\item \emph{Union bound} (\texttt{MeasureTheory.measure\_iUnion\_le}, \texttt{measure\_union\_le}) over finite index sets (in Part~I of cardinality at most $N^{10}$). \hfill[\S\S\ref{sec:prob}, \ref{sec:weak}; \S\S\ref{sec:strong}, \ref{sec:norm}; \S\ref{sec:edge}]
+\item \emph{Conditional expectation}: its defining property, only for the reformulation in Lemma~\ref{lem:split}(d). \hfill[\S\S\ref{sec:prob}, \ref{sec:weak}]
+\end{enumerate}
+
+\subsection{Probability: independence, Hoeffding, Gaussian measures, relative entropy}
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]\raggedright
+\item \emph{Independence}: \texttt{ProbabilityTheory.iIndepFun}; finitely many random variables are independent iff their joint law is the product of their laws
+(\texttt{iIndepFun\_iff\_map\_fun\_eq\_pi\_map}$^\circ$, \texttt{indepFun\_iff\_map\_prod\_eq\_prod\_map\_map}$^\circ$, \texttt{ProbabilityTheory.iIndepFun\_iff\_map\_prod\_eq\_prod\_map\_map}$^\circ$,
+\texttt{ProbabilityTheory.iIndepFun\_iff\_pi\_map\_eq\_map}$^\circ$); measurable functions of disjoint blocks of an independent family are independent (\texttt{iIndepFun.comp}$^\circ$,
+\texttt{ProbabilityTheory.iIndepFun.finset\_comp}$^\circ$, \texttt{iIndepFun.indepFun\_finset}$^\circ$, \texttt{IndepFun.comp}); the coordinates of a product measure are independent
+(\texttt{ProbabilityTheory.iIndepFun\_pi}$^\circ$); for independent integrable $\xi,\zeta$, $\int\xi\zeta=\int\xi\int\zeta$ (\texttt{ProbabilityTheory.IndepFun.integral\_mul\_of\_integrable}).
+(The splitting of the product law itself is Lemma~\ref{lem:split}.) \hfill[\S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:FA}; \S\ref{sec:edge}; \S\S\ref{sec:C1}, \ref{sec:C2}; \S\ref{sec:C3}]
+\item \emph{Hoeffding's lemma and inequality}, i.e.\ statement (H) of Section~\ref{sec:prob}: \texttt{ProbabilityTheory.hasSubgaussianMGF\_of\_mem\_Icc\_of\_integral\_eq\_zero}$^\circ$,
+\texttt{ProbabilityTheory.HasSubgaussianMGF.measure\_sum\_ge\_le\_of\_iIndepFun}. \hfill[\S\S\ref{sec:prob}, \ref{sec:weak}]
+\item \emph{Real Gaussian measures}: \texttt{ProbabilityTheory.gaussianReal} with its density \texttt{gaussianPDFReal}$^\circ$, mean $0$, variance $v$, finite absolute moments of all orders
+(\texttt{memLp\_id\_gaussianReal}$^\circ$), its moment generating function (\texttt{ProbabilityTheory.mgf}, \texttt{mgf\_id\_gaussianReal}$^\circ$); \texttt{ProbabilityTheory.stdGaussian} may be used as the
+definition of $g_1$ (Definition~\ref{c3:def:gauss}); the Gaussian integrals $\int e^{-(u-m)^2/(2\tau^2)}\rd u=\sqrt{2\pi}\,\tau$ and $\int_{\R^N}e^{-c|x|^2}\rd x=(\pi/c)^{N/2}$ (\texttt{integral\_gaussian} and products);
+finiteness of polynomial moments of Gaussian densities; integrability of $|x|^pe^{-\frac\kappa4|x|^2}$ on $\R^N$. \hfill[\S\S\ref{sec:C1}, \ref{sec:C2}; \S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}]
+\item \emph{Relative entropy}: \texttt{InformationTheory.klDiv} and \texttt{MeasureTheory.llr}, used only to identify $S(\cdot|\cdot)$ (\S\ref{c3:ss:KL}, Lemma~\ref{lem:DV}); the data-processing inequality
+under a measurable map \texttt{klDiv\_map\_le} (Lemma~\ref{lem:U8}). The chain rule for \texttt{klDiv} is \emph{not} used. \hfill[\S\ref{sec:C3}; \S\ref{sec:C6}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\end{enumerate}
+
+\subsection{Topology and measurability}
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]\raggedright
+\item Continuous functions are Borel (\texttt{Continuous.measurable}); open and closed sets are Borel (\texttt{IsOpen.measurableSet}, \texttt{IsClosed.measurableSet}); intersections of closed sets are closed
+(\texttt{isClosed\_iInter}); preimages of closed sets under continuous maps are closed (\texttt{IsClosed.preimage}); sets $\{f\le g\}$ (resp.\ $\{f<g\}$) with $f,g$ continuous are closed (resp.\ open), hence Borel.
+\hfill[\S\ref{sec:det}; \S\S\ref{sec:prob}, \ref{sec:weak}; \S\S\ref{sec:strong}, \ref{sec:norm}; \S\ref{sec:edge}; \S\S\ref{sec:C4}, \ref{sec:C5}]
+\item The product $\sigma$-algebra on a finite product of second countable spaces is the Borel $\sigma$-algebra (\texttt{Pi.borelSpace}$^\circ$). \hfill[\S\ref{sec:det}]
+\item A countable supremum of measurable functions is measurable (\texttt{Measurable.iSup}$^\circ$); a monotone function $\R\to[0,\infty]$ is Borel; density of $\mathbb Q$ in $\R$. \hfill[\S\ref{sec:det}; \S\S\ref{sec:C1}, \ref{sec:C2}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}]
+\item Continuous images of compact sets are compact; a continuous function on a compact set is bounded (\texttt{IsCompact.exists\_bound\_of\_continuousOn}) and uniformly continuous. \hfill[\S\ref{sec:edge}; \S\ref{sec:C6}]
+\end{enumerate}
+
+\subsection{Real and complex analysis}
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]\raggedright
+\item \emph{Complex numbers.} The principal square root on $\C\setminus(-\infty,0]$ (\texttt{Complex.sqrt} or \texttt{cpow} with exponent $\frac12$): $(\sqrt\zeta)^2=\zeta$, $\re\sqrt\zeta>0$, uniqueness with these two
+properties, and holomorphy on the slit plane; the geometric series; Euler's formula for $\sin$, $\cos$; holomorphy of rational functions; for a holomorphic $\Delta$ on an open set,
+$\partial_x\Delta=\Delta'$, $\partial_y\Delta=\ii\Delta'$. \hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}]
+\item \emph{The principal logarithm} \texttt{Complex.log}: $\exp(\Log w)=w$ for $w\ne0$; complex differentiability on the slit plane with derivative $1/w$ (\texttt{Complex.hasStrictDerivAt\_log});
+the bounds \eqref{eq:b1:L1}--\eqref{eq:b1:L3} are instances of \texttt{Complex.norm\_log\_sub\_logTaylor\_le} (a proof is given in \S\ref{sec:X}). \hfill[\S\ref{sec:edge}]
+\item \emph{One-variable calculus.} The fundamental theorem of calculus, also for continuously differentiable functions $[E_1,E_2]\to\C$ (\texttt{intervalIntegral.integral\_eq\_sub\_of\_hasDerivAt});
+integration by parts for $C^1$ functions on a compact interval; substitution $\int_{\phi(a)}^{\phi(b)}g=\int_a^b(g\circ\phi)\phi'$ for $\phi\in C^1$, $g$ continuous (\texttt{intervalIntegral.integral\_comp\_mul\_deriv}),
+$x=2-u$ (\texttt{intervalIntegral.integral\_comp\_sub\_left}) and affine changes of variables (\texttt{integral\_comp\_mul\_add}$^\circ$); monotonicity of the integral (\texttt{intervalIntegral.integral\_mono\_on});
+product and chain rules; the intermediate value theorem; the mean value theorem and monotonicity from the sign of the derivative (\texttt{antitoneOn\_of\_deriv\_nonpos}$^\circ$; a function with zero
+derivative on an interval is constant, \texttt{is\_const\_of\_deriv\_eq\_zero}$^\circ$); the mean value inequality $|\Phi(s)-\Phi(s')|\le\sup|\Phi'|\,|s-s'|$ for $\Phi\in C^1(\R)$
+(\texttt{Convex.norm\_image\_sub\_le\_of\_norm\_deriv\_le}); a differentiable even function has derivative $0$ at $0$; Taylor's formula with Lagrange remainder (\texttt{taylor\_mean\_remainder\_lagrange}).
+\hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}; \S\ref{sec:edge}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Specific integrals}: $\int_\R\frac{\rd s}{1+s^2}=\pi$ (\texttt{integral\_univ\_inv\_one\_add\_sq}); $\int_0^\pi\sin^2=\frac\pi2$ and $\int_0^\pi\cos(j\theta)\,\rd\theta=0$ for integers $j\ge1$;
+$\int_0^r\sqrt u\,\rd u=\frac23r^{3/2}$ and $\int_{m-1}^mx^{-4/3}\rd x$; the substitution $x=u^{\fa}$ over $[1,\infty)$ and $\int_0^\infty e^{-u/2}\rd u=2$. \hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}; \S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:edge}]
+\item \emph{Calculus in several variables.} The divergence theorem on a rectangle for a continuously differentiable vector field with values in $\C$
+(\texttt{MeasureTheory.integral2\_divergence\_prod\_of\_hasFDerivWithinAt\_off\_countable}; used in Lemma~\ref{lem:HS} only); $C^k$ functions on finite-dimensional real spaces (\texttt{ContDiff}), composition with
+continuous linear maps and of $C^\infty$ maps, the chain rule for $t\mapsto\Phi(\mathbf c(t))$ up to second order, in particular for $t\mapsto g(z+th)$ with $g\in C^2(\R^N)$ (\texttt{iteratedFDeriv},
+\texttt{ContDiff.comp}); symmetry of the second derivative of $C^2$ maps (\texttt{second\_derivative\_symmetric}$^\circ$, \texttt{ContDiffAt.isSymmSndFDerivAt}$^\circ$); a function on an open set whose
+iterated derivatives all exist and are continuous is $C^\infty$ (\texttt{contDiffOn\_of\_continuousOn\_differentiableOn}$^\circ$). \hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}; \S\ref{sec:C3}; \S\S\ref{sec:C4}, \ref{sec:C5}; \S\ref{sec:C6}]
+\item \emph{Smooth transition function} \texttt{Real.smoothTransition} with \texttt{.contDiff}, \texttt{.zero\_of\_nonpos}, \texttt{.one\_of\_one\_le}, \texttt{.nonneg}, \texttt{.le\_one} ; used for $\chi(t):=\texttt{smoothTransition}((4-t)/3)$ in Section~\ref{sec:C6}. No bump function is needed in Parts~I and~II: the cutoffs of \S\ref{sec:HS}
+and of \S\ref{sec:proof24} are explicit piecewise polynomials. \hfill[\S\ref{sec:C6}]
+\item \emph{Elementary functions.} Elementary properties of $\log$, $\exp$ and real powers; monotonicity of $s\mapsto s^a$ on $[0,\infty)$ ($a>0$) and of $a\mapsto N^a$ ($N\ge1$), $N^aN^b=N^{a+b}$,
+$(\log N)^{aL_0}=\exp(aL_0\log\log N)$ (\texttt{Real.rpow\_le\_rpow}, \texttt{Real.rpow\_le\_rpow\_of\_exponent\_le}, \texttt{Real.rpow\_def\_of\_pos}, \texttt{Real.rpow\_add});
+$x^n/n!\le e^x$ for $x\ge0$ (\texttt{Real.pow\_div\_factorial\_le\_exp}$^\circ$); $1+x\le e^x$ (\texttt{Real.add\_one\_le\_exp}); $\log t\le t-1$ (\texttt{Real.log\_le\_sub\_one\_of\_pos});
+convexity of $t\mapsto t\log t$ (\texttt{Real.strictConvexOn\_mul\_log}$^\circ$); concavity of $\log$ (\texttt{strictConcaveOn\_log\_Ioi}$^\circ$); $|\sinh x|\ge|x|$, $\cosh t=1+2\sinh^2(t/2)$, monotonicity of
+$\cosh$ on $[0,\infty)$; $\arctan$: derivative, strict monotonicity, range $(-\frac\pi2,\frac\pi2)$, oddness, $\arctan x+\arctan\frac1x=\frac\pi2$ for $x>0$ (\texttt{Real.arctan\_inv\_of\_pos});
+$\pi>3$ (\texttt{Real.pi\_gt\_three}). \hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}; \S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:edge}; \S\ref{sec:C3}; \S\ref{sec:C6}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Asymptotics.} $(\log\log N)^2/\log N\to0$ and $(\log N)^2/N^a\to0$ for $a>0$ (\texttt{Real.isLittleO\_log\_rpow\_atTop}$^\circ$). \hfill[\S\S\ref{sec:C1}, \ref{sec:C2}; \S\S\ref{sec:C7}--\ref{sec:C9}]
+\item \emph{Elementary inequalities.} Cauchy--Schwarz and Young; the weighted arithmetic--geometric mean inequality $\tau s+(1-\tau)t\ge s^\tau t^{1-\tau}$
+(\texttt{Real.geom\_mean\_le\_arith\_mean2\_weighted}$^\circ$); $(a+b)^2\le2a^2+2b^2$, $(a+b)^3\le4(a^3+b^3)$ ($a,b\ge0$), $(\alpha+\beta+\gamma)^2\le3(\alpha^2+\beta^2+\gamma^2)$; $\sqrt{\alpha+\beta}\le\sqrt\alpha+\sqrt\beta$,
+$2\sqrt{\alpha\beta}\le t\alpha+\beta/t$, $\sqrt{1+r}\le1+r/2$; $(\im\xi)^2=\frac12(|\xi|^2-\re\xi^2)$ for $\xi\in\C$; monotonicity of $\eta\mapsto\sqrt{\kappa+\eta}\,\eta$ and of $x\mapsto x^p$;
+absorption (if $0\le Y<\infty$ and $Y\le\theta Y+B$ with $0\le\theta<1$ then $Y\le B/(1-\theta)$); comparisons of the form $N^Ce^{-K}\le\frac12e^{-K/2}$ when $K\ge(\log N)^3$ and $(\log N)^2\ge2C+2$;
+$\sum_{k\le m}k^{-2/3}\le3m^{1/3}$ by comparison with $\int u^{-2/3}$. Numerical inequalities between explicit constants (such as $(3\pi/2)^{2/3}>2.8$ or $2^{1/4}/13>\frac1{150}$) are decidable by
+interval arithmetic. \hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}; \S\ref{sec:det}; \S\S\ref{sec:prob}, \ref{sec:weak}; \S\S\ref{sec:strong}, \ref{sec:norm}; \S\ref{sec:edge}; \S\S\ref{sec:C1}, \ref{sec:C2}; \S\ref{sec:C6}]
+\item \emph{Floor and ceiling}: $x-1<\lfloor x\rfloor\le x\le\lceil x\rceil<x+1$ (\texttt{Int.floor\_le}, \texttt{Int.lt\_floor\_add\_one}, \texttt{Int.le\_ceil}, \texttt{Int.ceil\_lt\_add\_one}); $\lfloor a\rfloor+1>a$
+(\texttt{Nat.lt\_floor\_add\_one}). \hfill[\S\S\ref{sec:strong}, \ref{sec:norm}; \S\ref{sec:edge}]
+\item \emph{Lipschitz functions}: the infimum of a family of $L$-Lipschitz real functions, if finite, is $L$-Lipschitz (\texttt{LipschitzWith.iInf}$^\circ$, or directly). \hfill[\S\S\ref{sec:C7}--\ref{sec:C9}]
+\end{enumerate}
+
+\subsection{Combinatorics and finite sums}
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]\raggedright
+\item The number of $(e_s)\in\Z_{\ge0}^p$ with $\sum e_s=j$ is $\binom{j+p-1}{p-1}\le2^{j+p-1}$ (\texttt{Nat.multichoose}$^\circ$, \texttt{Sym.card\_sym\_eq\_multichoose}$^\circ$); the binomial theorem
+(\texttt{add\_pow}); geometric series. \hfill[\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}; \S\S\ref{sec:prob}, \ref{sec:weak}; \S\ref{sec:FA}]
+\item Telescoping sums (\texttt{Finset.sum\_range\_succ\_sub\_sum}); the numbers of diagonal and off-diagonal pairs in $\mathcal P_N$ are $N$ and $N(N-1)/2$. \hfill[\S\ref{sec:edge}]
+\item The bijection between ordered $n$-tuples of distinct indices and pairs (subset, permutation); $\binom Mk\le M^k$; $\prod(1-a_k)\ge1-\sum a_k$ for $a_k\in[0,1]$. \hfill[\S\S\ref{sec:C7}--\ref{sec:C9}]
+\item Induction on a finite chain $z_0,\dots,z_{k_*}$ (the column of a lattice point, Sections~\ref{sec:weak} and~\ref{sec:strong}). \hfill[\S\S\ref{sec:strong}, \ref{sec:norm}]
+\end{enumerate}
+
+\subsection{What is not used}
+The following are \emph{not} used: Courant--Fischer in full, Cauchy interlacing, Neumann series, the operator norm of $B$, derivatives of matrix functions [\S\ref{sec:det}];
+no martingale inequality, no moment generating function of an unbounded variable, no regular conditional probability [\S\S\ref{sec:prob}, \ref{sec:weak}]; no conditional expectation and no limit in Sections~\ref{sec:strong}--\ref{sec:norm},
+whose only probabilistic inputs are Corollary~\ref{cor:FA} (at $p_1$ and at $p_2$), Lemma~\ref{lem:norm0} and the probabilities of the events $\cG_{\rm col}(z)$ [\S\S\ref{sec:strong}, \ref{sec:norm}]; no bump function [\S\S\ref{sec:main}, \ref{sec:det}, \ref{sec:rig}];
+Haar measure (on $U_\beta(N)$ or elsewhere), complex Gaussian measures, any semigroup, Markov process or Dirichlet-form theory, stochastic calculus, the chain rule for \texttt{klDiv} [Part~III];
+the Weyl integration formula, change of variables on manifolds, the implicit function theorem, eigenvalue perturbation theory, Rademacher's theorem [\S\S\ref{sec:C4}--\ref{sec:C6}];
+Sobolev spaces, measurability of sumsets, the Brunn--Minkowski inequality in dimension $>1$, Pinsker's inequality [\S\ref{sec:C6}].
+
+\noindent\emph{Remarks.} Each fact used in Section~\ref{sec:edge} has a proof of a few lines. Besides Mathlib, Sections~\ref{sec:C4}--\ref{sec:C5} use from other sections only
+Lemmas~\ref{lem:M1}--\ref{lem:M3} (Section~\ref{sec:C3}), Lemma~\ref{lem:weyl}(a),(b) and Definition~\ref{def:loggas} with its Comment~(2) (Section~\ref{sec:C6}).

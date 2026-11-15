@@ -1,0 +1,235 @@
+\subsection{The third-order term: decorrelation}\label{sec:decor}
+The standing assumptions of \S\ref{sec:step} remain in force. With only second moments matched, the term $F'(X(Q))\,\mathfrak T_3(Q;\nu)$ of Corollary~\ref{cor:entry} does not
+cancel between $\nu^v_p$ and $\nu^w_p$. Its trivial size is $N^{-3/2}\Psi\approx N^{-11/6+2\eg}$, too large by $N^{1/6}$ for $N^2/2$ steps. The next lemma gains one more
+factor $\Psi$, in expectation. It plays the role of Lemma~6.6 of the original, but it concerns a \emph{single} off-diagonal resolvent entry at a fixed spectral parameter.
+The mechanism: by the Schur complement formula, $R_{ab}=-R_{aa}\,Y$, where $Y$ is \emph{linear} in the entries of the row $a$ of $Q$, with coefficients that depend only
+on the minor $Q^{(a)}$; so $Y$ has conditional mean zero given the minor. The two factors that multiply $Y$, namely $-R_{aa}$ and $\Phi(X(Q))$, differ from quantities
+that depend only on the minor (the number $1$, and $\Phi(X(Q^{(a)}))$) by $O(\Psi)$, and $Y$ itself is $O(\Psi)$.
+
+\begin{lemma}[decorrelation of one off-diagonal entry]\label{lem:decor}
+Assume the standing assumptions of \S\ref{sec:step} \textup{(}in particular $\eg\in(0,\frac1{10}]$ and $N\ge N_1(\Par,\eg)$\textup{)}.
+Let $M$ be any ensemble of size $N$ over $\K$ with $\fA(\Par)$, $p=(a,b)\in\mathcal P_N$ with $a\ne b$, $Q:=H^{[p]}$, $R:=G_Q$, and let
+$\Phi\in C^1(\R)$ with $\sup_\R|\Phi|\le C_\Phi$ and $\sup_\R|\Phi'|\le C_\Phi$. Then for $z\in\{z_1,z_2\}$ and $(c,d)\in\{(a,b),(b,a)\}$, the function
+$\mathbf 1(Q\in\cG_p)\,\Phi(X(Q))\,R_{cd}(z)$ is bounded and Borel on $\Omega$, and
+\[
+\Big|\E_M\big[\mathbf 1(Q\in\cG_p)\,\Phi(X(Q))\,R_{cd}(z)\big]\Big|\le7\,C_\Phi\Psi^2\qquad(=112\,C_\Phi N^{-2/3+4\eg}).
+\]
+\textup{(The proof gives the constant $\frac{11}3$ instead of $7$.)}
+\end{lemma}
+\begin{proof}
+Fix $z\in\{z_1,z_2\}$ and $(c,d)\in\{(a,b),(b,a)\}$; we prove the bound for the entry $R_{cd}(z)$. The index $c$ is the one whose row will be integrated out. Recall $a<b$, so
+$N\ge2$. All matrices below are functions of $x\in\Omega$.
+
+\smallskip\noindent\emph{Step 0: notation, dependence on the coordinates, measurability.}
+Let $\pi_p:\Omega\to\Omega$ be the linear map which replaces the coordinate $x_p$ by $0$ and leaves the other coordinates unchanged. By Definitions~\ref{def:ens} and~\ref{def:hyb},
+\[
+Q(x)=H(x)^{[p]}=H(\pi_px)\qquad(x\in\Omega),
+\]
+since $H(x)^{[p]}$ is $H(x)$ with the entries $(a,b),(b,a)$, i.e.\ $x_p,\overline{x_p}$, replaced by $0$. Let $Q^{(c)}(x)$ be the minor of $Q(x)$ with row and column $c$ removed; it is a
+Hermitian matrix indexed by $\{1,\dots,N\}\setminus\{c\}$ (\S\ref{sec:resid}), of size $N-1\ge1$. Put
+\begin{gather*}
+R(x):=G_{Q(x)}(z),\qquad R^{(c)}(x):=\big(Q^{(c)}(x)-z\big)^{-1},\qquad r_j(x):=R^{(c)}_{jd}(x)\ \ (j\ne c),\\
+T(x):=\Phi\big(X(Q^{(c)}(x))\big),
+\end{gather*}
+where $X(Q^{(c)})=X_{E_1,E_2,\eta}(Q^{(c)})$ is the functional of Definition~\ref{def:X} for the $(N-1)\times(N-1)$ matrix $Q^{(c)}$.
+
+For $j\in\{1,\dots,N\}\setminus\{c\}$ let $q(j):=(\min(c,j),\max(c,j))\in\mathcal P_N$; the map $j\mapsto q(j)$ is injective, and $q(d)=p$. Put
+\[
+\mathcal J:=\big\{q(j):\ j\in\{1,\dots,N\}\setminus\{c,d\}\big\}\subset\mathcal P_N,\qquad\mathcal J^c:=\mathcal P_N\setminus\mathcal J .
+\]
+So $\mathcal J$ consists of the $N-2$ pairs which carry the entries of the row $c$ of $H$ other than $h_{cc}$ and $h_{cd}$; note $p\notin\mathcal J$ and $(c,c)\notin\mathcal J$.
+As in Lemma~\ref{lem:split} we write $x=(x',y)$ with $x'=x_{\mathcal J^c}\in\K^{\mathcal J^c}$ and $y=x_{\mathcal J}\in\K^{\mathcal J}$, and $\P_{\mathcal J}=\bigotimes_{q\in\mathcal J}\nu_q$.
+
+\emph{\textup{(i)} The minor does not depend on the coordinates in $\mathcal J$.} For $i,j\ne c$ the entry $Q_{ij}(x)$ is a function of the single coordinate $x_{(\min(i,j),\max(i,j))}$ (or is identically $0$),
+and the pair $(\min(i,j),\max(i,j))$ does not contain $c$, whereas every pair in $\mathcal J$ contains $c$. Hence $Q^{(c)}(x)$, and therefore $R^{(c)}(x)$, $r_j(x)$ and $T(x)$, depend only on $x'$.
+We write $r_j(x')$, $T(x')$.
+
+\emph{\textup{(ii)} The row $c$.} For $j\notin\{c,d\}$: $Q_{cj}(x)=h_{cj}(x)=\xi_j(x_{q(j)})$, where $\xi_j(s):=s$ if $c<j$ and $\xi_j(s):=\bar s$ if $j<c$ $(s\in\K)$; and $Q_{cd}(x)=0$.
+
+\emph{\textup{(iii)} Continuity and bounds.} $x\mapsto Q(x)$ and $x\mapsto Q^{(c)}(x)$ are linear. By Lemma~\ref{lem:basic}(a),(h) (for Hermitian matrices of size $N$ and $N-1$), the entries of $R$ and of $R^{(c)}$
+are continuous functions of $x$, $R_{cc}\ne0$, and
+\begin{equation}\label{eq:b3:rbound}
+|r_j(x')|\le\|R^{(c)}\|\le\eta^{-1}\qquad(j\ne c).
+\end{equation}
+By Lemma~\ref{lem:Xspec}(c), $x\mapsto X(Q(x))$ and $x\mapsto X(Q^{(c)}(x))$ are continuous; so $T$ is continuous with $|T|\le C_\Phi$. The set $\{x:Q(x)\in\cG_p\}$ is closed (remark after Definition~\ref{def:goodB}).
+Hence $\mathbf 1(Q\in\cG_p)\Phi(X(Q))R_{cd}(z)$ is a Borel function on $\Omega$, and it is bounded by $C_\Phi\Psi$, because $|R_{cd}(z)|\le\Psi$ on $\cG_p$.
+
+\smallskip\noindent\emph{Step 1: Schur complement (exact).} By Lemma~\ref{lem:schur}\,\textup{(I2)}, applied to the Hermitian matrix $Q(x)$ with $i=c$, $j=d$ (first formula),
+\begin{equation}\label{eq:b3:schur}
+R_{cd}=-R_{cc}\,Y,\qquad Y(x):=\sum_{j\ne c}Q_{cj}(x)\,R^{(c)}_{jd}(x)=\sum_{j\notin\{c,d\}}\xi_j\big(x_{q(j)}\big)\,r_j(x')
+\end{equation}
+at every $x\in\Omega$, by (i) and (ii). Since $Y=-R_{cd}/R_{cc}$, the function $Y$ is continuous on $\Omega$.
+
+\smallskip\noindent\emph{Step 2: $Y$ is centred given the minor, and $\E_M|Y|^2\le\eta^{-2}$.} Fix $x'\in\K^{\mathcal J^c}$. By Lemma~\ref{lem:split}(e), on the probability space $(\K^{\mathcal J},\P_{\mathcal J})$
+the coordinate functions $y\mapsto y_q$, $q\in\mathcal J$, are independent with laws $\nu_q$. Hence the random variables $\Xi_j(y):=\xi_j(y_{q(j)})$, $j\notin\{c,d\}$ (functions of distinct coordinates),
+are independent, and by the centring condition (Z) of Definition~\ref{def:ass} and the definition \eqref{eq:aver} of the variances,
+\[
+\int\Xi_j\,d\P_{\mathcal J}=\int\xi_j(s)\,\nu_{q(j)}(ds)=0,\qquad\int|\Xi_j|^2d\P_{\mathcal J}=\int|s|^2\nu_{q(j)}(ds)=\sigma_{cj}^2<\infty
+\]
+(for $\xi_j(s)=\bar s$ the first integral is the complex conjugate of $\int s\,\nu_{q(j)}(ds)=0$). For $j\ne j'$ the product $\Xi_j\overline{\Xi_{j'}}$ is integrable (Cauchy--Schwarz) and, by independence,
+$\int\Xi_j\overline{\Xi_{j'}}\,d\P_{\mathcal J}=\int\Xi_j\,d\P_{\mathcal J}\cdot\overline{\int\Xi_{j'}\,d\P_{\mathcal J}}=0$. By \eqref{eq:b3:schur}, $Y(x',y)=\sum_{j\notin\{c,d\}}r_j(x')\,\Xi_j(y)$ with coefficients that do not depend on $y$. Therefore,
+for \emph{every} $x'\in\K^{\mathcal J^c}$,
+\begin{align}
+\int Y(x',y)\,\P_{\mathcal J}(dy)&=\sum_{j\notin\{c,d\}}r_j(x')\int\Xi_j\,d\P_{\mathcal J}=0,\label{eq:b3:Ymean}\\
+\int|Y(x',y)|^2\,\P_{\mathcal J}(dy)&=\sum_{j,j'\notin\{c,d\}}r_j(x')\overline{r_{j'}(x')}\int\Xi_j\overline{\Xi_{j'}}\,d\P_{\mathcal J}=\sum_{j\notin\{c,d\}}|r_j(x')|^2\sigma_{cj}^2\notag\\
+&\le\ \eta^{-2}\sum_{j=1}^N\sigma_{cj}^2=\eta^{-2}.\label{eq:b3:Yvar}
+\end{align}
+In \eqref{eq:b3:Yvar} we used \eqref{eq:b3:rbound}, added the nonnegative terms $j=c,d$, and used (A) (with $\sigma_{cj}=\sigma_{jc}$). \emph{This is an inequality, not an identity:} the summands $j\in\{c,d\}$ are absent from $Y$,
+and $|r_j|\le\eta^{-1}$ is only a bound.
+
+By Lemma~\ref{lem:split}(b) (Tonelli) applied to $|Y|^2$ and by \eqref{eq:b3:Yvar},
+\begin{equation}\label{eq:b3:Y2}
+\E_M|Y|^2=\int P_{\mathcal J}\big(|Y|^2\big)\,d\P_M\le\eta^{-2}.
+\end{equation}
+In particular $Y\in L^2(\P_M)\subset L^1(\P_M)$. By \eqref{eq:b3:Yvar} and the Cauchy--Schwarz inequality, $\int|Y(x',y)|\P_{\mathcal J}(dy)\le\eta^{-1}<\infty$ for every $x'$, so the set $\mathcal D_Y$ of Lemma~\ref{lem:split}(c) is all of $\Omega$,
+and $P_{\mathcal J}Y=0$ at every point by \eqref{eq:b3:Ymean}. The function $T$ is bounded, Borel and independent of the coordinates in $\mathcal J$ (Step~0). By Lemma~\ref{lem:split}(d) with $f=Y$, $g=T$,
+\begin{equation}\label{eq:b3:TY}
+\E_M\big[T\,Y\big]=\int T\cdot P_{\mathcal J}Y\,d\P_M=0 .
+\end{equation}
+
+\smallskip\noindent\emph{Step 3: on the good set (deterministic).} Let $x\in\Omega$ with $Q=Q(x)\in\cG_p$. By \eqref{eq:b1:end}, $|R_{cc}(z_i)+1|\le\Psi$ for $i=1,2$ and $|R_{cd}(z)|\le\Psi$, where $\Psi\le\frac18$ by \textup{(N4)}.
+
+\emph{\textup{(3a)}} Corollary~\ref{cor:Xchange}(ii), applied to the matrix $Q$ and the pair $(c,c)$ (the statement involves only $Q$ and the index whose row and column are removed), gives, since $\frac1\pi<\frac13$,
+\[
+\big|X(Q)-X(Q^{(c)})\big|\le\tfrac2\pi\big(|R_{cc}(z_1)+1|+|R_{cc}(z_2)+1|\big)\le\tfrac4\pi\Psi\le\tfrac43\Psi .
+\]
+\emph{\textup{(3b)}} $|R_{cc}(z)|\ge1-|R_{cc}(z)+1|\ge1-\Psi\ge\frac78$, hence by \eqref{eq:b3:schur}: $|Y|=|R_{cd}(z)|/|R_{cc}(z)|\le\frac87\Psi$. \emph{No large deviation bound is used: the size of $Y$ is read off from the identity.}
+
+\emph{\textup{(3c)}} By \eqref{eq:b3:schur},
+\[
+\Phi(X(Q))\,R_{cd}(z)-T\,Y=\rho\,Y,\qquad\rho:=\Phi(X(Q))\big(-R_{cc}(z)-1\big)+\Big(\Phi(X(Q))-\Phi\big(X(Q^{(c)})\big)\Big).
+\]
+By the mean value theorem $|\Phi(s)-\Phi(s')|\le C_\Phi|s-s'|$, so by (3a): $|\rho|\le C_\Phi\Psi+\frac43C_\Phi\Psi=\frac73C_\Phi\Psi$. With (3b),
+\begin{equation}\label{eq:b3:good}
+\big|\Phi(X(Q))\,R_{cd}(z)-T\,Y\big|\le\tfrac73\cdot\tfrac87\,C_\Phi\Psi^2=\tfrac83\,C_\Phi\Psi^2\qquad\text{on }\{x:\ Q(x)\in\cG_p\}.
+\end{equation}
+
+\smallskip\noindent\emph{Step 4: the bad set.} Write $\mathbf 1_{\cG}:=\mathbf 1(Q\in\cG_p)$ and $\mathbf 1_{\cG^c}:=1-\mathbf 1_{\cG}$. All functions below are $\P_M$-integrable (Step 0 and \eqref{eq:b3:Y2}), and
+\[
+\E_M\big[\mathbf 1_{\cG}\,\Phi(X(Q))R_{cd}(z)\big]=\E_M\big[\mathbf 1_{\cG}\big(\Phi(X(Q))R_{cd}(z)-TY\big)\big]+\E_M[TY]-\E_M\big[\mathbf 1_{\cG^c}\,TY\big].
+\]
+The first term is at most $\frac83C_\Phi\Psi^2$ in modulus by \eqref{eq:b3:good}; the second vanishes by \eqref{eq:b3:TY}. For the third, the Cauchy--Schwarz inequality, $|T|\le C_\Phi$, Lemma~\ref{lem:RfromS}(b) (for the ensemble $M$) and \eqref{eq:b3:Y2} give
+\begin{align*}
+\big|\E_M\big[\mathbf 1_{\cG^c}\,TY\big]\big|&\le C_\Phi\,\P_M\big(H^{[p]}\notin\cG_p\big)^{1/2}\big(\E_M|Y|^2\big)^{1/2}\le C_\Phi\,(2N^{-20})^{1/2}\,\eta^{-1}\\
+&=\sqrt2\,C_\Phi\,N^{-10+\frac23+\eg}\le C_\Phi\Psi^2,
+\end{align*}
+because $-10+\frac23+\eg\le-9$ and $\sqrt2N^{-9}\le16N^{-2/3}\le16N^{-2/3+4\eg}=\Psi^2$. Altogether
+\[
+\Big|\E_M\big[\mathbf 1_{\cG}\,\Phi(X(Q))R_{cd}(z)\big]\Big|\le\big(\tfrac83+1\big)C_\Phi\Psi^2=\tfrac{11}3C_\Phi\Psi^2\le7C_\Phi\Psi^2.\qedhere
+\]
+\end{proof}
+
+\noindent\emph{Remarks.} (1) \emph{Why Step 4 is needed.} The indicator $\mathbf 1(Q\in\cG_p)$ depends on the row $c$ of $Q$, so one cannot integrate out the row $c$ in $\E_M[\mathbf 1_{\cG}TY]$ directly;
+the identity \eqref{eq:b3:TY} holds without the indicator, and the indicator is removed at the cost $\P(\cG^c)^{1/2}\|Y\|_{L^2}\le\sqrt2N^{-10}\eta^{-1}$. This is the only place of the comparison branch where an
+unbounded function of the matrix is integrated over $\Omega$, and the only place where the trivial bound $\eta^{-1}$ on a resolvent is used.
+
+(2) \emph{What is not used.} No large deviation estimate: the size of $Y$ on the good set is read off from $Y=-R_{cd}/R_{cc}$. No local law for minors: the resolvent $R^{(c)}$ of the minor enters only through
+$\|R^{(c)}\|\le\eta^{-1}$ and through the exact identity of Corollary~\ref{cor:Xchange}(ii). No bound along the segment $[E_1,E_2]+i\eta$: only the endpoint condition \eqref{eq:b1:end}.
+
+(3) \emph{Vanishing variances} are harmless: if $\sigma_{cj}=0$ then $\Xi_j=0$ almost surely and the summand disappears from \eqref{eq:b3:Yvar}. The step ``$S$ is the Green function of a generalized Wigner matrix
+with all variances positive'' of the original (TeX 4259--4269) has no counterpart here.
+
+(4) \emph{The gain is exactly one factor $\Psi$.} Both corrections in $\rho$ --- the diagonal entry $R_{cc}\ne-1$, and $X$ of the matrix versus $X$ of the minor --- are of order $\Psi$ and are not centred. The argument
+therefore gains exactly one factor $\Psi$ over the trivial bound $C_\Phi\Psi$, which is what the power counting of Proposition~\ref{prop:step} needs.
+
+(5) \emph{Real and complex case.} For $\K=\R$ all $\xi_j$ are the identity; for $\K=\C$ the conjugations in $\xi_j$ play no role, since only $\int\Xi_j=0$ and $\int|\Xi_j|^2=\sigma_{cj}^2$ are used.
+The second Schur formula of \textup{(I2)} is not needed: the entry $R_{ba}$ is treated by removing the index $b$.
+
+(6) \emph{Numerical check.} The identities $R_{cd}=-R_{cc}Y$, $X(Q)-X(Q^{(c)})=\frac1\pi\im\br{\Log(-R_{cc})}$ (for $c=a$ and $c=b$), the conditional statements \eqref{eq:b3:Ymean}, \eqref{eq:b3:Yvar}
+(by exact enumeration over two-point laws on a small matrix) and the deterministic bounds of Step~3 (on synthetic Hermitian matrices which satisfy \eqref{eq:b1:end}) were checked numerically.
+
+\begin{proposition}[one Lindeberg step]\label{prop:step}
+Assume the standing assumptions of \S\ref{sec:step} \textup{(}in particular $\eg\in(0,\frac1{10}]$, $N\ge N_1(\Par,\eg)$, $\eta=N^{-2/3-\eg}$, $|E_i-2|\le N^{-2/3+\eg}$ and $F\in C^3(\R)$ with the constant $C_F$\textup{)}.
+Let $M^v,M^w$ be ensembles of size $N$ over $\K$ which satisfy $\fA(\Par)$ and have matching second moments \eqref{eq:2m}; let $M_0,\dots,M_\Gamma$ be the hybrids of Definition~\ref{def:hyb}
+(for any bijection $\varphi$), $1\le k\le\Gamma$ and $p_k=(a,b)$. Then, with
+\begin{equation}\label{eq:b3:C3}
+C_3=C_3(\vartheta,C_0):=2C_2+396\,\mathfrak m_3C_0^{3/2}+8
+\end{equation}
+\textup{(}$C_2$ from \eqref{eq:b3:C2}\textup{)},
+\[
+\big|\E_{M_{k-1}}F(X(H))-\E_{M_k}F(X(H))\big|\le\begin{cases}C_3\,C_F\,N^{-13/6+4\eg}=C_3C_F\,N^{-2}\cdot N^{-1/6+4\eg},&a\ne b,\\[2pt] C_3\,C_F\,N^{-11/6+2\eg},&a=b.\end{cases}
+\]
+\end{proposition}
+\begin{proof}
+Write $p:=p_k$. By Lemma~\ref{lem:hyb}(ii), $M_{k-1}$ and $M_k$ satisfy $\fA(\Par)$, and we use its notation: $x=(x',x_p)$, $\P'=\bigotimes_{q\ne p}\nu^{(k)}_q$ on $\K^{\mathcal P_N\setminus\{p\}}$, $Q(x')=H(x)^{[p]}$.
+In this proof $(c,d)$ denotes an element of $\{(a,b),(b,a)\}$.
+
+\smallskip\noindent\emph{Step 1: reduction to one entry.} The function $A\mapsto F(X(A))$ is continuous (Lemma~\ref{lem:Xspec}(c)) and bounded by $C_F$ on the Hermitian $N\times N$ matrices. By \eqref{eq:B2step},
+\begin{gather*}
+\E_{M_{k-1}}F(X(H))-\E_{M_k}F(X(H))=\int\big[I^v(x')-I^w(x')\big]\,\P'(dx'),\\
+I^u(x'):=\int_\K F\big(X(Q(x')+V_p(s))\big)\,\nu^u_p(ds)\qquad(u\in\{v,w\}),
+\end{gather*}
+and $I^v,I^w$ are Borel functions of $x'$. Since $\nu^v_p,\nu^w_p$ are probability measures, subtracting the same number $F(X(Q(x')))$ from both gives
+\begin{equation}\label{eq:b3:DD}
+I^v-I^w=D^v-D^w,\qquad D^u(x'):=\mathfrak D\big(Q(x');\nu^u_p\big)=\int_\K\Big[F\big(X(Q(x')+V_p(s))\big)-F\big(X(Q(x'))\big)\Big]\nu^u_p(ds),
+\end{equation}
+and $|D^u|\le2C_F$.
+$D^u$ is Borel, because $I^u$ is and $x'\mapsto F(X(Q(x')))$ is continuous. Let $\cG':=\{x':\ Q(x')\in\cG_p\}$; it is closed, because $x'\mapsto Q(x')$ is linear and $\cG_p$ is closed (Definition~\ref{def:goodB}).
+
+\smallskip\noindent\emph{Step 2: the bad set.} By the last statement of Lemma~\ref{lem:hyb}(ii) (with $\Theta=\mathbf 1(\,\cdot\notin\cG_p)$) and Lemma~\ref{lem:RfromS}(b) for the ensemble $M_{k-1}$,
+\begin{equation}\label{eq:b3:bad}
+\P'\big((\cG')^c\big)=\P_{M_{k-1}}\big(H^{[p]}\notin\cG_p\big)\le2N^{-20},\quad\text{hence}\quad\Big|\int_{(\cG')^c}\big(D^v-D^w\big)\,d\P'\Big|\le8C_FN^{-20},
+\end{equation}
+because $|D^v-D^w|\le4C_F$.
+
+\smallskip\noindent\emph{Step 3: the good set, second order.} Each of the laws $\nu\in\{\nu^v_p,\nu^w_p\}$ satisfies the hypotheses of Corollary~\ref{cor:entry}: it is a Borel probability measure on $\K$, with $\nu(\R)=1$ if $a=b$ (R),
+$\int y\,d\nu=0$ (centring), and \eqref{eq:b3:nu} holds by (C) and \eqref{eq:subexp} (for $M^v$, resp.\ $M^w$). By \eqref{eq:2m} with $(l,u)=(1,1)$ and $(0,2)$, the numbers $m_{11}$ and $m_{20}$ are the same for $\nu^v_p$ and
+$\nu^w_p$; hence, by \eqref{eq:b3:Q2}, \eqref{eq:b3:Q2d},
+\begin{equation}\label{eq:b3:Q2eq}
+\mathfrak Q_2(Q;\nu^v_p)=\mathfrak Q_2(Q;\nu^w_p)\qquad\text{for every }Q\in\cG_p .
+\end{equation}
+
+\emph{Case $a=b$.} For $x'\in\cG'$, \eqref{eq:b3:entryd} and \eqref{eq:b3:Q2eq} give $|D^v(x')-D^w(x')|\le2C_2C_FN^{-11/6+2\eg}$. With \eqref{eq:b3:bad}, $\P'(\cG')\le1$ and $N^{-20}\le N^{-11/6+2\eg}$,
+\[
+\big|\E_{M_{k-1}}F(X(H))-\E_{M_k}F(X(H))\big|\le(2C_2+8)\,C_FN^{-11/6+2\eg}\le C_3C_FN^{-11/6+2\eg}.
+\]
+
+\emph{Case $a\ne b$.} For $u\in\{v,w\}$ and $x'\in\K^{\mathcal P_N\setminus\{p\}}$ put $e^u(x'):=D^u(x')-\mathfrak Q_2(Q(x');\nu^u_p)-F'(X(Q(x')))\,\mathfrak T_3(Q(x');\nu^u_p)$, where $\mathfrak Q_2,\mathfrak T_3$ are \emph{defined} by the right sides of
+\eqref{eq:b3:Q2}, \eqref{eq:b3:T3} for every Hermitian $Q$. These are Borel functions (Corollary~\ref{cor:entry}, last sentence), and $|e^u|\le C_2C_FN^{-13/6+4\eg}$ on $\cG'$ by \eqref{eq:b3:entry}. By \eqref{eq:b3:Q2eq}, on $\cG'$,
+\[
+D^v-D^w=e^v-e^w+F'(X(Q))\,\mathfrak T_3(Q;\nu^v_p)-F'(X(Q))\,\mathfrak T_3(Q;\nu^w_p),
+\]
+so that
+\begin{equation}\label{eq:b3:good2}
+\Big|\int_{\cG'}\big(D^v-D^w\big)\,d\P'\Big|\le2C_2C_FN^{-13/6+4\eg}+\sum_{u\in\{v,w\}}\Big|\int_{\cG'}F'(X(Q))\,\mathfrak T_3(Q;\nu^u_p)\,d\P'\Big| .
+\end{equation}
+
+\smallskip\noindent\emph{Step 4: the third-order term ($a\ne b$).} Fix $\nu\in\{\nu^v_p,\nu^w_p\}$ and let $\mu_3=\int|y|^2y\,d\nu$, $|\mu_3|\le\mathfrak m_3C_0^{3/2}N^{-3/2}$. For $(c,d)\in\{(a,b),(b,a)\}$ and $i\in\{1,2\}$ put
+\[
+\mathfrak E_{cd,i}:=\int\mathbf 1_{\cG'}(x')\,F'(X(Q))\,R_{cd}(z_i)\,g(z_i)\,\P'(dx'),\qquad R=G_{Q(x')} .
+\]
+The integrand is Borel, and bounded by $C_F\cdot\Psi\cdot\frac43$ (on $\cG'$: $|R_{cd}(z_i)|\le\Psi$ by \eqref{eq:b1:end} and $|g(z_i)|\le\frac43$ by Lemma~\ref{lem:expand}(a)). By \eqref{eq:b3:T3}, written out,
+$\mathfrak T_3(Q;\nu)=-\frac1\pi\im\sum_{i=1,2}(-1)^i\big(\mu_3R_{ba}(z_i)g(z_i)+\overline{\mu_3}R_{ab}(z_i)g(z_i)\big)$. Since $\mathbf 1_{\cG'}F'(X(Q))$ is real and $\im$ is $\R$-linear,
+\begin{equation}\label{eq:b3:T3int}
+\int_{\cG'}F'(X(Q))\,\mathfrak T_3(Q;\nu)\,d\P'=-\frac1\pi\,\im\sum_{i=1,2}(-1)^i\Big(\mu_3\,\mathfrak E_{ba,i}+\overline{\mu_3}\,\mathfrak E_{ab,i}\Big).
+\end{equation}
+Write $g=1+(g-1)$. By the last statement of Lemma~\ref{lem:hyb}(ii) (applied to the real and imaginary parts of the bounded Borel function $\Theta(Q):=\mathbf 1(Q\in\cG_p)F'(X(Q))G_Q(z_i)_{cd}$),
+\[
+\mathfrak E_{cd,i}=\E_{M_{k-1}}\big[\mathbf 1(Q\in\cG_p)\,F'(X(Q))\,R_{cd}(z_i)\big]+\int\mathbf 1_{\cG'}\,F'(X(Q))\,R_{cd}(z_i)\,\big(g(z_i)-1\big)\,d\P' .
+\]
+The first term is at most $7C_F\Psi^2$ in modulus by Lemma~\ref{lem:decor}, applied to the ensemble $M=M_{k-1}$ and to $\Phi:=F'$ (which is $C^1$ with $\sup|F'|,\sup|F''|\le C_F$, so $C_\Phi=C_F$). The second term is at most
+$C_F\cdot\Psi\cdot\frac94\Psi$, by $|R_{cd}(z_i)|\le\Psi$ and $|g(z_i)-1|\le\frac94\Psi$ on $\cG'$ (Lemma~\ref{lem:expand}(a)). Hence $|\mathfrak E_{cd,i}|\le\frac{37}4C_F\Psi^2$ for the four pairs $(cd,i)$, and by \eqref{eq:b3:T3int},
+$\frac1\pi<\frac13$ and $\Psi^2=16N^{-2/3+4\eg}$,
+\begin{equation}\label{eq:b3:third}
+\begin{aligned}
+\Big|\int_{\cG'}F'(X(Q))\,\mathfrak T_3(Q;\nu)\,d\P'\Big|&\le\frac1\pi\cdot4|\mu_3|\cdot\frac{37}4\,C_F\Psi^2\le\frac{37}3\,\mathfrak m_3C_0^{3/2}N^{-3/2}\cdot16N^{-2/3+4\eg}\,C_F\\
+&\le198\,\mathfrak m_3C_0^{3/2}\,C_F\,N^{-13/6+4\eg}.
+\end{aligned}
+\end{equation}
+
+\smallskip\noindent\emph{Step 5: conclusion ($a\ne b$).} By \eqref{eq:b3:DD}, \eqref{eq:b3:bad}, \eqref{eq:b3:good2}, \eqref{eq:b3:third} (for $\nu^v_p$ and for $\nu^w_p$) and $N^{-20}\le N^{-13/6+4\eg}$,
+\[
+\big|\E_{M_{k-1}}F(X(H))-\E_{M_k}F(X(H))\big|\le\big(8+2C_2+2\cdot198\,\mathfrak m_3C_0^{3/2}\big)C_FN^{-13/6+4\eg}=C_3C_FN^{-13/6+4\eg}.\qedhere
+\]
+\end{proof}
+
+\noindent\emph{Remarks.} (1) \textbf{Power counting per off-diagonal step:} $N^{-3/2}$ (third moment of the entry) $\times$ $\Psi\approx N^{-1/3+2\eg}$ (one off-diagonal resolvent entry in $\mathfrak T_3$) $\times$
+$\Psi\approx N^{-1/3+2\eg}$ (decorrelation gain, Lemma~\ref{lem:decor}; or the second factor $\Psi$ of the error terms of Lemma~\ref{lem:expand}) $=N^{-13/6+4\eg}=N^{-2}\cdot N^{-1/6+4\eg}$. This is the exponent of
+Lemma~6.5 of the original, with the explicit constant $4$ in front of $\eg$. For a diagonal step no decorrelation is needed: $N^{-3/2}\cdot\Psi\approx N^{-11/6+2\eg}$, and there are only $N$ such steps.
+
+(2) \emph{Constants.} $C_3$ depends on $(\vartheta,C_0)$ only, through $\mathfrak m_3,\mathfrak m_4,\mathfrak m_6$ and $C_0$; the parameters $\delta_\pm$ enter only through the threshold $N_1(\Par,\eg)$ of the standing assumptions.
+
+(3) \emph{Which hybrid.} The step $k$ uses Lemma~\ref{lem:RfromS}(b) and Lemma~\ref{lem:decor} for the single ensemble $M_{k-1}$ (through the common law $\P'$ of $Q$; one could equally use $M_k$). The laws $\nu^v_{p}$, $\nu^w_{p}$
+enter only through Corollary~\ref{cor:entry}.
+
+(4) \emph{Trivial steps.} If $\sigma_{p_k}=0$ then $\nu^v_{p_k}=\nu^w_{p_k}=\delta_0$, $M_{k-1}=M_k$, and the left side is $0$.

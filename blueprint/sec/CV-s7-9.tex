@@ -1,0 +1,543 @@
+\section{The entropy bound relative to the local relaxation measure}\label{sec:C7}
+
+\noindent\emph{Standing notation of Sections \ref{sec:C7}--\ref{sec:C8}.}
+We use the notation of \S\ref{ss:notation}. The parameters $(\vartheta,\delta_-,\delta_+,C_0)$ are fixed, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ is an ensemble over $\K$, and $H_0$, $V$, $H_t$ ($t\in[0,\infty]$) are as in \eqref{Ht}, on the probability space $(\widehat\Omega,\widehat{\mathcal F},\P)$ of \S\ref{ss:notation}; $\nu_t=\mathrm{law}(\lambda(H_t))$, $\mu=\lambda_*\bG=\nu_\infty$.
+All measures on $\cSig$ are regarded as Borel measures on $\R^N$ carried by $\cSig$ (\S\ref{sec:C4}).
+For $R>0$, $W=W_R$, $\omega=\omega_R$ and $\psi=\rd\omega/\rd\mu$ are as in Definition \ref{def:omega}, and
+\[
+Z_W:=\int e^{-NW}\rd\mu\in(0,1],\qquad \psi=e^{-NW}/Z_W,\qquad -\log\psi=NW+\log Z_W .
+\]
+$S(\cdot|\cdot)$ is the relative entropy of \S\ref{c3:ss:KL} (equivalently of Lemma \ref{lem:DV}): $S(\nu'|\nu'')=\int\mathfrak h(\rd\nu'/\rd\nu'')\,\rd\nu''\in[0,\infty]$ if $\nu'\ll\nu''$ and $+\infty$ otherwise, with $\mathfrak h(\tau)=\tau\log\tau$, $\mathfrak h(0)=0$; for probability measures this is Mathlib's \texttt{klDiv}.
+$D$, $L$ and $Q=7D^2N^{-1}$ are the quantities of \eqref{defL} and Lemma \ref{lem:Q}.
+
+\smallskip\noindent\emph{Moments of $H_0$.} The matrix $H_0$ of $\nu$ has finite moments of all orders: $\E|H_0|^m<\infty$ for every real $m\ge0$.
+Indeed, by (RA2) $\nu\in\mathcal E_N(\vartheta',\delta_-,\delta_+,C_0)$ with $\vartheta':=\min(\vartheta,1)$, so by (RA6) $\E|h_{ij}|^q\le(C_{\vartheta'}q)^{q/\vartheta'}\sigma_{ij}^q<\infty$ for all $i\le j$ and $q\ge1$ (and $|h_{ji}|=|h_{ij}|$).
+For $m\ge2$, Minkowski's inequality in $L^{m/2}(\P)$ gives $(\E|H_0|^m)^{2/m}=\big\|\sum_{i,j}|h_{ij}|^2\big\|_{L^{m/2}}\le\sum_{i,j}(\E|h_{ij}|^m)^{2/m}<\infty$; for $0\le m<2$, $\E|H_0|^m\le1+\E|H_0|^2$.
+Hence Proposition \ref{prop:U9} applies to $H_0$. Moreover $\E|H_0|^2=\E\Tr H_0^2=\sum_{i,j}\E|h_{ij}|^2=\sum_j\sum_i\sigma_{ij}^2=N$ by (A) (Part~I, Definition \ref{def:ass}).
+
+\begin{lemma}[A priori entropy]\label{lem:U8}
+For every $s>0$:
+\[
+S(\nu_s|\mu)\ \le\ S(\mathrm{law}(H_s)\,|\,\bG)\ \le\ \frac d2\log\frac1{1-e^{-s}}+\frac{\beta N^2}{4}e^{-s}.
+\]
+In particular $S(\nu_s|\mu)\le N^3$ whenever $N\ge1$ and $s\ge N^{-2}$.
+\end{lemma}
+
+\begin{proof}
+Let $\rho:=\mathrm{law}(H_0)$, a Borel probability measure on $\cH$. By \eqref{Ht}, $\mathrm{law}(H_s)=\rho_s$ in the notation of \S\ref{c3:ss:mehler} with $\mathcal E=\cH$, $\sigma^2=2/(\beta N)$, $g=\bG$.
+
+\emph{First inequality.} $\lambda:\cH\to\R^N$ is Borel (RA4), $\nu_s=\lambda_*\rho_s$ and $\mu=\lambda_*\bG$. The data-processing inequality for the relative entropy under a measurable map (Mathlib \texttt{klDiv\_map\_le}) gives $S(\lambda_*\rho_s|\lambda_*\bG)\le S(\rho_s|\bG)$.
+
+\emph{Second inequality.} Lemma \ref{c3:KL}(b) with $u=s$ and $M_2'=\int|w|^2\rho(\rd w)=\E|H_0|^2=N$ (see above) gives
+$S(\rho_s|\bG)\le\frac d2\log\frac1{1-e^{-s}}+\frac{e^{-s}N}{2\sigma^2}$, and $\frac{N}{2\sigma^2}=\frac{\beta N^2}4$ (Remark \ref{c3:rem:U8}).
+
+\emph{In particular.} $d=N+\beta N(N-1)/2\le N+N(N-1)=N^2$ as $\beta\le2$. Since $e^{s}\ge1+s$, $1-e^{-s}\ge1-\frac1{1+s}=\frac s{1+s}$, which is increasing in $s$; so for $s\ge N^{-2}$, $1-e^{-s}\ge\frac{N^{-2}}{1+N^{-2}}=\frac1{N^2+1}\ge\frac1{2N^2}$. With $\beta e^{-s}\le2$,
+\[
+S(\nu_s|\mu)\le\frac{N^2}2\log(2N^2)+\frac{N^2}2=\frac{N^2}{2}\big(\log2+1+2\log N\big)\le\frac{N^2}2\big(\log 2+1+2(N-1)\big)<N^3,
+\]
+using $\log N\le N-1$ and $\log2<1$.
+\end{proof}
+
+\begin{lemma}[Changing the reference measure]\label{lem:ref}
+Let $R>0$ and let $\nu'$ be a Borel probability measure on $\R^N$ with $\nu'\ll\mu$ and $\int|x|^2\nu'(\rd x)<\infty$. Then $\nu'\ll\omega$, $\ \rd\nu'/\rd\omega=(\rd\nu'/\rd\mu)/\psi$, and in $[0,\infty]$
+\[
+S(\nu'|\omega)=S(\nu'|\mu)+N\int W\rd\nu'+\log Z_W\ \le\ S(\nu'|\mu)+\frac{N}{2R^2}\int|x-\gamma|^2\,\nu'(\rd x).
+\]
+In particular $S(\mu|\omega)\le\frac{N}{2R^2}\int|x-\gamma|^2\mu(\rd x)<\infty$.
+\end{lemma}
+
+\begin{proof}
+Let $f:=\rd\nu'/\rd\mu$ (a Borel version with values in $[0,\infty)$). Since $\omega=\psi\mu$ with $\psi>0$ everywhere (Definition \ref{def:omega}, Comment (1)), $\mu=\psi^{-1}\omega$ and $\nu'=f\mu=(f/\psi)\,\omega$; so $\nu'\ll\omega$ with $q:=\rd\nu'/\rd\omega=f/\psi$.
+Pointwise, $\mathfrak h(q)\psi=f\log f-f\log\psi=\mathfrak h(f)+f\,(NW+\log Z_W)$ (both sides vanish where $f=0$). Now $0\le NW=\frac N{2R^2}|x-\gamma|^2$ and $\int fNW\rd\mu=N\int W\rd\nu'\le\frac N{2R^2}\int|x-\gamma|^2\rd\nu'\le\frac N{R^2}\big(\int|x|^2\rd\nu'+|\gamma|^2\big)<\infty$, and $\int f\log Z_W\rd\mu=\log Z_W$; so $f(NW+\log Z_W)\in L^1(\mu)$.
+The negative part of $\mathfrak h(f)$ is bounded by $1/e$, so $\int\mathfrak h(f)\rd\mu\in(-1/e,\infty]$ is well defined, and the integral of the sum is the sum of the integrals:
+\[
+S(\nu'|\omega)=\int\mathfrak h(q)\,\rd\omega=\int\mathfrak h(q)\psi\,\rd\mu=\int\mathfrak h(f)\rd\mu+N\int W\rd\nu'+\log Z_W=S(\nu'|\mu)+N\int W\rd\nu'+\log Z_W .
+\]
+Since $Z_W\le1$, $\log Z_W\le0$, which gives the inequality. For $\nu'=\mu$: $f\equiv1$, $S(\mu|\mu)=0$, and $\int|x|^2\rd\mu=\int|\lambda(H)|^2\bG(\rd H)=\int|H|^2\rd\bG=d\sigma^2<\infty$ (Lemma \ref{lem:inv}(a): $|\lambda(H)|=|H|$; Lemma \ref{lem:M1}(vi) or Lemma \ref{c3:GE}).
+\end{proof}
+
+\begin{proposition}[Entropy production]\label{prop:entprod}
+Let $H_0$ be a random element of $\cH$ with $\E|H_0|^m<\infty$ for all $m$ (e.g.\ the matrix of $\nu\in\mathcal E_N$, see above), let $s>0$, let $(f_t)_{t>s}$ be as in Proposition \ref{prop:U9}, and let $R>0$. Then $\cS(t):=S(\nu_t|\omega)$ is finite and continuously differentiable on $(s,\infty)$, and for every $t>s$
+\begin{equation}\label{entprod}
+\cS'(t)=-\frac1{\beta N}\int_{\Sig}\nabla f_t\cdot\nabla\big(\log f_t+NW\big)\,\rd\mu\ \le\ -\frac1{2\beta N}I_t+\frac{N}{2\beta R^4}\,\E|\lambda(H_t)-\gamma|^2,
+\end{equation}
+where $q_t:=f_t/\psi$ is a version of $\rd\nu_t/\rd\omega$ and
+\[
+I_t:=\int_{\Sig}\Big|\nabla\log\frac{f_t}{\psi}\Big|^2f_t\,\rd\mu=\int_{\Sig}\frac{|\nabla q_t|^2}{q_t}\,\rd\omega\ \in[0,\infty).
+\]
+Equivalently, $\cS'(t)=-\frac1{\beta N}\big[\int\frac{|\nabla q_t|^2}{q_t}\rd\omega+\int\nabla\log\psi\cdot\nabla q_t\,\rd\omega\big]$.
+\end{proposition}
+
+\begin{proof}
+Throughout, $f(t,x):=f_t(x)$; by Proposition \ref{prop:U9}(ii), $f$ is $C^\infty$ and positive on $(s,\infty)\times\R^N$, symmetric in $x$, and $\nu_t=f_t\mu$. Since $\mu=\mu^*$ (Theorem \ref{thm:JD}) and $\mu^*(\R^N\setminus\Sig)=0$, all $\mu$-integrals below may be taken over $\Sig$.
+By Definition \ref{def:omega}, Comment (4): $\nabla W=(x-\gamma)/R^2$, $|\nabla W|=|x-\gamma|/R^2\le(|x|+|\gamma|)/R^2$, and $0\le NW\le\frac N{R^2}(|x|^2+|\gamma|^2)$.
+
+\emph{Step 0 (finiteness; the formula for $\cS$).} Let $t>s$. By Lemma \ref{lem:inv}(a), $\int|x|^2\rd\nu_t=\E|\lambda(H_t)|^2=\E|H_t|^2<\infty$ (Proposition \ref{prop:U9}(i) applied with $s$ replaced by $t$). Lemma \ref{lem:ref} with $\nu'=\nu_t$ and $f=f_t$ gives
+\begin{equation}\label{c7:Sj}
+\cS(t)=\int j(t,x)\,\mu(\rd x)+\log Z_W,\qquad j(t,x):=f_t(x)\big(\log f_t(x)+NW(x)\big),
+\end{equation}
+provided $j(t,\cdot)\in L^1(\mu)$; this holds because, for $t$ in any compact interval $[t_1,t_2]\subset(s,\infty)$, Proposition \ref{prop:U9}(iv) gives a constant $C<\infty$ with $|\log f_t(x)|\le C(1+|x|^2)$, so that
+\[
+|j(t,x)|\le\mathfrak m(x)\,\big(C(1+|x|^2)+\tfrac N{R^2}(|x|^2+|\gamma|^2)\big)\le C_1\,\mathfrak m(x)(1+|x|)^2,\qquad C_1:=C+\tfrac N{R^2}(1+|\gamma|^2),
+\]
+with $\mathfrak m$ the function of Proposition \ref{prop:U9}(iv) for $[t_1,t_2]$, and $\int\mathfrak m(1+|x|)^2\rd\mu<\infty$. In particular $\cS(t)<\infty$.
+
+\emph{Step 1 (differentiation in $t$).} Fix $s<t_1<t_2$, with $C$, $C_1$, $\mathfrak m$ as in Step 0. For every $x$, $t\mapsto j(t,x)$ is differentiable on $(t_1,t_2)$ with
+\[
+\partial_tj(t,x)=\partial_tf_t(x)\,\big(\log f_t(x)+1+NW(x)\big),\qquad |\partial_tj(t,x)|\le\mathfrak m(x)\big(C_1(1+|x|)^2+1\big)\le(C_1+1)\,\mathfrak m(x)(1+|x|)^2,
+\]
+and $x\mapsto j(t,x)$, $x\mapsto\partial_tj(t,x)$ are continuous, hence Borel. The dominating function $(C_1+1)\mathfrak m(1+|x|)^2$ is $\mu$-integrable and independent of $t\in[t_1,t_2]$.
+By differentiation under the integral sign (Mathlib \texttt{hasDerivAt\_integral\_of\_dominated\_loc\_of\_deriv\_le}), $t\mapsto\int j(t,\cdot)\rd\mu$ is differentiable on $(t_1,t_2)$ with derivative $\int\partial_tj(t,\cdot)\rd\mu$.
+Moreover $t\mapsto\partial_tj(t,x)$ is continuous for each $x$ ($f\in C^\infty$, $f>0$), so by dominated convergence $t\mapsto\int\partial_tj(t,\cdot)\rd\mu$ is continuous on $(t_1,t_2)$. As $s<t_1<t_2$ are arbitrary, $\cS\in C^1((s,\infty))$ and
+\[
+\cS'(t)=\int_{\Sig}\partial_tf_t\,k_t\,\rd\mu,\qquad k_t:=\log f_t+1+NW\in C^\infty(\R^N).
+\]
+
+\emph{Step 2 (the equation).} Every $x\in\Sig$ has pairwise distinct coordinates, so $\partial_tf_t(x)=(Lf_t)(x)$ by Proposition \ref{prop:U9}(iii). Hence, with $\mu=\mu^*$,
+$\cS'(t)=\int_{\Sig}k_t\,Lf_t\,\rd\mu^*$.
+
+\emph{Step 3 (integration by parts).} Apply Corollary \ref{cor:ibp} with $\varphi:=f_t\in C^2(\R^N)$ and $k:=k_t\in C^1(\R^N)$. Its three hypotheses hold, with $\mathfrak m$ for an interval $[t_1,t_2]\ni t$:
+\begin{itemize}[leftmargin=1.6em,itemsep=1pt]
+\item $|k_t|\,|\nabla f_t|\le(C_1+1)(1+|x|)^2\,\mathfrak m(x)\in L^1(\mu^*)$;
+\item $k_t\,Lf_t=k_t\,\partial_tf_t$ on $\Sig$, and $|k_t\,\partial_tf_t|\le(C_1+1)(1+|x|)^2\mathfrak m(x)\in L^1(\mu^*)$;
+\item $\nabla k_t\cdot\nabla f_t=\frac{|\nabla f_t|^2}{f_t}+N\nabla W\cdot\nabla f_t$, where $\int|\nabla f_t|^2/f_t\,\rd\mu<\infty$ (Proposition \ref{prop:U9}(iv)) and $|N\nabla W\cdot\nabla f_t|\le\frac N{R^2}(|x|+|\gamma|)\mathfrak m(x)\in L^1(\mu^*)$.
+\end{itemize}
+Hence \eqref{ibp} gives $\cS'(t)=-\frac1{\beta N}\int_{\Sig}\nabla k_t\cdot\nabla f_t\,\rd\mu^*$, which is the equality in \eqref{entprod} since $\nabla k_t=\nabla(\log f_t+NW)$.
+
+\emph{Step 4 (completing the square).} Put $\mathbf a:=\nabla\log f_t+N\nabla W$. Since $\log\psi=-NW-\log Z_W$, $\mathbf a=\nabla\log(f_t/\psi)=\nabla\log q_t$. Pointwise, using $\nabla f_t=f_t\nabla\log f_t=f_t(\mathbf a-N\nabla W)$ and $N\nabla W\cdot\mathbf a\le\frac12|\mathbf a|^2+\frac12N^2|\nabla W|^2$,
+\[
+\nabla f_t\cdot\nabla(\log f_t+NW)=f_t\,(\mathbf a-N\nabla W)\cdot\mathbf a\ \ge\ f_t\Big(\frac12|\mathbf a|^2-\frac12N^2|\nabla W|^2\Big).
+\]
+\emph{Finiteness of $I_t$:} $f_t|\mathbf a|^2\le2\frac{|\nabla f_t|^2}{f_t}+2N^2f_t|\nabla W|^2$, and $\int f_t|\nabla W|^2\rd\mu=R^{-4}\int|x-\gamma|^2\rd\nu_t<\infty$ (Step 0); so $I_t=\int f_t|\mathbf a|^2\rd\mu<\infty$.
+Integrating the pointwise inequality against $\mu$ (all terms integrable) and inserting it in the equality of Step 3:
+\[
+\cS'(t)\le-\frac1{\beta N}\Big[\frac12I_t-\frac{N^2}{2R^4}\int|x-\gamma|^2f_t\,\rd\mu\Big]=-\frac{I_t}{2\beta N}+\frac{N}{2\beta R^4}\E|\lambda(H_t)-\gamma|^2,
+\]
+since $\int|x-\gamma|^2f_t\rd\mu=\int|x-\gamma|^2\rd\nu_t=\E|\lambda(H_t)-\gamma|^2$.
+
+\emph{The two forms of $I_t$ and of $\cS'$.} $q_t=f_t/\psi$ is $C^\infty$ and positive, $\nu_t=q_t\,\omega$ (Lemma \ref{lem:ref}), $\nabla\log q_t=\mathbf a$, so $\frac{|\nabla q_t|^2}{q_t}=q_t|\mathbf a|^2$ and $\int\frac{|\nabla q_t|^2}{q_t}\rd\omega=\int q_t\psi|\mathbf a|^2\rd\mu=\int f_t|\mathbf a|^2\rd\mu=I_t$.
+Finally, with $f_t=q_t\psi$: $\nabla f_t\cdot\nabla\log q_t=\psi\big(\frac{|\nabla q_t|^2}{q_t}+\nabla\log\psi\cdot\nabla q_t\big)$, and integrating against $\mu$ (i.e.\ the bracket against $\omega=\psi\mu$) gives the last formula.
+\end{proof}
+
+\begin{theorem}[Entropy bound]\label{thm:entropy}
+Let $N_4:=N_3$ with $N_3=N_3(\vartheta,\delta_\pm,C_0)$ from Lemma \ref{lem:Q}. For all $N\ge N_4$, $\K\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$ and all $t>0$ with $Nt\ge(\log N)^2$, with the choice
+\begin{equation}\label{Rchoice}
+R^2:=\frac{t}{8\beta\log N},\qquad \omega:=\omega_R,
+\end{equation}
+we have, with $D$ from \eqref{defL},
+\begin{equation}\label{entbound}
+S(\nu_t|\omega)\le\frac1N+\frac{32\beta D^2\log N}{t},\qquad S(\mu|\omega)\le\frac{28\beta D^2\log N}{t}.
+\end{equation}
+\end{theorem}
+\noindent The hypothesis $Nt\ge(\log N)^2$ is used in the proof only through $t/2\ge N^{-2}$ (step (4) below); so \eqref{entbound}, and with it Proposition~\ref{prop:gapuniv}, holds for every $t\ge2N^{-2}$.
+For $t\ll1/N$ the bound is true but weaker than trivial bounds; the hypothesis is kept because it is the one needed in \S\ref{sec:C8}.
+
+\begin{proof}
+Note $N\ge N_3\ge16$ (Lemma \ref{lem:Q} and \S\ref{sec:C2}: $N_3\ge N_6\ge N_*\ge16$), so $\log N>0$ and $R$ is well defined. Put $Q:=7D^2N^{-1}$; by Lemma \ref{lem:Q}, $\E|\lambda(H_r)-\gamma|^2\le Q$ for every $r\in[0,\infty]$, in particular $\int|x-\gamma|^2\rd\mu\le Q$.
+Note the identity
+\begin{equation}\label{c7:NQR}
+\frac{NQ}{2R^2}=\frac{7D^2}{2R^2}=\frac{28\beta D^2\log N}{t}.
+\end{equation}
+
+\emph{The bound on $S(\mu|\omega)$} is Lemma \ref{lem:ref} with \eqref{c7:NQR}.
+
+\emph{The bound on $S(\nu_t|\omega)$.} Apply Proposition \ref{prop:U9} to $H_0$ with $s:=t/4$ (the moment hypothesis holds, see the beginning of this section), and Proposition \ref{prop:entprod} with this $s$ and $R$ from \eqref{Rchoice}. So $\cS(r)=S(\nu_r|\omega)$ is finite and $C^1$ on $(t/4,\infty)\supset[t/2,t]$.
+
+(1) \emph{LSI.} By Definition \ref{def:omega}, Comment (3) (equivalently Definition \ref{def:loggas}, Comment (2)), $\omega$ is a convex log-gas with $\kappa=N(\frac\beta2+\frac1{R^2})\ge\frac N{R^2}>0$. For $r>t/4$, $q_r=f_r/\psi\in C^\infty(\R^N)$ is positive and $\int_{\Sig}q_r\rd\omega=\int f_r\rd\mu=\nu_r(\R^N)=1$. Theorem \ref{thm:LSI} gives
+\[
+\cS(r)=\int_{\Sig}\mathfrak h(q_r)\,\rd\omega=\Ent_\omega(q_r)\le\frac1{2\kappa}\int_{\Sig}\frac{|\nabla q_r|^2}{q_r}\rd\omega\le\frac{R^2}{2N}I_r .
+\]
+(The first equality: $q_r$ is a version of $\rd\nu_r/\rd\omega$, Lemma \ref{lem:ref}, and $\omega$ is carried by $\Sig$.)
+
+(2) \emph{Differential inequality.} By \eqref{entprod}, (1) in the form $-I_r\le-\frac{2N}{R^2}\cS(r)$, and $\E|\lambda(H_r)-\gamma|^2\le Q$: for every $r\in[t/2,t]$,
+\[
+\cS'(r)\le-a\,\cS(r)+b',\qquad a:=\frac1{\beta R^2},\quad b':=\frac{NQ}{2\beta R^4},\quad \frac{b'}a=\frac{NQ}{2R^2}.
+\]
+
+(3) \emph{Gr\"onwall.} The function $h(r):=e^{ar}\big(\cS(r)-b'/a\big)$ is $C^1$ on $(t/4,\infty)$ with $h'(r)=e^{ar}\big(\cS'(r)+a\cS(r)-b'\big)\le0$ for $r\in[t/2,t]$. By the mean value theorem $h(t)\le h(t/2)$, i.e.
+\[
+\cS(t)\le\frac{b'}a+e^{-at/2}\Big(\cS(t/2)-\frac{b'}a\Big)\le e^{-at/2}\,\cS(t/2)+\frac{NQ}{2R^2}.
+\]
+
+(4) \emph{Initial value.} Since $Nt\ge(\log N)^2$ and $N\ge16$: $t/2\ge(\log N)^2/(2N)\ge N^{-2}$ (as $N(\log N)^2\ge2$). By Lemma \ref{lem:ref} (with $\nu'=\nu_{t/2}\ll\mu$, Proposition \ref{prop:U9}(i), and $\int|x|^2\rd\nu_{t/2}<\infty$), Lemma \ref{lem:U8} and Lemma \ref{lem:Q}:
+\[
+\cS(t/2)\le S(\nu_{t/2}|\mu)+\frac N{2R^2}\E|\lambda(H_{t/2})-\gamma|^2\le N^3+\frac{NQ}{2R^2}.
+\]
+
+(5) \emph{Arithmetic.} $\frac{at}2=\frac{t}{2\beta R^2}=\frac{t\cdot8\beta\log N}{2\beta t}=4\log N$, so $e^{-at/2}=N^{-4}$. By (3), (4) and \eqref{c7:NQR},
+\[
+\cS(t)\le N^{-4}\Big(N^3+\frac{NQ}{2R^2}\Big)+\frac{NQ}{2R^2}=\frac1N+(1+N^{-4})\frac{28\beta D^2\log N}{t}\le\frac1N+\frac{32\beta D^2\log N}{t},
+\]
+since $28(1+N^{-4})\le32$.
+\end{proof}
+
+\begin{remark}[Where the dynamics is used]\label{rem:dyn}
+Only in \eqref{entprod}. Its two ingredients are (a) the pointwise identity $\partial_tf_t=Lf_t$ on $\Sig$ for the smooth symmetric density of Proposition \ref{prop:U9}, and (b) Corollary \ref{cor:ibp}.
+The cross term $N\nabla W\cdot\nabla f_t$ is what distinguishes $\omega$ from $\mu$; it is the reason why a purely static argument (matrix de Bruijn identity plus projection of the Fisher information onto eigenvalues, which only yields $\int|\nabla f_t|^2/f_t\,\rd\mu\le CN^3/t$) does not suffice.
+The only quantitative inputs of Theorem \ref{thm:entropy} are Lemma \ref{lem:U8} (through $S(\nu_{t/2}|\mu)\le N^3$), Lemma \ref{lem:Q} (rigidity, through $Q$), Theorem \ref{thm:LSI} (through $\kappa\ge N/R^2$) and the choice \eqref{Rchoice}; all constants in Proposition \ref{prop:U9}(iv) are used only qualitatively (Remark \ref{rem:M4}).
+\end{remark}
+\section[From gap observables to correlation functions; proof of Theorems \ref*{thm:sharp} and \ref*{thm:23}]{From gap observables to correlation functions; proof of Theorems \texorpdfstring{\ref{thm:sharp}}{12.1} and \ref{thm:23}}\label{sec:C8}
+
+The notation of \S\ref{sec:C7} remains in force.
+
+\subsection{Gap universality}
+
+\begin{proposition}[Universality of gap observables]\label{prop:gapuniv}
+Let $N\ge N_4$, $\K\in\{\R,\C\}$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$, and $t>0$ with $Nt\ge(\log N)^2$. Let $n\ge2$, integers $1\le m_2<\dots<m_n$, $J\subset\{1,\dots,N-m_n\}$, $A,A'\ge0$, $\rho>0$, and let $G$ and $F$ be as in Theorem \ref{thm:conc} and \eqref{defF}; extend $F$ to $\R^N$ by $F:=0$ on $\R^N\setminus\Sig$. Then
+\begin{equation}\label{gapuniv}
+\big|\E F(\lambda(H_t))-\E F(\lambda(V))\big|\le\frac{4}{N}\sqrt{C_\star(n-1)|J|}\;\Big(\frac1N+\frac{32\beta D^2\log N}{t}\Big)^{1/2},
+\end{equation}
+with $C_\star=C_\star(A,A',\rho)$ from Lemma \ref{lem:2pt}.
+\end{proposition}
+
+\begin{proof}
+$G$ is continuous on $(0,\infty)^{n-1}$ (comment after Theorem \ref{thm:conc}), so $F$ is continuous on the open set $\Sig$; the extended $F$ is Borel on $\R^N$ and $|F|\le A|J|/N$. Hence both expectations exist, and $\E F(\lambda(H_t))=\int F\rd\nu_t$, $\E F(\lambda(V))=\int F\rd\mu$.
+By Theorem \ref{thm:JD}, $\nu_t(\partial\Sig)=\mu(\partial\Sig)=0$; as $\nu_t,\mu$ are carried by $\cSig$, they are probability measures carried by $\Sig$, and the integrals do not depend on the extension of $F$ off $\Sig$.
+Let $R$, $\omega=\omega_R$ be as in \eqref{Rchoice}. By Theorem \ref{thm:JD}, $\nu_t\ll\mu$, and $\mu=\psi^{-1}\omega\ll\omega$ (Definition \ref{def:omega}, Comment (1)); so $\nu_t\ll\omega$ and $\mu\ll\omega$.
+Corollary \ref{cor:gap} (with the convex log-gas $\omega$, Definition \ref{def:omega}, Comment (3)), applied with $\nu=\nu_t$ and with $\nu=\mu$, and the triangle inequality give
+\[
+\Big|\int F\rd\nu_t-\int F\rd\mu\Big|\le\frac2N\sqrt{C_\star(n-1)|J|}\,\Big(\sqrt{S(\nu_t|\omega)}+\sqrt{S(\mu|\omega)}\Big).
+\]
+By Theorem \ref{thm:entropy} both entropies are at most $\frac1N+\frac{32\beta D^2\log N}t$ (as $28\le32$). This is \eqref{gapuniv}.
+\end{proof}
+
+\noindent This is the NP version of [ESYY, Theorem 4.1]: in the original's variables it reads $C\sqrt{|J|Q/(N\tau)}$ up to $(\log N)^{1/2}$, with $\tau=t$. Note that \eqref{gapuniv} holds for \emph{every} $t$ with $Nt\ge(\log N)^2$; no time average and no auxiliary dynamics are needed.
+
+\subsection{Deterministic reduction}\label{ss:reduction}
+
+\noindent\emph{Fixed data.} Throughout this subsection $n\ge1$, $\rho_O>0$ and $0<c\le2$ are fixed, $\varrho_*:=\varrho_*(c)=\frac1{2\pi}\sqrt{c-c^2/16}$, and
+\[
+\ell:=\max\Big(1,\frac{\rho_O}{\varrho_*}\Big)\ \ge1 .
+\]
+$O:\R^n\to\R$ is Lipschitz with support in $[-\rho_O,\rho_O]^n$ (so $O$ is continuous and bounded). $E\in[-2+c,2-c]$, $b\in(0,c/2)$ and $\varrho:=\rhosc(E)$. Since $|E|\le2-c\le2-c/4$, (RA5) gives
+\begin{equation}\label{c8:rho}
+\varrho_*\le\varrho\le\frac1\pi,\qquad\frac{\rho_O}{\varrho}\le\frac{\rho_O}{\varrho_*}\le\ell .
+\end{equation}
+$J:=\{i:\gamma_i\in[E-b,E+b]\}$ and $\mathcal B:=\{i:\operatorname{dist}(\gamma_i,\{E-b,E+b\})\le\xi_0+\ell/N\}$, $\xi_0=D/(N\varrho_*)$, are the deterministic index sets of Lemma \ref{lem:countC}(c).
+Note $[E-b,E+b]\subset[-2+\frac c2,2-\frac c2]\subset[-2,2]$.
+
+\noindent\emph{Symmetrisation.} $O^{s}(\alpha):=\frac1{n!}\sum_{\pi\in S_n}O(\alpha_{\pi(1)},\dots,\alpha_{\pi(n)})$. Since a permutation of the coordinates is an isometry of $(\R^n,|\cdot|)$ preserving $[-\rho_O,\rho_O]^n$: $\|O^s\|_\infty\le\|O\|_\infty$, $\Lip(O^s)\le\Lip(O)$, and $O^s=0$ outside $[-\rho_O,\rho_O]^n$.
+
+\noindent\emph{Index tuples.} $\mathfrak S_n:=\{m=(m_2,\dots,m_n)\in\mathbb Z^{n-1}:1\le m_2<\dots<m_n\}$ ($\mathfrak S_1=\{\emptyset\}$); always $m_1:=0$, and $m_n:=0$ for $n=1$. For $x\in\R^N$, $E'\in\R$, $1\le i\le N$, $m\in\mathfrak S_n$, $u\in\R^{n-1}$:
+\begin{align*}
+Y_{i,m}(E',x)&:=\begin{cases}O^{s}\big(N\varrho(x_i-E'),N\varrho(x_{i+m_2}-E'),\dots,N\varrho(x_{i+m_n}-E')\big)&\text{if }i+m_n\le N,\\ 0&\text{else;}\end{cases}\\
+G_\varrho(u)&:=\int_\R O^{s}\big(\varrho y,\varrho(y+u_2),\dots,\varrho(y+u_n)\big)\,\rd y\qquad(u=(u_2,\dots,u_n));\\
+F_m(x)&:=\frac1N\sum_{i\in J,\ i+m_n\le N}G_\varrho\big(N(x_{i+m_2}-x_i),\dots,N(x_{i+m_n}-x_i)\big).
+\end{align*}
+For $n=1$, $G_\varrho=\int O(\varrho y)\rd y$ is a number and $F_\emptyset=|J|G_\varrho/N$ is constant.
+
+\begin{lemma}[Algebraic identities and trivial bounds]\label{lem:alg}
+For all $x\in\cSig$ and $E'\in\R$:
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item $\cX^O_{E',\varrho}(x)=n!\sum_{i=1}^N\sum_{m\in\mathfrak S_n}Y_{i,m}(E',x)$ (only the finitely many $m$ with $m_n\le N-1$ contribute);
+\item if $i+m_n\le N$: $E'\mapsto Y_{i,m}(E',x)$ is continuous; $Y_{i,m}(E',x)=0$ unless $|x_{i+m_k}-E'|\le\ell/N$ for all $k=1,\dots,n$; $\int_\R|Y_{i,m}(E',x)|\rd E'\le2\ell\|O\|_\infty/N$; and
+$\int_\R Y_{i,m}(E',x)\,\rd E'=\frac1NG_\varrho\big(N(x_{i+m_2}-x_i),\dots,N(x_{i+m_n}-x_i)\big)$;
+\item $G_\varrho:\R^{n-1}\to\R$ is well defined, $|G_\varrho|\le A:=2\ell\|O\|_\infty$, $G_\varrho(u)=0$ unless $|u_k|\le2\ell$ for all $k$, and $|G_\varrho(u)-G_\varrho(u')|\le A'|u_k-u_k'|$ whenever $u,u'$ differ only in the $k$-th coordinate, with $A':=2\rho_O\Lip(O)$; in particular $G_\varrho$ is continuous.
+Consequently, for $n\ge2$, the restriction of $G_\varrho$ to $(0,\infty)^{n-1}$ satisfies the hypotheses of Theorem \ref{thm:conc} with $(A,A',\rho)=(2\ell\|O\|_\infty,\,2\rho_O\Lip(O),\,2\ell)$, and the constant of Lemma \ref{lem:2pt} satisfies
+\begin{equation}\label{c8:Cstar}
+\sqrt{C_\star}\le C_\sharp\,\big(\|O\|_\infty+\Lip(O)\big),\qquad C_\sharp:=\ell\Big(\sqrt{2/c_0}+3\sqrt2\,e\,\rho_O\Big),\quad c_0=\log\cosh\tfrac12 ;
+\end{equation}
+\item $|\cX^O_{E',\varrho}(x)|\le N^n\|O\|_\infty$ for all $x\in\R^N$; $F_m$ is continuous on $\R^N$ and $|F_m|\le A|J|/N$; $F_m\equiv0$ if $m_n\ge N$; and for $n\ge2$ and $m_n\le N-1$, the restriction of $F_m$ to $\Sig$ is the function $F$ of \eqref{defF} built with $G:=G_\varrho|_{(0,\infty)^{n-1}}$, the tuple $m$ and the index set $J_m:=\{i\in J:i\le N-m_n\}\subset\{1,\dots,N-m_n\}$, $|J_m|\le|J|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Put $\alpha_j:=N\varrho(x_j-E')$. An ordered $n$-tuple $(i_1,\dots,i_n)$ of pairwise distinct indices is the same as a pair $(\mathcal J,\pi)$ of an $n$-subset $\mathcal J=\{j_1<\dots<j_n\}$ of $\{1,\dots,N\}$ and a permutation $\pi\in S_n$, via $i_k=j_{\pi(k)}$. Hence
+$\cX^O_{E',\varrho}(x)=\sum_{\mathcal J}\sum_{\pi}O(\alpha_{j_{\pi(1)}},\dots,\alpha_{j_{\pi(n)}})=n!\sum_{\mathcal J}O^s(\alpha_{j_1},\dots,\alpha_{j_n})$.
+The $n$-subsets $\mathcal J$ are in bijection with the pairs $(i,m)$, $m\in\mathfrak S_n$, $1\le i$, $i+m_n\le N$, via $i=j_1$, $m_k=j_k-j_1$; and $O^s(\alpha_{j_1},\dots,\alpha_{j_n})=Y_{i,m}(E',x)$. The terms with $i+m_n>N$ are $0$ by definition.
+
+(b) Continuity: $O^s$ is continuous. If $Y_{i,m}(E',x)\ne0$ then each argument lies in $[-\rho_O,\rho_O]$, i.e.\ $|x_{i+m_k}-E'|\le\rho_O/(N\varrho)\le\ell/N$ by \eqref{c8:rho}. Thus $Y_{i,m}(\cdot,x)$ vanishes outside $[x_i-\ell/N,x_i+\ell/N]$ and $|Y_{i,m}|\le\|O\|_\infty$, which gives the $L^1$ bound.
+For the integral substitute $y:=N(x_i-E')$ ($\rd E'=\rd y/N$ up to orientation): $N\varrho(x_{i+m_k}-E')=\varrho\big(y+N(x_{i+m_k}-x_i)\big)$, which gives the formula with $u_k=N(x_{i+m_k}-x_i)$.
+
+(c) For fixed $u$, $y\mapsto O^s(\varrho y,\dots)$ is continuous and vanishes unless $|\varrho y|\le\rho_O$, i.e.\ outside an interval of length $2\rho_O/\varrho\le2\ell$; so $G_\varrho(u)$ is well defined and $|G_\varrho(u)|\le2\ell\|O\|_\infty$.
+If $G_\varrho(u)\ne0$, some $y$ has $|\varrho y|\le\rho_O$ and $|\varrho(y+u_k)|\le\rho_O$ for all $k$, so $|u_k|\le2\rho_O/\varrho\le2\ell$.
+If $u,u'$ differ only in the $k$-th coordinate, then for every $y$ the two integrands differ only in one argument, by $\varrho|u_k-u_k'|$, and both vanish unless $|\varrho y|\le\rho_O$; hence
+$|G_\varrho(u)-G_\varrho(u')|\le\frac{2\rho_O}{\varrho}\cdot\Lip(O)\,\varrho|u_k-u_k'|=2\rho_O\Lip(O)|u_k-u_k'|$.
+Changing one coordinate at a time, $|G_\varrho(u)-G_\varrho(u')|\le A'\sum_k|u_k-u'_k|$, so $G_\varrho$ is continuous, hence Borel.
+For $n\ge2$ the restriction to $(0,\infty)^{n-1}$ therefore satisfies: Borel, $|G|\le A$, $G(u)=0$ unless $u\in(0,2\ell]^{n-1}$, coordinatewise $A'$-Lipschitz — the hypotheses of Theorem \ref{thm:conc} with $\rho=2\ell$.
+By Lemma \ref{lem:2pt}, $C_\star=\max\big(\frac{A^2}{2c_0},\frac98(e\rho A')^2\big)$, so $\sqrt{C_\star}\le\frac{A}{\sqrt{2c_0}}+\frac{3}{2\sqrt2}e\rho A'=\ell\sqrt{2/c_0}\,\|O\|_\infty+3\sqrt2\,e\,\ell\rho_O\Lip(O)$, which gives \eqref{c8:Cstar}.
+
+(d) The number of ordered $n$-tuples of distinct indices is $N!/(N-n)!\le N^n$. $F_m$ is a finite sum of continuous functions, each bounded by $A/N$, with at most $|J|$ terms. If $m_n\ge N$ the sum in $F_m$ is empty. If $m_n\le N-1$, the summation set is $J_m$, and for $x\in\Sig$, $i\in J_m$ all arguments $N(x_{i+m_k}-x_i)$ are positive; so $F_m|_{\Sig}$ is \eqref{defF}.
+\end{proof}
+
+\begin{lemma}[Localisation on the good set]\label{lem:local}
+Assume \eqref{c2:counthyp}, i.e.\ $(D+\ell)/(N\varrho_*)\le c/8$, with $D$ from \eqref{defL}; let $x\in\Xi$ (see \eqref{good}) and $K_\ell:=2\ell/\pi+2D$ (Lemma \ref{lem:countC}(a)). Then:
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item $Y_{i,m}(E',x)=0$ for all $E'\in[-3,3]$, all $i$ and all $m\in\mathfrak S_n$ with $m_n\ge K_\ell$; for $i\in J$, the $i$-th summand of $F_m(x)$ vanishes whenever $m_n\ge K_\ell$.
+Moreover, for every bounded Borel $P:\R^n\to\R$ vanishing outside $[-\rho_O,\rho_O]^n$ and every $E'\in[-3,3]$: $|\cX^P_{E',\varrho}(x)|\le K_\ell^n\|P\|_\infty$.
+\item The number of $m\in\mathfrak S_n$ with $m_n<K_\ell$ is at most $K_\ell^{n-1}$, and
+\[
+\Big|\int_{E-b}^{E+b}\cX^O_{E',\varrho}(x)\,\rd E'-n!\sum_{m\in\mathfrak S_n,\,m_n<K_\ell}F_m(x)\Big|\le n!\,|\mathcal B|\,K_\ell^{n-1}\,\frac{2\ell\|O\|_\infty}{N}.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By \eqref{c2:counthyp}, $\xi_0=D/(N\varrho_*)\le c/8$ and $\ell/N\le\varrho_*c/8<c/8$ (as $\varrho_*\le\frac{\sqrt2}{2\pi}<1$).
+
+(a) If $Y_{i,m}(E',x)\ne0$, then by Lemma \ref{lem:alg}(b) $x_i$ and $x_{i+m_n}$ lie in $[E'-\ell/N,E'+\ell/N]$, hence so do the $m_n+1$ points $x_i\le x_{i+1}\le\dots\le x_{i+m_n}$ ($x\in\cSig$). Lemma \ref{lem:countC}(a) with $e=E'\in[-3,3]$ gives $m_n+1\le K_\ell$; so $m_n\ge K_\ell$ is impossible.
+Let $i\in J$ and suppose the $i$-th summand of $F_m(x)$ is nonzero. By Lemma \ref{lem:alg}(c), $0\le N(x_{i+m_n}-x_i)\le2\ell$, so the $m_n+1$ points $x_i,\dots,x_{i+m_n}$ lie in $[e-\ell/N,e+\ell/N]$ with $e:=x_i+\ell/N$.
+Since $\gamma_i\in[E-b,E+b]\subset[-2+\frac38c,2-\frac38c]$, Lemma \ref{lem:countC}(b) gives $|x_i-\gamma_i|\le\xi_0\le c/8$, so $|x_i|\le2-\frac c2+\frac c8\le2$ and $|e|\le2+\frac c8\le3$. Lemma \ref{lem:countC}(a) gives $m_n+1\le K_\ell$ again.
+For the last claim: a nonzero term of $\cX^P_{E',\varrho}(x)$ (see \eqref{defX}) requires $|N\varrho(x_{i_k}-E')|\le\rho_O$, i.e.\ $|x_{i_k}-E'|\le\ell/N$, for $k=1,\dots,n$. By Lemma \ref{lem:countC}(a) the set $\{j:|x_j-E'|\le\ell/N\}$ has at most $K_\ell$ elements, so there are at most $K_\ell^n$ such ordered tuples, each term bounded by $\|P\|_\infty$.
+
+(b) \emph{Counting.} Let $M$ be the largest integer $<K_\ell$ ($K_\ell\ge2D\ge4$). The $m\in\mathfrak S_n$ with $m_n<K_\ell$ correspond to the $(n-1)$-subsets of $\{1,\dots,M\}$; there are $\binom M{n-1}\le M^{n-1}\le K_\ell^{n-1}$ of them (for $n=1$: one).
+
+\emph{Reduction.} By Lemma \ref{lem:alg}(a) and Fubini (finite sum), $\int_{E-b}^{E+b}\cX^O_{E',\varrho}(x)\rd E'=n!\sum_{i,m}\int_{E-b}^{E+b}Y_{i,m}(E',x)\rd E'$; by (a) (note $[E-b,E+b]\subset[-3,3]$) only $m$ with $m_n<K_\ell$ contribute.
+By Lemma \ref{lem:alg}(b), $F_m(x)=\sum_{i\in J}\int_\R Y_{i,m}(E',x)\rd E'$ (terms with $i+m_n>N$ vanish on both sides). Hence the quantity to be bounded is $n!\big|\sum_{i}\sum_{m:\,m_n<K_\ell}\Delta_{i,m}\big|$ with
+\[
+\Delta_{i,m}:=\int_{E-b}^{E+b}Y_{i,m}(E',x)\,\rd E'-\mathbf 1_{i\in J}\int_\R Y_{i,m}(E',x)\,\rd E' .
+\]
+\emph{Claim: $\Delta_{i,m}=0$ unless $i\in\mathcal B$.}
+Case $i\notin J$, $\Delta_{i,m}\ne0$: then $Y_{i,m}(E',x)\ne0$ for some $E'\in[E-b,E+b]$, so $|x_i-E'|\le\ell/N$ and $x_i\in[E-b-\frac\ell N,E+b+\frac\ell N]\subset[-2+\frac c2-\frac c8,2-\frac c2+\frac c8]=[-2+\frac38c,2-\frac38c]$. By Lemma \ref{lem:countC}(b), $|x_i-\gamma_i|\le\xi_0$, so $\gamma_i\in[E-b-\xi_0-\frac\ell N,E+b+\xi_0+\frac\ell N]$; as $\gamma_i\notin[E-b,E+b]$, $\gamma_i$ is within $\xi_0+\ell/N$ of $E-b$ or of $E+b$: $i\in\mathcal B$.
+Case $i\in J\setminus\mathcal B$: $\gamma_i\in[E-b,E+b]$ is in the bulk, so $|x_i-\gamma_i|\le\xi_0$ (Lemma \ref{lem:countC}(b)). If $Y_{i,m}(E',x)\ne0$ then $|E'-\gamma_i|\le|E'-x_i|+|x_i-\gamma_i|\le\ell/N+\xi_0<\operatorname{dist}(\gamma_i,\{E-b,E+b\})$; a point $E'\notin[E-b,E+b]$ would be separated from $\gamma_i\in[E-b,E+b]$ by an endpoint, hence at distance $\ge\operatorname{dist}(\gamma_i,\{E-b,E+b\})$ from $\gamma_i$. So the support of $Y_{i,m}(\cdot,x)$ lies in $[E-b,E+b]$ and $\Delta_{i,m}=0$.
+\emph{Bound.} For $i\in\mathcal B$: if $i\in J$, $\Delta_{i,m}=-\int_{\R\setminus[E-b,E+b]}Y_{i,m}\rd E'$; if $i\notin J$, $\Delta_{i,m}=\int_{E-b}^{E+b}Y_{i,m}\rd E'$. In both cases $|\Delta_{i,m}|\le\int_\R|Y_{i,m}|\rd E'\le2\ell\|O\|_\infty/N$ (Lemma \ref{lem:alg}(b)). Summing over $i\in\mathcal B$ and the at most $K_\ell^{n-1}$ values of $m$ gives the claim.
+\end{proof}
+
+\subsection{Proof of Theorem \ref{thm:sharp}}\label{ss:proofsharp}
+
+\noindent\emph{Constants.} Let $(\vartheta,\delta_\pm,C_0)$, $c$, $n$, $\rho_O$ be given, and $\varrho_*$, $\ell$ as in \S\ref{ss:reduction}. Let $A_0$ be the constant of \eqref{defL}, and $N_*$, $N_K$ ($K=n+2$), $N_3$ the thresholds of \eqref{c2:Nstar}, Lemma \ref{lem:goodC}, Lemma \ref{lem:Q}; $N_4=N_3$. Let $N_c$ be the least integer $\ge16$ with
+$\big(N_c^{1/5}+2+\ell\big)/(N_c\varrho_*)\le c/8$ (it exists since the left side, as a function of $N_c\ge1$, decreases to $0$). Put
+\[
+N_{\rm q}:=\max\big(N_3,\,N_{n+2},\,N_c,\,n^2\big),\qquad A_1:=nA_0+1 .
+\]
+Then $N_{\rm q}\ge16$, and $N_{\rm q}$, $A_1$ depend only on $(c,n,\rho_O,\vartheta,\delta_\pm,C_0)$. With $C_\sharp$ from \eqref{c8:Cstar} and $C_{\mathcal B}:=\frac{4}{\pi\varrho_*}+\frac{4\ell}\pi+1$ put
+\[
+C_1'':=8(\ell+2)^n+32\,n!\sqrt{2n}\,(\ell+2)^{n-1}C_\sharp+4\,n!\,\ell\,C_{\mathcal B}(\ell+2)^{n-1}+4+8\,n!\,\ell(\ell+2)^{n-1},\qquad C_1':=3^nC_1'' ;
+\]
+$C_1'$ depends only on $(c,n,\rho_O)$.
+
+\noindent\emph{Consequences of $N\ge N_{\rm q}$.} Let $N\ge\max(N_{\rm q},n)=N_{\rm q}$.
+\begin{itemize}[leftmargin=1.6em,itemsep=1pt]
+\item[(i)] $N\ge N_*$, so \eqref{c2:Dsmall} holds: $D\le N^{1/5}+2$. Hence $(D+\ell)/(N\varrho_*)\le(N^{1/5}+2+\ell)/(N\varrho_*)\le c/8$ (monotonicity in $N$), i.e.\ \eqref{c2:counthyp} holds and Lemma \ref{lem:local} applies. Also $D\le N$ and $D\ge2$.
+\item[(ii)] $K_\ell=\frac{2\ell}\pi+2D\le(\ell+2)D$ (as $D\ge1$), and by Lemma \ref{lem:countC}(c), $|\mathcal B|\le\frac4\pi\big(\frac D{\varrho_*}+\ell\big)+2\le C_{\mathcal B}D$ (as $D\ge2$).
+\item[(iii)] $C_{N,n}=\prod_{k=0}^{n-1}\frac N{N-k}\le2$: indeed $\prod_{k<n}(1-\frac kN)\ge1-\sum_{k<n}\frac kN=1-\frac{n(n-1)}{2N}\ge\frac12$ for $N\ge n^2$.
+\item[(iv)] By Lemma \ref{lem:goodC} with $K=n+2$: $\P(\lambda(H_t)\notin\Xi)\le N^{-n-2}$ for every $t\in[0,\infty]$, and $\mu(\Xi^c)\le N^{-n-2}$.
+\item[(v)] $D^n(\log N)^{1/2}\le3^ne^{A_1(\log\log N)^2}$: $D=e^{A_0(\log\log N)^2}+2\le3e^{A_0(\log\log N)^2}$, and $(\log N)^{1/2}=e^{\frac12\log\log N}\le e^{(\log\log N)^2}$ because $\log\log N\ge\log\log16>\frac12$.
+\end{itemize}
+
+\begin{proof}[Proof of Theorem \ref{thm:sharp}]
+Let $N\ge N_{\rm q}$, $\K$, $\nu\in\mathcal E_N(\vartheta,\delta_-,\delta_+,C_0)$, $O$, $t>0$ with $Nt\ge(\log N)^2$, $E\in[-2+c,2-c]$, $b\in(0,c/2)$, and $\varrho=\rhosc(E)$. Write $\|O\|:=\|O\|_\infty$ and $\Theta$ for the left side of \eqref{eq:abstrthm2}.
+
+\emph{Step 1 (a deterministic functional).} $(E',x)\mapsto\cX^O_{E',\varrho}(x)$ is continuous on $\R\times\R^N$ ($O$ is continuous; finite sum), so
+\[
+\mathcal Z(x):=\int_{E-b}^{E+b}\cX^O_{E',\varrho}(x)\,\rd E'
+\]
+is continuous in $x$, hence Borel, and $|\mathcal Z|\le2bN^n\|O\|$ (Lemma \ref{lem:alg}(d)). The map $(E',\hat\omega)\mapsto\cX^O_{E',\varrho}(\lambda(H_t(\hat\omega)))$ is jointly measurable and bounded, so by Fubini
+$\int_{E-b}^{E+b}\E\,\cX^O_{E',\varrho}(\lambda(H_t))\rd E'=\E\,\mathcal Z(\lambda(H_t))$, and likewise for $V$. Therefore
+\[
+\Theta=\frac{C_{N,n}}{2b}\big|\E\,\mathcal Z(\lambda(H_t))-\E\,\mathcal Z(\lambda(V))\big|\le\frac1b\big|\E\,\mathcal Z(\lambda(H_t))-\E\,\mathcal Z(\lambda(V))\big| .
+\]
+For $x\in\Xi$, Lemma \ref{lem:local}(a) with $P=O$ (all $E'\in[E-b,E+b]\subset[-3,3]$) gives $|\mathcal Z(x)|\le2bK_\ell^n\|O\|$.
+
+\emph{Step 2 (case $b<1/N$).} Split each expectation according to $\lambda(\cdot)\in\Xi$ or not and use (iv):
+$|\E\,\mathcal Z(\lambda(H_t))|\le2bK_\ell^n\|O\|+2bN^n\|O\|N^{-n-2}$, and the same for $V$. Hence, by (ii) and $b^{-1}N^{-1}>1$,
+\[
+\Theta\le4\|O\|\big(K_\ell^n+N^{-2}\big)\le8(\ell+2)^nD^n\|O\|\le8(\ell+2)^nD^n\|O\|\,b^{-1}N^{-1}.
+\]
+
+\emph{Step 3 (case $b\ge1/N$: decomposition).} By Lemma \ref{lem:countC}(c), $|J|\le\frac{2Nb}\pi+1\le2Nb$ (as $Nb\ge1$). Define, for $x\in\cSig$,
+\[
+\mathcal F(x):=n!\sum_{m\in\mathfrak S_n,\ m_n<K_\ell}F_m(x),\qquad\mathrm{Err}(x):=\mathcal Z(x)-\mathcal F(x).
+\]
+By Lemma \ref{lem:local}(b) and (ii), $|\mathrm{Err}(x)|\le n!\,C_{\mathcal B}D\,(\ell+2)^{n-1}D^{n-1}\frac{2\ell\|O\|}N$ for $x\in\Xi$; and for all $x$, by Lemma \ref{lem:alg}(d) and Lemma \ref{lem:local}(b) (counting), $|\mathrm{Err}(x)|\le2bN^n\|O\|+n!K_\ell^{n-1}\frac{A|J|}N\le2bN^n\|O\|+4\,n!\,\ell\,b\,K_\ell^{n-1}\|O\|$.
+Since $\E\,\mathcal Z(\lambda(\cdot))=\E\,\mathcal F(\lambda(\cdot))+\E\,\mathrm{Err}(\lambda(\cdot))$ for $H_t$ and for $V$,
+\[
+\Theta\le(T1)+(T2)+(T3),\qquad (T1):=\frac{n!}b\sum_{m:\,m_n<K_\ell}\big|\E F_m(\lambda(H_t))-\E F_m(\lambda(V))\big|,
+\]
+\[
+(T2):=\frac1b\sum_{X\in\{H_t,V\}}\E\big[|\mathrm{Err}(\lambda(X))|\mathbf 1_{\Xi}(\lambda(X))\big],\qquad(T3):=\frac1b\sum_{X\in\{H_t,V\}}\E\big[|\mathrm{Err}(\lambda(X))|\mathbf 1_{\Xi^c}(\lambda(X))\big].
+\]
+
+\emph{Step 4 (T3: the bad event).} By (iv), (ii) and $D\le N$:
+\[
+\begin{aligned}
+(T3)&\le\frac2bN^{-n-2}\big(2bN^n+4\,n!\,\ell\,b\,K_\ell^{n-1}\big)\|O\|\le\big(4N^{-2}+8\,n!\,\ell(\ell+2)^{n-1}N^{n-1}N^{-n-2}\big)\|O\|\\
+&\le\big(4+8\,n!\,\ell(\ell+2)^{n-1}\big)\|O\|\,b^{-1}N^{-1},
+\end{aligned}
+\]
+using $N^{-2}\le N^{-1}\le b^{-1}N^{-1}$ (as $b<c/2\le1$).
+
+\emph{Step 5 (T2: boundary indices).} By Step 3, $(T2)\le\frac2b\cdot n!\,C_{\mathcal B}(\ell+2)^{n-1}D^n\frac{2\ell\|O\|}N=4\,n!\,\ell\,C_{\mathcal B}(\ell+2)^{n-1}D^n\|O\|\,b^{-1}N^{-1}$.
+
+\emph{Step 6 (T1: gap universality).} If $n=1$, $F_\emptyset$ is constant and $(T1)=0$. Let $n\ge2$ and $m\in\mathfrak S_n$ with $m_n<K_\ell$. If $m_n\ge N$, $F_m\equiv0$. Otherwise, by Lemma \ref{lem:alg}(c),(d), $F_m|_{\Sig}$ is a gap observable \eqref{defF} with index set $J_m\subset\{1,\dots,N-m_n\}$, $|J_m|\le|J|\le2Nb$, and $G=G_\varrho$ satisfying the hypotheses of Theorem \ref{thm:conc}; $F_m$ is continuous on $\R^N$ and $\nu_t(\partial\Sig)=\mu(\partial\Sig)=0$ (Theorem \ref{thm:JD}), so $\E F_m(\lambda(\cdot))$ equals the expectation of the extension used in Proposition \ref{prop:gapuniv}. By Proposition \ref{prop:gapuniv} ($N\ge N_4$, $Nt\ge(\log N)^2$), $\beta\le2$ and $\sqrt{\alpha+\alpha'}\le\sqrt\alpha+\sqrt{\alpha'}$:
+\[
+\begin{aligned}
+\big|\E F_m(\lambda(H_t))-\E F_m(\lambda(V))\big|&\le\frac4N\sqrt{2C_\star(n-1)Nb}\Big(N^{-1/2}+8D(\log N)^{1/2}t^{-1/2}\Big)\\&=4\sqrt{2C_\star(n-1)}\,b^{1/2}\Big(N^{-1}+8D(\log N)^{1/2}(Nt)^{-1/2}\Big).
+\end{aligned}
+\]
+There are at most $K_\ell^{n-1}\le(\ell+2)^{n-1}D^{n-1}$ such $m$ (Lemma \ref{lem:local}(b), (ii)). With \eqref{c8:Cstar}, $b^{-1/2}N^{-1}\le b^{-1}N^{-1}$ and $1\le D(\log N)^{1/2}$:
+\[
+\begin{aligned}
+(T1)&\le4\,n!\sqrt{2(n-1)}\,(\ell+2)^{n-1}D^{n-1}C_\sharp\big(\|O\|+\Lip(O)\big)\cdot8D(\log N)^{1/2}\Big[b^{-1}N^{-1}+b^{-1/2}(Nt)^{-1/2}\Big]\\
+&\le32\,n!\sqrt{2n}\,(\ell+2)^{n-1}C_\sharp\big(\|O\|+\Lip(O)\big)D^n(\log N)^{1/2}\Big[b^{-1}N^{-1}+b^{-1/2}(Nt)^{-1/2}\Big].
+\end{aligned}
+\]
+
+\emph{Step 7 (conclusion).} In both cases, by Steps 2, 4, 5, 6 and $(\log N)^{1/2}\ge1$, $D\ge1$:
+\[
+\Theta\le C_1''\big(\|O\|_\infty+\Lip(O)\big)\,D^n(\log N)^{1/2}\Big[b^{-1}N^{-1}+b^{-1/2}(Nt)^{-1/2}\Big],
+\]
+and by (v) this is at most $C_1'(\|O\|_\infty+\Lip(O))e^{A_1(\log\log N)^2}[b^{-1}N^{-1}+b^{-1/2}(Nt)^{-1/2}]$, which is \eqref{sharp}.
+\end{proof}
+
+\begin{remark}[Dependence of the constants]\label{rem:Odep}
+In the proof, $N_{\rm q}$ depends only on $(c,n,\rho_O,\vartheta,\delta_\pm,C_0)$, $A_1=nA_0+1$ only on $(n,\vartheta,\delta_\pm,C_0)$, and $C_1'$ only on $(c,n,\rho_O)$; none depends on $\|O\|_\infty$, $\Lip(O)$, $E$, $b$, $t$, $\K$, the ensemble $\nu$ or $N$. The test function enters only through $\rho_O$ (via $\ell$ and the support of $G_\varrho$) and linearly through $\|O\|_\infty$ (Steps 2, 4, 5) and $\sqrt{C_\star}\le C_\sharp(\|O\|_\infty+\Lip(O))$ (Step 6).
+The Lipschitz constant is used only in Lemma \ref{lem:alg}(c), where only the coordinatewise Lipschitz constants of $O$ enter; these are bounded by $\Lip(O)$ (Euclidean norm). This is obligation (O1) of Remark \ref{c1:oblig}.
+\end{remark}
+
+\subsection{Proof of Theorem \ref{thm:23}}\label{ss:proof23}
+
+This is item (O2) of Remark \ref{c1:oblig}. Let $(\eps',\delta,c,n,\rho_O,\vartheta,\delta_\pm,C_0)$ be given, and let $A_1,N_{\rm q},C_1'$ be the constants of Theorem \ref{thm:sharp} (proved in \S\ref{ss:proofsharp}). Since $(\log\log N)^2/\log N\to0$ and $(\log N)^2/N^{\delta+\eps'}\to0$ as $N\to\infty$, there is a least integer
+$N_2\ge\max(N_{\rm q},n,3)$, depending only on $(\eps',\delta,A_1,N_{\rm q},n)$, such that for all $N\ge N_2$
+\begin{equation}\label{c8:N2}
+e^{A_1(\log\log N)^2}\le N^{\eps'}\qquad\text{and}\qquad N^{\delta+\eps'}\ge(\log N)^2 .
+\end{equation}
+Put $C:=\max\big(C_1',\,2(c/2)^{1/2}N_2^{\,n+\delta/2}\big)$; it depends only on $(\eps',\delta,c,n,\rho_O,\vartheta,\delta_\pm,C_0)$.
+
+\begin{proof}[Proof of Theorem \ref{thm:23}]
+Let $N\ge\max(n,3)$, $\K$, $\nu$, $O$, $E$, $b$ and $t\ge N^{-1+\delta+\eps'}$ be as in Theorem \ref{thm:23}, and let $\Theta$ be the left side of \eqref{eq:abstrthm2}.
+
+\emph{Case $N\ge N_2$.} By \eqref{c8:N2}, $Nt\ge N^{\delta+\eps'}\ge(\log N)^2$, so Theorem \ref{thm:sharp} applies ($N\ge N_{\rm q}$). Moreover $(Nt)^{-1/2}\le N^{-(\delta+\eps')/2}\le N^{-\delta/2}$, $N^{-1}\le N^{-1+\eps'}$ and $e^{A_1(\log\log N)^2}\le N^{\eps'}\le N^{2\eps'}$. Hence
+$\Theta\le C_1'(\|O\|_\infty+\Lip(O))N^{2\eps'}[b^{-1}N^{-1+\eps'}+b^{-1/2}N^{-\delta/2}]$, and $C_1'\le C$.
+
+\emph{Case $\max(n,3)\le N<N_2$.} By Lemma \ref{lem:alg}(d) (which needs only that $O$ is bounded) $|\cX^O_{E',\varrho}|\le\frac{N!}{(N-n)!}\|O\|_\infty$, so
+$\Theta\le\frac1{2b}\int_{E-b}^{E+b}C_{N,n}\cdot2\frac{N!}{(N-n)!}\|O\|_\infty\,\rd E'=2N^n\|O\|_\infty\le2N_2^n\|O\|_\infty$.
+On the other hand $b<c/2$, $N<N_2$ and $N^{2\eps'}\ge1$ give
+$C(\|O\|_\infty+\Lip(O))N^{2\eps'}\big[b^{-1}N^{-1+\eps'}+b^{-1/2}N^{-\delta/2}\big]\ge C\|O\|_\infty(c/2)^{-1/2}N_2^{-\delta/2}\ge2N_2^n\|O\|_\infty$
+by the choice of $C$. So \eqref{eq:abstrthm2} holds in both cases.
+\end{proof}
+
+\noindent\emph{Room.} For $N\ge N_2$ the proof shows the stronger bound $C_1'(\|O\|_\infty+\Lip(O))\big[N^{\eps'}b^{-1}N^{-1}+N^{\eps'/2}b^{-1/2}N^{-\delta/2}\big]$: the first term of \eqref{eq:abstrthm2} is beaten by $N^{2\eps'}$, the second by $N^{3\eps'/2}$.
+
+\begin{corollary}[H\"older test functions]\label{cor:cont}
+Let $0<\alpha\le1$ and let $O:\R^n\to\R$ vanish outside $[-\rho_O,\rho_O]^n$ and satisfy $|O(u)-O(v)|\le[O]_\alpha|u-v|^\alpha$ for all $u,v$. In the setting of Theorem \ref{thm:sharp} ($N\ge N_{\rm q}$, $Nt\ge(\log N)^2$, $E\in[-2+c,2-c]$, $b\in(0,c/2)$, $\nu\in\mathcal E_N$), with
+\[
+\mathcal R:=e^{A_1(\log\log N)^2}\Big[b^{-1}N^{-1}+b^{-1/2}(Nt)^{-1/2}\Big]
+\]
+(the right side of \eqref{sharp} without the factor $C_1'(\|O\|_\infty+\Lip(O))$):
+\[
+\text{l.h.s.\ of \eqref{eq:abstrthm2}}\ \le\ C_{\rm H}\,\big(\|O\|_\infty+[O]_\alpha\big)\,D^n\,\min(1,\mathcal R)^{\alpha},\qquad C_{\rm H}:=16(\ell+2)^n+C_1',
+\]
+$C_{\rm H}$ depending only on $(c,n,\rho_O)$. In particular, for $t\ge N^{-1+\delta+\eps'}$ and $N\ge N_2$ (see \eqref{c8:N2}) the left side of \eqref{eq:abstrthm2} is at most $3^nC_{\rm H}(\|O\|_\infty+[O]_\alpha)N^{2\eps'}\big[b^{-1}N^{-1}+b^{-1/2}N^{-\delta/2}\big]^\alpha$ (using $D^n\le3^nN^{\eps'}$, which follows from (v) of \S\ref{ss:proofsharp} and \eqref{c8:N2}).
+\end{corollary}
+
+\begin{proof}
+For a bounded Borel $P:\R^n\to\R$ vanishing outside $[-\rho_O,\rho_O]^n$ let $\mathscr L(P)$ denote the expression inside the absolute value on the left of \eqref{eq:abstrthm2} (well defined as in Step 1 of \S\ref{ss:proofsharp} if $P$ is continuous; we only use continuous $P$). $\Lambda$ is linear in $P$.
+
+\emph{Trivial bound.} By Lemma \ref{lem:local}(a) on $\Xi$ (applicable by (i)), $|\cX^P_{E',\varrho}|\le N^n\|P\|_\infty$ off $\Xi$, (iii) and (iv):
+$|\mathscr L(P)|\le\frac{C_{N,n}}{2b}\cdot2b\cdot2\big(K_\ell^n+N^nN^{-n-2}\big)\|P\|_\infty\le4(K_\ell^n+1)\|P\|_\infty\le8(\ell+2)^nD^n\|P\|_\infty$.
+
+\emph{Lipschitz approximation.} For $r\in(0,1]$ let $L_r:=[O]_\alpha r^{\alpha-1}$, $\eps_r:=[O]_\alpha r^\alpha$,
+\[
+\widetilde O_r(u):=\inf_{v\in\R^n}\big(O(v)+L_r|u-v|\big),\qquad O_r:=\phi_{\eps_r}\circ\widetilde O_r,\qquad\phi_\eps(\tau):=\operatorname{sign}(\tau)\,(|\tau|-\eps)_+ .
+\]
+$O$ is bounded ($|O(u)|=|O(u)-O(v)|\le[O]_\alpha|u-v|^\alpha$ for $v$ outside the cube, and $O$ is continuous on the compact cube), so $\widetilde O_r$ is finite, $\inf O\le\widetilde O_r\le O$, and $\widetilde O_r$ is $L_r$-Lipschitz (an infimum of $L_r$-Lipschitz functions which is finite).
+Moreover $O(u)-\widetilde O_r(u)=\sup_v\big(O(u)-O(v)-L_r|u-v|\big)\le\sup_{\tau\ge0}[O]_\alpha(\tau^\alpha-r^{\alpha-1}\tau)\le\eps_r$, since $\tau^\alpha\le r^\alpha$ for $\tau\le r$ and $\tau^\alpha-r^{\alpha-1}\tau=\tau^\alpha(1-(\tau/r)^{1-\alpha})\le0$ for $\tau\ge r$.
+$\phi_\eps$ is $1$-Lipschitz, $|\phi_\eps(\tau)-\tau|\le\eps$, $|\phi_\eps(\tau)|\le|\tau|$ and $\phi_\eps=0$ on $[-\eps,\eps]$. Hence: $O_r$ is $L_r$-Lipschitz; $|O_r-O|\le|O_r-\widetilde O_r|+|\widetilde O_r-O|\le2\eps_r$; outside $[-\rho_O,\rho_O]^n$, $O=0$ so $\widetilde O_r\in[-\eps_r,0]$ and $O_r=0$; and $\|O_r\|_\infty\le\|O\|_\infty$ (if $\widetilde O_r(u)\ge0$ then $|O_r(u)|\le\widetilde O_r(u)\le O(u)$; if $\widetilde O_r(u)<0$ then $|O_r(u)|=(|\widetilde O_r(u)|-\eps_r)_+\le|O(u)|$ because $\widetilde O_r(u)\ge O(u)-\eps_r$).
+
+\emph{Conclusion.} By linearity, the trivial bound for $P=O-O_r$ (continuous, vanishing outside the cube, $\|P\|_\infty\le2\eps_r$) and Theorem \ref{thm:sharp} for $O_r$:
+\[
+|\mathscr L(O)|\le16(\ell+2)^nD^n[O]_\alpha r^\alpha+C_1'\big(\|O\|_\infty+[O]_\alpha r^{\alpha-1}\big)\mathcal R .
+\]
+If $\mathcal R\ge1$, the trivial bound for $P=O$ gives $|\mathscr L(O)|\le8(\ell+2)^nD^n\|O\|_\infty\le C_{\rm H}\|O\|_\infty D^n\min(1,\mathcal R)^\alpha$. If $\mathcal R<1$, take $r=\mathcal R$: then $\mathcal R\le\mathcal R^\alpha$ and $r^{\alpha-1}\mathcal R=\mathcal R^\alpha$, so $|\mathscr L(O)|\le(16(\ell+2)^n+C_1')(\|O\|_\infty+[O]_\alpha)D^n\mathcal R^\alpha$ (using $D\ge1$).
+For the last statement: for $N\ge N_2$ and $t\ge N^{-1+\delta+\eps'}$, $\mathcal R\le N^{\eps'}[b^{-1}N^{-1}+b^{-1/2}N^{-\delta/2}]$ as in \S\ref{ss:proof23}, $\min(1,\mathcal R)^\alpha\le\mathcal R^\alpha$ and $N^{\alpha\eps'}D^n\le3^nN^{2\eps'}$.
+\end{proof}
+
+\begin{remark}[Merely continuous $O$: not covered]\label{rem:contO}
+For $O\in C_c(\R^n)$ without a modulus of continuity the argument above gives l.h.s.\ $\le C D^n\|O-O'\|_\infty+C(O')\mathcal R$ for every Lipschitz $O'$; because $D^n=e^{nA_0(\log\log N)^2}(1+o(1))\to\infty$, this does \emph{not} even imply convergence to $0$ for arbitrary continuous $O$.
+A uniform bound $\E\,\#\{n\text{-tuples of eigenvalues in a window of size }\ell/N\}\le C$ (a Wegner-type estimate, not available in NP for $n\ge2$) would give the qualitative statement, but still no rate $C(O)\times$power.
+The original states (2.36) for continuous $O$ with $C=C(O)$; its source [ESYY, Thm 4.1] needs $G$ smooth. Moreover, by the uniform boundedness principle, ``for every continuous $O$ there is $C(O)$'' would be equivalent to a bound with $C(O)=C'\|O\|_\infty$, i.e.\ a total-variation bound at polynomial rate, which neither the original nor [ESYY] proves.
+NP therefore states Theorem \ref{thm:23} for Lipschitz $O$ (item PD-21 of Appendix~\ref{app:diff}); H\"older $O$ is covered by Corollary \ref{cor:cont}.
+\end{remark}
+\section{Dependency graph and constants of Part~III}\label{sec:C9}
+
+This section records the logical structure of Part~III and its constants. It contains no new mathematics.
+
+\subsection{Dependency graph}
+{\footnotesize
+\begin{alltt}
+ Part I: Thm 2.2 (2.25), sup form of (2.26) [RA1]; Lem 2.5(ii),(v) [RA2,RA3]; Lem 3.13 [RA4];
+         Lem 3.4 [RA5]; Lem 4.1(a) [RA6]
+     |
+     v
+ Lem \ref*{c2:transfer} (transfer), Lem \ref*{c2:gausstail} (Gaussian tails), Lem \ref*{c3:GE} (G on H, entries)
+     '--> Lem \ref*{lem:U11} (H~_t, V~ in one class E_N(theta~, delta~, C~_0), all t in [0,inf])
+              '--> Lem \ref*{c2:Xi} (Xi Borel) --> Lem \ref*{lem:goodC} (good event, all t) --+--> Lem \ref*{lem:Q} (Q <= 7 D^2/N)   [Assumption III]
+                                                                         '--> used in Sec. \ref*{sec:C8}
+              Lem \ref*{lem:countC} (deterministic: counting, bulk localisation, index sets)   [Assumption IV]
+ [INFRA] Def \ref*{c3:def:gauss}, Lem \ref*{c3:gauss} (Gaussians on a Euclidean space), Lem \ref*{c3:kernel}-\ref*{c3:smooth} (Mehler kernel, explicit domination)
+     '--> Lem \ref*{lem:M1}-\ref*{lem:M3} (Mehler semigroup: symmetry, smoothing, d_u = A, log-bounds, domination, mixing)
+     '--> Lem \ref*{c3:KL} (Gaussian relative entropy) --------------------------------------------.
+ Lem \ref*{lem:inv} (invariant functions), Lem \ref*{lem:givens} (Givens: (A Phi)(diag x) = (L phi)(x))                |
+     |--> Prop \ref*{prop:U9} (smooth symmetric f_t, nu_t = f_t mu, d_t f = L f, domination)          |
+     '--> [INFRA] Lem \ref*{lem:div}, Cor \ref*{cor:ibp} (divergence thm / IBP on Sigma_N)                           |
+              '--> Thm \ref*{thm:JD} (mu = mu*: joint density of GbetaE; nu_t << mu, nu_t(walls) = 0)    |
+                       '--> Def \ref*{def:omega} (omega_R, psi = d omega / d mu)                             |
+ [INFRA] Thm \ref*{thm:PL} (Prekopa-Leindler)                                                             |
+     |--> Lem \ref*{lem:convex} (convexity) --> Thm \ref*{thm:LSI} (LSI on Sigma_N, constant 1/(2 kappa))               |
+     '--> Lem \ref*{lem:2pt} (two-point) --> Thm \ref*{thm:conc} (gap concentration) --+--> Cor \ref*{cor:gap} (gap vs entropy)|
+                                    Lem \ref*{lem:DV} (entropy inequality) -'                             |
+ Lem \ref*{lem:U8} (a priori entropy) <-- Lem \ref*{c3:KL} + klDiv_map_le <-----------------------------------'
+ Lem \ref*{lem:ref} (reference change) <-- Def \ref*{def:omega}
+ Prop \ref*{prop:U9} + Thm \ref*{thm:JD} + Cor \ref*{cor:ibp} --> Prop \ref*{prop:entprod} (entropy production)
+ Prop \ref*{prop:entprod} + Thm \ref*{thm:LSI} + Lem \ref*{lem:U8} + Lem \ref*{lem:ref} + Lem \ref*{lem:Q} --> Thm \ref*{thm:entropy} (entropy bound)
+ Thm \ref*{thm:entropy} + Cor \ref*{cor:gap} + Thm \ref*{thm:JD} --> Prop \ref*{prop:gapuniv} (gap universality)
+ Lem \ref*{lem:alg}, \ref*{lem:local} (deterministic reduction; use Lem \ref*{lem:countC}) + Prop \ref*{prop:gapuniv} + Lem \ref*{lem:goodC}
+     --> Thm \ref*{thm:sharp} (sharp form, constant C_1'(||O|| + Lip O)) --> Thm 2.3 (Sec. \ref*{ss:proof23})
+                                                          '--> Cor \ref*{cor:cont} (Hoelder O)
+\end{alltt}
+}
+The graph is acyclic. Theorem \ref{thm:JD} does not use Proposition \ref{prop:U9}. The three \INFRA\ blocks (Mehler; Pr\'ekopa--Leindler; integration by parts on $\Sig$) are independent of each other and of Part~I.
+Only Theorem~\ref{thm:22} of the random-matrix part of NP is used (at each fixed time, for $\widetilde H_t$); Theorem~\ref{thm:21} and Part~II are not used.
+
+\subsection{Exponent and constant checks}
+The table collects the bounds that enter the error estimate, each with the place where it is proved in \S\S\ref{sec:C7}--\ref{sec:C8}.
+
+\begin{center}\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|p{3.1cm}|p{9.1cm}|p{2.7cm}|}
+\hline
+quantity & bound & source\\\hline
+$D$ & $e^{A_0(\log\log N)^2}+2\le N^{1/5}+2$ ($N\ge N_*$) & \eqref{defL}, \eqref{c2:Dsmall}\\
+$\P(\lambda(H_t)\notin\Xi)$, $\mu(\Xi^c)$ & $\le N^{-n-2}$ for $N\ge N_{n+2}$, every $t\in[0,\infty]$ & Lemma \ref{lem:goodC}\\
+$Q=\sup_r\E|\lambda(H_r)-\gamma|^2$ & $\le7D^2N^{-1}$ & Lemma \ref{lem:Q}\\
+$R^2$ & $t/(8\beta\log N)$; then $\frac{NQ}{2R^2}=\frac{28\beta D^2\log N}t$ & \eqref{Rchoice}, \eqref{c7:NQR}\\
+a priori entropy & $S(\nu_{t/2}|\mu)\le N^3$ ($t/2\ge N^{-2}$, all $N\ge1$) & Lemma \ref{lem:U8}\\
+initial entropy & $S(\nu_{t/2}|\omega)\le N^3+\frac{NQ}{2R^2}$ & Lemma \ref{lem:ref}\\
+LSI & $S(\nu_r|\omega)\le\frac{R^2}{2N}I_r$ ($\kappa\ge N/R^2$) & Theorem \ref{thm:LSI}\\
+decay on $[t/2,t]$ & $e^{-t/(2\beta R^2)}=N^{-4}$; $\ N^{-4}\cdot N^3=N^{-1}$ & Theorem \ref{thm:entropy}\\
+$S(\nu_t|\omega)$, $S(\mu|\omega)$ & $\le N^{-1}+32\beta D^2(\log N)/t$ (resp.\ $28\beta D^2(\log N)/t$) & \eqref{entbound}\\
+one gap observable & $\frac4N\sqrt{C_\star(n-1)|J|}\sqrt{S}\le4\sqrt{2C_\star(n-1)}\,b^{1/2}[N^{-1}+8D(\log N)^{\frac12}(Nt)^{-\frac12}]$ ($|J|\le2Nb$) & Prop.\ \ref{prop:gapuniv}\\
+$\sqrt{C_\star}$ & $\le C_\sharp(\|O\|_\infty+\Lip O)$, $C_\sharp=\ell(\sqrt{2/c_0}+3\sqrt2e\rho_O)$ & \eqref{c8:Cstar}\\
+number of $m$'s & $\le K_\ell^{n-1}\le(\ell+2)^{n-1}D^{n-1}$ (original: $M^{n-1}$, $M^n=N^{\eps'}$) & Lemma \ref{lem:local}\\
+(T1) & $\le32\,n!\sqrt{2n}(\ell+2)^{n-1}C_\sharp(\|O\|_\infty+\Lip O)D^n(\log N)^{\frac12}[b^{-1}N^{-1}+b^{-\frac12}(Nt)^{-\frac12}]$ & \S\ref{ss:proofsharp}, Step 6\\
+(T2) boundary indices & $\le4\,n!\,\ell\,C_{\mathcal B}(\ell+2)^{n-1}D^n\|O\|_\infty b^{-1}N^{-1}$ (original: $b^{-1}\xi$, $\xi=2N^{-1+A}$) & Step 5, Lemma \ref{lem:local}\\
+(T3) bad event & $\le(4+8\,n!\,\ell(\ell+2)^{n-1})\|O\|_\infty N^{-2}$ & Step 4, Lemma \ref{lem:goodC}\\
+case $b<1/N$ & $\le8(\ell+2)^nD^n\|O\|_\infty\le8(\ell+2)^nD^n\|O\|_\infty b^{-1}N^{-1}$ & Step 2\\\hline
+total & $C_1''(\|O\|_\infty+\Lip O)D^n(\log N)^{\frac12}[b^{-1}N^{-1}+b^{-\frac12}(Nt)^{-\frac12}]$, $\ D^n(\log N)^{\frac12}\le3^ne^{(nA_0+1)(\log\log N)^2}$ & \eqref{sharp}\\
+$t\ge N^{-1+\delta+\eps'}$, $N\ge N_2$ & $(Nt)^{-1/2}\le N^{-(\delta+\eps')/2}$; $e^{A_1(\log\log N)^2}\le N^{\eps'}$ & \S\ref{ss:proof23}\\
+$\max(n,3)\le N<N_2$ & l.h.s.\ $\le2N_2^n\|O\|_\infty$; $C\ge2(c/2)^{1/2}N_2^{n+\delta/2}$ & \S\ref{ss:proof23}\\\hline
+\end{tabular}
+\end{center}
+\noindent Comparison with \eqref{eq:abstrthm2}: the first term is better by $N^{2\eps'}$ ($N^{\eps'}b^{-1}N^{-1}$ vs.\ $N^{2\eps'}b^{-1}N^{-1+\eps'}$), the second by $N^{3\eps'/2}$.
+Example: $n=2$, $\eps'=\frac1{20}$, $\delta=\frac12$, $b=\frac14$, $t=N^{-0.45}$: bound $CN^{o(1)}[4N^{-1}+2N^{-0.275}]$ (original: $C[4N^{-0.85}+2N^{-0.15}]$).
+Steps that the original leaves implicit are proved in Lemma \ref{lem:countC}(a); Lemma \ref{lem:U8}; Proposition \ref{prop:U9} and Theorem \ref{thm:JD}; Lemmas \ref{lem:convex}, \ref{lem:Q}, \ref{lem:countC}(b); Lemmas \ref{lem:U11}, \ref{lem:goodC}.
+[ESYY] Assumption II is not needed beyond (RA5); Assumption IV is derived from \eqref{good} (Lemma \ref{lem:countC}), not from the local law.
+
+\noindent\emph{Thresholds and constants of Part~III.} $N_*$, $N_K$, $N_3=N_4$ depend only on $(\vartheta,\delta_\pm,C_0)$ (and $K$); $N_c$ on $(c,\rho_O)$; $N_{\rm q}=\max(N_3,N_{n+2},N_c,n^2)$; $A_1=nA_0+1$; $C_1'=3^nC_1''(c,n,\rho_O)$; $N_2=N_2(\eps',\delta,A_1,N_{\rm q},n)$; $C=\max(C_1',2(c/2)^{1/2}N_2^{n+\delta/2})$. Linear dependence on $\|O\|_\infty+\Lip(O)$ throughout (PD-21).
+
+\subsection{Infrastructure results}
+The results of Part~III that are not available in Mathlib and are proved here (they are contained in the sections marked \INFRA, see \S\ref{sec:intro}) are: the Gaussian ensemble on $\cH$ (Lemma \ref{c3:GE});
+the Mehler semigroup (Lemmas \ref{lem:M1}--\ref{lem:M3}, with Lemma \ref{c3:smooth}); integration by parts on $\Sig$ (Lemma \ref{lem:div}, Corollary \ref{cor:ibp}); the joint eigenvalue density of G$\beta$E (Theorem \ref{thm:JD});
+the Pr\'ekopa--Leindler inequality (Theorem \ref{thm:PL}); the logarithmic Sobolev inequality (Theorem \ref{thm:LSI}); gap concentration (Lemma \ref{lem:2pt}, Theorem \ref{thm:conc}, Lemma \ref{lem:DV}); and the Gaussian relative entropy (Lemma \ref{c3:KL}).
+The differences between Part~III and the original are listed in Appendix~\ref{app:diff} (\S\ref{sec:diff}).
+
+\subsection{Remarks for the formalization}\label{sec:risks}
+\begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
+\item Domination for derivatives of Gaussian convolutions: explicit dominating functions are given in Lemma \ref{c3:smooth} and Lemma \ref{lem:M2}(iii); they are used in Proposition \ref{prop:U9}(iv) and in Steps 0--3 of the proof of Proposition \ref{prop:entprod}. This is mathematically routine, but it is the longest analytic bookkeeping of Part~III.
+\item Theorem \ref{thm:LSI} uses two-sided differentiability in Step 1 and Fatou's lemma in Step 2; Theorem \ref{thm:PL} is proved via inner regularity, without measurability of sumsets.
+\item Lemma \ref{lem:2pt}, Theorem \ref{thm:conc} and Corollary \ref{cor:gap} are new in this form; they were also checked numerically.
+\item Theorem \ref{thm:JD} is proved by an ergodicity argument; it was also checked by Monte Carlo simulation for $N=2$.
+\item Part~III uses Theorem~\ref{thm:22} in the supremum form over $|E|\le5$, for every ensemble of $\mathcal E_N$, with constants depending only on $(\vartheta,\delta_\pm,C_0)$; it is applied to $\widetilde H_t$ through Lemma \ref{c2:transfer} and Lemma \ref{lem:U11}.
+\item Mathlib names marked $^\circ$ in Appendix~\ref{app:mathlib} are expected names that have not been checked against a fixed version of Mathlib.
+\end{enumerate}

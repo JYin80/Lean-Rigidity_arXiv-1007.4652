@@ -1,0 +1,220 @@
+\section{Exponent ledger}\label{app:ledger}
+This appendix is the single place where the exponents $C_1,\dots,C_5$, $c_0$, $b$ of Part~I are fixed and where every relation between them that is used anywhere in Sections~\ref{sec:main}--\ref{sec:rig} is verified.
+All exponents are affine functions of $\fa=1/\vth\ge1$ (after the normalisation $\vth\le1$ of Convention~\ref{conv:const}).
+
+\subsection{The final values}\label{app:values}
+\begin{equation}\tag{A.1}\label{eq:a5-ledger}
+\begin{gathered}
+ C_1=18\fa+20,\qquad C_2=12\fa+19,\qquad C_3=24\fa+36,\qquad C_4=30\fa+44,\qquad C_5=18\fa+21,\\
+ c_0=\frac1{8C_3}=\frac1{192\fa+288},\qquad b=12\fa+12 .
+\end{gathered}
+\end{equation}
+These are the values \eqref{eq:ledger0} of Section~\ref{sec:main} and the value of $b$ of Section~\ref{sec:strong}. The explicit values of the named (non-exponent) constants are collected in Section~\ref{app:consts}.
+The following table records where each quantity is fixed.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}\small
+\begin{tabular}{|p{0.27\textwidth}|p{0.43\textwidth}|p{0.22\textwidth}|}
+\hline
+quantity & value / bound & fixed in\\\hline
+truncation level $T=\kappa^{\fa}$ & $\kappa=K_w=K^2$ & Lemma~\ref{lem:LD}, Def.~\ref{def:levels}\\
+linear loss $\ell(\kappa)$ & $5\kappa^{\fa+1/2}$ & \eqref{eq:loss}\\
+quadratic loss $\ell_2(\kappa,N)$ & $50\kappa^{2\fa+1}\sqrt{2\lceil\log_2N\rceil+2}$ & \eqref{eq:loss}, decoupling\\
+$\fL=3C_0^2\ell_2(K^2,N)$ & $150\le\fL\le K^{4\fa+3}$ & Def.~\ref{def:levels}, Lemma~\ref{lem:levels}\\
+$\Emax=25K^{2\fa}\sqrt{C_0\log N}$ & $1\le\Emax\le K^{2\fa+1}$ & Lemmas~\ref{lem:norm0}, \ref{lem:levels}\\
+weak law, near & $\Ld+\Lo\le K\fL(N\eta)^{-1/3}\le K^{4\fa+4}(N\eta)^{-1/3}$ & Theorem~\ref{thm:weak}(a)\\
+weak law, far & $\Ld+\Lo\le9\fL(N\eta)^{-1/2}$ & Theorem~\ref{thm:weak}(b)\\
+$\mathfrak E_0=6\cdot10^6C_s^2\fL^2$ & $\le K^{8\fa+7}$ & Lemma~\ref{lem:apriori}\\
+FA exponent $c_F$ & $8\fa+7$ & Theorem~\ref{thm:FA}\\
+FA domain & $N\eta\ge p^{12\fa+11}$, $\ \log N\le p\le N^{1/(40\fa+40)}$, $p\ge p_0$ & \eqref{eq:FAhyp}\\
+$\mathfrak F=C_Fp_1^{c_F}$ \ ($p_1\le2K^{3/2}$) & $\le K^{12\fa+11}$ & Corollary~\ref{cor:FA}\\
+$b$, $\mathfrak E=K^b$, $\mathfrak E_3=K^{b+3}$ & $b=12\fa+12$ \ (needs $b>12\fa+11$) & Section~\ref{sec:strong}\\
+$\mathfrak E_0'=3(\Emax+14)\fL^2$ & $\le K^{10\fa+8}$ & Proposition~\ref{prop:S4}\\
+first pass & $Y\le42(\varkappa+K^b/(N\eta))$; $\ |\avg X|\le\frac{K^{b+1}}{N\eta}(\varkappa+\frac{K^b}{N\eta})$ & Proposition~\ref{prop:S1}\\
+law on the lattice & $\Lambda\le K^{b+4}/(N\eta)$; $\ \Ld+\Lo\le K^{b+5}(\dots)$ & Proposition~\ref{prop:S2}\\
+improved law & factor $K^{b+2}$ & Props.~\ref{prop:S3}, \ref{prop:S4}\\
+$C_1$ (domain $\eta\ge K^{C_1}/N$) & $18\fa+20$ \ (needs $C_1-1\ge\max\{12\fa+18,\,18\fa+17\}$) & Thm~\ref{thm:weak}, Cor.~\ref{cor:FA}\\
+$C_2$ (law) & $12\fa+19=b+7$ \ (needs $C_2\ge b+6$) & end of Section~\ref{sec:strong}\\
+$C_3$ (norm) & $24\fa+36=2b+12$ \ (needs $\frac12C_3>b+2$) & Proposition~\ref{prop:norm}\\
+$C_5$ (counting) & $18\fa+21=C_1+1$ & Proposition~\ref{prop:rig}\\
+$C_4$ (rigidity) & $30\fa+44=C_3+\frac13C_5+1$ & Proposition~\ref{prop:rig}\\
+$c_0$ (range $K\le N^{c_0}$) & $1/(8C_3)$ & Lemma~\ref{lem:ledger}\\
+$\phi$, $A_0$ & $1/(60\fa+88)$, $\ 180\fa+264$ & Prop.~\ref{prop:reduction}, Lemma~\ref{lem:phi}\\\hline
+\end{tabular}
+\end{center}
+
+\subsection{The constraints and their verification}\label{app:constraints}
+The following list contains every relation between the exponents that is used in Part~I; the right column says where it is used.
+\begin{center}
+\renewcommand{\arraystretch}{1.15}\small
+\begin{tabular}{|l|p{0.40\textwidth}|p{0.42\textwidth}|}
+\hline
+ & relation & used in\\\hline
+(L1) & $C_1-1\ge12\fa+18$ & \eqref{eq:ledgerA3}: Lemmas~\ref{lem:apriori}, \ref{lem:weakdich}, Theorem~\ref{thm:weak}(c); (T4)\\
+(L2) & $c_0\,(6\fa+6)\le\frac1{32}$ & \eqref{eq:ledgerA3}: Lemma~\ref{lem:levels}(S4), $|\mathbb L|\le N^{10}$, far regime; (T5)\\
+(L3) & $C_1-1\ge18\fa+17$ & Corollary~\ref{cor:FA} ($N\eta\ge p_1^{12\fa+11}$ on $\bD^{\rm near}$)\\
+(L4) & $c_0<\dfrac{2}{3(40\fa+40)}$ & Corollary~\ref{cor:FA} ($p_1\le N^{1/(40\fa+40)}$)\\
+(L5) & $b\ge12\fa+12$ & Propositions~\ref{prop:S1}--\ref{prop:S4} (via \eqref{eq:a5-T1})\\
+(L6) & $C_2\ge b+7$ & \eqref{eq:a5-T3}: Theorem~\ref{thm:K}(i),(ii)\\
+(L7) & $C_3\ge2b+12$; in particular $\frac12C_3>b+2$ & \eqref{eq:a5-T3}: Proposition~\ref{prop:norm}, Step 3 (edge exclusion)\\
+(L8) & $c_0\,(C_1-1)\le\frac13$ & \eqref{eq:a5-T3}: $\eta_e\approx N^{-2/3}$ lies in $\bD^{\rm near}$\\
+(L9) & $C_5\ge\max\big(C_1,\,C_2+\frac13\big)+1$ & \eqref{eq:ledgerrel}: Proposition~\ref{prop:rig}(iv)\\
+(L10) & $C_4\ge\max\big(C_5,\,C_3+\frac13C_5\big)+1$ & \eqref{eq:ledgerrel}: Proposition~\ref{prop:rig}(v)\\
+(L11) & $c_0\max(C_1,C_3,C_5)\le\frac18$ & \eqref{eq:ledgerrel}: Proposition~\ref{prop:rig}\\
+(L12) & $C_1,\dots,C_5\ge1$, $\ c_0>0$ & Proposition~\ref{prop:reduction}\\\hline
+\end{tabular}
+\end{center}
+
+\begin{lemma}[The ledger closes]\label{lem:ledger}
+For every $\fa\ge1$ the values \eqref{eq:a5-ledger} satisfy \textup{(L1)--(L12)}.
+\end{lemma}
+\begin{proof}
+All verifications are comparisons of affine functions of $\fa$ on $\fa\ge1$ (in fact on $\fa\ge0$).
+
+(L1) $C_1-1=18\fa+19\ge12\fa+18$.\quad
+(L2) $32(6\fa+6)=192\fa+192\le192\fa+288=1/c_0$.\quad
+(L3) $18\fa+19\ge18\fa+17$.
+
+(L4) $3(40\fa+40)=120\fa+120<384\fa+576=2/c_0$.\quad
+(L5) holds with equality.\quad
+(L6) $b+7=12\fa+19=C_2$.
+
+(L7) $2b+12=24\fa+36=C_3$, and $\frac12C_3=b+6>b+2$.\quad
+(L8) $3(C_1-1)=54\fa+57\le192\fa+288=1/c_0$.
+
+(L9) $C_1+1=18\fa+21=C_5$ and $C_2+\frac43=12\fa+20\frac13\le18\fa+21$.
+
+(L10) $C_3+\frac13C_5+1=24\fa+36+6\fa+7+1=30\fa+44=C_4$ and $C_5+1=18\fa+22\le30\fa+44$.
+
+(L11) $C_1<C_5=18\fa+21\le24\fa+36=C_3$, so the maximum is $C_3$, and $c_0C_3=\frac18$.\quad
+(L12) is clear.
+\end{proof}
+\noindent The condition $\frac12C_3>b+2$ needed for the edge exclusion is (L7); the three inequalities of Step~3 of Proposition~\ref{prop:norm} use it in the forms $K^{b+6}\ge16\sqrt2\cdot8$, $K^{b+10}\ge256$ and $K^{4}\ge16\sqrt2$.
+
+\begin{remark}[Robustness]\label{rem:robust}
+The proofs of Sections~\ref{sec:prob}--\ref{sec:rig} use the exponents only through (L1)--(L12): any other choice of $(C_1,\dots,C_5,c_0,b)$ satisfying these relations gives Theorem~\ref{thm:K} (with a different $N_0$), and then Proposition~\ref{prop:reduction} gives Theorems~\ref{thm:21} and~\ref{thm:22}
+with $\phi$ defined by the same formula. The values \eqref{eq:a5-ledger} are generous; nothing was optimised. The three inputs that determine everything are: the loss $\fL\le K^{4\fa+3}$ of the large deviation bounds at level $K^2$, the exponent $c_F=8\fa+7$ of fluctuation averaging at level $p_1\approx K^{3/2}$
+(so $\mathfrak F\le K^{\frac32c_F+\frac12}$), and the domain $N\eta\ge p^{12\fa+11}$ of Theorem~\ref{thm:FA}.
+\end{remark}
+
+\subsection{The constant \texorpdfstring{$\phi$}{phi} of Proposition \ref{prop:reduction}}\label{app:phi}
+\begin{lemma}\label{lem:phi}
+For the values \eqref{eq:a5-ledger} and every $\fa\ge1$,
+\[
+ \phi=\min\Big\{\frac{10}{C_1},\ \frac{2}{C_2},\ \frac{4}{C_3},\ \frac1{2C_4},\ \frac1{2C_5},\ 5c_0\Big\}=\frac1{2C_4}=\frac1{60\fa+88},\qquad A_0=\frac3\phi=180\fa+264 .
+\]
+\end{lemma}
+\begin{proof}
+The six numbers are the reciprocals of $1.8\fa+2$, $\ 6\fa+9.5$, $\ 6\fa+9$, $\ 60\fa+88$, $\ 36\fa+42$, $\ 38.4\fa+57.6$; the largest of these is $60\fa+88$.
+\end{proof}
+\noindent So Proposition~\ref{prop:reduction} holds as stated, with the explicit constants $\phi=1/(60\fa+88)$, $A_0=180\fa+264$, $C=1$, $c=\frac12$, where $\fa=1/\min(\vth,1)$. With $K=(\log N)^{\phi L}$ the powers of $\log N$ in the final statements are:
+domain $K^{C_1}=(\log N)^{\phi C_1L}\le(\log N)^{0.5L}$, far inside the required $(\log N)^{10L}$; errors $K^{C_2}\le(\log N)^{0.4L}$ (required: $4L$), $K^{C_3}\le(\log N)^{0.5L}$ (required: $9L$), $K^{C_4}=(\log N)^{L/2}$ and $K^{C_5}\le(\log N)^{0.4L}$ (required: $L$);
+probability $\exp(-\frac12(\log N)^{\phi L})$. (Indeed $\phi C_1=\frac{18\fa+20}{60\fa+88}\le\frac12$, $\phi C_2\le\frac25$, $\phi C_3=\frac{24\fa+36}{60\fa+88}\le\frac12$, $\phi C_5\le\frac25$.) The binding constraint is the rigidity exponent $C_4$.
+
+\subsection{Levels, events and probabilities}\label{app:levels}
+\begin{center}
+\renewcommand{\arraystretch}{1.15}\small
+\begin{tabular}{|p{0.29\textwidth}|p{0.13\textwidth}|p{0.25\textwidth}|p{0.22\textwidth}|}
+\hline
+event & level & failure probability & defined in\\\hline
+$\cG(z)$ (large deviations at $z$) & $K_w=K^2$ & $46\,\fa N^4e^{-K^2}$ & Def.~\ref{def:good}, Lemma~\ref{lem:levels}\\
+$\cG_{\rm col}(z)$, $\ \Xi(z)\supset\cG_{\rm col}(z)$ & $K^2$ & $460\,\fa N^8e^{-K^2}$ & Def.~\ref{def:domains}, Thm~\ref{thm:weak}\\
+$\{\norm H\le\Emax\}$ & $K^2$ & $(N^2\fa+1)e^{-K^2}$ & Lemma~\ref{lem:norm0}\\
+$\cG^1(z)$ within $\cG_{\rm col}(z)$ & $p_1\approx K^{3/2}$ & $e^{-p_1}$ & Proposition~\ref{prop:S1}\\
+$\cG^2(z)$ & $p_1$ & $N^{10}e^{-p_1}$ & Proposition~\ref{prop:S2}\\
+$\Xi_K^{(1)}$ & $p_1$ & $N^{20}e^{-p_1}$ & end of Section~\ref{sec:strong}\\
+$\cG^3(z)$ within $\cG^2(z)$; $\cG^{\rm f}(z)$ within $\cG_{\rm col}(z)$ & $p_2\approx K$ & $e^{-p_2}$ & Props.~\ref{prop:S3}, \ref{prop:S4}\\
+$\Xi_K^{(2)}$ & $p_2$ & $N^{21}e^{-p_1}+N^6e^{-p_2}$ & Proposition~\ref{prop:norm}\\
+$\Xi_K=\Xi_K^{(1)}\cap\Xi_K^{(2)}$ & --- & $2N^{21}e^{-p_1}+N^6e^{-p_2}\le e^{-K/2}$ & Def.~\ref{def:XiK}, Prop.~\ref{prop:XiK}\\\hline
+\end{tabular}
+\end{center}
+\noindent The relations between the levels are \eqref{eq:levelrel}: $K^2\ge40p_1\log N$, $p_1\ge40p_2\log N$, $p_2\ge K\ge(\log N)^3$. Each passage from a level to the next costs one factor $40\log N$ in the exponent, through a term $2N\,\PP(\cdot)^{1/p}$ in a moment bound ((T6) of Section~\ref{sec:strong}, and the term $N^{2}\PP(\Xi_p^c)^{1/(2p)}$ in Corollary~\ref{cor:FA});
+there are exactly two such passages. This is why no lower bound of the form $L\ge A_0\log\log N$ is needed in the proof: it enters only through $K\ge(\log N)^3$. All lattice unions have at most $N^{10}$ members.
+
+\subsection{Thresholds}\label{app:N0}
+The threshold $N_0$ of Theorem~\ref{thm:K} is the maximum of the following finitely many numbers, each of which depends only on the normalised model parameters $(\vth,\delta_-,\delta_+,C_0)$:
+\begin{enumerate}[label=\textup{(N\arabic*)},leftmargin=2.8em,itemsep=1pt]
+\item the threshold of Lemma~\ref{lem:levels} for the constant $K_0:=\max\{K_0^{(5)},\,124800,\,2142\,C_s\}$, where $K_0^{(5)}$ is the maximum of the explicit constants of Section~\ref{sec:weak} (they are named in its proofs:
+$\frac54C_c+2072C_s+70$, $(1152C_s)^{1/2}$, $416^2$, $2037$, $8/\lambda_{\rm st}$, $255$, $68$, $9$); this threshold includes $\log N\ge41^2$ (for \eqref{eq:levelrel}), $(\log N)^{5/2}\ge300C_0^2$, $N\ge13$, $N^2\ge C_0$, $(\log N)^6\ge\kappa_\vth+3\log N$ and $K_0\le N^{3/32}$; and the explicit conditions on $N$ alone in the proofs of Section~\ref{sec:weak} (such as $N^{3/2}\ge156/c_*$);
+\item the threshold of Theorem~\ref{thm:FA} (conditions \eqref{eq:N0FA}) and the conditions in the proof of Corollary~\ref{cor:FA}: $(\log N)^{3/2}\ge\max\{2^{12\fa+11},\,C_F2^{8\fa+7}\}$, $(\log N)^3\ge p_0$ (the constant of \eqref{eq:FAhyp}) and $C_we^{9/2}\le N^{10}$;
+\item the threshold $\max\{13,\sqrt{C_0}\}$ of Lemma~\ref{lem:norm0} (contained in (N1));
+\item the explicit conditions of Sections~\ref{sec:strong}--\ref{sec:norm}: $N^{31}\ge\max\{920\,\fa e^8,\,2e^{10}\}$; $\ N^2\ge460\,\fa+1$; $\ N^{15/32}\ge\frac{15600}{\sqrt{10}}$; $\ N^{3/2}\ge23400$; $\ N^{7/32}\ge72$; $\ N^{7/16}\ge4$; $\ N^{13/32}\ge24$; $\ N\ge400$;
+$\ N^6\ge462\,\fa+2$ (which gives $N^2\fa+1+460\fa N^{13}+N^{15}\le N^{21}$, $2N^5\le N^6$ and $N^{20}+46\fa N^{14}\le N^{21}$);
+\item $N\ge e^{7}$ (Proposition~\ref{prop:XiK}); this implies the conditions $N\ge e^6$ of Proposition~\ref{prop:rig} and $N\ge16$ of Proposition~\ref{prop:reduction}.
+\end{enumerate}
+Conditions (N3)--(N5) are implied by (N1) (which forces $\log N\ge1681$) except for the dependence on $\fa$ in (N4), which is harmless. We make no attempt to estimate $N_0$: it is astronomically large, because several absorptions are of the form
+``$K^{1/2}\ge(\log N)^{3/2}\ge$ a constant'' with constants such as $2^{12\fa+11}$ or $C_F2^{8\fa+7}$, and because of the condition $(\log N)^3\ge p_0$ of (N2)
+(for $\vth=1$, $C_0=1$ the constant $p_0$ of \eqref{eq:FAhyp} is of order $10^{19}$). This affects none of the statements, in which $N_0$ is existential, and it is the price of having error terms that are pure powers of $K$ with no numerical constants.
+
+\subsection{Named constants}\label{app:consts}
+The following named constants are fixed in the text; none of them affects an exponent of \eqref{eq:a5-ledger}.
+\begin{itemize}[leftmargin=2em,itemsep=1pt]
+\item $\lambda_{\rm st}=1/(576C_s)$ in \eqref{eq:lambda1}, together with $D\le2\Ld\le2\lambda_{\rm st}$ in Lemma~\ref{lem:stabnear}; the constants of \eqref{eq:quad} are $40C_s^2\Upsilon_{\max}^2+(90+72C_s)\Lambda^3$, and the coefficient of $\Lambda^2$ in \eqref{eq:ap3} is in fact $\frac3{10}$ (the statement keeps $\frac34$, which is what Sections~\ref{sec:strong}--\ref{sec:norm} use).
+In Section~\ref{sec:strong} the value of $\lambda_{\rm st}$ enters only through $144C_s\lambda_{\rm st}=\frac14$ (proof of Proposition~\ref{prop:S2}(c)) and through the statements of Section~\ref{sec:weak}.
+\item Lemma~\ref{lem:farstep}: $\Ld\le6\fL(N\eta)^{-1/2}$, $\Lo\le3\fL(N\eta)^{-1/2}$; Theorem~\ref{thm:weak}(b): $\Ld+\Lo\le9\fL(N\eta)^{-1/2}$. Proposition~\ref{prop:S4} does not use these numbers: it uses only $\max_i|G_{ii}|\le\frac12$ from Theorem~\ref{thm:weak}(b) and re-derives $\Psi_m\le6(N\eta)^{-1/2}$.
+\item Explicit values: $c_*=\frac1{150}$, $C_*=4$ (Lemma~\ref{lem:mscsize}); $\mathfrak E_0=6\cdot10^6C_s^2\fL^2$ (Lemma~\ref{lem:apriori}); $\PP(\cG(z)^c)\le46\,\fa N^4e^{-K^2}$; $c_F=8\fa+7$ and $C_F$ as in \eqref{eq:CF}; $C_6=10$, $C_7=9$ (Lemmas~\ref{lem:count}, \ref{lem:conv}).
+\item In Sections~\ref{sec:strong}--\ref{sec:norm}: the constants $42$ and $194$ in \eqref{eq:Y}, \eqref{eq:Xmom}; $7000$ in \eqref{eq:a5-7e}; $\mathfrak E_0'=3(\Emax+14)\fL^2$; the lower bound $K_0\ge\max\{124800,2142C_s\}$ in \eqref{eq:a5-T2}.
+\end{itemize}
+\section{Dependency graph}\label{app:dep}
+The graph below shows the dependencies in Part~I. It is acyclic. An arrow from a box to a lower box means ``is used in''.
+{\small
+\begin{verbatim}
+ Mathlib: spectral theorem, block inverse/determinant, product measures, Fubini,
+          Hoeffding, layer cake, Hoelder/Minkowski/Markov, divergence theorem
+    |
+ [2 model: D2.1, D2.2, L2.5 (class: monotone, reflection, scaling)]
+    |
+ [3.1 m_sc: L3.1-3.4]     [3.2 resolvent: L3.5-3.7]     [3.4 Weyl L3.13, net L3.14]
+    |                          |                               |
+ [3.3 stability: L3.8 (exact equations), L3.9 (vector, on e-perp), L3.10 (near;      |
+      lambda_st = 1/(576 C_s)), L3.11 (scalar quadratic), L3.12 (far)]                |
+    |                                                                                |
+ [4 LD: L4.1 moments -> L4.2 tail form -> L4.3 moment form;  L4.7 product splitting] |
+    |                                                                                |
+ [L4.4 good event G(z)]  [D4.2 levels, L4.6 standing ineq.]  [L4.5 crude norm bound]
+    |                                    |                                           |
+ [5 weak law: L5.1 a priori bounds, L5.2 dichotomy, L5.3 initial, L5.4 far step     |
+              ->  T5.5 (lattice; deterministic on G_col(z); event Xi(z))]            |
+    |          \                                                                     |
+    |           [6 FA: L6.3-6.7, P6.8 (p = 2), L6.9-6.13 -> T6.1                     |
+    |            (uses L3.6 (I1),(I4),(I5), L3.7, L4.1, L4.3, L4.7) -> C6.2          |
+    |            (uses T5.5(c) only through P(Xi(z)^c), and (4.13))]                 |
+    |          /                                                                     |
+ [7 strong law: P7.1 first pass (L5.1, L3.11, C6.2 at p_1)                           |
+       -> P7.2 dichotomy + continuity (L5.1, L5.3, L3.5(c), L3.1(f))                 |
+       -> P7.3 second pass (C6.2 at p_2);   P7.4 far (T5.5(b), L4.6, L3.12, C6.2);   |
+       L7.5 Lipschitz extension (L3.5(c), L3.1(f))]                                  |
+    |                         |                                                      |
+ T2.6 (i),(ii)          [8 norm: P8.1 (L4.5, P7.3 + L3.2, P7.4 + L3.1(g), L3.5(e)) <-+
+    |                         |
+    |                    T2.6 (iii);   D8.1 event Xi_K,  P8.2  P(Xi_K^c) <= exp(-K/2)
+ [3.5 HS L3.15 -> counting L3.16 (uses L3.3)]
+    |                         |
+ [9 rigidity: L9.1 conversion (uses L3.4) -> P9.2 ((i),(iii) => (iv),(v); deterministic)]
+    |
+ T2.6 (iv),(v)   --[Appendix A: L A.1 ledger (L1)-(L12), L A.2 phi]-->
+ P2.7 (reduction K -> L)  ->  Theorems 2.1 and 2.2
+\end{verbatim}
+}
+\noindent The weak law does not use Section~\ref{sec:FA}; Section~\ref{sec:FA} uses the weak law only through $\PP(\Xi(z)^c)$; Sections~\ref{sec:strong}--\ref{sec:norm} use Section~\ref{sec:FA} only through Corollary~\ref{cor:FA}; Section~\ref{sec:rig} is deterministic and uses Sections~\ref{sec:strong}--\ref{sec:norm} only through the statements (i), (iii) of Theorem~\ref{thm:K}.
+The exponent ledger (Lemma~\ref{lem:ledger}) is used by Lemma~\ref{lem:levels}, Corollary~\ref{cor:FA}, Sections~\ref{sec:strong}--\ref{sec:norm} and Proposition~\ref{prop:rig}, each through the relations listed in Section~\ref{app:constraints}.
+
+\medskip\noindent\textbf{Dependencies of Sections~\ref{sec:strong}--\ref{sec:norm} in detail.}
+\begin{center}
+\renewcommand{\arraystretch}{1.12}\small
+\begin{tabular}{|p{0.20\textwidth}|p{0.73\textwidth}|}
+\hline
+statement & uses (exactly)\\\hline
+(T4)--(T6) & Def.~\ref{def:domains}; Lemma~\ref{lem:mscsize}; Lemma~\ref{lem:stabnear} (size of $w_0$); Lemma~\ref{lem:basic}(a); Lemma~\ref{lem:msc}(b); Lemma~\ref{lem:levels}(S3),(S4); \eqref{eq:levelrel}; (L1), (L2), (L8)\\
+Proposition~\ref{prop:S1} & Theorem~\ref{thm:weak}(a); \eqref{eq:ap3}; Lemma~\ref{lem:scalar} (real statement); Corollary~\ref{cor:FA} with $p=p_1$; Lemma~\ref{lem:weyl}(e); (T4), (T6); (L5)\\
+Proposition~\ref{prop:S2} & Proposition~\ref{prop:S1}; \eqref{eq:ap2}--\eqref{eq:ap4}; Lemma~\ref{lem:initial}; \eqref{eq:lipnear} (i.e.\ Lemma~\ref{lem:basic}(c), Lemma~\ref{lem:msc}(f)); Lemma~\ref{lem:scalar}; $144C_s\lambda_{\rm st}=\frac14$\\
+Proposition~\ref{prop:S3} & Proposition~\ref{prop:S2}(a); \eqref{eq:ap3}; Corollary~\ref{cor:FA} with $p=p_2$; (T4), (T6)\\
+Proposition~\ref{prop:S4} & Theorem~\ref{thm:weak}(b) ($\max_i|G_{ii}|\le\frac12$); Lemma~\ref{lem:levels}(S2),(S4),(S5); Lemma~\ref{lem:stabfar}; Corollary~\ref{cor:FA} with $p=p_2$; (T5), (T6)\\
+Lemma~\ref{lem:lip} & Lemma~\ref{lem:basic}(c); Lemma~\ref{lem:msc}(f); Def.~\ref{def:domains}\\
+Theorem~\ref{thm:K}(i),(ii) & Proposition~\ref{prop:S2}(b),(c); Lemma~\ref{lem:lip}; (L6)\\
+Proposition~\ref{prop:norm} & Lemma~\ref{lem:norm0}; Proposition~\ref{prop:S4} with Lemma~\ref{lem:msc}(g); Proposition~\ref{prop:S3} with \eqref{eq:imm}; Lemma~\ref{lem:basic}(e); Lemma~\ref{lem:weyl}(a); (T5); (L7), (L8)\\
+Proposition~\ref{prop:XiK}, Theorem~\ref{thm:K} & Propositions~\ref{prop:S2}, \ref{prop:norm}; \eqref{eq:Krange}; Proposition~\ref{prop:rig} (for (iv), (v)); Lemma~\ref{lem:ledger}\\\hline
+\end{tabular}
+\end{center}
+
+

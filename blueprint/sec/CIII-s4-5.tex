@@ -1,0 +1,321 @@
+\section{Invariant functions and the eigenvalue density of $H_t$}\label{sec:C4}
+
+\noindent\emph{Conventions of Sections \ref{sec:C4}--\ref{sec:C5}.}
+We use the notation of \S\ref{ss:notation}: $\K\in\{\R,\C\}$, $\beta=\dim_\R\K$, the Euclidean space $(\cH,\la\cdot,\cdot\ra)$ of dimension $d$ with the orthonormal basis
+\[\mathfrak B:=\{E_{ii}:1\le i\le N\}\cup\{X_{ij}:i<j\}\cup\{Y_{ij}:i<j\}\quad(\text{the }Y_{ij}\text{ only if }\beta=2),\]
+the group $U_\beta(N)$, invariance, $\Sig$, $\lambda$, $\bG$ with $\sigma^2=2/(\beta N)$, the flow \eqref{Ht}, $\mu=\lambda_*\bG$ and $\nu_t=\mathrm{law}(\lambda(H_t))$.
+From \S\ref{sec:C3} we use $T_u$, $A$, $a_u=e^{-u/2}$, $s_u=1-e^{-u}$, $\rho_u$ and Lemmas \ref{lem:M1}--\ref{lem:M3}, always with $\mathcal E=\cH$ and $g=\bG$; the coordinates on $\cH$ are those of the basis $\mathfrak B$, and the partial derivatives $\partial_y^\alpha$ in Lemmas \ref{lem:M2}, \ref{lem:M3} refer to them.
+
+\begin{itemize}[leftmargin=1.6em,itemsep=1pt]
+\item \emph{Derivatives.} For $\Phi\in C^k(\cH)$ (as a function on the finite-dimensional real space $\cH$), $D^j\Phi(H)$ ($j\le k$) is the $j$-th derivative, a $j$-linear form on $\cH$;
+$\partial_Z\Phi(H):=D\Phi(H)[Z]$ and $\partial_Z^2\Phi(H):=D^2\Phi(H)[Z,Z]=\frac{\rd^2}{\rd t^2}\Phi(H+tZ)|_{t=0}$ for $Z\in\cH$; $\nabla\Phi(H)\in\cH$ is defined by $\la\nabla\Phi(H),Z\ra=D\Phi(H)[Z]$, and $\Delta_\cH\Phi(H):=\sum_{e\in\mathfrak B}D^2\Phi(H)[e,e]$.
+The Hilbert--Schmidt norm of a $j$-linear form $T$ on $\cH$ is $|T|:=\big(\sum_{e_1,\dots,e_j\in\mathfrak B}T[e_1,\dots,e_j]^2\big)^{1/2}$; thus $|D\Phi(H)|=|\nabla\Phi(H)|$.
+On $\R^N$ the same notation refers to the standard basis $(e_i)$; $|\nabla^2f|$ is the Frobenius norm of the Hessian, $\Delta=\sum_i\partial_i^2$, and $\partial^\alpha$ for a multi-index $\alpha\in\mathbb N^N$ is the usual partial derivative.
+\item \emph{Independence of the basis.} $|T|$ does not change if $\mathfrak B$ is replaced by another orthonormal basis $\mathfrak B'$ of $\cH$, in any one slot and hence in all slots:
+for fixed $h_2,\dots,h_j$ let $v\in\cH$ be defined by $\la v,h\ra=T[h,h_2,\dots,h_j]$; then $\sum_{e\in\mathfrak B}T[e,h_2,\dots,h_j]^2=\sum_{e\in\mathfrak B}\la v,e\ra^2=|v|^2=\sum_{e\in\mathfrak B'}T[e,h_2,\dots,h_j]^2$ (Parseval), and similarly in every other slot.
+\item \emph{Conjugations.} For $U\in U_\beta(N)$ let $\mathcal O_U(H):=UHU^*$. Then $\mathcal O_U$ maps $\cH$ onto $\cH$ ($(UHU^*)^*=UHU^*$, and $UHU^*$ is real if $\beta=1$), is $\R$-linear with inverse $\mathcal O_{U^*}$, and
+$\la\mathcal O_UX,\mathcal O_UY\ra=\Tr(UXU^*UYU^*)=\Tr(XY)$; so $\mathcal O_U$ is a linear isometry of $\cH$. $\Phi$ is invariant iff $\Phi\circ\mathcal O_U=\Phi$ for all $U\in U_\beta(N)$.
+Permutation matrices, real diagonal matrices with entries $\pm1$, the rotations $R_\theta$ below, and (if $\beta=2$) diagonal matrices with entries of modulus $1$ belong to $U_\beta(N)$.
+For a permutation $\pi$ of $\{1,\dots,N\}$ let $P_\pi e_k:=e_{\pi(k)}$; then $P_\pi\diag(x)P_\pi^{T}=\diag(x\circ\pi^{-1})$, so every rearrangement of $x$ is obtained in this way.
+\item \emph{The cone.} $\cSig$, the closure of $\Sig$, equals $\{x\in\R^N:x_1\le\dots\le x_N\}$: this set is closed and contains $\Sig$, and each of its points $x$ is the limit of $x+\eps(1,2,\dots,N)\in\Sig$ as $\eps\downarrow0$.
+We write $\partial\Sig:=\cSig\setminus\Sig=\{x\in\cSig:\ x_k=x_{k+1}\text{ for some }k\}$ (the \emph{walls}). Measures on $\cSig$ (such as $\mu$, $\nu_t$) are identified with Borel measures on $\R^N$ carried by $\cSig$.
+\end{itemize}
+
+\subsection{Radial calculus by Givens rotations}
+
+\begin{lemma}[Invariant functions]\label{lem:inv}
+Let $\Phi:\cH\to\R$ be invariant and $\varphi(x):=\Phi(\diag x)$, $x\in\R^N$. Then $\varphi$ is symmetric, $\Phi=\varphi\circ\lambda$, and $\Phi\in C^k(\cH)\Rightarrow\varphi\in C^k(\R^N)$.
+Conversely $\theta\circ\lambda$ is invariant for every $\theta:\cSig\to\R$. For every $u\ge0$, $T_u$ maps invariant (nonnegative or bounded) Borel functions to invariant functions.
+Moreover:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em,itemsep=1pt]
+\item $\lambda(UHU^*)=\lambda(H)$ for $U\in U_\beta(N)$; for every $H\in\cH$ there is $U\in U_\beta(N)$ with $H=U\diag(\lambda(H))U^*$; $\lambda(\diag x)=x$ for $x\in\cSig$; $|\lambda(H)|=|H|$; and $\max_k|\lambda_k(H)-\lambda_k(H')|\le|H-H'|$ for $H,H'\in\cH$. In particular $\lambda:\cH\to\cSig$ is continuous, hence Borel.
+\item If $\Phi\in C^k(\cH)$ is invariant and $0\le j\le k$, then $H\mapsto|D^j\Phi(H)|$ is invariant, and for $x\in\R^N$ and every multi-index $\alpha$ with $|\alpha|=j$: $|\partial^\alpha\varphi(x)|\le|D^j\Phi(\diag x)|$. Moreover $|\nabla\varphi(x)|\le|\nabla\Phi(\diag x)|$ and $|\nabla^2\varphi(x)|\le|D^2\Phi(\diag x)|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{(a)} For $U\in U_\beta(N)$ and $t\in\R$, $\det(t-UHU^*)=\det(U)\det(t-H)\det(U^*)=\det(t-H)$ since $\det U\,\det U^*=|\det U|^2=1$. As $\lambda(H)$ is the nondecreasing list of the roots of $\det(t-H)$ counted with multiplicity (Part~I, before Lemma \ref{lem:weyl}), $\lambda(UHU^*)=\lambda(H)$.
+By the spectral theorem (for real symmetric matrices if $\beta=1$, for Hermitian matrices if $\beta=2$) there are $V\in U_\beta(N)$ and $y\in\R^N$ with $H=V\diag(y)V^*$; by the remark just quoted, $y$ is a rearrangement of $\lambda(H)$, so $\diag(y)=P\diag(\lambda(H))P^T$ for a permutation matrix $P$, and $U:=VP\in U_\beta(N)$ does the job.
+The characteristic polynomial of $\diag x$ is $\prod_k(t-x_k)$, so $\lambda(\diag x)$ is the nondecreasing rearrangement of $x$, which is $x$ itself if $x\in\cSig$.
+With $H=U\diag(\lambda(H))U^*$: $|H|^2=\Tr H^2=\Tr\big(U\diag(\lambda(H))^2U^*\big)=\sum_k\lambda_k(H)^2=|\lambda(H)|^2$.
+Finally, by Lemma \ref{lem:weyl}(b),(a) of Part~I, $|\lambda_k(H)-\lambda_k(H')|\le\|H-H'\|=\max_l|\lambda_l(H-H')|\le|\lambda(H-H')|=|H-H'|$.
+
+\emph{Symmetry of $\varphi$; $\Phi=\varphi\circ\lambda$.} For a permutation $\pi$, $\varphi(x\circ\pi^{-1})=\Phi(P_\pi\diag(x)P_\pi^T)=\Phi(\diag x)=\varphi(x)$ by invariance; every rearrangement of $x$ is of the form $x\circ\pi^{-1}$.
+For $H\in\cH$ choose $U$ as in (a): $\Phi(H)=\Phi(U\diag(\lambda(H))U^*)=\Phi(\diag\lambda(H))=\varphi(\lambda(H))$.
+
+\emph{Regularity.} $\iota:\R^N\to\cH$, $x\mapsto\diag x$, is linear, so $\varphi=\Phi\circ\iota\in C^k$ if $\Phi\in C^k$, with
+$D^j\varphi(x)[v_1,\dots,v_j]=D^j\Phi(\diag x)[\diag v_1,\dots,\diag v_j]$. In particular, if $\alpha$ lists the indices $i_1,\dots,i_j$, then $\partial^\alpha\varphi(x)=D^j\Phi(\diag x)[E_{i_1i_1},\dots,E_{i_ji_j}]$. \hfill$(\ast)$
+
+\emph{Converse.} $\theta(\lambda(UHU^*))=\theta(\lambda(H))$ by (a).
+
+\emph{$T_u$.} $T_0$ is the identity ($a_0=1$, $s_0=0$). Let $u>0$ and let $\Phi\ge0$ be Borel and invariant. By Lemma \ref{lem:M1}(iii) with the linear isometry $\mathcal O=\mathcal O_U$:
+$T_u\Phi=T_u(\Phi\circ\mathcal O_U)=(T_u\Phi)\circ\mathcal O_U$; so $T_u\Phi$ is invariant (and Borel, by Tonelli's theorem in \eqref{Mehler}). If $\Phi$ is bounded and invariant, so are $\Phi^\pm:=\max(\pm\Phi,0)$; $T_u\Phi^\pm\le\|\Phi\|_\infty$ is finite and $T_u\Phi=T_u\Phi^+-T_u\Phi^-$ is invariant.
+
+\emph{(b)} Since $\mathcal O_U$ is linear, differentiating $\Phi\circ\mathcal O_U=\Phi$ $j$ times gives $D^j\Phi(\mathcal O_UH)[\mathcal O_Uh_1,\dots,\mathcal O_Uh_j]=D^j\Phi(H)[h_1,\dots,h_j]$.
+As $\mathcal O_U\mathfrak B$ is an orthonormal basis of $\cH$ and $|\cdot|$ does not depend on the basis,
+\[|D^j\Phi(\mathcal O_UH)|^2=\sum_{e_1,\dots,e_j\in\mathfrak B}D^j\Phi(\mathcal O_UH)[\mathcal O_Ue_1,\dots,\mathcal O_Ue_j]^2=\sum_{e_1,\dots,e_j\in\mathfrak B}D^j\Phi(H)[e_1,\dots,e_j]^2=|D^j\Phi(H)|^2 .\]
+By $(\ast)$, $\partial^\alpha\varphi(x)$ is one of the entries $D^j\Phi(\diag x)[e_1,\dots,e_j]$, $e_l\in\mathfrak B$, so $|\partial^\alpha\varphi(x)|\le|D^j\Phi(\diag x)|$.
+Likewise $|\nabla\varphi(x)|^2=\sum_i D\Phi(\diag x)[E_{ii}]^2\le\sum_{e\in\mathfrak B}D\Phi(\diag x)[e]^2=|\nabla\Phi(\diag x)|^2$ and $|\nabla^2\varphi(x)|^2=\sum_{i,l}D^2\Phi(\diag x)[E_{ii},E_{ll}]^2\le|D^2\Phi(\diag x)|^2$.
+\end{proof}
+
+\begin{lemma}[Radial part of the gradient and Laplacian]\label{lem:givens}
+Let $\Phi\in C^2(\cH)$ be invariant, $\varphi=\Phi\circ\diag$, and let $x\in\R^N$ have pairwise distinct coordinates, $D:=\diag x$. Then for all $i<j$ and $Z\in\{X_{ij},Y_{ij}\}$ ($Y_{ij}$ only if $\beta=2$):
+\begin{equation}\label{givens}
+\partial_Z\Phi(D)=0,\qquad \partial_Z^2\Phi(D)=\frac{\partial_i\varphi(x)-\partial_j\varphi(x)}{x_i-x_j}.
+\end{equation}
+Consequently $|\nabla\Phi(D)|^2=|\nabla\varphi(x)|^2$, $\la D,\nabla\Phi(D)\ra=x\cdot\nabla\varphi(x)$,
+$\Delta_\cH\Phi(D)=\Delta\varphi(x)+\beta\sum_{i<j}\frac{\partial_i\varphi-\partial_j\varphi}{x_i-x_j}(x)$, and, with $\sigma^2=2/(\beta N)$,
+\begin{equation}\label{L}
+(A\Phi)(\diag x)=(L\varphi)(x),\qquad L:=\frac1{\beta N}\Delta+\sum_{i=1}^N\Big(-\frac{x_i}{2}+\frac1N\sum_{j\ne i}\frac{1}{x_i-x_j}\Big)\partial_i .
+\end{equation}
+Moreover, for \emph{every} $x\in\R^N$ and every invariant $\Phi\in C^1(\cH)$: $\partial_Z\Phi(\diag x)=0$ for all off-diagonal $Z\in\mathfrak B$, $\nabla\Phi(\diag x)=\sum_i\partial_i\varphi(x)E_{ii}$, $|\nabla\Phi(\diag x)|=|\nabla\varphi(x)|$ and $\la\diag x,\nabla\Phi(\diag x)\ra=x\cdot\nabla\varphi(x)$.
+\end{lemma}
+
+\begin{proof}
+Let $x\in\R^N$, $D=\diag x$. By $(\ast)$ in the proof of Lemma \ref{lem:inv}, $D\Phi(D)[E_{ii}]=\partial_i\varphi(x)$, and $D\Phi(D)[D]=\sum_ix_i\,\partial_i\varphi(x)$ since $D=\sum_ix_iE_{ii}$.
+
+\emph{Step 1 (first derivatives; all $x$, $\Phi\in C^1$).} Fix $i<j$ and let $S:=\diag(s)$ with $s_j=-1$ and $s_k=1$ for $k\ne j$; $S\in U_\beta(N)$. Conjugation by $S$ multiplies the $(k,l)$ entry by $s_ks_l$; hence $SDS^*=D$, $SX_{ij}S^*=-X_{ij}$, $SY_{ij}S^*=-Y_{ij}$.
+For $Z\in\{X_{ij},Y_{ij}\}$ and $t\in\R$, invariance gives $\Phi(D+tZ)=\Phi(\mathcal O_S(D+tZ))=\Phi(D-tZ)$. The function $t\mapsto\Phi(D+tZ)$ is even and differentiable, so its derivative at $0$, $\partial_Z\Phi(D)$, vanishes.
+Therefore $\nabla\Phi(D)=\sum_{e\in\mathfrak B}D\Phi(D)[e]\,e=\sum_i\partial_i\varphi(x)E_{ii}$, whence $|\nabla\Phi(D)|^2=\sum_i\partial_i\varphi(x)^2=|\nabla\varphi(x)|^2$ and $\la D,\nabla\Phi(D)\ra=D\Phi(D)[D]=x\cdot\nabla\varphi(x)$.
+This proves the first identity in \eqref{givens} and the additional statement.
+
+\emph{Step 2 (second derivative in the direction $X_{ij}$; $x_i\ne x_j$).} Fix $i<j$, put $\varsigma:=x_j-x_i\ne0$, and for $\theta\in\R$ let $R_\theta$ be the real orthogonal matrix with $R_\theta e_i=\cos\theta\,e_i+\sin\theta\,e_j$, $R_\theta e_j=-\sin\theta\,e_i+\cos\theta\,e_j$, $R_\theta e_k=e_k$ ($k\ne i,j$). Writing $c=\cos\theta$, $s=\sin\theta$ and $D=\sum_kx_ke_ke_k^T$,
+\[R_\theta DR_\theta^T=\sum_kx_k(R_\theta e_k)(R_\theta e_k)^T=\sum_{k\ne i,j}x_kE_{kk}+x_i\big(c^2E_{ii}+cs(E_{ij}+E_{ji})+s^2E_{jj}\big)+x_j\big(s^2E_{ii}-cs(E_{ij}+E_{ji})+c^2E_{jj}\big),\]
+that is,
+\begin{equation}\label{c4:rot}
+\mathbf c(\theta):=R_\theta DR_\theta^T=D+\varsigma\sin^2\theta\,(E_{ii}-E_{jj})-\sqrt2\,\varsigma\sin\theta\cos\theta\,X_{ij}.
+\end{equation}
+$\mathbf c:\R\to\cH$ is $C^\infty$ with $\mathbf c(0)=D$,
+$\mathbf c'(\theta)=\varsigma\sin2\theta\,(E_{ii}-E_{jj})-\sqrt2\,\varsigma\cos2\theta\,X_{ij}$ and $\mathbf c''(\theta)=2\varsigma\cos2\theta\,(E_{ii}-E_{jj})+2\sqrt2\,\varsigma\sin2\theta\,X_{ij}$; so
+$\mathbf c'(0)=-\sqrt2\,\varsigma X_{ij}$ and $\mathbf c''(0)=2\varsigma(E_{ii}-E_{jj})$.
+By invariance $g(\theta):=\Phi(\mathbf c(\theta))=\Phi(D)$ for all $\theta$. Since $\Phi\in C^2$, the chain rule gives $g''(\theta)=D^2\Phi(\mathbf c(\theta))[\mathbf c'(\theta),\mathbf c'(\theta)]+D\Phi(\mathbf c(\theta))[\mathbf c''(\theta)]$, and $g''\equiv0$. At $\theta=0$:
+\[0=2\varsigma^2\,\partial^2_{X_{ij}}\Phi(D)+2\varsigma\big(\partial_i\varphi(x)-\partial_j\varphi(x)\big).\]
+Dividing by $2\varsigma^2$: $\partial^2_{X_{ij}}\Phi(D)=-(\partial_i\varphi(x)-\partial_j\varphi(x))/(x_j-x_i)$, which is the second identity in \eqref{givens} for $Z=X_{ij}$.
+
+\emph{Step 3 (the direction $Y_{ij}$, $\beta=2$).} Let $P:=\diag(p)$ with $p_j=\mathrm i$ and $p_k=1$ for $k\ne j$; $P\in U_2(N)$. Conjugation by $P$ multiplies the $(k,l)$ entry by $p_k\overline{p_l}$, so $PDP^*=D$ and $PX_{ij}P^*$ has $(i,j)$ entry $-\mathrm i/\sqrt2$ and $(j,i)$ entry $\mathrm i/\sqrt2$, i.e.\ $PX_{ij}P^*=-Y_{ij}$.
+Hence $\Phi(D+tY_{ij})=\Phi(\mathcal O_P(D-tX_{ij}))=\Phi(D-tX_{ij})$ for all $t$, and taking the second derivative at $t=0$: $\partial^2_{Y_{ij}}\Phi(D)=\partial^2_{X_{ij}}\Phi(D)$. With Step 2 this proves \eqref{givens} for $Z=Y_{ij}$.
+
+\emph{Step 4 (Laplacian and generator).} By $(\ast)$, $D^2\Phi(D)[E_{ii},E_{ii}]=\partial_i^2\varphi(x)$. Summing over $\mathfrak B$, which contains $\beta$ off-diagonal elements for each pair $i<j$, and using \eqref{givens},
+\[\Delta_\cH\Phi(D)=\sum_i\partial_i^2\varphi(x)+\beta\sum_{i<j}\frac{\partial_i\varphi(x)-\partial_j\varphi(x)}{x_i-x_j}.\]
+In the last sum, the pair $\{i,j\}$ contributes $\partial_i\varphi/(x_i-x_j)+\partial_j\varphi/(x_j-x_i)$, so the sum equals $\sum_i\partial_i\varphi(x)\sum_{j\ne i}(x_i-x_j)^{-1}$.
+By \eqref{Mehler}, $A\Phi(D)=\frac{\sigma^2}2\Delta_\cH\Phi(D)-\frac12\la D,\nabla\Phi(D)\ra$ with $\frac{\sigma^2}{2}=\frac1{\beta N}$; inserting the two formulas above and Step 1 gives \eqref{L}.
+\end{proof}
+
+\begin{remark}[The generator; PD-06]\label{rem:gen}
+For $\beta=2$, $L$ is exactly (2.32) of the original, $\mathcal L=\sum_i\frac1{2N}\partial_i^2+\sum_i\big(-\frac\beta4x_i+\frac\beta{2N}\sum_{j\ne i}\frac1{x_i-x_j}\big)\partial_i$ with $\beta=2$. For $\beta=1$, $L=2\,\mathcal L_{\beta=1}$: the GOE-normalised flow \eqref{Ht} (diagonal variance $2/N$) runs the $\beta=1$ Dyson generator at double speed. This is harmless: all statements are for $t\ge$ threshold.
+Formula \eqref{L} is the content of ``It\^o's formula for the eigenvalues''; here it is an identity between two continuous functions on the open dense set of $x$ with pairwise distinct coordinates, and the left side $x\mapsto(A\Phi)(\diag x)$ is continuous on all of $\R^N$ because $\Phi\in C^2(\cH)$.
+In particular, for $\varphi=\Phi\circ\diag$ with $\Phi\in C^2(\cH)$ invariant, the singular terms $\frac{\partial_i\varphi-\partial_j\varphi}{x_i-x_j}$ extend continuously across the walls $\{x_i=x_j\}$. \emph{This is how NP handles collisions: nothing happens there.}
+\end{remark}
+
+\subsection{The eigenvalue density at time $t$}
+
+In this subsection $H_0$ is a random element of $\cH$, defined on a probability space that also carries $V\sim\bG$ independent of $H_0$, and $H_t$ is given by \eqref{Ht}. Let $\rho:=\mathrm{law}(H_0)$.
+Since $e^{-t/2}=a_t$ and $(1-e^{-t})^{1/2}=s_t^{1/2}$, \eqref{Ht} says that $\mathrm{law}(H_t)=\rho_t$ in the notation of \S\ref{sec:C3}.
+``Finite moments of all orders'' means $\E|H_0|^m<\infty$ for every $m\in\mathbb N$; then also $\E|H_0|^m<\infty$ for every real $m\ge0$ (as $|H_0|^m\le1+|H_0|^{\lceil m\rceil}$). For the matrices of the ensembles of Theorem \ref{thm:23} this holds by (RA6).
+
+\begin{proposition}[Smooth symmetric version of $\rd\nu_t/\rd\mu$]\label{prop:U9}
+Let $H_0$ be a random element of $\cH$ with $\E|H_0|^m<\infty$ for every $m\in\mathbb N$, and let $s>0$. Then:
+\begin{enumerate}[label=(\roman*),itemsep=1pt]
+\item $\nu_s\ll\mu$. Fix a Borel version $f_s:=\rd\nu_s/\rd\mu$ on $\cSig$ and put $\Phi_s:=f_s\circ\lambda$; then $\Phi_s\bG$ is a probability measure on $\cH$ with $\int|H|^m\Phi_s\rd\bG=\E|H_s|^m<\infty$.
+\item For $t>s$ let $\Phi_t:=T_{t-s}\Phi_s$ and $f_t(x):=\Phi_t(\diag x)$, $x\in\R^N$. Then $(t,H)\mapsto\Phi_t(H)$ is $C^\infty$ and positive on $(s,\infty)\times\cH$, $\Phi_t$ is invariant, $f_t$ is $C^\infty$, positive and symmetric on $\R^N$, and
+$\nu_t=f_t\,\mu$ on $\cSig$.
+\item $\partial_tf_t(x)=(A\Phi_t)(\diag x)$ for all $x\in\R^N$, and $\partial_tf_t(x)=(Lf_t)(x)$ for all $x$ with pairwise distinct coordinates.
+\item For $s<t_1<t_2<\infty$ there is $C<\infty$ with $|\log f_t(x)|\le C(1+|x|^2)$ on $[t_1,t_2]\times\R^N$, and
+$\mathfrak m(x):=\sup_{t\in[t_1,t_2]}\big(|f_t|+|\nabla f_t|+|\nabla^2f_t|+|\partial_tf_t|+|\nabla\partial_tf_t|\big)(x)$ satisfies $\int_{\cSig}\mathfrak m(x)(1+|x|)^m\mu(\rd x)<\infty$ for all $m$. Moreover $\int_{\cSig}|\nabla f_t|^2/f_t\,\rd\mu<\infty$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(i)} By Lemma \ref{lem:M1}(iv), $\rho_s$ has a Lebesgue density $p(s,\cdot)$; $\bG$ has the everywhere positive Lebesgue density $\gamma_{\sigma^2}$. Hence $\rho_s=(p(s,\cdot)/\gamma_{\sigma^2})\,\bG\ll\bG$.
+If $B\subset\cSig$ is Borel with $\mu(B)=0$, then $\bG(\lambda^{-1}(B))=0$ ($\lambda$ is Borel by Lemma \ref{lem:inv}(a)), hence $\nu_s(B)=\rho_s(\lambda^{-1}(B))=0$. So $\nu_s\ll\mu$, and by the Radon--Nikodym theorem there is a Borel $f_s:\cSig\to[0,\infty)$ with $\nu_s=f_s\mu$; we fix one.
+$\Phi_s=f_s\circ\lambda$ is Borel, nonnegative and invariant (Lemma \ref{lem:inv}). For Borel $F:\cSig\to[0,\infty]$, the change of variables formula for the image measure $\mu=\lambda_*\bG$ gives
+\begin{equation}\label{c4:push}
+\int_\cH F(\lambda(H))\,\Phi_s(H)\,\bG(\rd H)=\int_{\cSig}F\,f_s\,\rd\mu=\int_{\cSig}F\,\rd\nu_s=\E\,F(\lambda(H_s)).
+\end{equation}
+With $F=1$: $\int\Phi_s\rd\bG=1$. With $F(x)=|x|^m$ and $|\lambda(H)|=|H|$ (Lemma \ref{lem:inv}(a)): $\int|H|^m\Phi_s\rd\bG=\E|H_s|^m$.
+Finally, for $m\ge1$, $|H_s|^m\le2^{m-1}(|H_0|^m+|V|^m)$ (as $a_s,s_s^{1/2}\le1$), and $\E|V|^m=\int|H|^m\bG(\rd H)<\infty$ (Gaussian moments), so $\E|H_s|^m<\infty$; for $m=0$ there is nothing to prove.
+
+\emph{(ii), smoothness.} By (i), $\rho':=\Phi_s\bG$ is a probability measure on $\cH$ with finite moments of all orders. Apply Lemma \ref{lem:M2} to $\rho'$: the function $\Psi'(u,y):=p'(u,y)/\gamma_{\sigma^2}(y)$, where $p'(u,\cdot)$ is the Lebesgue density of $\rho'_u$, is $C^\infty$ and positive on $(0,\infty)\times\cH$ and satisfies $\partial_u\Psi'=A\Psi'$.
+Moreover $\Psi'(u,\cdot)=T_u\Phi_s$ \emph{everywhere} on $\cH$ for $u>0$. (This is the parenthetical statement of Lemma \ref{lem:M2}; for completeness: by Lemma \ref{lem:M1}(iv), $p'(u,y)=\int\gamma_{\sigma^2s_u}(y-a_uw)\Phi_s(w)\gamma_{\sigma^2}(w)\,\rd w$, and
+\[\gamma_{\sigma^2s_u}(y-a_uw)\,\gamma_{\sigma^2}(w)=\gamma_{\sigma^2}(y)\,\gamma_{\sigma^2s_u}(w-a_uy)\qquad(y,w\in\cH),\]
+because the normalising constants on both sides are $(2\pi\sigma^2)^{-d}s_u^{-d/2}$ and $s_u(|w|^2-|y|^2)+|y-a_uw|^2=|w-a_uy|^2$ by $a_u^2+s_u=1$; dividing by $\gamma_{\sigma^2}(y)$ and comparing with the second formula in \eqref{Mehler} gives $\Psi'(u,y)=(T_u\Phi_s)(y)$.)
+Hence $\Phi_t(H)=\Psi'(t-s,H)$, and $(t,H)\mapsto\Phi_t(H)$ is $C^\infty$ and positive on $(s,\infty)\times\cH$ with
+\begin{equation}\label{c4:PhiPDE}
+\partial_t\Phi_t=A\Phi_t\qquad\text{on }(s,\infty)\times\cH .
+\end{equation}
+$\Phi_t=T_{t-s}\Phi_s$ is invariant by Lemma \ref{lem:inv}, since $\Phi_s\ge0$ is Borel and invariant. Consequently $f_t=\Phi_t\circ\diag$ is symmetric (Lemma \ref{lem:inv}) and positive, and $(t,x)\mapsto f_t(x)=\Phi_t(\diag x)$ is $C^\infty$ on $(s,\infty)\times\R^N$ as the composition of $(t,H)\mapsto\Phi_t(H)$ with the linear map $(t,x)\mapsto(t,\diag x)$.
+
+\emph{(ii), identification.} Let $t>s$, $B\subset\cSig$ Borel, and $\Theta:=\mathbf 1_B\circ\lambda$, a Borel invariant function with values in $\{0,1\}$. Then:
+\begin{itemize}[leftmargin=1.6em,itemsep=1pt]
+\item[(a)] $\nu_t(B)=\int\Theta\,\rd\rho_t=\int\Theta\,\rd(\rho_s)_{t-s}=\int T_{t-s}\Theta\,\rd\rho_s$, by $\mathrm{law}(H_t)=\rho_t$, Lemma \ref{lem:M1}(i) ($(\rho_s)_{t-s}=\rho_t$) and Lemma \ref{lem:M1}(v).
+\item[(b)] $T_{t-s}\Theta$ is Borel, invariant (Lemma \ref{lem:inv}) and takes values in $[0,1]$ (Lemma \ref{lem:M1}(i): $T_u$ is positive and $T_u1=1$). By Lemma \ref{lem:inv}, $T_{t-s}\Theta=\vartheta\circ\lambda$ with the Borel function $\vartheta:=(T_{t-s}\Theta)\circ\diag$.
+By the image-measure formula for $\nu_s=\lambda_*\rho_s$ and by \eqref{c4:push} with $F=\vartheta$:
+$\int T_{t-s}\Theta\,\rd\rho_s=\int_{\cSig}\vartheta\,\rd\nu_s=\int_\cH(T_{t-s}\Theta)\,\Phi_s\,\rd\bG$.
+\item[(c)] By the symmetry of $T_{t-s}$, Lemma \ref{lem:M1}(ii) (both $\Theta$ and $\Phi_s$ are Borel and nonnegative): $\int(T_{t-s}\Theta)\,\Phi_s\,\rd\bG=\int\Theta\,T_{t-s}\Phi_s\,\rd\bG=\int\Theta\,\Phi_t\,\rd\bG$.
+\item[(d)] $\Phi_t$ is invariant, so $\Phi_t=f_t\circ\lambda$ (Lemma \ref{lem:inv}), and $\int\Theta\,\Phi_t\,\rd\bG=\int(\mathbf 1_Bf_t)\circ\lambda\,\rd\bG=\int_Bf_t\,\rd\mu$.
+\end{itemize}
+Thus $\nu_t(B)=\int_Bf_t\,\rd\mu$ for every Borel $B\subset\cSig$, i.e.\ $\nu_t=f_t\mu$. Note that the law $\rho_s$ of $H_s$ itself is never claimed to be invariant; only its eigenvalue law $\nu_s$ enters, through \eqref{c4:push}.
+
+\emph{(iii)} By \eqref{c4:PhiPDE}, $\partial_tf_t(x)=(\partial_t\Phi_t)(\diag x)=(A\Phi_t)(\diag x)$ for all $x\in\R^N$. If $x$ has pairwise distinct coordinates, Lemma \ref{lem:givens} applied to the invariant $C^2$ function $\Phi_t$ gives $(A\Phi_t)(\diag x)=(Lf_t)(x)$.
+
+\emph{(iv)} Fix $s<t_1<t_2<\infty$ and put $u_l:=t_l-s$, so $0<u_1<u_2$ and $\Phi_t=\Psi'(t-s,\cdot)$ with $t-s\in[u_1,u_2]$ for $t\in[t_1,t_2]$.
+
+\emph{Logarithm.} Lemma \ref{lem:M2}(ii) for $\rho'$ gives $C$ with $|\log\Psi'(u,y)|\le C(1+|y|^2)$ for $u\in[u_1,u_2]$, $y\in\cH$. With $y=\diag x$ and $|\diag x|=|x|$: $|\log f_t(x)|\le C(1+|x|^2)$ for $t\in[t_1,t_2]$, $x\in\R^N$.
+
+\emph{Derivatives.} For $j\in\{0,1\}$, $H\mapsto\partial_t^j\Phi_t(H)$ is $C^\infty$ and invariant (for $j=1$ it is the pointwise limit of the invariant difference quotients $(\Phi_{t+h}-\Phi_t)/h$), and its restriction to diagonal matrices is $\partial_t^jf_t$. Define
+\[\widetilde{\mathfrak M}(H):=\sup_{t\in[t_1,t_2]}\ \sum_{j=0}^1\sum_{k=0}^2\big|D^k\partial_t^j\Phi_t(H)\big|\qquad(H\in\cH).\]
+Each summand is invariant by Lemma \ref{lem:inv}(b) (for $k=0$, $|\partial_t^j\Phi_t|$ is trivially invariant), so $\widetilde{\mathfrak M}$ is invariant.
+It is finite and Borel: the summands are continuous in $(t,H)$, so the supremum over the compact interval $[t_1,t_2]$ is finite and equals the supremum over the countable set $([t_1,t_2]\cap\mathbb Q)\cup\{t_1,t_2\}$. The same argument shows that $\mathfrak m$ is finite and Borel.
+By Lemma \ref{lem:inv}(b) applied to $\partial_t^j\Phi_t$ ($j=0,1$),
+\[|f_t(x)|+|\nabla f_t(x)|+|\nabla^2f_t(x)|+|\partial_tf_t(x)|+|\nabla\partial_tf_t(x)|\le\sum_{j=0}^1\sum_{k=0}^2|D^k\partial_t^j\Phi_t(\diag x)|,\]
+hence $\mathfrak m(x)\le\widetilde{\mathfrak M}(\diag x)$ for all $x\in\R^N$.
+On the other hand, for a $k$-linear form $T$ on $\cH$, $|T|\le\sum_{e_1,\dots,e_k\in\mathfrak B}|T[e_1,\dots,e_k]|$, and each ordered tuple $(e_1,\dots,e_k)$ corresponds to a multi-index $\alpha$ with $|\alpha|=k$ (at most $k!\le2$ tuples per $\alpha$ for $k\le2$) with $D^k\partial_t^j\Phi_t[e_1,\dots,e_k]=\partial_y^\alpha\partial_t^j\Psi'(t-s,\cdot)$. Hence $\widetilde{\mathfrak M}\le2\,\mathfrak M$, where $\mathfrak M$ is the function of Lemma \ref{lem:M2}(iii) for $\rho'$ and $[u_1,u_2]$.
+Since $\widetilde{\mathfrak M}$ is invariant, $\widetilde{\mathfrak M}=\widetilde{\mathfrak M}\circ\diag\circ\lambda$ (Lemma \ref{lem:inv}); with $|\lambda(H)|=|H|$ and $\mu=\lambda_*\bG$,
+\[\int_{\cSig}\mathfrak m(x)(1+|x|)^m\mu(\rd x)\le\int_{\cSig}\widetilde{\mathfrak M}(\diag x)(1+|x|)^m\mu(\rd x)=\int_\cH\widetilde{\mathfrak M}(H)(1+|H|)^m\,\bG(\rd H)\le2\int_\cH\mathfrak M(1+|H|)^m\,\rd\bG<\infty\]
+by Lemma \ref{lem:M2}(iii).
+
+\emph{Fisher information.} Let $t>s$. By Lemma \ref{lem:inv}(b), $|\nabla\Phi_t|$ is invariant, hence so is $|\nabla\Phi_t|^2/\Phi_t$, and $|\nabla f_t(x)|\le|\nabla\Phi_t(\diag x)|$ (with equality, by Lemma \ref{lem:givens}). Therefore, as above,
+\[\int_{\cSig}\frac{|\nabla f_t|^2}{f_t}\rd\mu\le\int_{\cSig}\frac{|\nabla\Phi_t|^2}{\Phi_t}(\diag x)\,\mu(\rd x)=\int_\cH\frac{|\nabla\Psi'(t-s,\cdot)|^2}{\Psi'(t-s,\cdot)}\rd\bG<\infty\]
+by Lemma \ref{lem:M2}(iv) with $u=t-s$; its right side is finite because $\rho'_{u}=\mathrm{law}(a_uY+s_u^{1/2}Z)$ with $Y\sim\rho'$, $Z\sim\bG$, and both have finite second moments.
+\end{proof}
+
+\begin{remark}[What is \emph{not} needed]
+No uniqueness theorem for $\partial_tf=Lf$, no semigroup on $\Sig$, no domain questions: $f_t$ is \emph{defined} by the matrix flow, and the equation is used only as a pointwise identity, once, in Proposition \ref{prop:entprod} (and for bounded data in Theorem \ref{thm:JD}).
+Neither Haar measure on $U_\beta(N)$ nor the invariance of $\mathrm{law}(H_s)$ is used: in the proof of Proposition \ref{prop:U9}(ii) only $\mu=\lambda_*\bG$, the symmetry of $T_u$ in $L^2(\bG)$ and the commutation of $T_u$ with conjugations enter. In particular $\nu_s\ll\mu$ for every $s>0$ also when $H_0$ has a discrete (e.g.\ Bernoulli) law.
+The version $f_t$ does not depend on the choice of the version $f_s$: two versions of $f_s$ differ on a $\mu$-null set, so the corresponding $\Phi_s$ differ on a $\bG$-null set, which is Lebesgue-null, and $T_u$ ($u>0$) integrates against a Lebesgue density (second formula in \eqref{Mehler}).
+\end{remark}
+\section{\INFRA\ Integration by parts on $\Sig$ and the joint eigenvalue density of G$\beta$E}\label{sec:C5}
+
+Let $\Delta(x):=\prod_{i<j}(x_j-x_i)$ (a polynomial; positive on $\Sig$), and
+\begin{equation}\label{mustar}
+w(x):=\Delta(x)^\beta e^{-\frac{\beta N}{4}|x|^2},\qquad Z_\beta:=\int_{\Sig}w\,\rd x\in(0,\infty),\qquad \mu^*(\rd x):=Z_\beta^{-1}w(x)\mathbf 1_{\Sig}(x)\,\rd x .
+\end{equation}
+(The value of $Z_\beta$ is never needed.) Here $\beta\in\{1,2\}$, so $w$ is a polynomial times a Gaussian and $w\in C^\infty(\R^N)$; for $N=1$, $\Delta\equiv1$ and $\Sig=\R$.
+For $x\in\R^N$ and $i<j$, $|x_j-x_i|\le|x_i|+|x_j|\le2|x|$, hence $0\le|w(x)|\le(2|x|)^{\beta N(N-1)/2}e^{-\frac{\beta N}4|x|^2}$. Since for $p\ge0$, $c>0$ the function $r\mapsto(1+r)^pe^{-cr^2/2}$ is bounded on $[0,\infty)$ and $\int_{\R^N}e^{-c|x|^2/2}\rd x=(2\pi/c)^{N/2}$,
+\begin{equation}\label{c5:mom}
+\int_{\R^N}(1+|x|)^m\,|w(x)|\,\rd x<\infty\qquad(m\ge0).
+\end{equation}
+With $m=0$ this gives $Z_\beta<\infty$; $Z_\beta>0$ because $w>0$ on the nonempty open set $\Sig$. So $\mu^*$ is a Borel probability measure on $\R^N$, carried by $\Sig$, with finite moments of all orders.
+Recall $\partial\Sig=\cSig\setminus\Sig=\{x\in\cSig:x_k=x_{k+1}\text{ for some }k\}$ (\S\ref{sec:C4}); $w=0$ on $\partial\Sig$ because $\Delta=0$ there and $\beta\ge1$.
+
+\smallskip\noindent\emph{The divergence identity.} On $\Sig$, for $\varphi\in C^2$: $\ \beta N\,w\,L\varphi=\dv(w\nabla\varphi)$, by $\partial_i\log w=\beta\sum_{j\ne i}\frac1{x_i-x_j}-\frac{\beta N}2x_i$. In detail: for $x\in\Sig$ and $1\le i\le N$,
+\begin{equation}\label{c5:dw}
+\partial_iw(x)=w(x)\,b_i(x),\qquad b_i(x):=\beta\sum_{j\ne i}\frac1{x_i-x_j}-\frac{\beta N}{2}x_i ,
+\end{equation}
+and consequently, for every $\varphi\in C^2(\R^N)$ and $x\in\Sig$,
+\begin{equation}\label{c5:div}
+\dv(w\nabla\varphi)(x)=\beta N\,w(x)\,(L\varphi)(x).
+\end{equation}
+\emph{Proof.} By the product rule, $\partial_i\Delta=\sum_{k<l}\partial_i(x_l-x_k)\prod_{(k',l')\ne(k,l)}(x_{l'}-x_{k'})$; only the factors with $i\in\{k,l\}$ contribute, with $\partial_i(x_l-x_i)=-1$ and $\partial_i(x_i-x_k)=1$. On $\Sig$, $\Delta\ne0$, so dividing by $\Delta$,
+$\partial_i\Delta/\Delta=\sum_{l>i}\frac{-1}{x_l-x_i}+\sum_{k<i}\frac1{x_i-x_k}=\sum_{j\ne i}\frac1{x_i-x_j}$.
+Hence $\partial_i(\Delta^\beta)=\beta\Delta^{\beta-1}\partial_i\Delta=\Delta^\beta\beta\sum_{j\ne i}(x_i-x_j)^{-1}$, and $\partial_ie^{-\frac{\beta N}4|x|^2}=-\frac{\beta N}2x_ie^{-\frac{\beta N}4|x|^2}$; this is \eqref{c5:dw}. Then
+$\dv(w\nabla\varphi)=\sum_i\partial_i(w\,\partial_i\varphi)=w\sum_i\partial_i^2\varphi+w\sum_ib_i\partial_i\varphi=\beta N\,w\big[\frac1{\beta N}\sum_i\partial_i^2\varphi+\sum_i\frac{b_i}{\beta N}\partial_i\varphi\big]$ (to avoid a clash with the Vandermonde product $\Delta(x)$ we write the Laplacian as $\sum_i\partial_i^2$ here), and $\frac{b_i}{\beta N}=-\frac{x_i}2+\frac1N\sum_{j\ne i}\frac1{x_i-x_j}$ is the coefficient of $\partial_i$ in \eqref{L}. \hfill$\square$
+
+\begin{lemma}[Divergence theorem on $\Sig$ for fields vanishing on the walls]\label{lem:div}
+Let $\mathbf Y\in C^1(\R^N;\R^N)$ vanish on every wall $\{x_i=x_{i+1}\}$, $1\le i<N$, and assume $|\mathbf Y|\in L^1(\Sig)$ and $\dv\mathbf Y\in L^1(\Sig)$. Then $\int_{\Sig}\dv\mathbf Y\,\rd x=0$.
+The conclusion holds under the weaker hypothesis that $\mathbf Y(x)=0$ for every $x\in\partial\Sig$.
+\end{lemma}
+
+\begin{proof}
+We prove the lemma under the weaker hypothesis $\mathbf Y=0$ on $\partial\Sig$ (which follows from the first one, since every point of $\partial\Sig$ lies on a wall).
+\emph{Integrability.} $\Sig$ is open, hence Borel; $\dv\mathbf Y=\sum_i\partial_i\mathbf Y_i$ is continuous.
+
+\emph{Step 1: $\mathbf Y$ vanishes outside a ball $\{|x|\le r_0\}$.} Then each $\partial_i\mathbf Y_i$ is continuous with compact support, so $\partial_i\mathbf Y_i\mathbf 1_{\Sig}\in L^1(\R^N)$ and $\int_{\Sig}\dv\mathbf Y=\sum_i\int_{\Sig}\partial_i\mathbf Y_i$. Fix $i$.
+For $x\in\R^N$ write $\hat x:=(x_1,\dots,x_{i-1},x_{i+1},\dots,x_N)\in\R^{N-1}$; the map $x\mapsto(x_i,\hat x)$ is a coordinate permutation $\R^N\to\R\times\R^{N-1}$ and preserves Lebesgue measure.
+Let $\Sigma':=\{\hat x\in\R^{N-1}:\hat x\text{ is strictly increasing}\}$ (for $N=1$, $\R^0$ is a point and $\Sigma'=\R^0$), and put $a(\hat x):=x_{i-1}$ if $i>1$, $a(\hat x):=-\infty$ if $i=1$, and $b(\hat x):=x_{i+1}$ if $i<N$, $b(\hat x):=+\infty$ if $i=N$. Then
+\begin{equation}\label{c5:slice}
+x\in\Sig\iff\hat x\in\Sigma'\ \text{ and }\ a(\hat x)<x_i<b(\hat x).
+\end{equation}
+Indeed, ``$\Rightarrow$'': a subsequence of a strictly increasing sequence is strictly increasing. ``$\Leftarrow$'': the consecutive pairs $(x_k,x_{k+1})$ with $i\notin\{k,k+1\}$ are consecutive in $\hat x$, and the pairs $(x_{i-1},x_i)$, $(x_i,x_{i+1})$ are ordered by $a<x_i<b$.
+By Fubini's theorem and \eqref{c5:slice},
+\[\int_{\Sig}\partial_i\mathbf Y_i\,\rd x=\int_{\Sigma'}\Big(\int_{a(\hat x)}^{b(\hat x)}\partial_i\mathbf Y_i(x)\,\rd x_i\Big)\rd\hat x .\]
+Fix $\hat x\in\Sigma'$, write $a=a(\hat x)$, $b=b(\hat x)$ (so $a<b$), and let $h(r):=\mathbf Y_i(x_1,\dots,x_{i-1},r,x_{i+1},\dots,x_N)$. Then $h\in C^1(\R)$, $h'(r)=\partial_i\mathbf Y_i(\dots,r,\dots)$, and $h(r)=0$ for $|r|>r_0$.
+If $a>-\infty$, the point with $i$-th coordinate $r=a=x_{i-1}$ satisfies $x_1<\dots<x_{i-1}=r<x_{i+1}<\dots<x_N$, so it lies in $\partial\Sig$ and $h(a)=0$; likewise $h(b)=0$ if $b<\infty$.
+Since $h=0$ on the open set $\{|r|>r_0\}$, also $h'=0$ there. Put $a':=a$ if $a>-\infty$; if $a=-\infty$, put $a':=-r_0-1-|b|$ when $b<\infty$ and $a':=-r_0-1$ when $b=\infty$. Symmetrically, $b':=b$ if $b<\infty$; if $b=\infty$, $b':=r_0+1+|a|$ when $a>-\infty$ and $b':=r_0+1$ when $a=-\infty$.
+Then $a\le a'<b'\le b$, $a',b'$ are finite, $h(a')=h(b')=0$ (either by the wall condition or because $|a'|,|b'|>r_0$), and $h'=0$ on $(a,a')\cup(b',b)$. By the fundamental theorem of calculus
+$\int_a^bh'(r)\,\rd r=\int_{a'}^{b'}h'(r)\,\rd r=h(b')-h(a')=0$.
+Hence $\int_{\Sig}\partial_i\mathbf Y_i=0$ for each $i$, and $\int_{\Sig}\dv\mathbf Y=0$.
+
+\emph{Step 2: general $\mathbf Y$.} Let $\chi:\R\to[0,1]$, $\chi(\tau):=1$ for $\tau\le1$, $\chi(\tau):=1-3(\tau-1)^2+2(\tau-1)^3$ for $1\le\tau\le2$, $\chi(\tau):=0$ for $\tau\ge2$. Then $\chi\in C^1(\R)$ (the pieces match with value $1$, slope $0$ at $\tau=1$ and value $0$, slope $0$ at $\tau=2$), $\chi'(\tau)=-6(\tau-1)(2-\tau)$ on $[1,2]$, so $|\chi'|\le\frac32$, and $\chi$ is nonincreasing.
+For $r\ge1$ put $\chi_r(x):=\chi(|x|^2/r^2)\in C^1(\R^N)$: $\chi_r=1$ on $\{|x|\le r\}$, $\chi_r=0$ on $\{|x|\ge\sqrt2r\}$, and $\nabla\chi_r(x)=\chi'(|x|^2/r^2)\,2x/r^2$ vanishes unless $|x|\le\sqrt2r$, so
+\[|\nabla\chi_r(x)|\le\tfrac32\cdot\frac{2\sqrt2\,r}{r^2}=\frac{3\sqrt2}{r}.\]
+The field $\chi_r\mathbf Y$ is $C^1$, vanishes outside $\{|x|\le\sqrt2r\}$ and on $\partial\Sig$. By Step 1 and $\dv(\chi_r\mathbf Y)=\chi_r\dv\mathbf Y+\nabla\chi_r\cdot\mathbf Y$ (both terms are in $L^1(\Sig)$ by the hypotheses),
+\[0=\int_{\Sig}\chi_r\,\dv\mathbf Y\,\rd x+\int_{\Sig}\nabla\chi_r\cdot\mathbf Y\,\rd x .\]
+As $r\to\infty$ along the integers, $\chi_r\dv\mathbf Y\to\dv\mathbf Y$ pointwise with $|\chi_r\dv\mathbf Y|\le|\dv\mathbf Y|\in L^1(\Sig)$, so the first integral tends to $\int_{\Sig}\dv\mathbf Y$ by dominated convergence; the second is bounded by $\frac{3\sqrt2}r\int_{\Sig}|\mathbf Y|\to0$. Hence $\int_{\Sig}\dv\mathbf Y=0$.
+\end{proof}
+
+\begin{corollary}[Integration by parts for $L$]\label{cor:ibp}
+Let $\varphi\in C^2(\R^N)$, $k\in C^1(\R^N)$, and assume $k\,|\nabla\varphi|$, $\nabla k\cdot\nabla\varphi$ and $k\,L\varphi$ are in $L^1(\mu^*)$. Then
+\begin{equation}\label{ibp}
+\int_{\Sig}k\,L\varphi\,\rd\mu^*=-\frac1{\beta N}\int_{\Sig}\nabla k\cdot\nabla\varphi\,\rd\mu^* .
+\end{equation}
+\end{corollary}
+\noindent(Here $L\varphi$ is defined on $\Sig$, which carries $\mu^*$; ``$\in L^1(\mu^*)$'' means $\int_{\Sig}|\cdot|\,w\,\rd x<\infty$.)
+
+\begin{proof}
+Let $\mathbf Y:=k\,w\,\nabla\varphi$. Since $k\in C^1$, $w\in C^\infty$ and $\nabla\varphi\in C^1$, $\mathbf Y\in C^1(\R^N;\R^N)$; and $\mathbf Y=0$ on $\partial\Sig$ because $w=0$ there.
+$\int_{\Sig}|\mathbf Y|\rd x=Z_\beta\int_{\Sig}|k||\nabla\varphi|\,\rd\mu^*<\infty$.
+On $\Sig$, by the product rule and \eqref{c5:div},
+$\dv\mathbf Y=w\,\nabla k\cdot\nabla\varphi+k\,\dv(w\nabla\varphi)=w\,\nabla k\cdot\nabla\varphi+\beta N\,k\,w\,L\varphi$,
+and both terms are in $L^1(\Sig)$ by hypothesis. Lemma \ref{lem:div} (in the form with $\mathbf Y=0$ on $\partial\Sig$) gives
+$0=\int_{\Sig}\dv\mathbf Y\,\rd x=Z_\beta\big(\int_{\Sig}\nabla k\cdot\nabla\varphi\,\rd\mu^*+\beta N\int_{\Sig}k\,L\varphi\,\rd\mu^*\big)$, which is \eqref{ibp}.
+\end{proof}
+
+\begin{theorem}[Joint eigenvalue density of GOE/GUE]\label{thm:JD}
+For $\beta\in\{1,2\}$ and all $N\ge1$: $\ \mu=\lambda_*\bG_{N,\beta}=\mu^*$. In particular $\mu(\partial\Sig)=0$, i.e.\ $\bG$-a.e.\ matrix has simple spectrum.
+Moreover, for every random $H_0\in\cH$ (independent of $V$) and every $t>0$, $\nu_t\ll\mu$ and $\nu_t(\partial\Sig)=0$.
+\end{theorem}
+
+\begin{proof}
+Both $\mu$ and $\mu^*$ are Borel probability measures on $\R^N$ ($\mu$ is carried by $\cSig$ because $\lambda$ takes values there). Let $\theta:\R^N\to\R$ be bounded and continuous, and put $\Phi:=\theta\circ\lambda$.
+By Lemma \ref{lem:inv}, $\Phi$ is invariant, and it is bounded and continuous on $\cH$ ($\lambda$ is continuous, Lemma \ref{lem:inv}(a)). For $u>0$ let $\Phi_u:=T_u\Phi$ and $\varphi_u(x):=\Phi_u(\diag x)$.
+
+\emph{Step 1 (regularity and the equation).} By Lemma \ref{lem:M3}, $(u,H)\mapsto\Phi_u(H)$ is $C^\infty$ on $(0,\infty)\times\cH$, $\partial_u\Phi_u=A\Phi_u$, and for $0<u_1<u_2$ there is $C$ (depending on $u_1,u_2,N,\|\theta\|_\infty$) with
+$|\partial_u^j\partial^\alpha_y\Phi_u(H)|\le C(1+|H|)^{2j+|\alpha|}$ for $u\in[u_1,u_2]$, $j\le1$, $|\alpha|\le2$.
+Hence $(u,x)\mapsto\varphi_u(x)$ is $C^\infty$ on $(0,\infty)\times\R^N$, and, using $\partial_i\varphi_u(x)=\partial_{E_{ii}}\Phi_u(\diag x)$ and $|\diag x|=|x|$: for $u\in[u_1,u_2]$, $x\in\R^N$,
+\begin{equation}\label{c5:JDbounds}
+|\varphi_u(x)|\le\|\theta\|_\infty,\qquad|\nabla\varphi_u(x)|\le\sqrt N\,C(1+|x|),\qquad|\partial_u\varphi_u(x)|\le C(1+|x|)^2 .
+\end{equation}
+The first bound holds because $T_u$ is positive with $T_u1=1$ (Lemma \ref{lem:M1}(i)), applied to $\|\theta\|_\infty\pm\Phi\ge0$.
+$\Phi_u$ is invariant (Lemma \ref{lem:inv}) and $C^2$, so by Lemma \ref{lem:givens}, for $x\in\Sig$:
+\begin{equation}\label{c5:JDeq}
+\partial_u\varphi_u(x)=(A\Phi_u)(\diag x)=(L\varphi_u)(x).
+\end{equation}
+
+\emph{Step 2 ($m$ is constant).} Let $m(u):=\int_{\Sig}\varphi_u\,\rd\mu^*$, $u>0$. Fix $0<u_1<u_2$. On $(u_1,u_2)$, $u\mapsto\varphi_u(x)$ is differentiable for every $x$, $x\mapsto\varphi_u(x)$ is continuous, and $|\partial_u\varphi_u(x)|\le C(1+|x|)^2$, which is $\mu^*$-integrable by \eqref{c5:mom}. By differentiation under the integral sign, $m$ is differentiable on $(u_1,u_2)$ with
+$m'(u)=\int_{\Sig}\partial_u\varphi_u\,\rd\mu^*=\int_{\Sig}L\varphi_u\,\rd\mu^*$ (by \eqref{c5:JDeq}).
+Apply Corollary \ref{cor:ibp} with $k\equiv1$ and $\varphi=\varphi_u\in C^2(\R^N)$: $k|\nabla\varphi_u|\le\sqrt NC(1+|x|)$ and $k\,L\varphi_u=\partial_u\varphi_u$ (on $\Sig$) are $\mu^*$-integrable by \eqref{c5:JDbounds}, \eqref{c5:mom}, and $\nabla k\cdot\nabla\varphi_u=0$. Hence $m'(u)=0$.
+As $u_1<u_2$ were arbitrary, $m$ is differentiable on $(0,\infty)$ with $m'\equiv0$, hence constant there.
+
+\emph{Step 3 (the two limits).} By Lemma \ref{lem:M3} (with $\Phi$ bounded and continuous):
+as $u\to\infty$, $\varphi_u(x)\to\int\Phi\,\rd\bG=\int\theta\circ\lambda\,\rd\bG=\int\theta\,\rd\mu$ for every $x$; as $u\downarrow0$, $\varphi_u(x)\to\Phi(\diag x)=\theta(\lambda(\diag x))=\theta(x)$ for every $x\in\cSig$ (Lemma \ref{lem:inv}(a)).
+Since $|\varphi_u|\le\|\theta\|_\infty$ and $\mu^*$ is a probability measure carried by $\Sig$, dominated convergence (along sequences $u_n\to\infty$, $u_n\downarrow0$) gives $m(u)\to\int\theta\,\rd\mu$ as $u\to\infty$ and $m(u)\to\int_{\Sig}\theta\,\rd\mu^*=\int\theta\,\rd\mu^*$ as $u\downarrow0$. As $m$ is constant,
+\[\int_{\R^N}\theta\,\rd\mu=\int_{\R^N}\theta\,\rd\mu^*\qquad\text{for every bounded continuous }\theta:\R^N\to\R .\]
+
+\emph{Step 4 (conclusion).} Two finite Borel measures on the metric space $\R^N$ with the same integrals of all bounded continuous functions are equal. Hence $\mu=\mu^*$.
+In particular $\mu(\partial\Sig)=\mu^*(\partial\Sig)=0$, as $\mu^*(\R^N\setminus\Sig)=0$. Since $\lambda(H)\in\Sig$ iff the eigenvalues of $H$ are pairwise distinct, $\bG(\{H:H\text{ has a multiple eigenvalue}\})=\mu(\partial\Sig)=0$.
+Finally, for $t>0$ the proof of Proposition \ref{prop:U9}(i) (which uses only Lemma \ref{lem:M1}(iv), not the moment assumption) shows $\nu_t\ll\mu$; hence $\nu_t(\partial\Sig)=0$.
+\end{proof}
+
+\begin{remark}
+This replaces the Weyl integration formula (not available in Mathlib; a chart-based proof needs a parametrisation of $U(N)/\mathbb T^N$ and a Jacobian computation). The proof uses only Lemmas \ref{lem:M1}(i), \ref{lem:M3}, \ref{lem:inv}, \ref{lem:givens}, \ref{lem:div} and Corollary \ref{cor:ibp} --- all needed anyway --- and the continuity of $\lambda$ (Weyl's inequality).
+It does not use Proposition \ref{prop:U9}, so there is no circularity: Proposition \ref{prop:U9} uses $\mu=\lambda_*\bG$ only as a definition.
+Only the eigenvalue law of the \emph{Gaussian} ensemble is identified; the disintegration of Lebesgue measure on $\cH$ along conjugation orbits is never used.
+For $N=1$ the statement reduces to $\bG_{1,\beta}=N(0,2/\beta)$, which is the definition of $\bG$.
+\end{remark}
+
+\begin{definition}[Local relaxation measure]\label{def:omega}
+For $R>0$ let $W(x)=W_R(x):=\frac1{2R^2}|x-\gamma|^2$ and
+\begin{equation}\label{omega}
+\omega=\omega_R:=\frac{e^{-NW}}{\int e^{-NW}\rd\mu}\,\mu=\frac{1}{Z_\omega}e^{-\cV_R(x)}\mathbf 1_{\Sig}(x)\,\rd x,\qquad \cV_R(x):=\frac{\beta N}{4}|x|^2+\frac{N}{2R^2}|x-\gamma|^2-\beta\sum_{i<j}\log(x_j-x_i).
+\end{equation}
+(The second equality is Theorem \ref{thm:JD}.) $\psi:=\rd\omega/\rd\mu=e^{-NW}/\int e^{-NW}\rd\mu$.
+\end{definition}
+
+\noindent\emph{Comments.}
+(1) \emph{Well-definedness.} $0<e^{-NW}\le1$, so $\int e^{-NW}\rd\mu\in(0,1]$ and $\omega$ is a Borel probability measure on $\R^N$. The function $\psi(x)=e^{-NW(x)}/\int e^{-NW}\rd\mu$ is $C^\infty$ and positive on all of $\R^N$; it is a version of $\rd\omega/\rd\mu$, and $\omega$ and $\mu$ are mutually absolutely continuous.
+(2) \emph{The second equality in \eqref{omega}.} By Theorem \ref{thm:JD}, $\mu=Z_\beta^{-1}w\mathbf 1_{\Sig}\rd x$. On $\Sig$, $\Delta>0$ and $\Delta^\beta=\exp\big(\beta\sum_{i<j}\log(x_j-x_i)\big)$, so $e^{-NW}w=e^{-\cV_R}$ there. Hence $\omega=Z_\omega^{-1}e^{-\cV_R}\mathbf 1_{\Sig}\rd x$ with
+$Z_\omega:=\int_{\Sig}e^{-\cV_R}\rd x=Z_\beta\int e^{-NW}\rd\mu\in(0,\infty)$.
+(3) \emph{Convexity.} $\omega$ is a convex log-gas in the sense of Definition \ref{def:loggas} with $\cV_0(x)=\frac{\beta N}4|x|^2+\frac N{2R^2}|x-\gamma|^2$, which is $\kappa$-convex with $\kappa=N(\frac\beta2+\frac1{R^2})\ge\frac N{R^2}$ (Comment (2) after Definition \ref{def:loggas}); likewise $\mu^*$ ($R=\infty$, $\kappa=\beta N/2$).
+(4) \emph{Derivatives used later.} $\nabla W(x)=(x-\gamma)/R^2$, $|\nabla W|^2=|x-\gamma|^2/R^4$, $\nabla\log\psi=-N\nabla W$, and $NW(x)\le\frac N{R^2}(|x|^2+|\gamma|^2)$.
+(5) \emph{Notation.} Because $\psi$ denotes $\rd\omega/\rd\mu$, the function $t\mapsto t\log t$ is written $\mathfrak h$ in \S\ref{sec:C6}. Only $\gamma\in\R^N$ (the vector of classical locations, \S\ref{ss:notation}) enters; the statements of this section hold for every fixed $\gamma\in\R^N$.

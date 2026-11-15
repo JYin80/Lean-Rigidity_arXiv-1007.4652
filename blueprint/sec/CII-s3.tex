@@ -1,0 +1,391 @@
+\section{\INFRA\ The Ornstein--Uhlenbeck (Mehler) semigroup on a Euclidean space}\label{sec:C3}
+
+This section is pure Gaussian calculus on a finite-dimensional Euclidean space. It will be applied with $\mathcal E=\cH$, $\sigma^2=2/(\beta N)$ and $g=\bG$.
+Apart from \S\ref{c3:ss:GE}, where the Gaussian ensemble on $\cH$ is described, nothing from the other sections of Part~III is used.
+Every differentiation under an integral sign is justified by an explicit dominating function; the constants in these dominating functions are explicit, but they depend on $d$, $\sigma$ and a lower bound $u_1$ for the time variable, and they are used only qualitatively (Remark \ref{rem:M4}).
+
+\medskip\noindent\emph{Conventions.}
+$(\mathcal E,\la\cdot,\cdot\ra)$ is a real inner product space of dimension $d\ge1$ with norm $|\cdot|$ and its Borel $\sigma$-algebra. Integrals of $[0,\infty]$-valued Borel functions are Lebesgue integrals with values in $[0,\infty]$; ``Borel $\Phi\ge0$'' means Borel $\Phi:\mathcal E\to[0,\infty]$.
+For $f\in C^k(\mathcal E)$, $y\in\mathcal E$ and $e_1,\dots,e_k\in\mathcal E$ we write $\partial_{e_1}\cdots\partial_{e_k}f(y)$ for the iterated directional derivative, and
+\[
+\mathsf N_kf(y):=\sup\{|\partial_{e_1}\cdots\partial_{e_k}f(y)|:\ |e_1|,\dots,|e_k|\le1\}
+\]
+(the norm of the $k$-th derivative as a $k$-linear form; $\mathsf N_0f=|f|$). If $(f_i)$ is an orthonormal basis then $\Delta f=\sum_i\partial_{f_i}\partial_{f_i}f$ (independent of the basis), so $|\Delta f|\le d\,\mathsf N_2f$; and $|\la y,\nabla f(y)\ra|=|\partial_yf(y)|\le|y|\,\mathsf N_1f(y)$.
+A function of $(u,y)$ is differentiated in $y$ by $\partial_e,\nabla,\Delta$ and in $u$ by $\partial_u$.
+
+\subsection{Lebesgue and Gaussian measures on a Euclidean space}\label{c3:ss:gauss}
+
+Let $\mathbf e=(e_1,\dots,e_d)$ be an orthonormal basis of $\mathcal E$ and $J_{\mathbf e}:\R^d\to\mathcal E$, $J_{\mathbf e}(x):=\sum_kx_ke_k$. Then $J_{\mathbf e}$ is a linear bijection with $|J_{\mathbf e}x|=|x|$ (Euclidean norm of $\R^d$), and $J_{\mathbf e}^{-1}y=(\la y,e_k\ra)_{k\le d}$.
+\emph{Lebesgue measure} on $\mathcal E$ is $\lambda_{\mathcal E}:=(J_{\mathbf e})_*\mathrm{Leb}^d$. It does not depend on $\mathbf e$: for another orthonormal basis $\mathbf e'$, $M:=J_{\mathbf e}^{-1}J_{\mathbf e'}$ is a linear isometry of $\R^d$, i.e.\ an orthogonal matrix, so $|\det M|=1$ and $M_*\mathrm{Leb}^d=|\det M|^{-1}\mathrm{Leb}^d=\mathrm{Leb}^d$; hence $(J_{\mathbf e'})_*\mathrm{Leb}^d=(J_{\mathbf e})_*M_*\mathrm{Leb}^d=(J_{\mathbf e})_*\mathrm{Leb}^d$. Consequently:
+\begin{enumerate}[label=(L\arabic*),leftmargin=2.4em,itemsep=1pt]
+\item\label{c3:L1} $\mathcal O_*\lambda_{\mathcal E}=\lambda_{\mathcal E}$ for every linear isometry $\mathcal O$ of $\mathcal E$ (as $\mathcal O\circ J_{\mathbf e}=J_{\mathcal O\mathbf e}$ and $\mathcal O\mathbf e$ is an orthonormal basis; $\mathcal O$ is bijective because it is injective and $\dim\mathcal E<\infty$);
+\item\label{c3:L2} for $m\in\mathcal E$ and $c\in\R\setminus\{0\}$ the map $y\mapsto m+cy$ maps $\lambda_{\mathcal E}$ to $|c|^{-d}\lambda_{\mathcal E}$ (translation invariance and scaling of $\mathrm{Leb}^d$);
+\item\label{c3:L3} on $\mathcal E^2:=\mathcal E\times\mathcal E$ with the inner product $\la(y,z),(y',z')\ra:=\la y,y'\ra+\la z,z'\ra$ one has $\lambda_{\mathcal E^2}=\lambda_{\mathcal E}\otimes\lambda_{\mathcal E}$ (use the orthonormal basis $((e_k,0))_k\cup((0,e_k))_k$, whose coordinate map is $J_{\mathbf e}\times J_{\mathbf e}$, and $\mathrm{Leb}^{2d}=\mathrm{Leb}^d\otimes\mathrm{Leb}^d$).
+\end{enumerate}
+
+\begin{auxdefinition}[Gaussian measures]\label{c3:def:gauss}
+For $s>0$ let $\gamma_s(y):=(2\pi s)^{-d/2}\exp(-|y|^2/(2s))$, $y\in\mathcal E$, and $g_s:=\gamma_s\,\lambda_{\mathcal E}$; let $g_0:=\delta_0$.
+For $m\in\mathcal E$ and $s\ge0$, $N(m,s)$ denotes the image of $g_s$ under $y\mapsto m+y$. (Thus $g_s=N(0,s)$ is the centred Gaussian measure with covariance $s\,\mathrm{Id}$; $g_1$ is the standard Gaussian measure of $\mathcal E$, which is Mathlib's \texttt{stdGaussian}.)
+When the space has to be indicated we write $\gamma^{\mathcal E}_s$, $g^{\mathcal E}_s$.
+\end{auxdefinition}
+
+\begin{auxlemma}[Gaussian measures on $\mathcal E$]\label{c3:gauss}
+Let $s>0$.
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item $g_s$ is a probability measure, and for every orthonormal basis $\mathbf e$, $(J_{\mathbf e}^{-1})_*g_s=\bigotimes_{k=1}^d\mathrm{gaussianReal}(0,s)$. Equivalently: a random vector $Y$ in $\mathcal E$ has law $g_s$ if and only if its coordinates $\la Y,e_1\ra,\dots,\la Y,e_d\ra$ are independent with law $N(0,s)$ each.
+\item $\mathcal O_*g_s=g_s$ for every linear isometry $\mathcal O$ of $\mathcal E$.
+\item For $m\in\mathcal E$ and $c\ne0$ the image of $g_s$ under $y\mapsto m+cy$ is $\gamma_{c^2s}(\cdot-m)\,\lambda_{\mathcal E}$; in particular $N(m,s)=\gamma_s(\cdot-m)\lambda_{\mathcal E}$. For every $s'\ge0$ the image of $g_1$ under $y\mapsto\sqrt{s'}\,y$ is $g_{s'}$.
+\item $g^{\mathcal E}_s\otimes g^{\mathcal E}_s=g^{\mathcal E^2}_s$. For $\alpha,\beta\in\R$ with $\alpha^2+\beta^2=1$ the map $R_{\alpha,\beta}(y,z):=(\alpha y+\beta z,\ \beta y-\alpha z)$ is a linear isometry of $\mathcal E^2$ with $R_{\alpha,\beta}\circ R_{\alpha,\beta}=\mathrm{id}$, and $(R_{\alpha,\beta})_*(g_s\otimes g_s)=g_s\otimes g_s$.
+\item For $\alpha,\beta\in\R$ and $s'\ge0$ the image of $g_{s'}\otimes g_{s'}$ under $(y,z)\mapsto\alpha y+\beta z$ is $g_{(\alpha^2+\beta^2)s'}$.
+\item If $Y\sim g_s$ then $\E Y=0$ (coordinatewise), $\E|Y|^2=ds$, and $\E|Y|^p<\infty$ for every $p\ge0$; more precisely $Y\overset{d}=\sqrt s\,Z$ with $Z\sim g_1$, and $m_p:=\int(1+|z|)^p\,g_1(\rd z)<\infty$ depends only on $(d,p)$.
+\end{enumerate}
+\end{auxlemma}
+
+\begin{proof}
+(a) Write $\varphi_s(t):=(2\pi s)^{-1/2}e^{-t^2/(2s)}$ for the density of $\mathrm{gaussianReal}(0,s)$ on $\R$. Since $|J_{\mathbf e}x|^2=\sum_kx_k^2$, we have $\gamma_s(J_{\mathbf e}x)=\prod_k\varphi_s(x_k)$, and therefore, for Borel $B\subset\R^d$,
+$(J_{\mathbf e}^{-1})_*g_s(B)=\int_{\mathcal E}\mathbf 1_B(J_{\mathbf e}^{-1}y)\gamma_s(y)\,\lambda_{\mathcal E}(\rd y)=\int_{\R^d}\mathbf 1_B(x)\prod_k\varphi_s(x_k)\,\rd x$.
+For a box $B=\prod_kB_k$ Tonelli gives $\prod_k\int_{B_k}\varphi_s$, which is the value of the product measure $\bigotimes_k\mathrm{gaussianReal}(0,s)$ on $B$; two finite measures on $\R^d$ that agree on boxes agree (uniqueness of product measures). With $B=\R^d$ the total mass is $1$.
+The law of $Y$ is $g_s$ iff the law of $J_{\mathbf e}^{-1}Y=(\la Y,e_k\ra)_k$ is $(J_{\mathbf e}^{-1})_*g_s$ (as $J_{\mathbf e}$ is a measurable bijection with measurable inverse), i.e.\ the product measure; and the joint law of finitely many real random variables is the product of their laws iff they are independent.
+
+(b) $\gamma_s(\mathcal Oy)=\gamma_s(y)$ since $|\mathcal Oy|=|y|$. For Borel $B$, using \ref{c3:L1},
+$g_s(\mathcal O^{-1}B)=\int\mathbf 1_B(\mathcal Oy)\gamma_s(\mathcal Oy)\,\lambda_{\mathcal E}(\rd y)=\int\mathbf 1_B(y')\gamma_s(y')\,(\mathcal O_*\lambda_{\mathcal E})(\rd y')=g_s(B)$.
+
+(c) Let $T(y)=m+cy$. By \ref{c3:L2}, for Borel $\Theta\ge0$: $\int\Theta(T y)\gamma_s(y)\lambda_{\mathcal E}(\rd y)=\int\Theta(y')\gamma_s(T^{-1}y')|c|^{-d}\lambda_{\mathcal E}(\rd y')$, and
+$|c|^{-d}\gamma_s((y'-m)/c)=|c|^{-d}(2\pi s)^{-d/2}e^{-|y'-m|^2/(2c^2s)}=\gamma_{c^2s}(y'-m)$. For the last claim take $m=0$, $c=\sqrt{s'}$, $s=1$ if $s'>0$; if $s'=0$ the image is $\delta_0=g_0$.
+
+(d) $\gamma_s(y)\gamma_s(z)=(2\pi s)^{-d}e^{-(|y|^2+|z|^2)/(2s)}=\gamma_s^{\mathcal E^2}(y,z)$, and $\lambda_{\mathcal E^2}=\lambda_{\mathcal E}\otimes\lambda_{\mathcal E}$ by \ref{c3:L3}; so $g_s\otimes g_s=\gamma_s^{\mathcal E^2}\lambda_{\mathcal E^2}=g^{\mathcal E^2}_s$ (again by uniqueness of product measures, checking on rectangles with Tonelli).
+$R=R_{\alpha,\beta}$ is linear, and
+$|\alpha y+\beta z|^2+|\beta y-\alpha z|^2=(\alpha^2+\beta^2)(|y|^2+|z|^2)+2\alpha\beta\la y,z\ra-2\alpha\beta\la y,z\ra=|y|^2+|z|^2$, so $R$ is a linear isometry of $\mathcal E^2$.
+$R(R(y,z))=(\alpha(\alpha y+\beta z)+\beta(\beta y-\alpha z),\ \beta(\alpha y+\beta z)-\alpha(\beta y-\alpha z))=(y,z)$. Apply (b) on $\mathcal E^2$.
+
+(e) If $\alpha=\beta=0$ the image is $\delta_0=g_0$. If $s'=0$ the image of $\delta_{(0,0)}$ is $\delta_0=g_0$. Otherwise let $r:=(\alpha^2+\beta^2)^{1/2}>0$ and $\pi_1(y,z):=y$. Then $\alpha y+\beta z=r\,\pi_1(R_{\alpha/r,\beta/r}(y,z))$. By (d), $(\pi_1\circ R_{\alpha/r,\beta/r})_*(g_{s'}\otimes g_{s'})=(\pi_1)_*(g_{s'}\otimes g_{s'})=g_{s'}$, and by (c) the image of $g_{s'}$ under $y\mapsto ry$ is $\gamma_{r^2s'}\lambda_{\mathcal E}=g_{r^2s'}$.
+
+(f) By (a) the coordinates $\la Y,e_k\ra$ are independent $N(0,s)$, so $\E\la Y,e_k\ra=0$ and $\E|Y|^2=\sum_k\E\la Y,e_k\ra^2=ds$. By (c), $Y\overset d=\sqrt sZ$ with $Z\sim g_1$. Finally $(1+|z|)^p\le(1+\sum_k|z_k|)^p\le(d+1)^{p}\max(1,\max_k|z_k|)^p\le(d+1)^p(1+\sum_k|z_k|^p)$ in the coordinates $z_k=\la z,e_k\ra$, and the one-dimensional Gaussian has finite absolute moments of every order; so $m_p<\infty$.
+\end{proof}
+
+\subsection{The Gaussian ensemble on $\cH$}\label{c3:ss:GE}
+
+We use the notation of \S\ref{ss:notation}: $\K\in\{\R,\C\}$, $\beta=\dim_\R\K$, $\cH=\cH_N(\K)$ with $\la X,Y\ra=\Tr(XY)$, $|X|=(\Tr X^2)^{1/2}$.
+The form $\Tr(XY)$ is real on $\cH$ ($\overline{\Tr(XY)}=\Tr((XY)^*)=\Tr(YX)=\Tr(XY)$), bilinear, symmetric, and $\Tr(X^2)=\sum_{i,j}|x_{ij}|^2>0$ for $X\ne0$; so $(\cH,\la\cdot,\cdot\ra)$ is a real inner product space.
+For $H=(h_{ij})\in\cH$ and $i<j$, using $\Tr(HE_{ij})=h_{ji}=\overline{h_{ij}}$:
+\begin{equation}\label{c3:coord}
+\la H,E_{ii}\ra=h_{ii},\qquad \la H,X_{ij}\ra=\tfrac{h_{ji}+h_{ij}}{\sqrt2}=\sqrt2\,\mathrm{Re}\,h_{ij},\qquad \la H,Y_{ij}\ra=\tfrac{\mathrm i(h_{ji}-h_{ij})}{\sqrt2}=\sqrt2\,\mathrm{Im}\,h_{ij}\quad(\beta=2).
+\end{equation}
+The family $\mathbf b:=(E_{ii})_{i}\cup(X_{ij})_{i<j}\,[\cup(Y_{ij})_{i<j}$ if $\beta=2]$ consists of elements of $\cH$; it is orthonormal (by $\Tr(E_{ab}E_{cd})=\delta_{bc}\delta_{ad}$, products of two elements supported on different index pairs have zero trace; $\Tr X_{ij}^2=\Tr(E_{ii}+E_{jj})/2=1$, $\Tr Y_{ij}^2=-\Tr(-E_{ii}-E_{jj})/2=1$, $\Tr(X_{ij}Y_{ij})=\frac{\mathrm i}2\Tr(E_{jj}-E_{ii})=0$), and it spans $\cH$, because by \eqref{c3:coord}
+$H=\sum_ih_{ii}E_{ii}+\sum_{i<j}\big(\sqrt2\,\mathrm{Re}\,h_{ij}\,X_{ij}+\sqrt2\,\mathrm{Im}\,h_{ij}\,Y_{ij}\big)$ (the $Y$-terms only for $\beta=2$; the $(i,j)$ entry of the right side is $\mathrm{Re}\,h_{ij}+\mathrm i\,\mathrm{Im}\,h_{ij}$). Hence $d=\dim\cH=N+\beta N(N-1)/2$, and $\lambda_\cH$ (\S\ref{c3:ss:gauss}) is the Lebesgue measure $\rd H$ of \S\ref{ss:notation}.
+
+\begin{auxlemma}[The Gaussian ensemble]\label{c3:GE}
+Let $\sigma^2:=2/(\beta N)$ and $\bG:=g^{\cH}_{\sigma^2}$ (Definition \ref{c3:def:gauss} with $\mathcal E=\cH$).
+\begin{enumerate}[label=(\roman*),itemsep=1pt]
+\item $\bG(\rd H)=(2\pi\sigma^2)^{-d/2}\exp\big(-\frac{\beta N}{4}\Tr H^2\big)\,\rd H$.
+\item A random matrix $V=(v_{ij})$ with values in $\cH$ has law $\bG$ if and only if the $\K$-valued random variables $(v_{ij})_{i\le j}$ are independent with the following laws:
+$v_{ii}\sim N(0,2/(\beta N))$ (real); for $i<j$: $v_{ij}\sim N(0,1/N)$ if $\beta=1$, and, if $\beta=2$, the pair $(\sqrt2\,\mathrm{Re}\,v_{ij},\sqrt2\,\mathrm{Im}\,v_{ij})$ has law $N(0,1/N)\otimes N(0,1/N)$.
+In particular $\E v_{ij}=0$, $\E|v_{ij}|^2=1/N$ for $i<j$, $\E v_{ii}^2=2/(\beta N)$, and $\E v_{ij}^2=0$ for $i<j$ if $\beta=2$.
+\item For every $U\in U_\beta(N)$ the map $\mathcal O_U:H\mapsto UHU^*$ is a linear isometry of $\cH$ onto itself, and $(\mathcal O_U)_*\bG=\bG$.
+\item If $V\sim\bG$, then $V$ is an ensemble in the sense of NP (entries $v_{ij}$, $i\le j$, independent, centred, $v_{ji}=\overline{v_{ij}}$, $v_{ii}\in\R$) with variances $\sigma_{ij}^2:=\E|v_{ij}|^2=1/N$ for $i\ne j$ and $\sigma_{ii}^2=2/(\beta N)$. Moreover $\E|V|^2=\E\Tr V^2=d\sigma^2\le N+1$, and $\E|V|^p<\infty$ for all $p\ge0$.
+\end{enumerate}
+\end{auxlemma}
+
+\begin{proof}
+(i) is Definition \ref{c3:def:gauss} with $|H|^2/(2\sigma^2)=\frac{\beta N}4\Tr H^2$.
+
+(ii) By Lemma \ref{c3:gauss}(a) applied to the orthonormal basis $\mathbf b$, $V\sim\bG$ iff the $d$ coordinates $\la V,b\ra$, $b\in\mathbf b$, are independent $N(0,\sigma^2)$. By \eqref{c3:coord} these coordinates are $v_{ii}$, $\xi_{ij}:=\sqrt2\,\mathrm{Re}\,v_{ij}$ and (for $\beta=2$) $\eta_{ij}:=\sqrt2\,\mathrm{Im}\,v_{ij}$; and $v_{ij}=(\xi_{ij}+\mathrm i\eta_{ij})/\sqrt2$ (with $\eta_{ij}:=0$ if $\beta=1$).
+``$\Rightarrow$'': the blocks $\{v_{ii}\}$, $\{\xi_{ij},\eta_{ij}\}$ are disjoint subfamilies of an independent family, so measurable functions of different blocks are independent; this gives the independence of $(v_{ij})_{i\le j}$. The laws: $v_{ii}\sim N(0,\sigma^2)=N(0,2/(\beta N))$; for $\beta=1$, $v_{ij}=\xi_{ij}/\sqrt2\sim N(0,\sigma^2/2)=N(0,1/N)$; for $\beta=2$, $(\xi_{ij},\eta_{ij})\sim N(0,\sigma^2)^{\otimes2}=N(0,1/N)^{\otimes2}$.
+``$\Leftarrow$'': if the $v_{ij}$, $i\le j$, are independent with these laws, then the blocks $\{v_{ii}\}$, $\{\xi_{ij},\eta_{ij}\}$ are independent (each block is a measurable function of one $v_{ij}$), and inside a block the joint law is $N(0,\sigma^2)$ resp.\ $N(0,\sigma^2)^{\otimes2}$ (for $\beta=1$: $\xi_{ij}=\sqrt2v_{ij}\sim N(0,2/N)=N(0,\sigma^2)$). So the joint law of all coordinates is $N(0,\sigma^2)^{\otimes d}$, i.e.\ they are independent $N(0,\sigma^2)$.
+Moments: $\E|v_{ij}|^2=(\E\xi_{ij}^2+\E\eta_{ij}^2)/2=\beta\sigma^2/2=1/N$; for $\beta=2$, $\E v_{ij}^2=(\E\xi_{ij}^2-\E\eta_{ij}^2)/2+\mathrm i\,\E\xi_{ij}\eta_{ij}=0$.
+
+(iii) $\mathcal O_U$ is $\R$-linear and maps $\cH$ into $\cH$: $(UHU^*)^*=UH^*U^*=UHU^*$, and for $\beta=1$ ($U$ real orthogonal) $UHU^{T}$ is real. It preserves the inner product: $\Tr(UXU^*\,UYU^*)=\Tr(UXYU^*)=\Tr(XYU^*U)=\Tr(XY)$. It is bijective with inverse $C_{U^*}$. Apply Lemma \ref{c3:gauss}(b).
+
+(iv) Independence, centring and the variances are (ii); $v_{ji}=\overline{v_{ij}}$ and $v_{ii}\in\R$ hold because $V\in\cH$.
+$\E|V|^2=d\sigma^2$ by Lemma \ref{c3:gauss}(f), and $d\sigma^2=\frac{2}{\beta N}(N+\frac{\beta N(N-1)}2)=\frac2\beta+N-1\le N+1$. Finite moments: Lemma \ref{c3:gauss}(f).
+\end{proof}
+
+\begin{auxremark}\label{c3:rem:I1}
+In Lemma \ref{c3:GE}, (ii) is the coordinate description of \S\ref{ss:notation}, (iii) is the conjugation invariance, (iv) says that $V$ is an ensemble. No complex Gaussian measure is used: for $\beta=2$ the off-diagonal entry is the image of the pair $(\xi_{ij},\eta_{ij})$ of real Gaussians.
+\end{auxremark}
+
+\subsection{The Mehler semigroup}\label{c3:ss:mehler}
+
+From now on $\sigma>0$ is fixed, $g:=g_{\sigma^2}$, so $g(\rd y)=\gamma_{\sigma^2}(y)\,\lambda_{\mathcal E}(\rd y)$ with $\gamma_{\sigma^2}(y)=(2\pi\sigma^2)^{-d/2}e^{-|y|^2/2\sigma^2}$, and for $u\ge0$
+\[
+a_u:=e^{-u/2},\qquad s_u:=1-e^{-u},\qquad a_u^2+s_u=1,\qquad a_ua_v=a_{u+v},\qquad a_v^2s_u+s_v=s_{u+v}.
+\]
+For $u\ge0$ and Borel $\Phi:\mathcal E\to[0,\infty]$, and also for Borel $\Phi:\mathcal E\to\R$ whenever the integral converges absolutely (e.g.\ for bounded $\Phi$), define
+\begin{equation}\label{Mehler}
+(T_u\Phi)(y):=\int\Phi\big(a_uy+s_u^{1/2}z\big)\,g(\rd z)=\int\Phi(w)\,\gamma_{\sigma^2s_u}(w-a_uy)\,\lambda_{\mathcal E}(\rd w)\quad(u>0),
+\qquad A:=\frac{\sigma^2}{2}\Delta-\frac12\la y,\nabla\ra .
+\end{equation}
+The second expression follows from Lemma \ref{c3:gauss}(c): for $u>0$ the image of $g$ under $z\mapsto a_uy+s_u^{1/2}z$ is $\gamma_{\sigma^2s_u}(\cdot-a_uy)\lambda_{\mathcal E}$. For $u=0$, $T_0\Phi=\Phi$.
+Since $(y,z)\mapsto\Phi(a_uy+s_u^{1/2}z)$ is Borel on $\mathcal E^2$, $y\mapsto T_u\Phi(y)$ is Borel (Tonelli; Fubini for bounded $\Phi$), and $|T_u\Phi|\le T_u|\Phi|$.
+For a Borel probability measure $\rho$ on $\mathcal E$ and $u\ge0$ let
+\[
+\rho_u:=(m_u)_*(\rho\otimes g),\qquad m_u(y,z):=a_uy+s_u^{1/2}z ,
+\]
+i.e.\ $\rho_u=\mathrm{law}(a_uY+s_u^{1/2}Z)$ with $Y\sim\rho$, $Z\sim g$ independent. In the application $\rho=\mathrm{law}(H_0)$ and $\rho_t=\mathrm{law}(H_t)$, by \eqref{Ht}.
+
+\begin{auxlemma}[The Mehler kernel]\label{c3:kernel}
+For $u>0$ and $y,w\in\mathcal E$ let
+\begin{equation}\label{c3:K}
+K(u,y,w):=s_u^{-d/2}\exp\Big(\frac{2a_u\la y,w\ra-a_u^2(|y|^2+|w|^2)}{2\sigma^2s_u}\Big).
+\end{equation}
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item $K>0$, $K(u,y,w)=K(u,w,y)$, and $\gamma_{\sigma^2}(w)K(u,y,w)=\gamma_{\sigma^2s_u}(w-a_uy)$, $\gamma_{\sigma^2}(y)K(u,y,w)=\gamma_{\sigma^2s_u}(y-a_uw)$.
+\item For $u>0$, $y\in\mathcal E$ and Borel $\Phi\ge0$ (or Borel $\Phi$ with $\int|\Phi|K(u,y,\cdot)\rd g<\infty$): $T_u\Phi(y)=\int\Phi(w)K(u,y,w)\,g(\rd w)$.
+\item $K\in C^\infty((0,\infty)\times\mathcal E\times\mathcal E)$. With $v=v(u,y,w):=a_u(w-a_uy)/(\sigma^2s_u)$ and $c_u:=a_u^2/(\sigma^2s_u)$:
+$\ \partial_eK=\la e,v\ra K$ and $\partial_{e'}\la e,v\ra=-c_u\la e,e'\ra$ for $e,e'\in\mathcal E$ (derivatives in $y$); and $\partial_uK=A_yK$, where $A_y$ is $A$ acting on the variable $y$.
+\item $K(u,y,w)\le s_u^{-d/2}e^{|y|^2/(2\sigma^2)}$ and $\gamma_{\sigma^2}(y)K(u,y,w)\le(2\pi\sigma^2s_u)^{-d/2}\exp\big(-(|y|-|w|)_+^2/(2\sigma^2)\big)$.
+\end{enumerate}
+\end{auxlemma}
+
+\begin{proof}
+Write $a=a_u$, $s=s_u$. (a) $\gamma_{\sigma^2s}(w-ay)/\gamma_{\sigma^2}(w)=s^{-d/2}\exp\big(-\frac{|w-ay|^2}{2\sigma^2s}+\frac{|w|^2}{2\sigma^2}\big)$ and
+$-|w-ay|^2+s|w|^2=-|w|^2+2a\la y,w\ra-a^2|y|^2+s|w|^2=2a\la y,w\ra-a^2(|y|^2+|w|^2)$ because $s-1=-a^2$. The exponent in \eqref{c3:K} is symmetric in $(y,w)$, which gives the symmetry and the second identity.
+(b) By the second expression in \eqref{Mehler} and (a): $T_u\Phi(y)=\int\Phi(w)K(u,y,w)\gamma_{\sigma^2}(w)\lambda_{\mathcal E}(\rd w)$.
+(c) $u\mapsto a_u,s_u,s_u^{-1},s_u^{-d/2}$ are $C^\infty$ on $(0,\infty)$ (as $s_u>0$), the exponent in \eqref{c3:K} is a polynomial in $(y,w)$ with these coefficients, and $\exp$ is $C^\infty$. Let $F:=\log K=-\frac d2\log s+\frac{P}{2\sigma^2s}$, $P:=2a\la y,w\ra-a^2(|y|^2+|w|^2)$.
+Then $\partial_eF=\frac{2a\la e,w\ra-2a^2\la e,y\ra}{2\sigma^2s}=\la e,v\ra$, and $\partial_{e'}\la e,v\ra=-\frac{a^2}{\sigma^2s}\la e,e'\ra$. Hence $\Delta K=(|v|^2-dc_u)K$ and $\la y,\nabla K\ra=\la y,v\ra K$, so
+$A_yK/K=\frac{\sigma^2}2|v|^2-\frac{\sigma^2d}{2}c_u-\frac12\la y,v\ra$.
+On the other hand $\frac{\rd a}{\rd u}=-\frac a2$ and $\frac{\rd s}{\rd u}=a^2$, so $\partial_u(-\frac d2\log s)=-\frac{da^2}{2s}=-\frac{\sigma^2d}{2}c_u$, and with $\partial_uP=-a\la y,w\ra+a^2(|y|^2+|w|^2)$:
+\[
+\partial_u\frac{P}{2\sigma^2s}=\frac{s\,\partial_uP-a^2P}{2\sigma^2s^2}=\frac{-a(s+2a^2)\la y,w\ra+a^2(s+a^2)(|y|^2+|w|^2)}{2\sigma^2s^2}=\frac{a^2|y|^2+a^2|w|^2-a(1+a^2)\la y,w\ra}{2\sigma^2s^2}.
+\]
+Also $\frac{\sigma^2}2|v|^2-\frac12\la y,v\ra=\frac{a^2(|w|^2-2a\la y,w\ra+a^2|y|^2)-as(\la y,w\ra-a|y|^2)}{2\sigma^2s^2}=\frac{a^2|w|^2+a^2(a^2+s)|y|^2-a(2a^2+s)\la y,w\ra}{2\sigma^2s^2}$, which is the same expression since $a^2+s=1$.
+Hence $\partial_uF=A_yK/K$, i.e.\ $\partial_uK=A_yK$.
+(d) By (a), $K=s^{-d/2}\exp\big(\frac{|y|^2}{2\sigma^2}-\frac{|y-aw|^2}{2\sigma^2s}\big)\le s^{-d/2}e^{|y|^2/(2\sigma^2)}$. Since $0<a\le1$, $|y-aw|\ge|y|-|w|$, so $|y-aw|\ge(|y|-|w|)_+$; with $s\le1$, $\gamma_{\sigma^2s}(y-aw)\le(2\pi\sigma^2s)^{-d/2}e^{-(|y|-|w|)_+^2/(2\sigma^2)}$.
+\end{proof}
+
+\begin{lemma}[Algebraic properties]\label{lem:M1}
+For $u,v\ge0$:
+\begin{enumerate}[label=(\roman*),itemsep=1pt]
+\item $T_u1=1$, $T_u\Phi\ge0$ for Borel $\Phi\ge0$, $T_uT_v\Phi=T_{u+v}\Phi$ for Borel $\Phi\ge0$ and for bounded Borel $\Phi$, and $(\rho_u)_v=\rho_{u+v}$ for every probability measure $\rho$.
+\item (symmetry) $\int\Phi\,T_u\Theta\,\rd g=\int\Theta\,T_u\Phi\,\rd g$ in $[0,\infty]$ for Borel $\Phi,\Theta\ge0$; and for real Borel $\Phi,\Theta$ with $\int|\Phi|\,T_u|\Theta|\,\rd g<\infty$ (e.g.\ $\Theta$ bounded and $\Phi\in L^1(g)$), in which case all integrals converge absolutely (here $T_u\Theta$ is finite $g$-a.e.\ on $\{\Phi\ne0\}$, and $\Phi\,T_u\Theta:=0$ where $\Phi=0$; symmetrically for $\Theta\,T_u\Phi$).
+\item $T_u(\Phi\circ\mathcal O)=(T_u\Phi)\circ\mathcal O$ for every linear isometry $\mathcal O$ of $\mathcal E$ and every Borel $\Phi\ge0$ or bounded Borel $\Phi$.
+\item If $\rho=\Phi g$ with Borel $\Phi\ge0$, $\int\Phi\,\rd g=1$, then $\rho_u=(T_u\Phi)\,g$.
+In general, for $u>0$, $\rho_u$ has the Lebesgue density $p(u,y)=\int\gamma_{\sigma^2s_u}(y-a_uw)\,\rho(\rd w)\in(0,(2\pi\sigma^2s_u)^{-d/2}]$, and
+$\rho_u=\Psi(u,\cdot)\,g$ with $\Psi(u,y):=p(u,y)/\gamma_{\sigma^2}(y)=\int K(u,y,w)\,\rho(\rd w)\in(0,\infty)$; in particular $\rho_u\ll g$ and $g\ll\rho_u$.
+If $\rho=\Phi g$ as above, then $\Psi(u,y)=T_u\Phi(y)$ for \emph{every} $y\in\mathcal E$ and $u>0$.
+\item $\int F\,\rd\rho_u=\int T_uF\,\rd\rho$ for Borel $F\ge0$ and for bounded Borel $F$.
+\item If $\int|w|^q\rho(\rd w)<\infty$ for some $q\ge0$, then $\int|y|^q\rho_u(\rd y)\le2^q\big(\int|w|^q\rho(\rd w)+\sigma^qs_u^{q/2}\int|z|^qg_1(\rd z)\big)<\infty$; and $\int|y|^2\rho_u(\rd y)=e^{-u}\int|w|^2\rho(\rd w)+s_u\sigma^2d$ whenever $\int|w|^2\rho(\rd w)<\infty$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write $a=a_u$, $b=s_u^{1/2}$.
+(v) For Borel $F\ge0$, by definition of the image measure and Tonelli, $\int F\rd\rho_u=\int F\circ m_u\,\rd(\rho\otimes g)=\int\big(\int F(ay+bz)g(\rd z)\big)\rho(\rd y)=\int T_uF\,\rd\rho$. For bounded $F$ apply this to $F^\pm$ (all terms finite).
+
+(i) $T_u1=1$ as $g$ is a probability measure; $T_u\Phi\ge0$ is clear. Let $\Phi\ge0$ be Borel and $y\in\mathcal E$. By Tonelli,
+$T_u(T_v\Phi)(y)=\int\!\!\int\Phi\big(a_v(ay+bz)+s_v^{1/2}z'\big)\,g(\rd z')g(\rd z)=\int\Phi(a_{u+v}y+w)\,\pi(\rd w)$,
+where $\pi$ is the image of $g\otimes g$ under $(z,z')\mapsto a_vb\,z+s_v^{1/2}z'$. By Lemma \ref{c3:gauss}(e) (with $s'=\sigma^2$), $\pi=g_{\sigma^2(a_v^2s_u+s_v)}=g_{\sigma^2s_{u+v}}$, which by Lemma \ref{c3:gauss}(c) is the image of $g=g_{\sigma^2}$ under $z\mapsto s_{u+v}^{1/2}z$. Hence $T_uT_v\Phi(y)=\int\Phi(a_{u+v}y+s_{u+v}^{1/2}z)g(\rd z)=T_{u+v}\Phi(y)$.
+For bounded $\Phi$ apply this to $\Phi^\pm$ (all values finite, and $T_v$ is linear on bounded functions).
+For Borel $B$, by (v) twice and the semigroup property for $\mathbf 1_B$: $(\rho_u)_v(B)=\int T_v\mathbf 1_B\,\rd\rho_u=\int T_u(T_v\mathbf 1_B)\,\rd\rho=\int T_{u+v}\mathbf 1_B\,\rd\rho=\rho_{u+v}(B)$.
+
+(ii) Let $\Phi,\Theta\ge0$ be Borel. As $a^2+b^2=1$, $R:=R_{a,b}$ of Lemma \ref{c3:gauss}(d) preserves $g\otimes g$ and $R\circ R=\mathrm{id}$. Put $G(y,z):=\Phi(y)\Theta(\pi_1R(y,z))$, $\pi_1(y,z)=y$, so that $\pi_1R(y,z)=ay+bz$. Then, by Tonelli and the invariance,
+\[
+\int\Phi\,T_u\Theta\,\rd g=\int G\,\rd(g\otimes g)=\int G\circ R\,\rd(g\otimes g)=\int\Phi(ay+bz)\Theta(y)\,(g\otimes g)(\rd y,\rd z)=\int\Theta\,T_u\Phi\,\rd g ,
+\]
+using $G(R(y,z))=\Phi(\pi_1R(y,z))\Theta(\pi_1R(R(y,z)))=\Phi(ay+bz)\Theta(y)$.
+For real $\Phi,\Theta$ with $\int|\Phi|T_u|\Theta|\rd g<\infty$: the nonnegative identity gives $\int|\Theta|T_u|\Phi|\rd g<\infty$ as well, so the four identities for $\Phi^\pm,\Theta^\pm$ are between finite numbers, and subtracting them gives the claim. If $\Theta$ is bounded and $\Phi\in L^1(g)$, then $\int|\Phi|T_u|\Theta|\rd g\le\|\Theta\|_\infty\int|\Phi|\rd g$.
+
+(iii) By Lemma \ref{c3:gauss}(b), $\mathcal O_*g=g$, so $T_u(\Phi\circ\mathcal O)(y)=\int\Phi(a\mathcal Oy+b\mathcal Oz)g(\rd z)=\int\Phi(a\mathcal Oy+bz')(\mathcal O_*g)(\rd z')=T_u\Phi(\mathcal Oy)$.
+
+(iv) If $\rho=\Phi g$: for Borel $B$, by (v) and (ii), $\rho_u(B)=\int T_u\mathbf 1_B\,\Phi\,\rd g=\int\mathbf 1_B\,T_u\Phi\,\rd g$.
+General $\rho$, $u>0$: by (v), the second expression in \eqref{Mehler} and Tonelli, $\rho_u(B)=\int\big(\int\mathbf 1_B(y)\gamma_{\sigma^2s_u}(y-aw)\lambda_{\mathcal E}(\rd y)\big)\rho(\rd w)=\int_Bp(u,y)\lambda_{\mathcal E}(\rd y)$.
+The bounds on $p$ hold since $0<\gamma_{\sigma^2s_u}\le(2\pi\sigma^2s_u)^{-d/2}$ and $\rho$ is a probability measure.
+By Lemma \ref{c3:kernel}(a), $p(u,y)/\gamma_{\sigma^2}(y)=\int K(u,y,w)\rho(\rd w)$, and $\rho_u(B)=\int_B\Psi(u,y)\gamma_{\sigma^2}(y)\lambda_{\mathcal E}(\rd y)=\int_B\Psi(u,\cdot)\rd g$. Since $0<\Psi<\infty$, $\rho_u$ and $g$ are mutually absolutely continuous.
+If $\rho=\Phi g$, then $\Psi(u,y)=\int K(u,y,w)\Phi(w)g(\rd w)=T_u\Phi(y)$ for every $y$, by Lemma \ref{c3:kernel}(b).
+
+(vi) By (v) with $F=|\cdot|^q$: $\int|y|^q\rd\rho_u=\iint|ay+bz|^qg(\rd z)\rho(\rd y)$, and $|ay+bz|^q\le(|y|+b|z|)^q\le2^q(|y|^q+b^q|z|^q)$; finally $g$ is the image of $g_1$ under $z\mapsto\sigma z$ (Lemma \ref{c3:gauss}(c)), and $\int|z|^qg_1(\rd z)<\infty$ (Lemma \ref{c3:gauss}(f)).
+For $q=2$: $\int|ay+bz|^2g(\rd z)=a^2|y|^2+2ab\la y,\int z\,g(\rd z)\ra+b^2\int|z|^2g(\rd z)=a^2|y|^2+s_u\sigma^2d$ by Lemma \ref{c3:gauss}(f); integrate in $\rho(\rd y)$ and use $a^2=e^{-u}$.
+\end{proof}
+
+\subsection{Derivatives of the Mehler kernel; differentiation under the integral sign}\label{c3:ss:deriv}
+
+\emph{Constants.} Let $t_0=t_1=1$ and $t_{k+1}:=t_k+k\,t_{k-1}$ ($k\ge1$); $t_k$ is the number of partial matchings of $\{1,\dots,k\}$ (sets of pairwise disjoint two-element subsets), and $t_k\le k!$ by induction ($t_{k+1}\le k!+k(k-1)!\le(k+1)!$).
+Let
+\[
+c_{0,k}:=t_k,\qquad c_{j,k}:=\frac{\sigma^2d}{2}\,c_{j-1,k+2}+\frac12\,c_{j-1,k+1}+\frac k2\,c_{j-1,k}\quad(j\ge1,\ k\ge0),\qquad \hat c_n:=\max_{0\le j\le n}c_{j,n-j}.
+\]
+For $u_1>0$ let
+\[
+\kappa=\kappa(u_1):=1+\frac{1}{\sigma^2s_{u_1}}+\frac{1}{\sigma s_{u_1}^{1/2}},\qquad \Lambda(y,w):=\kappa\,(1+|y|+|w|)\ \ (\ge1).
+\]
+These numbers depend only on $(j,k,n,d,\sigma,u_1)$. On $\R\times\mathcal E$ we use the norm $\|(h,e)\|:=\max(|h|,|e|)$; $D^n_x$ denotes the $n$-th Fr\'echet derivative in $x=(u,y)\in(0,\infty)\times\mathcal E$, and $\|\cdot\|$ the norm of $n$-linear forms.
+
+\begin{auxlemma}[Explicit derivative bounds for the kernel]\label{c3:kbounds}
+Let $u_1>0$. For all $u\ge u_1$, $y,w\in\mathcal E$, $j,k,n\ge0$ and $e_1,\dots,e_k\in\mathcal E$ with $|e_i|\le1$:
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item $\partial_u^j\partial_{e_1}\cdots\partial_{e_k}K(u,y,w)=\partial_{e_1}\cdots\partial_{e_k}(A_y^jK)(u,y,w)$;
+\item $|\partial_u^j\partial_{e_1}\cdots\partial_{e_k}K(u,y,w)|\le c_{j,k}\,\Lambda(y,w)^{k+2j}\,K(u,y,w)$;
+\item $\|D^n_xK(u,y,w)\|\le2^n\hat c_n\,\Lambda(y,w)^{2n}\,K(u,y,w)$.
+\end{enumerate}
+\end{auxlemma}
+
+\begin{proof}
+Fix $w$; all derivatives below are in $(u,y)$, and $K\in C^\infty$ (Lemma \ref{c3:kernel}(c)), so partial derivatives commute.
+
+\emph{Step 1 ($j=0$; a matching formula).} Let $\mathsf M_k$ be the set of partial matchings of $\{1,\dots,k\}$; for $\pi\in\mathsf M_k$ let $U(\pi)$ be the set of unmatched indices. We claim
+\begin{equation}\label{c3:match}
+\partial_{e_1}\cdots\partial_{e_k}K=K\sum_{\pi\in\mathsf M_k}(-c_u)^{|\pi|}\prod_{\{i,l\}\in\pi}\la e_i,e_l\ra\prod_{i\in U(\pi)}\la e_i,v\ra .
+\end{equation}
+For $k=0$ this is trivial. Assume it for $k$ and apply $\partial_{e_{k+1}}$ with the product rule and Lemma \ref{c3:kernel}(c): differentiating $K$ produces the factor $\la e_{k+1},v\ra$, i.e.\ the matching $\pi$ of $\{1,..,k+1\}$ with $k+1$ unmatched; differentiating a factor $\la e_i,v\ra$, $i\in U(\pi)$, produces $-c_u\la e_i,e_{k+1}\ra$, i.e.\ the matching $\pi\cup\{\{i,k+1\}\}$. Every partial matching of $\{1,\dots,k+1\}$ arises exactly once in this way (remove $k+1$, or the pair containing it), which proves \eqref{c3:match} for $k+1$; it also shows $|\mathsf M_{k+1}|=|\mathsf M_k|+k|\mathsf M_{k-1}|$, i.e.\ $|\mathsf M_k|=t_k$.
+For $u\ge u_1$: $a_u\le1$ and $s_u\ge s_{u_1}$, so $|v|\le\frac{|w|+|y|}{\sigma^2s_{u_1}}$ and $c_u^{1/2}\le\frac1{\sigma s_{u_1}^{1/2}}$, whence $|v|+c_u^{1/2}\le\Lambda$. Each term of \eqref{c3:match} is bounded by $c_u^{|\pi|}|v|^{k-2|\pi|}\le(c_u^{1/2}+|v|)^k\le\Lambda^k$ (as $|e_i|\le1$), so $|\partial_{e_1}\cdots\partial_{e_k}K|\le t_k\Lambda^kK$, i.e.\ $\mathsf N_k(K(u,\cdot,w))(y)\le c_{0,k}\Lambda^kK$.
+
+\emph{Step 2 (proof of (a)).} $A_y$ has coefficients independent of $u$. By induction on $j$, using Lemma \ref{c3:kernel}(c) and the commutation of $\partial_u$ with $y$-derivatives: $\partial_u^jK=\partial_u(A_y^{j-1}K)=A_y^{j-1}\partial_uK=A_y^jK$. Then $\partial_u^j\partial_{e_1}\cdots\partial_{e_k}K=\partial_{e_1}\cdots\partial_{e_k}\partial_u^jK=\partial_{e_1}\cdots\partial_{e_k}A_y^jK$.
+
+\emph{Step 3 (a commutator).} For $f\in C^\infty(\mathcal E)$ and $e\in\mathcal E$: $\partial_e\la y,\nabla f(y)\ra=\partial_e\big(Df(y)[y]\big)=D^2f(y)[y,e]+Df(y)[e]=\la y,\nabla\partial_ef(y)\ra+\partial_ef(y)$, and $\partial_e\Delta f=\Delta\partial_ef$. Hence $\partial_e(Af)=A\partial_ef-\frac12\partial_ef$, and by induction on $k$
+\[
+\partial_{e_1}\cdots\partial_{e_k}(Af)=A\,\partial_{e_1}\cdots\partial_{e_k}f-\frac k2\,\partial_{e_1}\cdots\partial_{e_k}f .
+\]
+With $|\Delta F|\le d\,\mathsf N_2F$ and $|\la y,\nabla F(y)\ra|\le|y|\,\mathsf N_1F(y)$ (Conventions) applied to $F=\partial_{e_1}\cdots\partial_{e_k}f$ this gives, for $|e_i|\le1$,
+\begin{equation}\label{c3:NA}
+\mathsf N_k(Af)(y)\le\frac{\sigma^2d}2\,\mathsf N_{k+2}f(y)+\frac{|y|}2\,\mathsf N_{k+1}f(y)+\frac k2\,\mathsf N_kf(y).
+\end{equation}
+
+\emph{Step 4 (proof of (b)).} We show $\mathsf N_k(A_y^jK)\le c_{j,k}\Lambda^{k+2j}K$ for all $k$, by induction on $j$; by (a) this is (b). The case $j=0$ is Step 1. For $j\ge1$ apply \eqref{c3:NA} to $f=A_y^{j-1}K(u,\cdot,w)$ and the induction hypothesis:
+$\mathsf N_k(A_y^jK)\le\big[\frac{\sigma^2d}2c_{j-1,k+2}\Lambda^{k+2j}+\frac{|y|}2c_{j-1,k+1}\Lambda^{k+2j-1}+\frac k2c_{j-1,k}\Lambda^{k+2j-2}\big]K\le c_{j,k}\Lambda^{k+2j}K$, using $|y|\le\Lambda$ and $\Lambda\ge1$.
+
+\emph{Step 5 (proof of (c)).} For $\xi_i=(h_i,e_i)\in\R\times\mathcal E$, $\xi_i=h_i(1,0)+(0,e_i)$, multilinearity and symmetry of $D^n_xK$ give
+$D^n_xK[\xi_1,\dots,\xi_n]=\sum_{S\subset\{1,\dots,n\}}\big(\prod_{i\in S}h_i\big)\,\partial_u^{|S|}\prod_{i\notin S}\partial_{e_i}K$.
+If $\|\xi_i\|\le1$ for all $i$, (b) bounds the term of $S$ by $c_{|S|,n-|S|}\Lambda^{n+|S|}K\le\hat c_n\Lambda^{2n}K$; there are $2^n$ terms.
+\end{proof}
+
+\begin{auxlemma}[Smoothing of kernel integrals, with explicit domination]\label{c3:smooth}
+Let $\rho$ be a finite Borel measure on $\mathcal E$ with $M_p(\rho):=\int(1+|w|)^p\rho(\rd w)<\infty$ for every $p\ge0$, and let $h:\mathcal E\to\R$ be bounded and Borel. Put $\Omega:=(0,\infty)\times\mathcal E$ and
+\[
+\Psi_h(u,y):=\int K(u,y,w)\,h(w)\,\rho(\rd w),\qquad (u,y)\in\Omega .
+\]
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item (Domination.) For $u_1>0$, $r\ge0$, $n\ge0$ and all $(u,y)\in\Omega$ with $u\ge u_1$, $|y|\le r$:
+\begin{equation}\label{c3:dom}
+\|D^n_xK(u,y,w)\,h(w)\|\le G_{n,u_1,r}(w):=\|h\|_\infty\,2^n\hat c_n\,\kappa(u_1)^{2n}\,s_{u_1}^{-d/2}e^{r^2/(2\sigma^2)}\,(1+r+|w|)^{2n},
+\end{equation}
+and $\int G_{n,u_1,r}\,\rd\rho\le\|h\|_\infty2^n\hat c_n\kappa(u_1)^{2n}s_{u_1}^{-d/2}e^{r^2/(2\sigma^2)}(1+r)^{2n}M_{2n}(\rho)<\infty$.
+\item (Smoothness.) $\Psi_h\in C^\infty(\Omega)$ and $D^n\Psi_h(x)=\int D^n_xK(x,w)h(w)\rho(\rd w)$ (absolutely convergent Bochner integral of $n$-linear forms) for all $n$ and $x\in\Omega$. In particular $\partial_u^j\partial_{e_1}\cdots\partial_{e_k}\Psi_h=\int\partial_u^j\partial_{e_1}\cdots\partial_{e_k}K\,h\,\rd\rho$, and $\partial_u\Psi_h=A\Psi_h$ on $\Omega$.
+\item (Gaussian-weighted bound.) For $u\ge u_1>0$, $y\in\mathcal E$, $|e_i|\le1$:
+\[
+\gamma_{\sigma^2}(y)\,|\partial_u^j\partial_{e_1}\cdots\partial_{e_k}\Psi_h(u,y)|\le\|h\|_\infty\,c_{j,k}\,\kappa(u_1)^{k+2j}(2\pi\sigma^2s_{u_1})^{-d/2}\int(1+|y|+|w|)^{k+2j}e^{-(|y|-|w|)_+^2/(2\sigma^2)}\rho(\rd w).
+\]
+\item (An elementary integral.) For $p,r\ge0$:
+$\displaystyle\int_{\mathcal E}(1+|y|+r)^pe^{-(|y|-r)_+^2/(2\sigma^2)}\lambda_{\mathcal E}(\rd y)\le B_p(1+r)^{p+d}$, with
+$B_p:=4^d3^p+(8\pi\sigma^2)^{d/2}(1+4\sigma)^pm_p$ ($m_p$ from Lemma \ref{c3:gauss}(f)).
+\end{enumerate}
+\end{auxlemma}
+
+\begin{proof}
+(a) By Lemma \ref{c3:kbounds}(c), $\|D^n_xK\|\le2^n\hat c_n\Lambda^{2n}K$; here $\Lambda\le\kappa(u_1)(1+r+|w|)$, and by Lemma \ref{c3:kernel}(d) $K(u,y,w)\le s_u^{-d/2}e^{|y|^2/(2\sigma^2)}\le s_{u_1}^{-d/2}e^{r^2/(2\sigma^2)}$, because $s_u\ge s_{u_1}$. The integral bound uses $(1+r+|w|)\le(1+r)(1+|w|)$.
+
+(b) For $n\ge0$ and $x\in\Omega$ put $I_n(x):=\int D^n_xK(x,w)h(w)\rho(\rd w)$. The integrand is measurable in $w$ (continuous in $w$ times Borel $h$) and, by (a), dominated by an integrable function locally uniformly in $x$; so $I_n$ is well defined, and $I_0=\Psi_h$.
+Fix $x_0=(u_0,y_0)\in\Omega$ and let $B_0:=\{x:\|x-x_0\|<\eps_0\}$, $\eps_0:=\min(u_0/2,1)$. For $x=(u,y)\in B_0$: $u\ge u_0/2=:u_1$ and $|y|\le|y_0|+1=:r$. For each $w$, $x\mapsto D^n_xK(x,w)h(w)$ is differentiable on $B_0$ with derivative $D^{n+1}_xK(x,w)h(w)$, whose norm is $\le G_{n+1,u_1,r}(w)$ by (a), and $G_{n+1,u_1,r}\in L^1(\rho)$.
+By the theorem on differentiation under the integral sign (Mathlib, see Appendix~\ref{app:mathlib}), $I_n$ is differentiable at $x_0$ with $DI_n(x_0)=I_{n+1}(x_0)$. By dominated convergence with the dominating function $G_{n,u_1,r}$, $I_n$ is continuous on $B_0$.
+Hence by induction $D^n\Psi_h=I_n$ exists and is continuous on $\Omega$ for every $n$, i.e.\ $\Psi_h\in C^\infty(\Omega)$.
+Evaluating $D^{j+k}\Psi_h(x)$ at $((1,0)^{\times j},(0,e_1),\dots,(0,e_k))$ (evaluation at fixed arguments is a continuous linear map and commutes with the Bochner integral) gives the formula for $\partial_u^j\partial_{e_1}\cdots\partial_{e_k}\Psi_h$.
+Finally, with an orthonormal basis $(f_i)$ of $\mathcal E$ and Lemma \ref{c3:kernel}(c):
+$\partial_u\Psi_h(u,y)=\int A_yK\,h\,\rd\rho=\frac{\sigma^2}2\sum_i\int\partial_{f_i}^2K\,h\,\rd\rho-\frac12\int\partial_yK\,h\,\rd\rho=\frac{\sigma^2}2\Delta\Psi_h-\frac12\la y,\nabla\Psi_h\ra=A\Psi_h$
+(here $\partial_y$ is the directional derivative in the direction $y$, and $\int\partial_yK\,h\,\rd\rho=\partial_y\Psi_h=\la y,\nabla\Psi_h\ra$).
+
+(c) By (b) and Lemma \ref{c3:kbounds}(b), $|\partial_u^j\partial_{e_1}\cdots\partial_{e_k}\Psi_h(u,y)|\le\|h\|_\infty c_{j,k}\int\Lambda^{k+2j}K\,\rd\rho$. Multiply by $\gamma_{\sigma^2}(y)$ and use Lemma \ref{c3:kernel}(d) together with $s_u\ge s_{u_1}$ and $\Lambda\le\kappa(u_1)(1+|y|+|w|)$.
+
+(d) On $\{|y|\le2r\}$ the integrand is $\le(1+3r)^p\le3^p(1+r)^p$, and $\{|y|\le2r\}\subset J_{\mathbf e}([-2r,2r]^d)$ (as $|\la y,e_k\ra|\le|y|$) has $\lambda_{\mathcal E}$-measure $\le(4r)^d\le4^d(1+r)^d$.
+On $\{|y|>2r\}$: $|y|-r>|y|/2$, so $(|y|-r)_+^2\ge|y|^2/4$, and $1+|y|+r\le1+2|y|$; hence this part is at most
+$\int(1+2|y|)^pe^{-|y|^2/(8\sigma^2)}\lambda_{\mathcal E}(\rd y)=(8\pi\sigma^2)^{d/2}\int(1+2|y|)^pg_{4\sigma^2}(\rd y)=(8\pi\sigma^2)^{d/2}\int(1+4\sigma|z|)^pg_1(\rd z)$
+(Lemma \ref{c3:gauss}(c): $g_{4\sigma^2}$ is the image of $g_1$ under $z\mapsto2\sigma z$), and $(1+4\sigma|z|)\le(1+4\sigma)(1+|z|)$. Add the two parts and use $(1+r)^{p+d}\ge\max\{(1+r)^p(1+r)^d,1\}$.
+\end{proof}
+
+\subsection{Smoothing, the equation, and bounds}\label{c3:ss:M2}
+
+\begin{lemma}[Smoothing, the equation, and bounds]\label{lem:M2}
+Let $\rho$ be a probability measure on $\mathcal E$ with $\int|w|^m\rho(\rd w)<\infty$ for all $m$, write $M_p:=\int(1+|w|)^p\rho(\rd w)$, $M_2':=\int|w|^2\rho(\rd w)$, and let $\Psi(u,y):=p(u,y)/\gamma_{\sigma^2}(y)=\int K(u,y,w)\rho(\rd w)$ for $u>0$ (Lemma \ref{lem:M1}(iv); so $\rho_u=\Psi(u,\cdot)g$, and $\Psi(u,\cdot)=T_u\Phi$ everywhere if $\rho=\Phi g$). Then:
+\begin{enumerate}[label=(\roman*),itemsep=1pt]
+\item $\Psi\in C^\infty((0,\infty)\times\mathcal E)$, $\Psi>0$, and $\partial_u\Psi=A\Psi$. All derivatives may be taken under the integral sign: $\partial_u^j\partial_{e_1}\cdots\partial_{e_k}\Psi=\int\partial_u^j\partial_{e_1}\cdots\partial_{e_k}K(\cdot,\cdot,w)\rho(\rd w)$, with the dominating functions \eqref{c3:dom} ($h\equiv1$).
+\item For $0<u_1<u_2<\infty$ (in fact for all $u\ge u_1$) and $y\in\mathcal E$: $|\log\Psi(u,y)|\le C_{\log}(1+|y|^2)$ with
+$C_{\log}:=\log2+\frac d2\log\frac1{s_{u_1}}+\frac{1+2M_2'}{\sigma^2s_{u_1}}$.
+\item With $\mathfrak M(y):=\sup_{u\in[u_1,u_2]}\sum_{j\le1,\,|\alpha|\le3}|\partial_u^j\partial_y^\alpha\Psi(u,y)|$ (coordinate derivatives in an orthonormal basis): $\mathfrak M$ is Borel and $\int\mathfrak M(y)(1+|y|)^m\,g(\rd y)<\infty$ for every $m\ge0$. Quantitatively, for all $j,k,m\ge0$,
+\begin{equation}\label{c3:Mbound}
+\int\sup_{u\ge u_1}\mathsf N_k\big(\partial_u^j\Psi(u,\cdot)\big)(y)\,(1+|y|)^m\,g(\rd y)\le c_{j,k}\,\kappa(u_1)^{k+2j}\,(2\pi\sigma^2s_{u_1})^{-d/2}\,B_{m+k+2j}\,M_{m+k+2j+d},
+\end{equation}
+and $\mathfrak M\le\binom{d+3}{3}\sum_{j\le1,\,k\le3}\sup_{u\ge u_1}\mathsf N_k(\partial_u^j\Psi(u,\cdot))$.
+\item (Fisher information) For $u>0$: $\displaystyle\int\frac{|\nabla\Psi(u,\cdot)|^2}{\Psi(u,\cdot)}\rd g\le\frac{2d}{\sigma^2s_u}+\frac{2}{\sigma^4}\int|y|^2\rho_u(\rd y)=\frac{2d}{\sigma^2s_u}+\frac{2(e^{-u}M_2'+s_u\sigma^2d)}{\sigma^4}<\infty$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Lemma \ref{c3:smooth}(a),(b) with $h\equiv1$ ($\rho$ is finite and $M_p<\infty$ for all $p$); $\Psi>0$ as $K>0$.
+
+(ii) Let $u\ge u_1$, $a=a_u$, $s=s_u\in[s_{u_1},1)$. Upper bound: by Lemma \ref{c3:kernel}(d), $\Psi(u,y)\le s_{u_1}^{-d/2}e^{|y|^2/(2\sigma^2)}$, so $\log\Psi\le\frac d2\log\frac1{s_{u_1}}+\frac{|y|^2}{2\sigma^2}\le C_{\log}(1+|y|^2)$ (as $\frac1{2\sigma^2}\le\frac1{\sigma^2s_{u_1}}$).
+Lower bound: let $R_0:=(2M_2')^{1/2}$. By Chebyshev, $\rho(|w|>R_0)\le\frac12$ (if $M_2'=0$ then $\rho=\delta_0$ and $\rho(|w|>0)=0$). For $|w|\le R_0$, by Lemma \ref{c3:kernel}(a) and $s^{-d/2}\ge1$:
+$K(u,y,w)=s^{-d/2}\exp\big(\frac{|y|^2}{2\sigma^2}-\frac{|y-aw|^2}{2\sigma^2s}\big)\ge\exp\big(-\frac{2|y|^2+2|w|^2}{2\sigma^2s}\big)\ge\exp\big(-\frac{|y|^2+2M_2'}{\sigma^2s_{u_1}}\big)$.
+Hence $\Psi(u,y)\ge\int_{|w|\le R_0}K\,\rd\rho\ge\frac12\exp\big(-\frac{|y|^2+2M_2'}{\sigma^2s_{u_1}}\big)$, i.e.\ $\log\Psi\ge-\log2-\frac{|y|^2+2M_2'}{\sigma^2s_{u_1}}\ge-C_{\log}(1+|y|^2)$.
+
+(iii) \emph{Measurability.} For fixed $y$, $u\mapsto\partial_u^j\partial^\alpha_y\Psi(u,y)$ and $u\mapsto\mathsf N_k(\partial_u^j\Psi(u,\cdot))(y)$ are continuous ($\Psi\in C^\infty$; $\mathsf N_k$ is the norm of the continuous $k$-th derivative), and they are continuous in $y$ for fixed $u$. So the suprema over $u$ in an interval equal the suprema over the countable set of rational points of the interval together with its endpoints, and are therefore Borel (even lower semicontinuous) functions of $y$.
+\emph{Bound \eqref{c3:Mbound}.} By Lemma \ref{c3:smooth}(c) with $h\equiv1$, for every $u\ge u_1$ and $|e_i|\le1$, $\gamma_{\sigma^2}(y)|\partial_u^j\partial_{e_1}\cdots\partial_{e_k}\Psi(u,y)|$ is bounded by a quantity that does not depend on $u$ or on the $e_i$; hence the same bound holds for $\gamma_{\sigma^2}(y)\sup_{u\ge u_1}\mathsf N_k(\partial_u^j\Psi(u,\cdot))(y)$. Multiply by $(1+|y|)^m\le(1+|y|+|w|)^m$ inside the $w$-integral, integrate over $\lambda_{\mathcal E}(\rd y)$, exchange the integrals (Tonelli), and apply Lemma \ref{c3:smooth}(d) with $r=|w|$ and $p=m+k+2j$:
+the left side of \eqref{c3:Mbound} is at most $c_{j,k}\kappa^{k+2j}(2\pi\sigma^2s_{u_1})^{-d/2}\int B_{m+k+2j}(1+|w|)^{m+k+2j+d}\rho(\rd w)$.
+\emph{$\mathfrak M$.} A coordinate derivative $\partial_y^\alpha$ is $\partial_{f_{i_1}}\cdots\partial_{f_{i_{|\alpha|}}}$ with basis vectors $|f_i|=1$, so $|\partial_u^j\partial_y^\alpha\Psi|\le\mathsf N_{|\alpha|}(\partial_u^j\Psi)$, and there are $\binom{d+3}3$ multi-indices with $|\alpha|\le3$. Integrability of $\mathfrak M(1+|y|)^m$ follows from \eqref{c3:Mbound}.
+
+(iv) Fix $u>0$, $a=a_u$, $s=s_u$, $t:=\sigma^2s$. Then $p(u,\cdot)=\gamma_{\sigma^2}\Psi(u,\cdot)\in C^\infty$, $p>0$, and by (i) and the product rule
+$\nabla p=\Psi\nabla\gamma_{\sigma^2}+\gamma_{\sigma^2}\nabla\Psi=\int\nabla_y\big(\gamma_{\sigma^2}(y)K(u,y,w)\big)\rho(\rd w)=\int(\nabla\gamma_t)(y-aw)\,\rho(\rd w)$, by Lemma \ref{c3:kernel}(a); here $\nabla\gamma_t(x)=-\frac{x}{t}\gamma_t(x)$.
+By Cauchy--Schwarz in $L^2(\rho)$,
+$|\nabla p(y)|^2\le\Big(\int\frac{|\nabla\gamma_t|}{\gamma_t^{1/2}}(y-aw)\,\gamma_t^{1/2}(y-aw)\,\rho(\rd w)\Big)^2\le p(y)\int\frac{|\nabla\gamma_t|^2}{\gamma_t}(y-aw)\,\rho(\rd w)$.
+Since $\nabla(1/\gamma_{\sigma^2})(y)=\frac{y}{\sigma^2}\frac1{\gamma_{\sigma^2}(y)}$, we have $\nabla\Psi=\big(\nabla p+p\,y/\sigma^2\big)/\gamma_{\sigma^2}$ and
+\[
+\frac{|\nabla\Psi|^2}{\Psi}\,\gamma_{\sigma^2}=\frac{|\nabla p+p\,y/\sigma^2|^2}{p}\le\frac{2|\nabla p|^2}{p}+\frac{2|y|^2p}{\sigma^4}\le2\int\frac{|\nabla\gamma_t|^2}{\gamma_t}(y-aw)\rho(\rd w)+\frac{2|y|^2p(y)}{\sigma^4}.
+\]
+Integrate over $\lambda_{\mathcal E}(\rd y)$ and use Tonelli and translation invariance of $\lambda_{\mathcal E}$:
+$\int\!\!\int\frac{|\nabla\gamma_t|^2}{\gamma_t}(y-aw)\lambda_{\mathcal E}(\rd y)\rho(\rd w)=\int\frac{|x|^2}{t^2}\gamma_t(x)\lambda_{\mathcal E}(\rd x)=\frac{dt}{t^2}=\frac{d}{\sigma^2s}$ (Lemma \ref{c3:gauss}(f)), and $\int|y|^2p(u,y)\lambda_{\mathcal E}(\rd y)=\int|y|^2\rho_u(\rd y)$, which is computed in Lemma \ref{lem:M1}(vi).
+\end{proof}
+
+\begin{lemma}[Bounded data; mixing]\label{lem:M3}
+Let $\Phi$ be bounded and Borel. Then $(u,y)\mapsto T_u\Phi(y)$ is $C^\infty$ on $(0,\infty)\times\mathcal E$, $|T_u\Phi|\le\|\Phi\|_\infty$, $\partial_uT_u\Phi=AT_u\Phi$, and for $u_1>0$, all $u\ge u_1$ (in particular on $[u_1,u_2]$), $y\in\mathcal E$, $j,k\ge0$ and $|e_i|\le1$:
+\begin{equation}\label{c3:M3bound}
+|\partial_u^j\partial_{e_1}\cdots\partial_{e_k}T_u\Phi(y)|\le C_{j,k}(1+|y|)^{2j+k}\|\Phi\|_\infty,\qquad C_{j,k}:=c_{j,k}\,\kappa(u_1)^{k+2j}\int(2+|z|)^{k+2j}g(\rd z).
+\end{equation}
+In coordinates: $\sup_{u\in[u_1,u_2]}|\partial_u^j\partial_y^\alpha T_u\Phi(y)|\le C_{j,|\alpha|}(1+|y|)^{2j+|\alpha|}\|\Phi\|_\infty$.
+If $\Phi$ is moreover continuous, then for every $y$: $T_u\Phi(y)\to\Phi(y)$ as $u\downarrow0$ and $T_u\Phi(y)\to\int\Phi\,\rd g$ as $u\to\infty$ (and $|T_u\Phi(y)|\le\|\Phi\|_\infty$ throughout).
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{c3:kernel}(b), $T_u\Phi=\Psi_h$ of Lemma \ref{c3:smooth} with $\rho:=g$ and $h:=\Phi$; $g$ has finite moments of all orders (Lemma \ref{c3:gauss}(f)). So Lemma \ref{c3:smooth}(b) gives smoothness, the equation, and the derivative formula. $|T_u\Phi|\le T_u|\Phi|\le\|\Phi\|_\infty$ since $g$ is a probability measure.
+Bound: by Lemma \ref{c3:kbounds}(b) and Lemma \ref{c3:kernel}(a),
+\[
+|\partial_u^j\partial_{e_1}\cdots\partial_{e_k}T_u\Phi(y)|\le\|\Phi\|_\infty c_{j,k}\kappa^{k+2j}\int(1+|y|+|w|)^{k+2j}\gamma_{\sigma^2s_u}(w-a_uy)\lambda_{\mathcal E}(\rd w)
+=\|\Phi\|_\infty c_{j,k}\kappa^{k+2j}\int(1+|y|+|a_uy+s_u^{1/2}z|)^{k+2j}g(\rd z),
+\]
+using that $\gamma_{\sigma^2s_u}(\cdot-a_uy)\lambda_{\mathcal E}$ is the image of $g$ under $z\mapsto a_uy+s_u^{1/2}z$ (Lemma \ref{c3:gauss}(c)). Since $a_u,s_u\le1$: $1+|y|+|a_uy+s_u^{1/2}z|\le1+2|y|+|z|\le(1+|y|)(2+|z|)$. The coordinate form follows as in Lemma \ref{lem:M2}(iii).
+Limits: $T_u\Phi(y)=\int\Phi(a_uy+s_u^{1/2}z)g(\rd z)$. As $u\downarrow0$, $a_u\to1$ and $s_u\to0$, so $\Phi(a_uy+s_u^{1/2}z)\to\Phi(y)$ for every $z$ by continuity; as $u\to\infty$, $a_u\to0$, $s_u\to1$, so $\Phi(a_uy+s_u^{1/2}z)\to\Phi(z)$. The integrands are bounded by $\|\Phi\|_\infty$ and $g$ is a probability measure, so dominated convergence (along every sequence $u_n\downarrow0$, resp.\ $u_n\to\infty$) gives the limits.
+\end{proof}
+
+\subsection{Gaussian relative entropy}\label{c3:ss:KL}
+
+For probability measures $\nu,\nu'$ on a measurable space, $S(\nu|\nu'):=\int\mathfrak h\big(\frac{\rd\nu}{\rd\nu'}\big)\rd\nu'$ if $\nu\ll\nu'$ and $S(\nu|\nu'):=+\infty$ otherwise, where $\mathfrak h(t)=t\log t$ ($\mathfrak h(0)=0$); this is the convention of Lemma \ref{lem:DV} and agrees with Mathlib's \texttt{klDiv} for probability measures.
+With $\tilde{\mathfrak h}(t):=t\log t-t+1\ge0$ one has $S(\nu|\nu')=\int\tilde{\mathfrak h}(\frac{\rd\nu}{\rd\nu'})\rd\nu'\in[0,\infty]$ when $\nu\ll\nu'$ (the negative part of $\mathfrak h(f)$ is bounded by $1/e$, and $\int(f-1)\rd\nu'=0$).
+
+\begin{auxlemma}[Gaussian relative entropy]\label{c3:KL}
+\begin{enumerate}[label=(\alph*),itemsep=1pt]
+\item For $m\in\mathcal E$ and $s>0$: $\ S\big(N(m,\sigma^2s)\,\big|\,g\big)=\frac d2\,(s-1-\log s)+\frac{|m|^2}{2\sigma^2}$.
+\item For every probability measure $\rho$ on $\mathcal E$ with $M_2':=\int|w|^2\rho(\rd w)<\infty$ and every $u>0$:
+\[
+S(\rho_u|g)\le\int S\big(N(a_uw,\sigma^2s_u)\,\big|\,g\big)\rho(\rd w)=\frac d2\,(s_u-1-\log s_u)+\frac{e^{-u}M_2'}{2\sigma^2}\le\frac d2\log\frac1{1-e^{-u}}+\frac{e^{-u}M_2'}{2\sigma^2}.
+\]
+\end{enumerate}
+\end{auxlemma}
+
+\begin{proof}
+(a) Let $\varkappa:=N(m,\sigma^2s)=\gamma_{\sigma^2s}(\cdot-m)\lambda_{\mathcal E}$ (Lemma \ref{c3:gauss}(c)). Then $\varkappa=f\,g$ with $f(y):=\gamma_{\sigma^2s}(y-m)/\gamma_{\sigma^2}(y)>0$ and
+$\log f(y)=-\frac d2\log s+\frac{|y|^2}{2\sigma^2}-\frac{|y-m|^2}{2\sigma^2s}$, a polynomial of degree $2$ in $y$. If $Y\sim\varkappa$ then $Y=m+\sigma s^{1/2}Z$ in law with $Z\sim g_1$, $\E Z=0$, $\E|Z|^2=d$ (Lemma \ref{c3:gauss}(c),(f)); so $\log f\in L^1(\varkappa)$, $\E|Y|^2=|m|^2+\sigma^2sd$ and $\E|Y-m|^2=\sigma^2sd$. Hence
+$S(\varkappa|g)=\int f\log f\,\rd g=\int\log f\,\rd\varkappa=-\frac d2\log s+\frac{|m|^2+\sigma^2sd}{2\sigma^2}-\frac d2$, which is the claim.
+
+(b) Let $u>0$, $k_w:=K(u,\cdot,w)$. By Lemma \ref{c3:kernel}(a) and Lemma \ref{c3:gauss}(c), $k_w\,g=\gamma_{\sigma^2s_u}(\cdot-a_uw)\lambda_{\mathcal E}=N(a_uw,\sigma^2s_u)$, so by (a)
+$\int\tilde{\mathfrak h}(k_w)\rd g=S(N(a_uw,\sigma^2s_u)|g)=\frac d2(s_u-1-\log s_u)+\frac{e^{-u}|w|^2}{2\sigma^2}$.
+By Lemma \ref{lem:M1}(iv), $\rho_u=\Psi(u,\cdot)g$ with $\Psi(u,y)=\int k_w(y)\rho(\rd w)\in(0,\infty)$.
+$\tilde{\mathfrak h}$ is convex and differentiable on $(0,\infty)$ with $\tilde{\mathfrak h}'(t_0)=\log t_0$, so $\tilde{\mathfrak h}(t)\ge\tilde{\mathfrak h}(t_0)+\log t_0\,(t-t_0)$ for $t_0>0$, $t\ge0$ (for $t=0$ it reads $1\ge1-t_0$).
+Take $t_0=\Psi(u,y)$, $t=k_w(y)$ and integrate in $\rho(\rd w)$ (the right side is $\rho$-integrable with integral $\tilde{\mathfrak h}(t_0)$): $\int\tilde{\mathfrak h}(k_w(y))\rho(\rd w)\ge\tilde{\mathfrak h}(\Psi(u,y))$.
+Integrate in $g(\rd y)$ and use Tonelli ($\tilde{\mathfrak h}\ge0$):
+$S(\rho_u|g)=\int\tilde{\mathfrak h}(\Psi(u,\cdot))\rd g\le\int\big(\int\tilde{\mathfrak h}(k_w)\rd g\big)\rho(\rd w)$, which is the first inequality and the equality. The last inequality holds because $s_u-1\le0$ and $s_u=1-e^{-u}$.
+\end{proof}
+
+\begin{auxremark}[Use in Lemma \ref{lem:U8}]\label{c3:rem:U8}
+With $\mathcal E=\cH$, $\sigma^2=2/(\beta N)$, $g=\bG$ and $\rho=\mathrm{law}(H_0)$, Lemma \ref{c3:KL}(b) gives $S(\mathrm{law}(H_s)|\bG)\le\frac d2\log\frac1{1-e^{-s}}+\frac{\beta N}{4}e^{-s}\,\E|H_0|^2$, and $\E|H_0|^2=\E\Tr H_0^2=\sum_{i,j}\sigma_{ij}^2=N$ under (A). This is the second inequality of Lemma \ref{lem:U8}; no kernel/chain-rule argument (\texttt{klDiv\_compProd\_eq\_add}) is needed. Only the first inequality of Lemma \ref{lem:U8} (data processing under $\lambda$, \texttt{klDiv\_map\_le}) uses Mathlib's relative entropy.
+\end{auxremark}
+
+\begin{remark}\label{rem:M4}
+Lemmas \ref{lem:M1}--\ref{lem:M3} (with the auxiliary Lemmas \ref{c3:gauss}--\ref{c3:KL}) are the \emph{only} facts about ``Dyson Brownian motion'' used in NP. No stochastic process is constructed; $t\mapsto\mathrm{law}(H_t)$ is the curve $\rho_t$ with $\rho=\mathrm{law}(H_0)$, and $\rho_t$ is computed by Lemma \ref{lem:M1}(iv).
+The constants in Lemma \ref{lem:M2}(ii)--(iii), Lemma \ref{lem:M3} and in the dominating functions \eqref{c3:dom} are explicit, but they depend on $d$, $\sigma$, $u_1$ and the moments of $\rho$ (hence on $N$ and on the ensemble): they are used only to justify differentiation under integrals and integrations by parts, never quantitatively. The only quantitative statements are Lemma \ref{lem:M2}(iv) (finiteness only is used) and Lemma \ref{c3:KL}.
+\end{remark}

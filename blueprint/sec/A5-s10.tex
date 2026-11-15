@@ -1,0 +1,97 @@
+\section{Exported results (for Parts~II and~III)}\label{sec:export}
+All constants depend only on $(\vth,\delta_-,\delta_+,C_0)$ (normalised as in Convention~\ref{conv:const}); $C_1,\dots,C_5,c_0$ are those of \eqref{eq:ledger0}, $b=12\fa+12$ is the exponent of Section~\ref{sec:strong}, and $N_0$ is the threshold of Theorem~\ref{thm:K}.
+All statements hold for every $N\ge N_0$, every $\kk\in\{\R,\C\}$ and every $\nu\in\mathcal E_N(\vth,\dpm,C_0)$, with the \emph{same} constants. Items (X1), (X8)--(X13) are pointers to numbered statements; the items (X2)--(X7) and (X14) are short consequences, proved in Section~\ref{sec:exportproofs}.
+Section~\ref{sec:exportuse} lists which of these items Parts~II and~III actually use.
+
+\subsection{The list}\label{sec:exportlist}
+\begin{enumerate}[label=\textbf{(X\arabic*)},leftmargin=3em,itemsep=3pt]
+\item \textbf{Theorems \ref{thm:21}, \ref{thm:22}} as stated (with one measurable event for all $z\in\bS_L$, and the same constants $A_0,C,c,\phi,N_0$ in both theorems), and their level form \textbf{Theorem~\ref{thm:K}}: for every $K\in[(\log N)^3,N^{c_0}]$ a closed event $\Xi_K$ (Definition~\ref{def:XiK}), $\PP(\Xi_K^c)\le e^{-K/2}$, on which (i)--(v) hold \emph{simultaneously} for all $z\in\bD_K$, all $E\in\R$ and all $j$.
+The constants of Theorems~\ref{thm:21}, \ref{thm:22} are $\phi=1/(60\fa+88)$, $A_0=180\fa+264$, $C=1$, $c=\frac12$, with $\fa=1/\min(\vth,1)$ (Proposition~\ref{prop:reduction} and Appendix~\ref{app:ledger}).
+\item \textbf{$N^{\eps}$-form.} Let $0<\eps\le c_0$ and $N^\eps\ge(\log N)^3$. With probability at least $1-\exp(-\frac12N^\eps)$, for all $|E|\le5$, $N^{-1+C_1\eps}\le\eta\le10$:
+$\Lambda\le N^{C_2\eps}/(N\eta)$, $\ \Ld+\Lo\le N^{C_2\eps}\big(\sqrt{\im\msc/(N\eta)}+1/(N\eta)\big)$; and $\norm H\le2+N^{-2/3+C_3\eps}$; $|\lambda_j-\gamma_j|\le N^{C_4\eps}\,[\min(j,N+1-j)]^{-1/3}N^{-2/3}$ for all $j$; $\sup_{E\in\R}|\fn(E)-\nsc(E)|\le N^{-1+C_5\eps}$.
+\item \textbf{Local law at one $z$, without the lattice.} For a fixed $z=E+\ii\eta\in\bD_K$ there is a closed event of probability at least $1-N^{10}e^{-p_1}\ge1-N^{10}\exp(-K^{3/2})$ on which
+$\Lambda(z)\le K^{b+5}/(N\eta)$ and $\Ld(z)+\Lo(z)\le K^{b+6}\big(\sqrt{\im\msc(z)/(N\eta)}+1/(N\eta)\big)$; in particular the bounds of Theorem~\ref{thm:K}(i),(ii) hold at $z$.
+\item \textbf{Improved averaged law outside the spectrum} (Propositions~\ref{prop:S3}, \ref{prop:S4}). With probability at least $1-N^{20}e^{-p_1}-N^{10}e^{-p_2}\ \ge1-N^{21}\exp(-K^{3/2})-N^{10}e^{-K}$, for all $z=E+\ii\eta\in\mathbb L\cap\bD^{\rm near}$ with $\varkappa N\eta\ge K^{b+3}$:
+$\ \Lambda(z)\le K^{b+2}\big(\frac{\im\msc}{\varkappa N\eta}+\frac1{\varkappa(N\eta)^2}\big)$; in particular, if moreover $|E|>2$ and $\kappa=|E|-2\ge\eta$: $\ \Lambda(z)\le K^{b+2}\big(\frac4{N\kappa}+\frac1{\sqrt\kappa(N\eta)^2}\big)$.
+Moreover there is a closed event $\Xi_K^{(4)}\subset\Xi_K$ with $\PP((\Xi_K^{(4)})^c)\le2N^{21}e^{-p_1}+2N^{10}e^{-p_2}\le e^{-K/2}$ on which, in addition to these bounds and to (i)--(v) of Theorem~\ref{thm:K}, for all $z\in\mathbb L\cap\bD^{\rm far}$ (i.e.\ $4\le|E|\le\Emax+1$, $\frac12N^{-1/2}\le\eta\le10$, on the lattice):
+$\ \Lambda(z)\le K^{b+2}\big(\frac{\im\msc}{N\eta}+\frac1{(N\eta)^2}+\frac1N\big)$.
+\item \textbf{Norm.} $\PP\big(\norm H>25K^{2\fa}\sqrt{C_0\log N}\big)\le N^2\vth^{-1}e^{-K^2}+2e^{-N\log N}\le2N^2\vth^{-1}e^{-K^2}$ (Lemma~\ref{lem:norm0} with $\kappa=K^2$), and $\norm H\le2+K^{C_3}N^{-2/3}$ on $\Xi_K$ (Proposition~\ref{prop:norm}).
+\item \textbf{Local density.} On $\Xi_K$, for all $z=E+\ii\eta\in\bD_K$: $\ \im m(z)\le\im\msc(z)+K^{C_2}/(N\eta)$ and $\#\{j:|\lambda_j-E|\le\eta\}\le2N\eta\,\im\msc(z)+2K^{C_2}$.
+\item \textbf{Below the domain (deterministic).} For every Hermitian matrix $H$, $E\in\R$, $0<\eta\le\eta'$ and all $i,j$:
+$\im G_{ii}(E+\ii\eta)\le\frac{\eta'}\eta\im G_{ii}(E+\ii\eta')$ and
+$|G_{ij}(E+\ii\eta)|\le|G_{ij}(E+\ii\eta')|+\frac{\eta'}{\eta}\max_k\im G_{kk}(E+\ii\eta')$.
+\item \textbf{Large deviation bounds} for weighted linear, quadratic and bilinear forms with unequal, possibly vanishing variances: moments and truncation of a single entry (Lemma~\ref{lem:moments}); tail form (Lemma~\ref{lem:LD}) and moment form (Lemma~\ref{lem:LDmom});
+the good event and its consequences \eqref{eq:Xi}--\eqref{eq:Gij} at any $z\in\C_+$ (Definition~\ref{def:good}, Lemma~\ref{lem:good}); the splitting of the product law and partial integration (Lemma~\ref{lem:split}).
+\item \textbf{Fluctuation averaging} with arbitrary deterministic weights $|t_k|\le1/N$, any $z$ with $|z|\le N$, explicit $p$-dependence and random control parameter (Theorem~\ref{thm:FA}; the case $p=2$ is Proposition~\ref{prop:FAtwo}, which holds for $N$ above its own threshold $N_0$ of \eqref{eq:CV}, not necessarily the $N_0$ of Theorem~\ref{thm:K}).
+\item \textbf{Resolvent algebra}: Lemma~\ref{lem:basic} (including the spectral form of $\tr G$ and the two-matrix resolvent identity), Lemma~\ref{lem:schur} (including the block form $G_{AA}=(M^A)^{-1}$, \eqref{eq:1overG}, the transposed form of (I2) and the determinant identity (I6)),
+Lemmas~\ref{lem:minor}, \ref{lem:sce}; stability: Lemmas~\ref{lem:vecstab}--\ref{lem:stabfar}.
+\item \textbf{Semicircle facts}: Lemmas~\ref{lem:msc}--\ref{lem:nsc} (algebraic definition, sizes with explicit constants $c_*=\frac1{150}$, $C_*=4$, Lipschitz bound, Stieltjes representation, $\rhosc\le1/\pi$, $\nsc$, $\gamma_j$, the bulk lower bound on $\rhosc$ and the count of classical locations).
+\item \textbf{Helffer--Sj\"ostrand} formula (Lemma~\ref{lem:HS}), the counting lemma (Lemma~\ref{lem:count}), the conversion lemma (Lemma~\ref{lem:conv}) and the deterministic implication ``(i), (iii) $\Rightarrow$ (iv), (v)'' (Proposition~\ref{prop:rig}).
+\item \textbf{Weyl's inequality}, reflection $\lambda_k(-A)=-\lambda_{n+1-k}(A)$ (Lemma~\ref{lem:weyl}(c)), Lipschitz continuity and measurability of eigenvalues, resolvent entries and the counting function (Lemma~\ref{lem:weyl}); grid net for the norm (Lemma~\ref{lem:net}).
+\item \textbf{Families of ensembles.} If $(\nu^{(\theta)})_{\theta\in\Theta}$ is a finite family in $\mathcal E_N(\vth,\dpm,C_0)$, then for every $\theta$ the statements above hold for $\nu^{(\theta)}$ with constants and thresholds that do not depend on $\theta$;
+if the matrices $H^{(\theta)}$ are realised on one probability space, all of them satisfy a given statement simultaneously off an event of probability at most $|\Theta|$ times the stated bound.
+The class is closed under $H\mapsto-H$, monotone in the parameters, and \eqref{eq:subexp} is invariant under scaling with the same $\vth$ (Lemma~\ref{lem:mono}(ii),(iv),(v)).
+\end{enumerate}
+\noindent\emph{Not provided by Part~I:} bounds for $\eta<K^{C_1}/N$ other than (X7); isotropic bounds; anything for ensembles violating (A) (e.g.\ $H_t$ in the real case before rescaling, cf.\ Part~III; or a matrix with one entry or one row removed, cf.\ Part~II).
+
+\subsection{Proofs of \textup{(X2)--(X7)} and \textup{(X14)}}\label{sec:exportproofs}
+\emph{\textup{(X2)}.} Put $K:=N^\eps$. Then $(\log N)^3\le K\le N^{c_0}$, so Theorem~\ref{thm:K} applies; $K^{C_i}=N^{C_i\eps}$, $\bD_K=\{|E|\le5,\ N^{-1+C_1\eps}\le\eta\le10\}$ and $\PP(\Xi_K^c)\le\exp(-\frac12N^\eps)$. (For a fixed $\eps\in(0,c_0]$ the condition $N^\eps\ge(\log N)^3$ holds for all large $N$.)
+
+\emph{\textup{(X3)}.} Let $z'\in\mathbb L\cap\bD^{\rm near}$ be the lattice point of Lemma~\ref{lem:lip}. The proof of Theorem~\ref{thm:K}(i),(ii) at the end of Section~\ref{sec:strong} uses, for the given $z$, only that the point of $\Omega$ lies in $\cG^2(z')$;
+it gives $\Lambda(z)\le2K^{b+4}/(N\eta)$ and $\Ld(z)+\Lo(z)\le K^{b+5}\sqrt{\im\msc/(N\eta)}+3K^{b+5}/(N\eta)$ there. The event $\cG^2(z')$ is closed and $\PP(\cG^2(z')^c)\le N^{10}e^{-p_1}$ (Proposition~\ref{prop:S2}); $p_1\ge K^{3/2}$.
+
+\emph{\textup{(X4)}.} Let $\mathbb L_a$ be the set of points $z=E+\ii\eta\in\mathbb L\cap\bD^{\rm near}$ with $\varkappa N\eta\ge\mathfrak E_3=K^{b+3}$, and $\Xi_K^{(3)}:=\bigcap_{z\in\mathbb L_a}\cG^3(z)$, a closed set. On $\Xi_K^{(3)}$ the bound \eqref{eq:improved} holds at all $z\in\mathbb L_a$, and by Propositions~\ref{prop:S2}, \ref{prop:S3} and $|\mathbb L|\le N^{10}$,
+\[
+ \PP\big((\Xi_K^{(3)})^c\big)\le\sum_{z\in\mathbb L_a}\Big(\PP\big(\cG^2(z)^c\big)+\PP\big(\cG^2(z)\setminus\cG^3(z)\big)\Big)\le N^{20}e^{-p_1}+N^{10}e^{-p_2},
+\]
+and $p_1\ge K^{3/2}$, $p_2\ge K$. For the particular case: if $|E|>2$ and $\kappa\ge\eta$ then $\im\msc\le4\eta/\varkappa$ by \eqref{eq:imm} and $\varkappa\ge\sqrt\kappa$, so $\frac{\im\msc}{\varkappa N\eta}\le\frac4{N\kappa}$ and $\frac1{\varkappa(N\eta)^2}\le\frac1{\sqrt\kappa(N\eta)^2}$.
+
+Next let $\Xi_K^{(4)}:=\Xi_K\cap\Xi_K^{(3)}\cap\bigcap_{z'\in\mathbb L\cap\bD^{\rm far}}\cG^{\rm f}(z')$, a closed set; by Proposition~\ref{prop:S4} the far-regime bound holds on it. Since $\Xi_K\subset\cG^2(z)$ for all $z\in\mathbb L\cap\bD^{\rm near}$,
+\[
+ \big(\Xi_K^{(4)}\big)^c\subset\Xi_K^c\cup\bigcup_{z\in\mathbb L_a}\big(\cG^2(z)\setminus\cG^3(z)\big)\cup\bigcup_{z'}\cG_{\rm col}(z')^c\cup\bigcup_{z'}\big(\cG_{\rm col}(z')\setminus\cG^{\rm f}(z')\big).
+\]
+By the bound $\PP(\Xi_K^c)\le(N^{20}+N^{21})e^{-p_1}+N^6e^{-p_2}$ (proof of Proposition~\ref{prop:XiK}), Propositions~\ref{prop:S3}, \ref{prop:S4}, Definition~\ref{def:domains} ($\bigcup_{z'}\cG_{\rm col}(z')^c\subset\cG_*^c$, $\PP(\cG_*^c)\le46\,\fa N^{14}e^{-K^2}$), $|\mathbb L|\le N^{10}$ and $K^2\ge p_1$,
+\[
+ \PP\big((\Xi_K^{(4)})^c\big)\le\big(N^{20}+N^{21}+46\,\fa N^{14}\big)e^{-p_1}+\big(N^6+N^{10}\big)e^{-p_2}\le2N^{21}e^{-p_1}+2N^{10}e^{-p_2}\le e^{-K/2},
+\]
+the last step as in the proof of Proposition~\ref{prop:XiK} ($21\log N+\log4\le\frac12K$).
+
+\emph{\textup{(X5)}.} This is Lemma~\ref{lem:norm0} (see Step~1 of the proof of Proposition~\ref{prop:norm}, where $2e^{-N\log N}\le e^{-K^2}\le N^2\vth^{-1}e^{-K^2}$ is shown) and Theorem~\ref{thm:K}(iii).
+
+\emph{\textup{(X6)}.} On $\Xi_K$, by Theorem~\ref{thm:K}(i), $\im m\le\im\msc+|m-\msc|\le\im\msc+K^{C_2}/(N\eta)$, and by Lemma~\ref{lem:basic}(e), $\#\{j:|\lambda_j-E|\le\eta\}\le2N\eta\,\im m(z)$.
+
+\emph{\textup{(X7)}.} Write $z=E+\ii\eta$, $z'=E+\ii\eta'$. The first inequality is Lemma~\ref{lem:basic}(f) ($\eta\mapsto\eta\,\im G_{ii}(E+\ii\eta)$ is nondecreasing and $\eta\le\eta'$: $\eta\im G_{ii}(z)\le\eta'\im G_{ii}(z')$).
+For the second, the resolvent identity (Lemma~\ref{lem:basic}(c)) gives $G_{ij}(z)-G_{ij}(z')=\ii(\eta-\eta')\sum_kG_{ik}(z)G_{kj}(z')$, and by the Cauchy--Schwarz inequality, the Ward identity (Lemma~\ref{lem:basic}(b)) and the first inequality,
+\begin{align*}
+ \Big|\sum_kG_{ik}(z)G_{kj}(z')\Big|&\le\Big(\frac{\im G_{ii}(z)}{\eta}\Big)^{1/2}\Big(\frac{\im G_{jj}(z')}{\eta'}\Big)^{1/2}\le\Big(\frac{\eta'\,\im G_{ii}(z')}{\eta^2}\Big)^{1/2}\Big(\frac{\im G_{jj}(z')}{\eta'}\Big)^{1/2}\\
+ &=\frac1\eta\big(\im G_{ii}(z')\,\im G_{jj}(z')\big)^{1/2}\le\frac1\eta\max_k\im G_{kk}(z').
+\end{align*}
+Hence $|G_{ij}(z)-G_{ij}(z')|\le\frac{\eta'-\eta}{\eta}\max_k\im G_{kk}(z')\le\frac{\eta'}\eta\max_k\im G_{kk}(z')$.
+
+\emph{\textup{(X14)}.} All constants and thresholds of Part~I are functions of $(\vth,\delta_-,\delta_+,C_0)$ only (Convention~\ref{conv:const}); nothing depends on the individual laws $\nu_{ij}$ or on the variances beyond (A)--(C). The simultaneous statement is the union bound.
+The closure properties are Lemma~\ref{lem:mono}(ii),(iv),(v).
+
+\subsection{What Parts~II and~III use}\label{sec:exportuse}
+For the convenience of the reader we list the statements of Part~I that are cited in Parts~II and~III, with the names used there.
+\begin{center}
+\renewcommand{\arraystretch}{1.12}\small
+\begin{tabular}{|p{0.11\textwidth}|p{0.50\textwidth}|p{0.29\textwidth}|}
+\hline
+name in B, C & statement of Part~I & item above\\\hline
+(BB1) & Theorem~\ref{thm:21}(ii), i.e.\ \eqref{eq:Lambdaodfinal}, with outer probability over all $z\in\bS_L$ and one measurable event & (X1)\\
+(BB2), (RA1) & Theorem~\ref{thm:22}: \eqref{eq:rigidity} and \eqref{eq:nn} & (X1)\\
+(S1) & Lemma~\ref{lem:msc}(a)--(c) & (X11)\\
+(S2) & Lemma~\ref{lem:basic}(a),(b),(c),(d),(h) & (X10)\\
+(S3) & Lemma~\ref{lem:schur}\,(I2), (I6) & (X10)\\
+(S4) & Lemma~\ref{lem:weyl}(b)--(e); Lemma~\ref{lem:mono}(iv) & (X13), (X14)\\
+(S5), (RA6) & Lemma~\ref{lem:moments} & (X8)\\
+(S6) & Lemma~\ref{lem:split} & (X8)\\
+(RA2), (RA3) & Lemma~\ref{lem:mono}(ii), (v) & (X14)\\
+(RA4) & Lemma~\ref{lem:weyl}(a),(b) & (X13)\\
+(RA5) & Lemma~\ref{lem:nsc}(a),(c),(d),(e) (Part~II also uses (b)) & (X11)\\
+--- & Definitions~\ref{def:ens}, \ref{def:ass}; \eqref{eq:green}--\eqref{eq:defS}; statements of Theorems~\ref{thm:23}, \ref{thm:24} & Section~\ref{sec:main}\\\hline
+\end{tabular}
+\end{center}
+\noindent Parts~II and~III do \emph{not} use: the level form (Theorem~\ref{thm:K}) and the items (X2)--(X7), (X9), (X12); Theorem~\ref{thm:21}(i),(iii); any bound for a matrix that is not in the class $\mathcal E_N$.
+Part~II uses the simultaneity in $z$ of Theorem~\ref{thm:21}(ii) (on a segment of energies at fixed $\eta$), which is provided by the measurable event $\Xi_K$; Part~III uses Theorem~\ref{thm:22} at each fixed time for the rescaled matrix $\widetilde H_t$, which lies in one class $\mathcal E_N$ for all $t$.
+The items (X2)--(X7), (X9), (X12) are recorded because they are the natural inputs for extensions (other observables at the edge, the removal of the moment matching conditions, eigenvector bounds).

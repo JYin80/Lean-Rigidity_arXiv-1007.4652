@@ -1,0 +1,107 @@
+\section{Rigidity: proof of Theorem \ref{thm:K}\,(iv),(v)}\label{sec:rig}
+This section is deterministic. It converts the averaged local law (Theorem~\ref{thm:K}(i)) and the norm bound (Theorem~\ref{thm:K}(iii)) into the bound on the counting function and into rigidity.
+The exponents of \eqref{eq:ledger0} enter only through the following relations, which hold for the values in \eqref{eq:ledger0} (recall $\fa\ge1$):
+\begin{equation}\label{eq:ledgerrel}
+ C_5\ge\max\big(C_1,\,C_2+\tfrac13\big)+1,\qquad C_4\ge\max\big(C_5,\,C_3+\tfrac13C_5\big)+1,\qquad c_0\max(C_1,C_3,C_5)\le\tfrac18 .
+\end{equation}
+Indeed $C_5=C_1+1$ and $C_2+\frac13<C_1$; $C_3+\frac13C_5+1=24\fa+36+6\fa+7+1=C_4$ and $C_5<C_3$; and $C_1<C_5<C_3$, $c_0C_3=\frac18$.
+
+\begin{lemma}[From counting to rigidity; deterministic]\label{lem:conv}
+Let $C_7:=9$. Let $\lambda_1\le\dots\le\lambda_N$ be real, $\fn(E):=\frac1N\#\{j:\lambda_j\le E\}$, $\Delta\ge1$, $0\le\omega\le1$, $N\ge 100\Delta$, and assume
+\[
+ \sup_{E\in\R}|\fn(E)-\nsc(E)|\le\frac\Delta N,\qquad-2-\omega\le\lambda_1,\quad\lambda_N\le2+\omega .
+\]
+Then for every $j\in\{1,\dots,N\}$, with $\hat\jmath:=\min(j,N+1-j)$:
+\[
+ |\lambda_j-\gamma_j|\le C_7\,\Delta\,\hat\jmath^{-1/3}N^{-2/3}+\bone(\hat\jmath\le3\Delta)\big(\omega+C_7\Delta^{2/3}N^{-2/3}\big).
+\]
+More precisely: if $\hat\jmath>3\Delta$ then $|\lambda_j-\gamma_j|\le3.5\,\Delta\,\hat\jmath^{-1/3}N^{-2/3}$, and if $\hat\jmath\le3\Delta$ then $|\lambda_j-\gamma_j|\le\omega+9\,\Delta^{2/3}N^{-2/3}$.
+\end{lemma}
+\begin{proof}
+\emph{Step 1: for every $j$,}
+\begin{equation}\tag{R1}\label{eq:a1-R1}
+ \frac{j-\Delta}N\le\nsc(\lambda_j)\le\frac{j-1+\Delta}N .
+\end{equation}
+At least $j$ of the numbers $\lambda_k$ are $\le\lambda_j$, so $\fn(\lambda_j)\ge j/N$ and $\nsc(\lambda_j)\ge\fn(\lambda_j)-\Delta/N\ge(j-\Delta)/N$.
+If $E<\lambda_j$, then $\lambda_k\le E$ implies $k\le j-1$, so $\fn(E)\le(j-1)/N$ and $\nsc(E)\le(j-1+\Delta)/N$; letting $E\uparrow\lambda_j$ and using the continuity of $\nsc$ (Lemma~\ref{lem:nsc}(a)) gives the upper bound.
+Recall also $\nsc(\gamma_j)=j/N$ (Lemma~\ref{lem:nsc}(c)); since $\Delta\ge1$, \eqref{eq:a1-R1} holds with $\gamma_j$ in place of $\lambda_j$ as well.
+
+\emph{Step 2: the case $\hat\jmath>3\Delta$.} Let $a:=\min(\lambda_j,\gamma_j)$, $b:=\max(\lambda_j,\gamma_j)$. By Step 1 and the monotonicity of $\nsc$,
+\[
+ \nsc(a)\ge\frac{j-\Delta}N,\qquad1-\nsc(b)\ge\frac{N+1-j-\Delta}N,\qquad0\le\nsc(b)-\nsc(a)=|\nsc(\lambda_j)-\nsc(\gamma_j)|\le\frac\Delta N ,
+\]
+where the last bound follows from \eqref{eq:a1-R1} and $\nsc(\gamma_j)=j/N$: $-\Delta\le N\nsc(\lambda_j)-j\le\Delta-1$. Hence $\min(\nsc(a),1-\nsc(b))\ge(\hat\jmath-\Delta)/N\ge\frac{2\hat\jmath}{3N}>0$, and Lemma~\ref{lem:nsc}(f) gives
+\[
+ |\lambda_j-\gamma_j|=b-a\le3\cdot\frac\Delta N\cdot\Big(\frac{2\hat\jmath}{3N}\Big)^{-1/3}=3\big(\tfrac32\big)^{1/3}\Delta\,\hat\jmath^{-1/3}N^{-2/3}\le3.5\,\Delta\,\hat\jmath^{-1/3}N^{-2/3}.
+\]
+
+\emph{Step 3: the case $j\le3\Delta$ (left edge).} Since $N\ge100\Delta$ we have $j\le N/2$. Put $\theta:=(\Delta/N)^{2/3}$.
+
+By Lemma~\ref{lem:nsc}(c), $0<\gamma_j+2\le3.6\,(j/N)^{2/3}\le3.6\cdot3^{2/3}\theta\le7.5\,\theta$.
+
+By \eqref{eq:a1-R1}, $\nsc(\lambda_j)\le(j-1+\Delta)/N\le4\Delta/N\le\frac1{25}<\frac12=\nsc(0)$, so $\lambda_j<0$. If $\lambda_j\le-2$, then $-\omega\le\lambda_1+2\le\lambda_j+2\le0$. If $\lambda_j>-2$, then $u:=\lambda_j+2\in(0,2)$ and Lemma~\ref{lem:nsc}(b) gives
+$\frac{\sqrt2}{3\pi}u^{3/2}\le\nsc(\lambda_j)\le4\Delta/N$, i.e.\ $u\le(6\sqrt2\pi)^{2/3}\theta\le9\,\theta$. In both cases $-\omega\le\lambda_j+2\le9\theta$. Therefore
+\[
+ |\lambda_j-\gamma_j|=|(\lambda_j+2)-(\gamma_j+2)|\le\max\big(\omega+7.5\,\theta,\ 9\,\theta\big)\le\omega+9\,\Delta^{2/3}N^{-2/3}.
+\]
+
+\emph{Step 4: the case $N+1-j\le3\Delta$ (right edge).} Now $j\ge N/2$, and by Lemma~\ref{lem:nsc}(c), $0\le2-\gamma_j\le3.6\,((N-j)/N)^{2/3}\le7.5\,\theta$.
+By \eqref{eq:a1-R1}, $1-\nsc(\lambda_j)\le(N-j+\Delta)/N\le4\Delta/N<\frac12$, so $\lambda_j>0$. If $\lambda_j\ge2$, then $0\le\lambda_j-2\le\lambda_N-2\le\omega$. If $\lambda_j<2$, then $u:=2-\lambda_j\in(0,2)$ and, by the symmetry $1-\nsc(2-u)=\nsc(-2+u)$ and Lemma~\ref{lem:nsc}(b),
+$\frac{\sqrt2}{3\pi}u^{3/2}\le1-\nsc(\lambda_j)\le4\Delta/N$, so $u\le9\theta$. Hence $-\omega\le2-\lambda_j\le9\theta$, and as in Step 3, $|\lambda_j-\gamma_j|\le\omega+9\,\Delta^{2/3}N^{-2/3}$.
+
+Steps 2--4 cover all $j$ and give the two ``more precise'' statements; these imply the displayed bound with $C_7=9$.
+\end{proof}
+\noindent The lemma treats the two edges directly; no reflection $H\mapsto-H$ and no shift of the index are needed.
+
+\begin{proposition}[Counting function and rigidity from the local law; deterministic]\label{prop:rig}
+Let $\vth\in(0,1]$, let $C_1,\dots,C_5,c_0$ be as in \eqref{eq:ledger0}, and let $C_6=10$, $C_7=9$ be the constants of Lemmas~\ref{lem:count} and~\ref{lem:conv}. Let $N\ge e^{6}$ and let $K$ be a real number with $(\log N)^3\le K\le N^{c_0}$.
+Let $H$ be a Hermitian $N\times N$ matrix with eigenvalues $\lambda_1\le\dots\le\lambda_N$ such that
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item $|m(z)-\msc(z)|\le K^{C_2}/(N\eta)$ for all $z=E+\ii\eta$ with $|E|\le\frac72$ and $K^{C_1}N^{-1}\le\eta\le2$;
+\item $\max_j|\lambda_j|\le2+K^{C_3}N^{-2/3}$.
+\end{enumerate}
+Then
+\[
+ \sup_{E\in\R}|\fn(E)-\nsc(E)|\le\frac{K^{C_5}}N\qquad\text{and}\qquad|\lambda_j-\gamma_j|\le K^{C_4}\,[\min(j,N+1-j)]^{-1/3}N^{-2/3}\quad\text{for all }j .
+\]
+In particular, parts \textup{(iv)} and \textup{(v)} of Theorem~\ref{thm:K} hold at every point of any event on which parts \textup{(i)} and \textup{(iii)} hold, provided $N\ge e^6$.
+\end{proposition}
+\begin{proof}
+\emph{Preliminaries.} Since $N\ge e^6$: $\log N\ge6$, $K\ge(\log N)^3\ge216$, and $N^{1/8}\le N^{2/3}$. By the third relation in \eqref{eq:ledgerrel}, for $i\in\{1,3,5\}$,
+\begin{equation}\tag{R2}\label{eq:a1-R2}
+ K^{C_i}\le N^{c_0C_i}\le N^{1/8} .
+\end{equation}
+Moreover $\log(2N)\le2\log N\le2K^{1/3}$, and $N^{7/8}\ge e^{5.25}>100$.
+
+\emph{Part \textup{(iv)}.} By (b) and \eqref{eq:a1-R2}, $|\lambda_j|\le2+N^{1/8-2/3}<3$ for all $j$. Hence for $E\ge3$, $\fn(E)=1=\nsc(E)$, and for $E\le-3$, $\fn(E)=0=\nsc(E)$ (Lemma~\ref{lem:nsc}(a)).
+Let $E\in(-3,3)$. We apply Lemma~\ref{lem:count} with
+\[
+ E_1:=-3,\qquad E_2:=E,\qquad\tilde\eta:=K^{C_1}N^{-1},\qquad U:=K^{C_2}.
+\]
+Its assumptions hold: $E_1<E_2$ and $E_2-E_1\le6\le8$; $U\ge1$; by \eqref{eq:a1-R2}, $0<\tilde\eta\le N^{-7/8}\le\frac12$; and \eqref{eq:HShyp} is hypothesis (a), because $m(z)=\frac1N\tr G(z)=\frac1N\sum_j(\lambda_j-z)^{-1}$ (Lemma~\ref{lem:basic}(d)),
+$[E_1-\tilde\eta,E_2+\tilde\eta]\subset[-\frac72,\frac72]$ and $[\tilde\eta,2]=[K^{C_1}N^{-1},2]$. Since $\fn(-3)=\nsc(-3)=0$ and $\log(2/\tilde\eta)\le\log(2N)\le2K^{1/3}$, Lemma~\ref{lem:count} gives
+\[
+ |\fn(E)-\nsc(E)|\le\frac{C_6}N\Big(K^{C_2}\log(2/\tilde\eta)+K^{C_1}\Big)\le\frac{C_6}N\Big(2K^{C_2+1/3}+K^{C_1}\Big)\le\frac{3C_6}{N}K^{C_5-1}\le\frac{K^{C_5}}N,
+\]
+where we used the first relation in \eqref{eq:ledgerrel} and $K\ge216\ge3C_6$.
+
+\emph{Part \textup{(v)}.} We apply Lemma~\ref{lem:conv} with $\Delta:=K^{C_5}\ge1$ and $\omega:=K^{C_3}N^{-2/3}$. Its assumptions hold: $\omega\le N^{1/8-2/3}\le1$ and $100\Delta\le100N^{1/8}\le N$ by \eqref{eq:a1-R2} and $N^{7/8}\ge100$;
+the bound on $\fn-\nsc$ is part (iv); and $-2-\omega\le\lambda_1$, $\lambda_N\le2+\omega$ by (b). Let $j\in\{1,\dots,N\}$ and $\hat\jmath=\min(j,N+1-j)$. If $\hat\jmath>3\Delta$, the lemma gives
+$|\lambda_j-\gamma_j|\le3.5K^{C_5}\hat\jmath^{-1/3}N^{-2/3}$. If $\hat\jmath\le3\Delta$, then $1\le(3K^{C_5})^{1/3}\hat\jmath^{-1/3}$ and the lemma gives
+\[
+ |\lambda_j-\gamma_j|\le\big(K^{C_3}+9K^{2C_5/3}\big)N^{-2/3}\le3^{1/3}\big(K^{C_3+C_5/3}+9K^{C_5}\big)\hat\jmath^{-1/3}N^{-2/3}.
+\]
+In both cases, by the second relation in \eqref{eq:ledgerrel} and $K\ge216$,
+\[
+ |\lambda_j-\gamma_j|\le3^{1/3}\cdot10\,K^{\max(C_5,\,C_3+C_5/3)}\,\hat\jmath^{-1/3}N^{-2/3}\le15\,K^{C_4-1}\hat\jmath^{-1/3}N^{-2/3}\le K^{C_4}\hat\jmath^{-1/3}N^{-2/3}.
+\]
+The last sentence of the proposition follows because (a) is contained in Theorem~\ref{thm:K}(i) ($\{|E|\le\frac72,\ K^{C_1}N^{-1}\le\eta\le2\}\subset\bD_K$) and (b) is Theorem~\ref{thm:K}(iii).
+\end{proof}
+
+\medskip\noindent\textbf{Proof of Theorem~\ref{thm:K}\,(iv),(v).} Let $N_0\ge e^6$ be such that parts (i)--(iii) of Theorem~\ref{thm:K} hold for $N\ge N_0$ on the event $\Xi_K$ constructed in Sections~\ref{sec:strong} and~\ref{sec:norm}.
+By Proposition~\ref{prop:rig}, (iv) and (v) hold at every point of the same event $\Xi_K$; no further exceptional set is needed, so $\PP(\Xi_K^c)$ is unchanged. \qed
+
+\begin{remark}\label{rem:rigexp}
+If the ledger is revised, Proposition~\ref{prop:rig} remains valid for any exponents satisfying \eqref{eq:ledgerrel} (and $C_1,\dots,C_5\ge1$); the proof uses nothing else.
+The supremum in \textup{(iv)} is over all real $E$; the measurability of $\sup_E|\fn(E)-\nsc(E)|$ (Lemma~\ref{lem:weyl}(f)) is needed only to state \eqref{eq:nn}, not in the proof.
+\end{remark}

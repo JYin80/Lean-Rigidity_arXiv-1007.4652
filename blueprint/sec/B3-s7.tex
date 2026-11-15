@@ -1,0 +1,60 @@
+\subsection{Green function comparison at the edge}\label{sec:gfc}
+\begin{theorem}[edge comparison; the form (6.25) of Theorem~6.3 of the original]\label{thm:gfc}
+For every $\Par=(\vartheta,\delta_-,\delta_+,C_0)$ and every $\eg\in(0,\frac1{10}]$ there is $C_4=C_4(\vartheta,C_0)$ such that for all
+$N\ge N_1(\Par,\eg)$ \textup{(}the threshold of Lemma~\ref{lem:N0}\textup{)}, $\K\in\{\R,\C\}$, all ensembles $M^v,M^w$ of size $N$ over $\K$ with $\fA(\Par)$ and matching second moments \eqref{eq:2m}, all real $E_1\le E_2$ with
+$|E_i-2|\le N^{-2/3+\eg}$ $(i=1,2)$, $\eta=N^{-2/3-\eg}$, and all $F\in C^3(\R)$ with $C_F=\max_{0\le k\le3}\sup_\R|F^{(k)}|<\infty$:
+\begin{equation}\label{eq:b3:gfc}
+\Big|\E^vF\Big(\frac N\pi\int_{E_1}^{E_2}\im m(y+i\eta)\,dy\Big)-\E^wF\Big(\frac N\pi\int_{E_1}^{E_2}\im m(y+i\eta)\,dy\Big)\Big|\le C_4\,C_F\,N^{-1/6+4\eg}.
+\end{equation}
+One can take
+\begin{equation}\label{eq:b3:C4}
+C_4:=\tfrac32\,C_3=3C_2+594\,\mathfrak m_3C_0^{3/2}+12,
+\end{equation}
+with $C_2$, $C_3$ from \eqref{eq:b3:C2}, \eqref{eq:b3:C3}.
+\end{theorem}
+\begin{proof}
+Let $N\ge N_1(\Par,\eg)$ and let $\K,M^v,M^w,E_1,E_2,\eta,F$ be as in the statement. Then the standing assumptions of \S\ref{sec:step} hold (with $\Psi=4N^{-1/3+2\eg}$, $t=N^{-1/2+2\eg}$).
+By Definition~\ref{def:X} and \eqref{eq:green} ($\tr G_H=Nm$),
+\[
+X(H)=X_{E_1,E_2,\eta}(H)=\frac1\pi\int_{E_1}^{E_2}\im\tr G_H(y+i\eta)\,dy=\frac N\pi\int_{E_1}^{E_2}\im m(y+i\eta)\,dy ,
+\]
+so the left side of \eqref{eq:b3:gfc} is $|\E^vF(X(H))-\E^wF(X(H))|$; the function $x\mapsto F(X(H(x)))$ is continuous and bounded on $\Omega$ (Lemma~\ref{lem:Xspec}(c)), so all expectations exist.
+
+Fix a bijection $\varphi:\mathcal P_N\to\{1,\dots,\Gamma\}$, $\Gamma=N(N+1)/2$, and let $M_0=M^v,M_1,\dots,M_\Gamma=M^w$ be the hybrids of Definition~\ref{def:hyb}. Telescoping,
+\[
+\E^vF(X(H))-\E^wF(X(H))=\sum_{k=1}^{\Gamma}\Big(\E_{M_{k-1}}F(X(H))-\E_{M_k}F(X(H))\Big).
+\]
+Since $\varphi$ is a bijection, exactly $N$ of the pairs $p_1,\dots,p_\Gamma$ are diagonal $(a=b)$ and exactly $N(N-1)/2$ are off-diagonal. By Proposition~\ref{prop:step}, applied to each $k$,
+\begin{align*}
+\big|\E^vF(X(H))-\E^wF(X(H))\big|&\le\frac{N(N-1)}2\cdot C_3C_FN^{-13/6+4\eg}+N\cdot C_3C_FN^{-11/6+2\eg}\\
+&\le\tfrac12C_3C_FN^{-1/6+4\eg}+C_3C_FN^{-5/6+2\eg}\le\tfrac32\,C_3C_F\,N^{-1/6+4\eg},
+\end{align*}
+because $2-\frac{13}6=-\frac16$, $1-\frac{11}6=-\frac56$ and $N^{-5/6+2\eg}\le N^{-1/6+4\eg}$. The constant $C_4=\frac32C_3$ depends only on $(\vartheta,C_0)$ by \eqref{eq:b3:C2}, \eqref{eq:b3:C3}, and $N_1(\Par,\eg)$ depends only on
+$(\Par,\eg)$ (Lemma~\ref{lem:N0}). Only the bounds $\sup|F^{(k)}|\le C_F$, $k=0,1,2,3$, are used: in Lemma~\ref{lem:expand} (hypothesis \textup{(D3)}), Corollary~\ref{cor:entry}, Lemma~\ref{lem:decor} (with $\Phi=F'$) and
+Proposition~\ref{prop:step}.
+\end{proof}
+
+\noindent\emph{Remarks.} (1) \emph{Uniformity over the $N(N+1)/2$ hybrids.} Proposition~\ref{prop:step} holds for each $k$ with the \emph{same} constant $C_3$ and the same threshold $N_1(\Par,\eg)$, because every
+hybrid $M_k$ satisfies $\fA(\Par)$ with the same $\Par$ (Lemma~\ref{lem:hyb}(ii)) and the constants of Theorem~\ref{thm:21} depend only on $\Par$. No union bound over the hybrids is taken, and no supremum over $k$
+appears inside a probability: step $k$ bounds a difference of two expectations, using the event $\{Q\in\cG_{p_k}\}$ under the single law $\P_{M_{k-1}}$, whose complement costs $O(N^{-20})$ in that step. The sum of
+these costs over all steps is at most $8C_F\,\Gamma\,N^{-20}\le8C_FN^{-18}$, which is included in the bound.
+
+(2) \emph{Exponents and constants.} The exponent $-\frac16+4\eg$ is absolute: the number $4$ in front of $\eg$ and the constant $\frac16$ do not depend on $\Par$. The constant $C_4$ depends on $(\vartheta,C_0)$ only;
+$\delta_\pm$ enter only through $N_1(\Par,\eg)$ (via the constants $A_0,C,c,\phi,N_0$ of Theorem~\ref{thm:21}). This is what the quantifier order of Theorem~\ref{thm:24} requires: in \S\ref{sec:proof24} the theorem is used with
+$\eg=\frac1{50}$, where $-\frac16+4\eg=-\frac{13}{150}<-\frac1{20}$. Total: $N^2\cdot N^{-3/2}\cdot\Psi^2\approx N^{-1/6+4\eg}$ from the off-diagonal steps, $N\cdot N^{-3/2}\cdot\Psi\approx N^{-5/6+2\eg}$ from the diagonal ones.
+
+(3) \emph{The order of replacement} $\varphi$ is arbitrary; the bound does not depend on it.
+
+(4) \emph{Scope.} Only the integrated form (6.25) of Theorem~6.3 of the original is proved, for bounded $F$ with bounded derivatives; this is what \S\ref{sec:proof24} uses (with $F=q$). The pointwise form (6.24)
+and polynomially growing $F$ are not needed for Theorem~\ref{thm:24} and are not treated (see Appendix~\ref{app:diffB}).
+
+\medskip\noindent\textbf{Dependencies of the comparison branch} (``$\Leftarrow$'' means ``uses''; nothing else is used).
+Lemma~\ref{lem:edge} $\Leftarrow$ Theorem~\ref{thm:21}(ii) in the form \textup{(BB1)}, Lemma~\ref{lem:mscB}(b), Lemma~\ref{lem:N0}.
+Lemma~\ref{lem:RfromS}(b) $\Leftarrow$ Lemma~\ref{lem:edge}, Lemma~\ref{lem:RfromS}(a), \eqref{eq:subexp}, (C).
+Corollary~\ref{cor:entry} $\Leftarrow$ Lemma~\ref{lem:expand}, Lemma~\ref{lem:moments}(a), \eqref{eq:subexp}.
+Lemma~\ref{lem:decor} $\Leftarrow$ Lemma~\ref{lem:schur}\,(I2), Lemma~\ref{lem:split}, Corollary~\ref{cor:Xchange}(ii), Lemma~\ref{lem:RfromS}(b), centring, (A).
+Proposition~\ref{prop:step} $\Leftarrow$ Lemma~\ref{lem:hyb}(ii), Corollary~\ref{cor:entry}, Lemma~\ref{lem:decor}, Lemma~\ref{lem:RfromS}(b), Lemma~\ref{lem:expand}(a), \eqref{eq:2m}.
+Theorem~\ref{thm:gfc} $\Leftarrow$ Proposition~\ref{prop:step}.
+The comparison branch uses Theorem~\ref{thm:21}(ii) only (through Lemma~\ref{lem:edge}) and never Theorem~\ref{thm:22}; it meets the rigidity branch (\S\ref{sec:sandwich}) only in Proposition~\ref{prop:oneside}.
+Every function that is integrated over $\Omega$ (or over the law $\P'$ of $Q$) is bounded, except $Y$ in Lemma~\ref{lem:decor}, which is in $L^2$; the integrals over a single entry law $\nu$
+in Corollary~\ref{cor:entry} involve polynomials of degree $\le3$ in the entry, and its sixth moment in the tail estimate. Every event is an open or a closed subset of $\Omega$.

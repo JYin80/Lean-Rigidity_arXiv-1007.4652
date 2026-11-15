@@ -1,0 +1,483 @@
+\subsection{Resolvent identities}\label{sec:resid}
+
+\paragraph{Notation.} Vectors $x\in\C^N$ are columns, $\langle x,y\rangle:=\sum_i\ol{x_i}y_i$, $|x|:=\langle x,x\rangle^{1/2}$, $\norm x_\infty:=\max_i|x_i|$, and
+$\norm M:=\sup_{|x|=1}|Mx|$ is the operator norm of a matrix $M$; thus $|M_{ij}|=|\langle e_i,Me_j\rangle|\le\norm M$ for the standard basis $(e_i)$.
+$M^*$ is the conjugate transpose. If $M$ is indexed by a finite set $I$ and $P,Q\subset I$, then $M_{PQ}:=(M_{pq})_{p\in P,q\in Q}$.
+A matrix indexed by the empty set is the \emph{empty matrix}; by convention it is invertible, equal to its inverse, its determinant is $1$, its trace is $0$, and sums over an empty index set are $0$.
+
+For $T\subset\{1,\dots,N\}$ let $H^{(T)}:=(h_{ij})_{i,j\notin T}$ be the minor of $H$ with rows and columns in $T$ removed. It is indexed by $T^c:=\{1,\dots,N\}\setminus T$
+(indices are \emph{not} relabelled) and it is Hermitian. For $\im z>0$,
+\[
+ G^{(T)}(z):=(H^{(T)}-z)^{-1},\qquad m^{(T)}(z):=\frac1N\sum_{k\notin T}G^{(T)}_{kk}(z)\quad(\text{normalised by }N,\text{ not by }N-|T|),
+\]
+and we write $(iT)$ for $\{i\}\cup T$, $(ij)$ for $\{i,j\}$, and $\sum^{(T)}_k$ for the sum over $k\in T^c$. $H^{(\emptyset)}=H$, $G^{(\emptyset)}=G$.
+The matrix $G^{(T)}$ exists by Lemma~\ref{lem:basic}(a) applied to $H^{(T)}$. Throughout, $z=E+\ii\eta$ and $z'=E'+\ii\eta'$ with $\eta,\eta'>0$.
+
+\begin{lemma}[Basic properties]\label{lem:basic}
+Let $H$ be a Hermitian $N\times N$ matrix, $N\ge1$, and $\eta>0$. Then:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item $|(H-z)x|\ge\eta|x|$ for all $x\in\C^N$; $H-z$ is invertible, $\norm{G}\le\eta^{-1}$, $|G_{ij}|\le\eta^{-1}$, $G(z)^*=(H-\bar z)^{-1}$, and $\im G_{ii}>0$ (in particular $G_{ii}\ne0$).
+If $H$ is real symmetric then $G_{ij}=G_{ji}$.
+\item \emph{Ward identity:} $\sum_j|G_{ij}|^2=\sum_j|G_{ji}|^2=\im G_{ii}/\eta$.
+\item \emph{Resolvent identity:} $G(z)-G(z')=(z-z')G(z)G(z')$; hence $|G_{ij}(z)-G_{ij}(z')|\le|z-z'|/(\eta\eta')$ and $|m(z)-m(z')|\le|z-z'|/(\eta\eta')$.
+Consequently, if $\eta,\eta'\ge\eta_0>0$, each of the three functions $F\in\{\Lambda,\Ld,\Lo\}$ of \eqref{eq:defLambda} satisfies $|F(z)-F(z')|\le\big(\eta_0^{-2}+\eta_0^{-1}+1\big)|z-z'|$.
+\item \emph{Spectral form:} let $\lambda_1\le\dots\le\lambda_N$ be the eigenvalues of $H$ and $u_1,\dots,u_N$ an orthonormal basis of $\C^N$ with $Hu_\alpha=\lambda_\alpha u_\alpha$. Then
+\[
+ G_{ij}(z)=\sum_{\alpha=1}^N\frac{u_\alpha(i)\ol{u_\alpha(j)}}{\lambda_\alpha-z},\qquad\tr G(z)=\sum_{\alpha=1}^N\frac1{\lambda_\alpha-z},\qquad
+ \im m(z)=\frac1N\sum_{\alpha=1}^N\frac{\eta}{(\lambda_\alpha-E)^2+\eta^2},
+\]
+and $\im G_{ii}(z)=\sum_\alpha|u_\alpha(i)|^2\,\eta/((\lambda_\alpha-E)^2+\eta^2)$.
+\item \emph{Counting:} $\#\{\alpha:|\lambda_\alpha-E|\le\eta\}\le2\eta\,\im\tr G(E+\ii\eta)=2N\eta\,\im m(E+\ii\eta)$. In particular, if $\im m(E+\ii\eta)<\frac1{2N\eta}$ then $H$ has no eigenvalue in $[E-\eta,E+\eta]$.
+\item For fixed $E$, the functions $\eta\mapsto\eta\,\im m(E+\ii\eta)$ and $\eta\mapsto\eta\,\im G_{ii}(E+\ii\eta)$ are nondecreasing on $(0,\infty)$, and $\eta\mapsto\eta^{-1}\im m(E+\ii\eta)$, $\eta\mapsto\eta^{-1}\im G_{ii}(E+\ii\eta)$ are nonincreasing.
+\item $\norm{G(z)}=\max_\alpha|\lambda_\alpha-z|^{-1}=\operatorname{dist}(z,\operatorname{Spec}H)^{-1}$ and $G(z)+z^{-1}=z^{-1}G(z)H$.
+\item \emph{Two matrices}: if $A,B$ are Hermitian $N\times N$ matrices and $G_A:=(A-z)^{-1}$, $G_B:=(B-z)^{-1}$, then
+\[
+ G_A-G_B=G_A\,(B-A)\,G_B,\quad\ \norm{G_A-G_B}\le\eta^{-2}\norm{A-B},\quad\ |\tr G_A-\tr G_B|\le N\eta^{-2}\norm{A-B}.
+\]
+\end{enumerate}
+Items \textup{(a)--(c), (g), (h)} hold verbatim for every minor $H^{(T)}$, $T\ne\{1,\dots,N\}$; items \textup{(d)--(f)} hold for $H^{(T)}$ with $\tr G^{(T)}=Nm^{(T)}$ in place of $\tr G=Nm$
+and the $N-|T|$ eigenvalues and eigenvectors of $H^{(T)}$.
+\end{lemma}
+\begin{proof}
+(a) Since $H=H^*$, $\langle x,Hx\rangle$ is real, so $\im\langle x,(H-z)x\rangle=-\eta|x|^2$ and, by the Cauchy--Schwarz inequality,
+\[
+ |x|\,|(H-z)x|\ \ge\ |\langle x,(H-z)x\rangle|\ \ge\ \eta|x|^2 .
+\]
+Hence $|(H-z)x|\ge\eta|x|$; the linear map $H-z$ is injective, therefore bijective on $\C^N$, and putting $x=Gy$ gives $|Gy|\le\eta^{-1}|y|$, i.e.\ $\norm G\le\eta^{-1}$ and $|G_{ij}|\le\norm G\le\eta^{-1}$.
+The same argument with $-\eta$ shows that $H-\bar z$ is invertible, and $G^*=((H-z)^*)^{-1}=(H-\bar z)^{-1}$. If $H$ is real symmetric, $H-z$ is a symmetric matrix and so is its inverse.
+The claim $\im G_{ii}>0$ is proved with (b).
+
+(b) From $(H-\bar z)-(H-z)=(z-\bar z)=2\ii\eta$ we get, multiplying by $G$ on the left and $G^*$ on the right, respectively by $G^*$ on the left and $G$ on the right,
+\[
+ G-G^*=2\ii\eta\,GG^*,\qquad G-G^*=2\ii\eta\,G^*G .
+\]
+The $(i,i)$ entry of $G-G^*$ is $G_{ii}-\ol{G_{ii}}=2\ii\im G_{ii}$, that of $GG^*$ is $\sum_j|G_{ij}|^2$ and that of $G^*G$ is $\sum_j|G_{ji}|^2$. This is (b).
+Since $G$ is invertible, its $i$-th row is not zero, so $\im G_{ii}=\eta\sum_j|G_{ij}|^2>0$, which completes (a).
+
+(c) $G(z)\big[(H-z')-(H-z)\big]G(z')=G(z)-G(z')$ and the bracket equals $(z-z')$. By (a), $|G_{ij}(z)-G_{ij}(z')|\le|z-z'|\,\norm{G(z)}\norm{G(z')}\le|z-z'|/(\eta\eta')$, and $m$ is the average of the $G_{ii}$.
+For the last claim, $|\msc(z)-\msc(z')|\le(1+\eta_0^{-1})|z-z'|$ by Lemma~\ref{lem:msc}(f); so each of the functions $G_{ii}-\msc$, $m-\msc$, $G_{ij}$ $(i\ne j)$ changes by at most
+$(\eta_0^{-2}+\eta_0^{-1}+1)|z-z'|$ between $z$ and $z'$, and $\big||a|-|b|\big|\le|a-b|$, $|\max_ka_k-\max_kb_k|\le\max_k|a_k-b_k|$.
+
+(d) By the spectral theorem for Hermitian matrices there is an orthonormal eigenbasis $(u_\alpha)$; let $U$ be the unitary matrix with columns $u_\alpha$ and $D:=\operatorname{diag}(\lambda_\alpha)$, so $H=UDU^*$.
+Since $\im(\lambda_\alpha-z)=-\eta\ne0$, the matrix $D-z$ is invertible and $(H-z)\,U(D-z)^{-1}U^*=U(D-z)(D-z)^{-1}U^*=1$. Hence $G=U(D-z)^{-1}U^*$, which is the formula for $G_{ij}$;
+$\tr G=\tr\big((D-z)^{-1}U^*U\big)=\sum_\alpha(\lambda_\alpha-z)^{-1}$; and $\im\frac1{\lambda-z}=\im\frac{\lambda-E+\ii\eta}{|\lambda-z|^2}=\frac{\eta}{(\lambda-E)^2+\eta^2}$.
+
+(e) Every $\alpha$ with $|\lambda_\alpha-E|\le\eta$ contributes at least $\eta/(2\eta^2)=1/(2\eta)$ to the sum $\im\tr G=\sum_\alpha\eta/((\lambda_\alpha-E)^2+\eta^2)$, and all terms are positive. Hence
+$\#\{\alpha:|\lambda_\alpha-E|\le\eta\}\le2\eta\,\im\tr G$. If $\im m<1/(2N\eta)$, the right side is $<1$, so the set is empty.
+
+(f) By (d), $\eta\,\im G_{ii}=\sum_\alpha|u_\alpha(i)|^2\frac{\eta^2}{(\lambda_\alpha-E)^2+\eta^2}$ and $\eta^{-1}\im G_{ii}=\sum_\alpha|u_\alpha(i)|^2\frac{1}{(\lambda_\alpha-E)^2+\eta^2}$; for $a\ge0$ the function $\eta\mapsto\eta^2/(a+\eta^2)=1-a/(a+\eta^2)$ is nondecreasing and
+$\eta\mapsto1/(a+\eta^2)$ is nonincreasing. Average over $i$ for $m$.
+
+(g) By (d), $G=U(D-z)^{-1}U^*$ with $U$ unitary, so $\norm G=\norm{(D-z)^{-1}}=\max_\alpha|\lambda_\alpha-z|^{-1}$, and $\min_\alpha|\lambda_\alpha-z|$ is the distance from $z$ to the spectrum.
+Further $GH=G(H-z)+zG=1+zG$; divide by $z\ne0$.
+
+(h) $G_A\big[(B-z)-(A-z)\big]G_B=G_A-G_B$. Then use $\norm{G_A},\norm{G_B}\le\eta^{-1}$ from (a), and $|\tr M|\le N\max_i|M_{ii}|\le N\norm M$.
+
+The statement on minors needs no proof: $H^{(T)}$ is a Hermitian matrix of size $N-|T|\ge1$.
+\end{proof}
+
+\begin{lemma}[Schur complement in block form]\label{lem:schur} \infra\
+Let $H$ be a Hermitian $N\times N$ matrix, $\eta>0$, $\emptyset\ne A\subset\{1,\dots,N\}$, and define the $A\times A$ matrix
+\begin{equation}\label{eq:MA}
+ M^A_{ab}:=h_{ab}-z\delta_{ab}-\sum_{k,l\notin A}h_{ak}G^{(A)}_{kl}h_{lb}\qquad(a,b\in A).
+\end{equation}
+Then $M^A$ is invertible and $(G_{ab})_{a,b\in A}=(M^A)^{-1}$. Moreover, for $a\in A$ and $k\notin A$,
+\[
+ G_{ak}=-\sum_{b\in A}\sum_{l\notin A}G_{ab}\,h_{bl}\,G^{(A)}_{lk},\qquad G_{ka}=-\sum_{b\in A}\sum_{l\notin A}G^{(A)}_{kl}\,h_{lb}\,G_{ba}.
+\]
+Consequently:
+\begin{enumerate}[label=\textup{(I\arabic*)},leftmargin=2.6em,itemsep=1pt]
+\item $\dfrac1{G_{ii}}=h_{ii}-z-\sum^{(i)}_{k,l}h_{ik}G^{(i)}_{kl}h_{li}$.
+\item For $i\ne j$:
+\[
+ G_{ij}=-G_{ii}\sum^{(i)}_kh_{ik}G^{(i)}_{kj}=-G_{ii}G^{(i)}_{jj}\Big(h_{ij}-\sum^{(ij)}_{k,l}h_{ik}G^{(ij)}_{kl}h_{lj}\Big),
+ \qquad G_{ji}=-G_{ii}\sum^{(i)}_kG^{(i)}_{jk}h_{ki}.
+\]
+\item For $A\ne\{1,\dots,N\}$ the matrix $G_{AA}=(G_{cd})_{c,d\in A}$ is invertible and for $i,j\notin A$:
+$G^{(A)}_{ij}=G_{ij}-\sum_{a,b\in A}G_{ia}\big(G_{AA}^{-1}\big)_{ab}G_{bj}$; for $A=\{k\}$: $G^{(k)}_{ij}=G_{ij}-G_{ik}G_{kj}/G_{kk}$.
+\item For $k\in A$, $A':=A\setminus\{k\}\ne\emptyset$: the matrix $M^A_{A'A'}:=(M^A_{ab})_{a,b\in A'}$ is invertible, $(M^A_{A'A'})^{-1}=(G^{(k)}_{ab})_{a,b\in A'}$, and
+\begin{equation}\label{eq:1overG}
+ \frac1{G_{kk}}=M^A_{kk}-\sum_{a,b\in A'}M^A_{ka}\,G^{(k)}_{ab}\,M^A_{bk}.
+\end{equation}
+Moreover $M^A_{aa}=1/G^{(A\setminus a)}_{aa}$ for every $a\in A$.
+\item $\tr G-\tr G^{(i)}=(G^2)_{ii}/G_{ii}$ and $|(G^2)_{ii}|\le\im G_{ii}/\eta\le|G_{ii}|/\eta$; hence $|m-m^{(i)}|\le\frac1{N\eta}$ and, for every $T\subset\{1,\dots,N\}$,
+\[
+ |m^{(T)}-m|\le\frac{|T|}{N\eta},\qquad\text{in particular}\quad\im m^{(T)}\le\im m+\frac{|T|}{N\eta}.
+\]
+\item \emph{Determinants}: $\det(H-z)=\det(H^{(A)}-z)\cdot\det M^A=\det(H^{(A)}-z)/\det(G_{AA})$; for $A=\{a\}$:
+\[
+ \det(H-z)=\frac{\det(H^{(a)}-z)}{G_{aa}} .
+\]
+\end{enumerate}
+The same identities hold for every minor $H^{(T)}$ in place of $H$ (with $A\subset T^c$, and with $G^{(T)}$, $G^{(T\cup A)}$, $m^{(T)}$, $\tr G^{(T)}$ in place of $G$, $G^{(A)}$, $m$, $\tr G$);
+for instance $1/G^{(T)}_{ii}=h_{ii}-z-\sum^{(iT)}_{k,l}h_{ik}G^{(iT)}_{kl}h_{li}$ for $i\notin T$.
+\end{lemma}
+\begin{proof}
+\emph{Step 0: the block inverse formula.} Let $I=A\sqcup A^c$ be a finite index set with $A,A^c\ne\emptyset$, and let $\mathcal M$ be an invertible $I\times I$ complex matrix, written in blocks as
+\[
+ \mathcal M=\begin{pmatrix}P&Q\\R&S\end{pmatrix},\qquad\mathcal M^{-1}=\begin{pmatrix}X&Y\\Z&W\end{pmatrix}\qquad(P,X:\ A\times A;\quad S,W:\ A^c\times A^c),
+\]
+and assume that $S$ is invertible. Then $P-QS^{-1}R$ is invertible and
+\begin{equation}\tag{BI}\label{eq:BI}
+ X=(P-QS^{-1}R)^{-1},\qquad Y=-XQS^{-1},\qquad Z=-S^{-1}RX,\qquad W=S^{-1}+S^{-1}RXQS^{-1}.
+\end{equation}
+Indeed, $\mathcal M\mathcal M^{-1}=1$ gives $PX+QZ=1$ and $RX+SZ=0$; the second relation gives $Z=-S^{-1}RX$ and then the first gives $(P-QS^{-1}R)X=1$.
+For square matrices a one-sided inverse is the inverse, which proves the first and third formulas. $\mathcal M^{-1}\mathcal M=1$ gives $XQ+YS=0$ and $ZQ+WS=1$, hence $Y=-XQS^{-1}$ and
+$W=S^{-1}-ZQS^{-1}=S^{-1}+S^{-1}RXQS^{-1}$. (In Mathlib: \texttt{Matrix.invOf\_fromBlocks\textsubscript{22}\_eq}.)
+Moreover, without assuming that $\mathcal M$ is invertible,
+\begin{equation}\tag{BD}\label{eq:BD}
+ \det\mathcal M=\det S\cdot\det(P-QS^{-1}R),
+\end{equation}
+because
+$\begin{pmatrix}P&Q\\R&S\end{pmatrix}=\begin{pmatrix}1&QS^{-1}\\0&1\end{pmatrix}\begin{pmatrix}P-QS^{-1}R&0\\0&S\end{pmatrix}\begin{pmatrix}1&0\\S^{-1}R&1\end{pmatrix}$
+and the determinant of a block triangular matrix is the product of the determinants of its diagonal blocks (Mathlib: \texttt{Matrix.det\_fromBlocks\textsubscript{22}}).
+Both the inverse and the determinant are unchanged under a simultaneous relabelling of rows and columns, so it does not matter how $I$ is ordered.
+
+\emph{Step 1: $G_{AA}=(M^A)^{-1}$ and the off-diagonal blocks.} If $A=\{1,\dots,N\}$, then $M^A=H-z$ by definition (empty sum) and there is nothing to prove.
+Otherwise apply Step~0 to $\mathcal M:=H-z$, which is invertible by Lemma~\ref{lem:basic}(a), with
+$P=H_{AA}-z$, $Q=H_{AA^c}$, $R=H_{A^cA}$ and $S=H^{(A)}-z$. The matrix $S$ is invertible by Lemma~\ref{lem:basic}(a) applied to the Hermitian matrix $H^{(A)}$, and $S^{-1}=G^{(A)}$.
+By definition \eqref{eq:MA}, $P-QS^{-1}R=M^A$. So \eqref{eq:BI} gives: $M^A$ is invertible, $G_{AA}=X=(M^A)^{-1}$, $G_{AA^c}=Y=-G_{AA}H_{AA^c}G^{(A)}$ and $G_{A^cA}=Z=-G^{(A)}H_{A^cA}G_{AA}$.
+The last two are the displayed formulas for $G_{ak}$, $G_{ka}$.
+
+\emph{Step 2: \textup{(I1)} and the first and third formulas of \textup{(I2)}.} Take $A=\{i\}$. Then $M^A$ is the $1\times1$ matrix with entry $h_{ii}-z-\sum^{(i)}_{k,l}h_{ik}G^{(i)}_{kl}h_{li}$, and Step~1 says that it is the inverse of $G_{ii}$: this is (I1).
+The off-diagonal blocks of Step~1 read, for $j\ne i$: $G_{ij}=-G_{ii}\sum^{(i)}_lh_{il}G^{(i)}_{lj}$ and $G_{ji}=-\sum^{(i)}_lG^{(i)}_{jl}h_{li}G_{ii}$.
+
+\emph{Step 3: a consistency property of $M^A$.} Let $\emptyset\ne A'\subset A$ and $T:=A\setminus A'$. Then
+\begin{equation}\tag{$\ast$}\label{eq:MAcons}
+ M^A_{ab}=M^{A'}\big[H^{(T)}\big]_{ab}\qquad(a,b\in A'),
+\end{equation}
+where $M^{A'}[H^{(T)}]$ denotes the matrix \eqref{eq:MA} formed with the Hermitian matrix $H^{(T)}$ (indexed by $T^c$) and its subset of indices $A'\subset T^c$.
+Indeed, the complement of $A'$ in $T^c$ is $A^c$, and the minor of $H^{(T)}$ with the rows and columns in $A'$ removed is $H^{(T\cup A')}=H^{(A)}$; so
+$M^{A'}[H^{(T)}]_{ab}=h_{ab}-z\delta_{ab}-\sum_{k,l\notin A}h_{ak}G^{(A)}_{kl}h_{lb}$, which is $M^A_{ab}$.
+
+\emph{Step 4: the second formula of \textup{(I2)}.} Let $i\ne j$, $A:=\{i,j\}$ and $M:=M^A$. By Step~1, $M$ is an invertible $2\times2$ matrix with inverse $G_{AA}$, so by the formula for the inverse of a $2\times2$ matrix
+\[
+ G_{ii}=\frac{M_{jj}}{\det M},\qquad G_{ij}=-\frac{M_{ij}}{\det M}.
+\]
+By \eqref{eq:MAcons} with $A'=\{j\}$, $T=\{i\}$, and by (I1) applied to the Hermitian matrix $H^{(i)}$ and its index $j$: $M_{jj}=M^{\{j\}}[H^{(i)}]_{jj}=1/G^{(i)}_{jj}$; in particular $M_{jj}\ne0$.
+Hence $\det M=M_{jj}/G_{ii}$ and $G_{ij}=-G_{ii}M_{ij}/M_{jj}=-G_{ii}G^{(i)}_{jj}M_{ij}$, where $M_{ij}=h_{ij}-\sum^{(ij)}_{k,l}h_{ik}G^{(ij)}_{kl}h_{lj}$ by \eqref{eq:MA}.
+
+\emph{Step 5: \textup{(I3)}.} Let $A\ne\{1,\dots,N\}$. Apply Step~0 to the invertible matrix $\mathcal M:=G$, whose inverse is $H-z$, with the roles of the two blocks exchanged:
+the block $G_{AA}$ plays the role of $S$ (it is invertible by Step~1), $G_{A^cA^c}$ the role of $P$. The first formula of \eqref{eq:BI} says that $G_{A^cA^c}-G_{A^cA}(G_{AA})^{-1}G_{AA^c}$ is invertible and
+\[
+ \big(G_{A^cA^c}-G_{A^cA}(G_{AA})^{-1}G_{AA^c}\big)^{-1}=(G^{-1})_{A^cA^c}=(H-z)_{A^cA^c}=H^{(A)}-z .
+\]
+Taking inverses, $G^{(A)}=G_{A^cA^c}-G_{A^cA}(G_{AA})^{-1}G_{AA^c}$, which is (I3). For $A=\{k\}$, $G_{AA}^{-1}=1/G_{kk}$.
+
+\emph{Step 6: \textup{(I4)}.} Let $k\in A$ and $A'=A\setminus\{k\}\ne\emptyset$. By \eqref{eq:MAcons} with $T=\{k\}$, $M^A_{A'A'}=M^{A'}[H^{(k)}]$, and by Step~1 applied to the Hermitian matrix $H^{(k)}$ and $A'$ this matrix
+is invertible with inverse $(G^{(k)}_{ab})_{a,b\in A'}$. Now apply Step~0 to $\mathcal M:=M^A$ (invertible, with inverse $G_{AA}$, by Step~1) with the blocks $\{k\}$ and $A'$: $S=M^A_{A'A'}$ is invertible, so
+\[
+ G_{kk}=\big((M^A)^{-1}\big)_{kk}=\Big(M^A_{kk}-\sum_{a,b\in A'}M^A_{ka}\big((M^A_{A'A'})^{-1}\big)_{ab}M^A_{bk}\Big)^{-1},
+\]
+which is \eqref{eq:1overG}. Finally, for $a\in A$, \eqref{eq:MAcons} with $A'=\{a\}$, $T=A\setminus\{a\}$ and (I1) for $H^{(T)}$ give $M^A_{aa}=1/G^{(A\setminus a)}_{aa}$ (for $A=\{a\}$ this is (I1) itself).
+
+\emph{Step 7: \textup{(I5)}.} \emph{The identity.} If $N=1$ then $\tr G^{(i)}=0$ and $(G^2)_{ii}/G_{ii}=G_{ii}=\tr G$. If $N\ge2$, then by (I3) with $A=\{i\}$, $G^{(i)}_{kk}=G_{kk}-G_{ki}G_{ik}/G_{ii}$ for $k\ne i$; summing over $k\ne i$,
+\[
+ \tr G^{(i)}=\tr G-G_{ii}-\frac1{G_{ii}}\sum_{k\ne i}G_{ik}G_{ki}=\tr G-\frac1{G_{ii}}\sum_{k}G_{ik}G_{ki}=\tr G-\frac{(G^2)_{ii}}{G_{ii}} .
+\]
+\emph{The bounds} (for every $N\ge1$). By the Cauchy--Schwarz inequality and the Ward identity (Lemma~\ref{lem:basic}(b)),
+$|(G^2)_{ii}|\le\big(\sum_k|G_{ik}|^2\big)^{1/2}\big(\sum_k|G_{ki}|^2\big)^{1/2}=\im G_{ii}/\eta\le|G_{ii}|/\eta$. Hence $|\tr G-\tr G^{(i)}|\le\eta^{-1}$ and $|m-m^{(i)}|\le(N\eta)^{-1}$.
+For a general $T=\{t_1,\dots,t_r\}$ (with $r=|T|$ distinct elements; $T=\{1,\dots,N\}$ is allowed) put $T_s:=\{t_1,\dots,t_s\}$, $T_0:=\emptyset$. For $1\le s\le r$ the matrix $H^{(T_{s-1})}$ is Hermitian (of size $N-s+1\ge1$) and $H^{(T_s)}$ is its minor with the index $t_s$ removed, so the bound just proved gives
+$|\tr G^{(T_{s-1})}-\tr G^{(T_s)}|\le\eta^{-1}$. Summing over $s$: $|\tr G-\tr G^{(T)}|\le r/\eta$, i.e.\ $|m-m^{(T)}|\le|T|/(N\eta)$.
+
+\emph{Step 8: \textup{(I6)}.} If $A=\{1,\dots,N\}$ the claim is $\det(H-z)=\det M^A$, which is true as $M^A=H-z$. Otherwise \eqref{eq:BD} with the blocks of Step~1 gives
+$\det(H-z)=\det(H^{(A)}-z)\det M^A$, and $\det M^A=1/\det G_{AA}$ by Step~1. For $A=\{a\}$, $\det G_{AA}=G_{aa}$.
+
+\emph{Minors.} For $T\ne\{1,\dots,N\}$ the matrix $H^{(T)}$ is Hermitian, and for $A\subset T^c$ its minor with the indices $A$ removed is $H^{(T\cup A)}$. So every statement applies to $H^{(T)}$ as described.
+\end{proof}
+
+\begin{remark}\label{rem:rows}
+Two structural facts used in Sections~\ref{sec:prob} and~\ref{sec:FA} can be read off \eqref{eq:MA}: (i) $M^A_{ab}$ is a polynomial in the entries $h_{ab}$, $(h_{ak})_{k\notin A}$, $(h_{lb})_{l\notin A}$ with coefficients $-z\delta_{ab}$ and $G^{(A)}_{kl}$
+that depend only on the minor $H^{(A)}$; (ii) by (I4), $M^A_{aa}=1/G^{(A\setminus a)}_{aa}$, so $|1/M^A_{aa}|\le\eta^{-1}$ by Lemma~\ref{lem:basic}(a).
+\end{remark}
+
+\begin{lemma}[Perturbation of minors]\label{lem:minor}
+Let $A\subset\{1,\dots,N\}$, $|A|=r\ge1$, and $g>0$. If $|G_{aa}|\ge g$ for all $a\in A$ and $\max_{a\ne b\in A}|G_{ab}|\le g/(2r)$, then every entry of $(G_{AA})^{-1}$ has modulus at most $2/g$, and for all $i,j\notin A$:
+\[
+ |G^{(A)}_{ij}-G_{ij}|\le\frac{2r^2}g\max_{a\in A}|G_{ia}|\max_{b\in A}|G_{bj}|.
+\]
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:schur}, $G_{AA}$ is invertible; let $X:=(G_{AA})^{-1}$ and $\mu:=\max_{a,b\in A}|X_{ab}|$. Writing the identity $G_{AA}X=1$ entrywise and isolating the diagonal entry of $G_{AA}$,
+\[
+ G_{aa}X_{ab}=\delta_{ab}-\sum_{c\in A,\,c\ne a}G_{ac}X_{cb}\qquad(a,b\in A).
+\]
+Hence $g|X_{ab}|\le1+(r-1)\frac{g}{2r}\mu\le1+\frac g2\mu$ for all $a,b$, so $g\mu\le1+\frac g2\mu$ and $\mu\le2/g$.
+By (I3), $|G^{(A)}_{ij}-G_{ij}|\le\sum_{a,b\in A}|G_{ia}|\,|X_{ab}|\,|G_{bj}|\le r^2\frac2g\max_a|G_{ia}|\max_b|G_{bj}|$.
+\end{proof}
+
+\subsection{The self-consistent equation and its stability}\label{sec:stab}
+In this subsection $B=(\sigma_{ij}^2)_{i,j=1}^N$ is a real symmetric matrix with nonnegative entries satisfying (A), (B), (C) of Definition~\ref{def:ass}; $H$ is an arbitrary Hermitian $N\times N$ matrix
+(no relation between $H$ and $B$ is assumed), $N\ge2$, $z=E+\ii\eta$ with $\eta>0$, and $m:=\msc(z)$. By (A) and the symmetry of $B$,
+\begin{equation}\tag{A$'$}\label{eq:Arow}
+ \sum_{j=1}^N\sigma_{ij}^2=1\quad\text{for every }i,\qquad\text{i.e.}\quad B\bone=\bone,\qquad\bone:=(1,\dots,1)^{T}.
+\end{equation}
+\begin{definition}\label{def:XA}
+For $i\in\{1,\dots,N\}$ (all quantities depend on $z$):
+\begin{align*}
+ Z_i&:=\sum^{(i)}_{k,l}h_{ik}G^{(i)}_{kl}h_{li}-\sum^{(i)}_k\sigma_{ik}^2G^{(i)}_{kk}, & X_i&:=h_{ii}-Z_i,\\
+ A_i&:=\sigma_{ii}^2G_{ii}+\sum_{j\ne i}\sigma_{ij}^2\frac{G_{ij}G_{ji}}{G_{ii}}, & \Upsilon_i&:=A_i+X_i .
+\end{align*}
+For a vector $u\in\C^N$, $\avg u:=\frac1N\sum_iu_i$; for vectors $u,u'$ the products $uu'$, $u^2$, \dots\ are taken entrywise. Further $\Upsilon_{\max}:=\max_i|\Upsilon_i|$.
+\end{definition}
+\noindent($A_i$ is well defined since $G_{ii}\ne0$, Lemma~\ref{lem:basic}(a). In the probabilistic setting $X_i=Q_i(1/G_{ii})$, where $Q_i=1-P_i$ and $P_i$ is the expectation in the $i$-th row, see Section~\ref{sec:FA}; this is not used in the present section.)
+
+\begin{lemma}[Exact self-consistent equations]\label{lem:sce}
+Assume \textup{(A)}. With $v_i=G_{ii}-\msc$, $m=\msc$, $r_i:=v_i^2/G_{ii}$:
+\begin{align}
+ \frac1{G_{ii}}&=-z-\sum_j\sigma_{ij}^2G_{jj}+\Upsilon_i, &
+ v_i&=m\,G_{ii}\Big(\sum_j\sigma_{ij}^2v_j-\Upsilon_i\Big),\label{eq:sce1}\\
+ v_i-m^2\sum_j\sigma^2_{ij}v_j&=-m^2\Upsilon_i+r_i, &
+ (1-m^2)\avg v&=-m^2\avg\Upsilon+\avg r,\label{eq:sce2}
+\end{align}
+and $A_i=\sigma_{ii}^2G_{ii}+G_{ii}\sum_{j\ne i}\sigma_{ij}^2\big(\sum^{(i)}_kh_{ik}G^{(i)}_{kj}\big)\big(\sum^{(i)}_lG^{(i)}_{jl}h_{li}\big)$.
+\end{lemma}
+\begin{proof}
+\emph{First equation of \eqref{eq:sce1}.} By (I1) and the definitions of $Z_i$, $X_i$,
+\[
+ \frac1{G_{ii}}=h_{ii}-z-Z_i-\sum^{(i)}_k\sigma_{ik}^2G^{(i)}_{kk}=-z+X_i-\sum^{(i)}_k\sigma_{ik}^2G^{(i)}_{kk}.
+\]
+By (I3) with $A=\{i\}$, $G^{(i)}_{kk}=G_{kk}-G_{ki}G_{ik}/G_{ii}$ for $k\ne i$, so
+\[
+ \sum^{(i)}_k\sigma_{ik}^2G^{(i)}_{kk}=\sum_{k}\sigma_{ik}^2G_{kk}-\sigma_{ii}^2G_{ii}-\sum_{k\ne i}\sigma_{ik}^2\frac{G_{ik}G_{ki}}{G_{ii}}=\sum_k\sigma_{ik}^2G_{kk}-A_i .
+\]
+Inserting this gives $1/G_{ii}=-z-\sum_k\sigma_{ik}^2G_{kk}+A_i+X_i$.
+
+\emph{Second equation of \eqref{eq:sce1}.} Put $t_i:=\sum_j\sigma_{ij}^2v_j-\Upsilon_i$. By \eqref{eq:Arow}, $\sum_j\sigma_{ij}^2G_{jj}=m+\sum_j\sigma_{ij}^2v_j$, and by Lemma~\ref{lem:msc}(a), $m\ne0$ and $-z-m=1/m$. So the first equation reads
+$1/G_{ii}=1/m-t_i$. Multiplying by $mG_{ii}$: $m=G_{ii}-mG_{ii}t_i$, i.e.\ $v_i=mG_{ii}t_i$.
+
+\emph{First equation of \eqref{eq:sce2}.} From $v_i=mG_{ii}t_i$ and $G_{ii}=m+v_i$: $v_i=m^2t_i+mv_it_i$, and $mt_i=v_i/G_{ii}$, so $mv_it_i=v_i^2/G_{ii}=r_i$. Thus $v_i=m^2t_i+r_i$, which is the claim.
+
+\emph{Second equation of \eqref{eq:sce2}.} Average the first one over $i$ and use (A): $\frac1N\sum_i\sum_j\sigma_{ij}^2v_j=\frac1N\sum_jv_j\sum_i\sigma_{ij}^2=\avg v$.
+
+\emph{Formula for $A_i$.} For $j\ne i$, the first and third formulas of (I2) give $G_{ij}G_{ji}=G_{ii}^2\big(\sum^{(i)}_kh_{ik}G^{(i)}_{kj}\big)\big(\sum^{(i)}_lG^{(i)}_{jl}h_{li}\big)$; divide by $G_{ii}$.
+\end{proof}
+
+\begin{lemma}[Vector stability on $\be^\perp$, no logarithm]\label{lem:vecstab}
+Assume \textup{(A), (B), (C)} and let $\delta_{\min}:=\min(\delta_-,\delta_+)$. Let $\zeta\in\C$, $|\zeta|\le1$, and $u\in\C^N$ with $\sum_iu_i=0$. There is a unique $d\in\C^N$ with $\sum_id_i=0$ and $(1-\zeta B)d=u$, and
+\[
+ |d|\le\delta_{\min}^{-1}|u|,\qquad\norm d_\infty\le C_s\norm u_\infty,\qquad C_s:=1+\frac{\sqrt{C_0}}{\delta_{\min}}.
+\]
+\end{lemma}
+\begin{proof}
+Let $V:=\{x\in\C^N:\sum_ix_i=0\}$.
+
+\emph{Step 1: $B$ maps $V$ into $V$.} For $x\in V$, by (A), $\sum_i(Bx)_i=\sum_jx_j\sum_i\sigma_{ij}^2=\sum_jx_j=0$.
+
+\emph{Step 2: the quadratic form on $V$.} Let $x\in V$ and write $x=a+\ii b$ with $a,b\in\R^N$; then $\sum_ia_i=\sum_ib_i=0$. Since $B$ is real and symmetric, $\langle a,Bb\rangle=\langle b,Ba\rangle$ and
+\[
+ \langle x,Bx\rangle=\langle a,Ba\rangle+\langle b,Bb\rangle+\ii\big(\langle a,Bb\rangle-\langle b,Ba\rangle\big)=\langle a,Ba\rangle+\langle b,Bb\rangle .
+\]
+Applying (B) to $a$ and to $b$, and $|x|^2=|a|^2+|b|^2$: $(-1+\delta_-)|x|^2\le\langle x,Bx\rangle\le(1-\delta_+)|x|^2$, hence
+\[
+ |\langle x,Bx\rangle|\le(1-\delta_{\min})|x|^2\qquad(x\in V).
+\]
+(If $\delta_{\min}>1$ this forces $V=\{0\}$, which is impossible for $N\ge2$; so $\delta_{\min}\le1$.)
+
+\emph{Step 3: coercivity, existence and uniqueness.} For $x\in V$, by the Cauchy--Schwarz inequality, Step~2 and $|\zeta|\le1$,
+\[
+ |x|\,|(1-\zeta B)x|\ \ge\ |\langle x,(1-\zeta B)x\rangle|\ \ge\ |x|^2-|\zeta|\,|\langle x,Bx\rangle|\ \ge\ \delta_{\min}|x|^2 .
+\]
+So $|(1-\zeta B)x|\ge\delta_{\min}|x|$ on $V$. By Step~1, $1-\zeta B$ maps the finite-dimensional space $V$ into itself; it is injective on $V$, hence bijective on $V$. This gives existence and uniqueness of $d\in V$ with $(1-\zeta B)d=u$, and $|d|\le\delta_{\min}^{-1}|u|$.
+
+\emph{Step 4: the bound in the maximum norm.} From $d=u+\zeta Bd$, the Cauchy--Schwarz inequality, (C) and \eqref{eq:Arow},
+\[
+ |(Bd)_i|=\Big|\sum_j\sigma_{ij}^2d_j\Big|\le\Big(\sum_j\sigma_{ij}^4\Big)^{1/2}|d|\le\Big(\frac{C_0}N\sum_j\sigma_{ij}^2\Big)^{1/2}|d|=\sqrt{\frac{C_0}{N}}\,|d| ,
+\]
+and $|d|\le\delta_{\min}^{-1}|u|\le\delta_{\min}^{-1}\sqrt N\norm u_\infty$. Hence $\norm d_\infty\le\norm u_\infty+\norm{Bd}_\infty\le(1+\sqrt{C_0}/\delta_{\min})\norm u_\infty$.
+\end{proof}
+\noindent Neither a Neumann series nor the spectral theorem for $B$ is used; the lemma holds for all $\delta_\pm,C_0>0$, without the normalisation of Convention~\ref{conv:const}.
+Note that $C_s\ge1$ always, and $C_s\ge2$ under that normalisation ($C_0\ge1$, $\delta_{\min}\le1$).
+
+\begin{lemma}[Stability, near regime]\label{lem:stabnear}
+Assume \textup{(A), (B), (C)}. Let $|E|\le5$, $0<\eta\le10$, and
+\begin{equation}\label{eq:lambda1}
+ \lambda_{\rm st}:=\frac1{576\,C_s}.
+\end{equation}
+Put $w:=\avg v$ (so $|w|=\Lambda$), $w_0:=\msc(1-\msc^2)$, $d_i:=v_i-w$, $D:=\max_i|v_i-w|$, $\Upsilon_{\max}:=\max_i|\Upsilon_i|$. If $\Ld\le\lambda_{\rm st}$, then $\frac3{52}\le|G_{ii}|\le\frac54$ for all $i$,
+$\Lambda\le\Ld$, $D\le2\Ld\le2\lambda_{\rm st}$, and
+\begin{align}
+ D&\le4C_s\Upsilon_{\max}+144C_s\Lambda^2,\qquad\Ld\le\Lambda+D,\label{eq:Dbound}\\
+ |w^2-w_0w|&\le|\avg\Upsilon|+D^2+18\Ld^3\ \le\ |\avg\Upsilon|+40C_s^2\,\Upsilon_{\max}^2+(90+72C_s)\Lambda^3,\label{eq:quad}
+\end{align}
+and $\frac1{13}c_*\varkappa\le|w_0|\le C_*\varkappa$, with $c_*,C_*$ from Lemma~\ref{lem:mscsize}. Moreover the following identity holds (whenever $\eta>0$, without any assumption on $E$, $\eta$ or $\Ld$):
+\[
+ w^2-w_0w=m^3\avg\Upsilon-\avg{d^2}+\avg{v^3/G},\qquad\text{where }\ \avg{v^3/G}:=\frac1N\sum_i\frac{v_i^3}{G_{ii}} .
+\]
+\end{lemma}
+\noindent(Note $(90+72C_s)\lambda_{\rm st}\le\frac{162}{576}<\frac3{10}$, so the cubic term is at most $\frac3{10}\Lambda^2$ when $\Ld\le\lambda_{\rm st}$.)
+\begin{proof}
+Throughout, $m=\msc(z)$, and $\frac1{13}\le|m|\le1$ by \eqref{eq:alpha}.
+
+\emph{Step 1: elementary bounds.} Since $C_s\ge1$, $\lambda_{\rm st}\le\frac1{576}\le\frac1{52}$. So $|G_{ii}|\ge|m|-|v_i|\ge\frac1{13}-\frac1{52}=\frac3{52}$ and $|G_{ii}|\le1+\frac1{52}\le\frac54$. Consequently
+\[
+ |r_i|=\frac{|v_i|^2}{|G_{ii}|}\le\frac{52}3\Ld^2\le18\Ld^2,\qquad\Big|\frac{v_i^3}{G_{ii}}\Big|\le18\Ld^3 .
+\]
+Further $\Lambda=|\avg v|\le\max_i|v_i|=\Ld$, $|d_i|\le|v_i|+|w|\le2\Ld$, so $D\le2\Ld\le2\lambda_{\rm st}$; and $|v_i|\le|w|+|d_i|$ gives $\Ld\le\Lambda+D$.
+
+\emph{Step 2: the equation for $d$.} Let $y:=-m^2\Upsilon+r\in\C^N$ and $d:=v-w\bone$, so $\sum_id_i=0$. The first equation of \eqref{eq:sce2} is $(1-m^2B)v=y$. By \eqref{eq:Arow}, $B\bone=\bone$, hence
+\[
+ (1-m^2)w\bone+(1-m^2B)d=y .
+\]
+By Step~1 of the proof of Lemma~\ref{lem:vecstab}, $\sum_i((1-m^2B)d)_i=0$. Taking the average of both sides gives $(1-m^2)w=\avg y$ (this is the second equation of \eqref{eq:sce2}), and subtracting,
+\[
+ (1-m^2B)d=y-\avg y\bone=:u,\qquad\sum_iu_i=0,\qquad\norm u_\infty\le2\norm y_\infty\le2\big(\Upsilon_{\max}+18\Ld^2\big),
+\]
+where we used $|m|\le1$ and Step~1. By Lemma~\ref{lem:vecstab} with $\zeta:=m^2$ ($|\zeta|\le1$; $d$ is \emph{the} solution by uniqueness),
+\[
+ D=\norm d_\infty\le2C_s\Upsilon_{\max}+36C_s\Ld^2\le2C_s\Upsilon_{\max}+72C_s\Lambda^2+72C_sD^2,
+\]
+using $\Ld^2\le(\Lambda+D)^2\le2\Lambda^2+2D^2$. Since $72C_sD\le144C_s\lambda_{\rm st}=\frac14$, we get $\frac34D\le2C_s\Upsilon_{\max}+72C_s\Lambda^2$, hence $D\le\frac83C_s\Upsilon_{\max}+96C_s\Lambda^2$, which implies \eqref{eq:Dbound}.
+
+\emph{Step 3: the identity for $w$.} Since $G_{ii}=m+v_i$,
+\[
+ \frac{v_i^2}{m}-\frac{v_i^3}{mG_{ii}}=\frac{v_i^2(G_{ii}-v_i)}{mG_{ii}}=\frac{v_i^2}{G_{ii}}=r_i,\qquad\text{so}\qquad\avg r=\frac1m\avg{v^2}-\frac1m\avg{v^3/G}.
+\]
+Since $\avg d=0$, $\avg{v^2}=\avg{(w\bone+d)^2}=w^2+\avg{d^2}$. Multiplying the second equation of \eqref{eq:sce2} by $-m$ therefore gives
+\[
+ -m(1-m^2)w=m^3\avg\Upsilon-w^2-\avg{d^2}+\avg{v^3/G},
+\]
+which is the asserted identity because $w_0=m(1-m^2)$. Only $\eta>0$ and (A) were used here.
+
+\emph{Step 4: \eqref{eq:quad}.} By Step~3, $|m|\le1$, $|\avg{d^2}|\le D^2$ and Step~1: $|w^2-w_0w|\le|\avg\Upsilon|+D^2+18\Ld^3$. Next, $(a+b)^3\le4(a^3+b^3)$ for $a,b\ge0$, so by Step~1
+\[
+ 18\Ld^3\le72\Lambda^3+72D^3\le72\Lambda^3+144\lambda_{\rm st}D^2=72\Lambda^3+\frac{D^2}{4C_s} .
+\]
+By \eqref{eq:Dbound}, $(a+b)^2\le2a^2+2b^2$ and $\Lambda\le\Ld\le\lambda_{\rm st}$,
+\[
+ D^2\le32C_s^2\Upsilon_{\max}^2+2\cdot144^2C_s^2\Lambda^4\le32C_s^2\Upsilon_{\max}^2+\frac{2\cdot144^2}{576}C_s\Lambda^3=32C_s^2\Upsilon_{\max}^2+72C_s\Lambda^3 .
+\]
+Hence, using $C_s\ge1$ in the form $32C_s^2+8C_s\le40C_s^2$,
+\[
+\begin{aligned}
+ D^2+18\Ld^3&\le\Big(1+\frac1{4C_s}\Big)D^2+72\Lambda^3\le(32C_s^2+8C_s)\Upsilon_{\max}^2+(72C_s+18+72)\Lambda^3\\
+ &\le40C_s^2\Upsilon_{\max}^2+(90+72C_s)\Lambda^3 .
+\end{aligned}
+\]
+
+\emph{Step 5: size of $w_0$.} $|w_0|=|m|\,|1-m^2|$, and \eqref{eq:alpha} gives $\frac1{13}c_*\varkappa\le|w_0|\le C_*\varkappa$.
+\end{proof}
+
+\begin{lemma}[Scalar quadratic inequality]\label{lem:scalar}
+Let $w,w_0\in\C$, $R\ge0$ with $|w^2-w_0w|\le R$. Then \textup{(i)} $|w|\le|w_0|+\sqrt R$; \textup{(ii)} if $|w|\le|w_0|/2$ then $|w_0|\,|w|\le2R$, i.e.\ $|w|\le2R/|w_0|$ when $w_0\ne0$ (and $w=0$ when $w_0=0$).
+Moreover, for reals $x,b,c\ge0$: $x^2\le bx+c$ implies $x\le b+\sqrt c$.
+\end{lemma}
+\begin{proof}
+\emph{The real statement.} If $x>b+\sqrt c$, then $x-b>\sqrt c\ge0$ and $x>\sqrt c$, so $x^2-bx=x(x-b)>c$, contradicting $x^2\le bx+c$.
+
+(i) $|w|^2=|w^2|\le|w_0w|+|w^2-w_0w|\le|w_0|\,|w|+R$; apply the real statement with $x=|w|$, $b=|w_0|$, $c=R$.
+
+(ii) If $|w|\le|w_0|/2$ then $|w-w_0|\ge|w_0|-|w|\ge|w_0|/2$, so $\frac12|w_0|\,|w|\le|w|\,|w-w_0|=|w^2-w_0w|\le R$.
+\end{proof}
+
+\begin{lemma}[Stability, far regime]\label{lem:stabfar}
+Assume \textup{(A)}. Let $|E|\ge4$, $\eta>0$ and suppose $\max_i|G_{ii}|\le1$. Then, for every $i$,
+\[
+ \Ld\le\tfrac12\Upsilon_{\max},\qquad\Lambda\le\tfrac18|\avg\Upsilon|+\tfrac98\,\Ld^2\,(|z|+1+\Upsilon_{\max}),\qquad\frac1{|G_{ii}|}\le|z|+1+\Upsilon_{\max}.
+\]
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:msc}(g), $|m|\le\frac13$ and $|1-m^2|\ge\frac89$. By the second equation of \eqref{eq:sce1}, $|G_{ii}|\le1$ and \eqref{eq:Arow},
+\[
+ |v_i|\le|m|\,|G_{ii}|\Big(\sum_j\sigma_{ij}^2|v_j|+|\Upsilon_i|\Big)\le\tfrac13\big(\Ld+\Upsilon_{\max}\big)\qquad\text{for every }i,
+\]
+so $\Ld\le\frac13\Ld+\frac13\Upsilon_{\max}$, i.e.\ $\Ld\le\frac12\Upsilon_{\max}$. By the first equation of \eqref{eq:sce1}, $|G_{jj}|\le1$ and \eqref{eq:Arow},
+\[
+ \frac1{|G_{ii}|}\le|z|+\sum_j\sigma_{ij}^2|G_{jj}|+|\Upsilon_i|\le|z|+1+\Upsilon_{\max}.
+\]
+Therefore $|r_i|=|v_i|^2/|G_{ii}|\le\Ld^2(|z|+1+\Upsilon_{\max})$, and the second equation of \eqref{eq:sce2} gives
+\[
+ \tfrac89\Lambda\le|1-m^2|\,|\avg v|\le|m|^2|\avg\Upsilon|+|\avg r|\le\tfrac19|\avg\Upsilon|+\Ld^2(|z|+1+\Upsilon_{\max}).
+\]
+Multiply by $\frac98$.
+\end{proof}
+
+\subsection{Eigenvalues: continuity and a net for the operator norm}\label{sec:eig}
+For a Hermitian $n\times n$ matrix $A$ ($n\ge1$; a real symmetric matrix is regarded as a complex Hermitian one) we denote by
+$\lambda_1(A)\le\lambda_2(A)\le\dots\le\lambda_n(A)$ its eigenvalues, i.e.\ the roots of the characteristic polynomial $\det(t-A)$ counted with multiplicity, in nondecreasing order.
+By the spectral theorem (Mathlib) they are real and there is an orthonormal basis $u_1,\dots,u_n$ of $\C^n$ with $Au_\alpha=\lambda_\alpha(A)u_\alpha$; conversely, if $(u'_\alpha)$ is any orthonormal basis of eigenvectors of $A$ with eigenvalues $\mu_\alpha$, then
+$\det(t-A)=\prod_\alpha(t-\mu_\alpha)$ (conjugation by the unitary matrix with columns $u'_\alpha$), so $(\mu_\alpha)$ is a rearrangement of $(\lambda_\alpha(A))$.
+Recall $\Omega=\kk^{\mathcal P_N}$ and the map $x\mapsto H(x)$ of Definition~\ref{def:ens}; on $\Omega$ we use the Euclidean norm $|x|^2=\sum_{(i,j)\in\mathcal P_N}|x_{ij}|^2$. The product $\sigma$-algebra of $\Omega$ is its Borel $\sigma$-algebra (finite product of separable metric spaces).
+
+\begin{lemma}[Weyl inequality and measurability]\label{lem:weyl} \infra\
+Let $A,A'$ be Hermitian $n\times n$ matrices. Then:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em,itemsep=1pt]
+\item \emph{Rayleigh bounds:} $\lambda_1(A)|x|^2\le\langle x,Ax\rangle\le\lambda_n(A)|x|^2$ for all $x\in\C^n$, and
+$\norm A=\max_k|\lambda_k(A)|=\max\big(\lambda_n(A),-\lambda_1(A)\big)=\max_{|x|=1}|\langle x,Ax\rangle|$.
+\item \emph{Weyl's inequality:} $|\lambda_k(A)-\lambda_k(A')|\le\norm{A-A'}$ for every $k\in\{1,\dots,n\}$.
+\item \emph{Reflection}: $\lambda_k(-A)=-\lambda_{n+1-k}(A)$ for every $k$; in particular $\lambda_1(A)=-\lambda_n(-A)$.
+\item \emph{Lipschitz continuity on $\Omega$:} $x\mapsto H(x)$ is $\R$-linear, $\norm{H(x)-H(x')}\le\sqrt2\,|x-x'|$, and $|\lambda_k(H(x))-\lambda_k(H(x'))|\le\sqrt2\,|x-x'|$ for all $x,x'\in\Omega$ and all $k$.
+\item \emph{Resolvents:} for fixed $z=E+\ii\eta$, $\eta>0$, and $T\subsetneq\{1,\dots,N\}$, the functions $x\mapsto G^{(T)}_{ij}(z)$, $m^{(T)}(z)$, $\Lambda(z)$, $\Ld(z)$, $\Lo(z)$ are Lipschitz on $\Omega$ with constant $\sqrt2\,\eta^{-2}$;
+the functions $(x,z)\mapsto G^{(T)}_{ij}(z)$ are continuous on $\Omega\times\{\im z>0\}$; and for fixed $z$ the functions $1/G_{ii}$, $M^A_{ab}$, $Z_i$, $X_i$, $A_i$, $\Upsilon_i$ of \eqref{eq:MA} and Definition~\ref{def:XA} are continuous on $\Omega$.
+\item \emph{Counting function:} for every $E\in\R$ and every $j$ the set $\{x:\lambda_j(H(x))\le E\}$ is closed, and $x\mapsto\fn(E)=\frac1N\#\{j:\lambda_j(H(x))\le E\}$ is a Borel function. For $J=\R$ or $J=[a,b]$ $(a<b)$,
+\[
+ \sup_{E\in J}|\fn(E)-\nsc(E)|=\sup_{E\in J_0}|\fn(E)-\nsc(E)|,\qquad J_0:=(J\cap\mathbb Q)\cup\{b\}\ \ (J_0:=\mathbb Q\text{ if }J=\R),
+\]
+at every point of $\Omega$, and this supremum is a Borel function on $\Omega$.
+\end{enumerate}
+In particular all the functions in \textup{(d)--(f)} are Borel measurable on $\Omega$.
+\end{lemma}
+\begin{proof}
+Fix an orthonormal eigenbasis $(u_\alpha)$ of $A$ with $Au_\alpha=\lambda_\alpha u_\alpha$, $\lambda_\alpha:=\lambda_\alpha(A)$.
+
+(a) For $x=\sum_\alpha c_\alpha u_\alpha$ we have $|x|^2=\sum_\alpha|c_\alpha|^2$, $\langle x,Ax\rangle=\sum_\alpha\lambda_\alpha|c_\alpha|^2$ and $|Ax|^2=\sum_\alpha\lambda_\alpha^2|c_\alpha|^2$.
+The first gives the Rayleigh bounds. With $\rho:=\max_\alpha|\lambda_\alpha|=\max(\lambda_n,-\lambda_1)$ we get $|Ax|\le\rho|x|$ and $|\langle x,Ax\rangle|\le\rho|x|^2$, with equality in both for $x=u_\alpha$ when $|\lambda_\alpha|=\rho$.
+Hence $\norm A=\rho=\max_{|x|=1}|\langle x,Ax\rangle|$.
+
+(b) \emph{One-sided min--max.} We claim: for $t\in\R$ and $1\le k\le n$,
+\begin{equation}\tag{MM}\label{eq:MM}
+ \lambda_k(A)\le t\iff\text{there is a subspace }V\subset\C^n\text{ with }\dim V=k\text{ and }\langle x,Ax\rangle\le t|x|^2\text{ for all }x\in V.
+\end{equation}
+``$\Rightarrow$'': take $V:=\operatorname{span}(u_1,\dots,u_k)$; for $x=\sum_{\alpha\le k}c_\alpha u_\alpha$, $\langle x,Ax\rangle=\sum_{\alpha\le k}\lambda_\alpha|c_\alpha|^2\le\lambda_k|x|^2\le t|x|^2$.
+``$\Leftarrow$'': let $W:=\operatorname{span}(u_k,\dots,u_n)$, of dimension $n-k+1$. Since $\dim V+\dim W=n+1>n$, there is $x\ne0$ in $V\cap W$. Writing $x=\sum_{\alpha\ge k}c_\alpha u_\alpha$,
+$\lambda_k|x|^2\le\sum_{\alpha\ge k}\lambda_\alpha|c_\alpha|^2=\langle x,Ax\rangle\le t|x|^2$, so $\lambda_k\le t$.
+
+\emph{Weyl.} Let $\eps:=\norm{A-A'}$ and $V:=\operatorname{span}(u_1,\dots,u_k)$. For $x\in V$,
+$\langle x,A'x\rangle=\langle x,Ax\rangle+\langle x,(A'-A)x\rangle\le(\lambda_k(A)+\eps)|x|^2$. By \eqref{eq:MM} for $A'$ with $t=\lambda_k(A)+\eps$: $\lambda_k(A')\le\lambda_k(A)+\eps$. Exchanging $A$ and $A'$ gives the other inequality.
+
+(c) $(u_\alpha)$ is an orthonormal eigenbasis of $-A$ with eigenvalues $-\lambda_\alpha$. By the remark before the lemma, the eigenvalues of $-A$ counted with multiplicity are the numbers $-\lambda_1\ge-\lambda_2\ge\dots\ge-\lambda_n$;
+in nondecreasing order the $k$-th of them is $-\lambda_{n+1-k}$.
+
+(d) Linearity over $\R$ is clear from the definition of $H(x)$, so $H(x)-H(x')=H(y)$ with $y:=x-x'$. For any matrix $M$, $|Mx|^2=\sum_i|\sum_jM_{ij}x_j|^2\le\sum_{i,j}|M_{ij}|^2\,|x|^2$ by the Cauchy--Schwarz inequality. Hence
+\[
+ \norm{H(y)}^2\le\sum_{i,j}|H(y)_{ij}|^2=\sum_i(\re y_{ii})^2+2\sum_{i<j}|y_{ij}|^2\le2|y|^2 .
+\]
+The eigenvalue bound follows from (b).
+
+(e) For $T\subsetneq\{1,\dots,N\}$ and vectors $\xi$ supported on $T^c$, $|(H^{(T)}(x)-H^{(T)}(x'))\xi|\le|(H(x)-H(x'))\xi|$ (the left side keeps only the coordinates in $T^c$), so $\norm{H^{(T)}(x)-H^{(T)}(x')}\le\sqrt2|x-x'|$ by (d).
+By Lemma~\ref{lem:basic}(h) applied to the Hermitian matrices $H^{(T)}(x)$, $H^{(T)}(x')$, the matrix $G^{(T)}(z)$ changes by at most $\sqrt2\eta^{-2}|x-x'|$ in operator norm, hence each entry does.
+$m^{(T)}$ is $N^{-1}$ times a sum of at most $N$ diagonal entries; $\msc(z)$ does not depend on $x$; and $||a|-|b||\le|a-b|$, $|\max_ka_k-\max_kb_k|\le\max_k|a_k-b_k|$. This gives the Lipschitz bounds.
+Joint continuity: by Lemma~\ref{lem:basic}(c),(h), $|G^{(T)}_{ij}(z;x)-G^{(T)}_{ij}(z';x')|\le\sqrt2\eta^{-2}|x-x'|+|z-z'|/(\eta\eta')$.
+The entries $h_{ij}$ are continuous functions of $x$; $1/G_{ii}$ is continuous because $G_{ii}$ is continuous and never zero (Lemma~\ref{lem:basic}(a)); $M^A_{ab}$, $Z_i$, $X_i$, $A_i$, $\Upsilon_i$ are finite sums of products of the functions $h_{kl}$, $G^{(T)}_{kl}$, $1/G_{ii}$ and constants.
+
+(f) By (d) the function $x\mapsto\lambda_j(H(x))$ is continuous, so $\{\lambda_j(H(x))\le E\}$ is closed and $\fn(E)=\frac1N\sum_j\bone(\lambda_j\le E)$ is Borel.
+Fix $x$ and put $\varphi(E):=|\fn(E)-\nsc(E)|$. The function $\fn$ is right-continuous: if $\eps>0$ is smaller than $\lambda_j-E$ for all $j$ with $\lambda_j>E$, then $\fn=\fn(E)$ on $[E,E+\eps)$.
+The function $\nsc$ is continuous (Lemma~\ref{lem:nsc}). So $\varphi$ is right-continuous, and for every $E\in J$ that is not the right endpoint of $J$ there are $q_l\in J\cap\mathbb Q$, $q_l\downarrow E$, with $\varphi(q_l)\to\varphi(E)$.
+Hence $\sup_J\varphi=\sup_{J_0}\varphi$. A countable supremum of Borel functions is Borel.
+
+Finally, continuous functions on $\Omega$ are Borel.
+\end{proof}
+
+\begin{lemma}[Grid net for the norm]\label{lem:net} \infra\
+Let $n:=\beta N$, where $\beta:=\dim_\R\kk\in\{1,2\}$, and identify $\kk^N$ with $\R^{n}$ (real and imaginary parts of the coordinates; this identification preserves the Euclidean norm).
+Let $\delta_n:=1/(4\sqrt n)$ and $\mathcal N:=\{y\in(\delta_n\Z)^n:\ |y|\le1\}\subset\kk^N$. Then
+\[
+ |\mathcal N|\le(9\sqrt n)^n\le e^{3N\log N}\quad\text{for }N\ge13,
+\]
+and for every Hermitian $N\times N$ matrix $A$ with entries in $\kk$ (real symmetric if $\kk=\R$):\quad$\norm A\le2\max_{y\in\mathcal N}|\langle y,Ay\rangle|$.
+\end{lemma}
+\begin{proof}
+\emph{Cardinality.} If $y\in\mathcal N$ then every real coordinate is $y_i=\delta_nk_i$ with $k_i\in\Z$, $|k_i|\le1/\delta_n=4\sqrt n$; there are at most $8\sqrt n+1\le9\sqrt n$ such integers. So $|\mathcal N|\le(9\sqrt n)^n$.
+Since $n\le2N$, $\ n\log(9\sqrt n)\le2N\big(\log9+\tfrac12\log(2N)\big)=N\big(\log162+\log N\big)\le3N\log N$ as soon as $N^2\ge162$, i.e.\ $N\ge13$.
+
+\emph{A maximiser in $\kk^N$.} We claim that there is $x\in\kk^N$ with $|x|=1$ and $|\langle x,Ax\rangle|=\norm A$. By Lemma~\ref{lem:weyl}(a) there is a unit vector $u\in\C^N$ and $\lambda\in\R$ with $Au=\lambda u$, $|\lambda|=\norm A$.
+If $\kk=\C$ take $x:=u$. If $\kk=\R$, write $u=a+\ii b$ with $a,b\in\R^N$; since $A$ and $\lambda$ are real, $Aa=\lambda a$ and $Ab=\lambda b$, and $a\ne0$ or $b\ne0$; take $x:=a/|a|$ or $x:=b/|b|$.
+
+\emph{Rounding.} Let $x_1,\dots,x_n$ be the real coordinates of $x$ and put $y_i:=\delta_n\operatorname{sgn}(x_i)\lfloor|x_i|/\delta_n\rfloor$. Then $y_i\in\delta_n\Z$, $|y_i|\le|x_i|$ and $|x_i-y_i|<\delta_n$, so
+$|y|\le|x|=1$, $y\in\mathcal N$, and $|x-y|\le\sqrt n\,\delta_n=\frac14$. Now
+\[
+ \langle x,Ax\rangle-\langle y,Ay\rangle=\langle x-y,Ax\rangle+\langle y,A(x-y)\rangle,
+\]
+so $\big|\langle x,Ax\rangle-\langle y,Ay\rangle\big|\le\norm A\,|x-y|\,(|x|+|y|)\le\tfrac12\norm A$.
+Therefore $\norm A=|\langle x,Ax\rangle|\le|\langle y,Ay\rangle|+\frac12\norm A$, i.e.\ $\norm A\le2|\langle y,Ay\rangle|\le2\max_{\mathcal N}|\langle\cdot,A\,\cdot\rangle|$.
+\end{proof}

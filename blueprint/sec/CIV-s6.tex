@@ -1,0 +1,374 @@
+\section{\INFRA\ Pr\'ekopa--Leindler; LSI and gap concentration for convex log-gases}\label{sec:C6}
+
+\noindent\emph{Conventions of this section.}
+All integrals of nonnegative Borel functions are Lebesgue integrals with values in $[0,\infty]$; $|A|$ denotes the Lebesgue measure of a Borel set $A$.
+In $[0,\infty]$ we use $0\cdot\infty=0$, $\infty^p=\infty$ and $0^p=0$ for $p>0$ (these are the conventions of Mathlib's \texttt{ENNReal}); with them $(a,b)\mapsto a^\tau b^{1-\tau}$ is nondecreasing in each variable on $[0,\infty]^2$.
+$N\ge1$ is an integer, $\Sig=\{x\in\R^N:x_1<\dots<x_N\}$ (\S\ref{ss:notation}); $\Sig$ is open, nonempty and convex: if $x,y\in\Sig$ and $\tau\in[0,1]$ then $z:=\tau x+(1-\tau)y$ satisfies $z_j-z_i=\tau(x_j-x_i)+(1-\tau)(y_j-y_i)>0$ for $i<j$.
+$|\cdot|$ is the Euclidean norm on $\R^N$.
+In this section $\beta\ge1$ is an arbitrary real number (in the application $\beta\in\{1,2\}$), and nothing from Sections \ref{sec:C1}--\ref{sec:C5} is used except the notation $\Sig$ (the measures $\mu^*$ and $\omega_R$ appear only as examples).
+The section is self-contained relative to Mathlib; the Mathlib facts used are listed in Appendix~\ref{app:mathlib}.
+Auxiliary statements are proved as numbered steps inside the proofs.
+
+\subsection{Pr\'ekopa--Leindler}
+
+\begin{theorem}[Pr\'ekopa--Leindler]\label{thm:PL}
+Let $N\ge1$, $\tau\in(0,1)$ and let $u,v,w:\R^N\to[0,\infty]$ be Borel with
+\begin{equation}\label{c6:PLhyp}
+w(\tau x+(1-\tau)y)\ \ge\ u(x)^\tau v(y)^{1-\tau}\qquad\text{for all }x,y\in\R^N .
+\end{equation}
+Then
+\begin{equation}\label{c6:PLconcl}
+\int_{\R^N} w\,\rd x\ \ge\ \Big(\int_{\R^N} u\,\rd x\Big)^\tau\Big(\int_{\R^N} v\,\rd x\Big)^{1-\tau}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 0 (reductions valid in every dimension).}
+If $\int u=0$ or $\int v=0$, the right side of \eqref{c6:PLconcl} is $0$ and there is nothing to prove. So assume $\int u>0$ and $\int v>0$.
+For $k\in\mathbb N$ let $u_k:=\min(u,k)$, $v_k:=\min(v,k)$. These are Borel, bounded, $u_k\le u$, $v_k\le v$, so $(u_k,v_k,w)$ satisfies \eqref{c6:PLhyp} by monotonicity of $(a,b)\mapsto a^\tau b^{1-\tau}$.
+By monotone convergence $\int u_k\uparrow\int u$ and $\int v_k\uparrow\int v$; in particular $\int u_k>0$ and $\int v_k>0$ for all large $k$. Moreover $a_k^\tau b_k^{1-\tau}\to a^\tau b^{1-\tau}$ whenever $a_k\uparrow a$, $b_k\uparrow b$ in $[0,\infty]$ with $a,b>0$ (continuity on $(0,\infty)^2$ if $a,b<\infty$; if, say, $a=\infty$, then $a_k^\tau\to\infty$ while $b_k^{1-\tau}$ is eventually bounded below by a positive constant). So if \eqref{c6:PLconcl} holds for $(u_k,v_k,w)$ for all large $k$, it holds for $(u,v,w)$. Hence
+\begin{equation}\label{c6:PLred}
+\text{it suffices to prove \eqref{c6:PLconcl} when $u,v$ are bounded and $\textstyle\int u>0$, $\int v>0$.}
+\end{equation}
+
+\emph{Step 1 (Brunn--Minkowski on the line).} \emph{For nonempty compact $K_1,K_2\subset\R$, the set $K_1+K_2:=\{a+b:a\in K_1,b\in K_2\}$ is compact and $|K_1+K_2|\ge|K_1|+|K_2|$.}
+Indeed, $K_1+K_2$ is the image of the compact set $K_1\times K_2$ under the continuous map $(a,b)\mapsto a+b$.
+Let $a^*:=\max K_1$, $b_*:=\min K_2$. Then $K_1+b_*\subset K_1+K_2$ and $a^*+K_2\subset K_1+K_2$; moreover $K_1+b_*\subset(-\infty,a^*+b_*]$ and $a^*+K_2\subset[a^*+b_*,\infty)$, so $(K_1+b_*)\cap(a^*+K_2)\subset\{a^*+b_*\}$ is a Lebesgue null set. By additivity and translation invariance of Lebesgue measure,
+$|K_1+K_2|\ge|(K_1+b_*)\cup(a^*+K_2)|=|K_1+b_*|+|a^*+K_2|=|K_1|+|K_2|$.
+
+\emph{Step 2 (level sets; no measurability of sumsets is needed).} \emph{Let $\tau\in(0,1)$, let $A,B,C\subset\R$ be Borel, $A,B$ nonempty, with $\tau a+(1-\tau)b\in C$ for all $a\in A$, $b\in B$. Then $|C|\ge\tau|A|+(1-\tau)|B|$.}
+Lebesgue measure on $\R$ is inner regular on Borel sets: $|A|=\sup\{|K|:K\subset A\text{ compact}\}$; since $A\neq\emptyset$ and $|K\cup\{a\}|=|K|$, the supremum may be restricted to nonempty compact $K$. The same holds for $B$.
+For nonempty compact $K_1\subset A$, $K_2\subset B$, the set $\tau K_1+(1-\tau)K_2$ is compact (hence Borel), contained in $C$, and by Step 1 and the scaling property $|cK|=c|K|$ ($c>0$):
+$|C|\ge|\tau K_1+(1-\tau)K_2|\ge\tau|K_1|+(1-\tau)|K_2|$.
+Taking the supremum over $K_1$ and over $K_2$ proves the claim (both sides are in $[0,\infty]$).
+
+\emph{Step 3 (the case $N=1$).}
+By \eqref{c6:PLred} we may assume $u,v$ bounded with positive integrals. Then $a:=\sup_\R u\in(0,\infty)$ and $b:=\sup_\R v\in(0,\infty)$ (true suprema, not essential suprema).
+The functions $\tilde u:=u/a$, $\tilde v:=v/b$, $\tilde w:=w/(a^\tau b^{1-\tau})$ satisfy \eqref{c6:PLhyp}, and \eqref{c6:PLconcl} for $(\tilde u,\tilde v,\tilde w)$ is equivalent to \eqref{c6:PLconcl} for $(u,v,w)$ (both sides are divided by $a^\tau b^{1-\tau}$). So we may assume
+\[\sup u=\sup v=1 .\]
+For $r\in(0,1)$ put $A_r:=\{u>r\}$, $B_r:=\{v>r\}$, $C_r:=\{w>r\}$. These sets are Borel; $A_r$ and $B_r$ are nonempty because $r<1=\sup u=\sup v$; and if $x\in A_r$, $y\in B_r$ then by \eqref{c6:PLhyp}
+$w(\tau x+(1-\tau)y)\ge u(x)^\tau v(y)^{1-\tau}>r^\tau r^{1-\tau}=r$, i.e.\ $\tau x+(1-\tau)y\in C_r$.
+By Step 2,
+\begin{equation}\label{c6:PLlevel}
+|C_r|\ \ge\ \tau|A_r|+(1-\tau)|B_r|\qquad(0<r<1).
+\end{equation}
+The functions $r\mapsto|A_r|,|B_r|,|C_r|$ are nonincreasing, hence Borel. By the layer-cake formula $\int f\,\rd x=\int_0^\infty|\{f>r\}|\,\rd r$ (valid for Borel $f\ge0$), and since $\{u>r\}=\{v>r\}=\emptyset$ for $r\ge1$,
+\begin{align*}\int w\ &\ge\ \int\min(w,1)\ =\ \int_0^1|C_r|\,\rd r\ \ge\ \tau\int_0^1|A_r|\,\rd r+(1-\tau)\int_0^1|B_r|\,\rd r\\
+&=\ \tau\int u+(1-\tau)\int v\ \ge\ \Big(\int u\Big)^\tau\Big(\int v\Big)^{1-\tau}.\end{align*}
+Here the layer-cake formula is applied to the real-valued functions $\min(w,1)$, $u$ and $v$ (for $r<1$, $\{\min(w,1)>r\}=C_r$), so that no $[0,\infty]$-valued version of it is needed.
+The last step is the weighted arithmetic--geometric mean inequality $\tau s+(1-\tau)t\ge s^\tau t^{1-\tau}$ for $s,t\in[0,\infty)$; if $s$ or $t$ is $+\infty$, the left side is $+\infty$.
+This proves the theorem for $N=1$ (for functions with values in $[0,\infty]$).
+
+\emph{Step 4 (induction $N-1\to N$, $N\ge2$).}
+Identify $\R^N=\R\times\R^{N-1}$, $x=(x_1,x')$; Lebesgue measure on $\R^N$ is the product of the Lebesgue measures on $\R$ and $\R^{N-1}$. Define the marginals
+\[\bar u(x_1):=\int_{\R^{N-1}}u(x_1,x')\,\rd x',\qquad\bar v(x_1):=\int_{\R^{N-1}}v(x_1,x')\,\rd x',\qquad\bar w(x_1):=\int_{\R^{N-1}}w(x_1,x')\,\rd x' .\]
+By Tonelli's theorem $\bar u,\bar v,\bar w:\R\to[0,\infty]$ are Borel and $\int_\R\bar u=\int_{\R^N}u$, and likewise for $v,w$.
+Fix $x_1,y_1\in\R$ and put $z_1:=\tau x_1+(1-\tau)y_1$. The sections $u(x_1,\cdot)$, $v(y_1,\cdot)$, $w(z_1,\cdot)$ are Borel functions $\R^{N-1}\to[0,\infty]$, and for all $x',y'\in\R^{N-1}$, by \eqref{c6:PLhyp} at the points $(x_1,x')$, $(y_1,y')$,
+\[w\big(z_1,\tau x'+(1-\tau)y'\big)=w\big(\tau(x_1,x')+(1-\tau)(y_1,y')\big)\ge u(x_1,x')^\tau v(y_1,y')^{1-\tau}.\]
+By the induction hypothesis (the theorem in dimension $N-1$), $\bar w(z_1)\ge\bar u(x_1)^\tau\bar v(y_1)^{1-\tau}$.
+Since $x_1,y_1$ were arbitrary, $(\bar u,\bar v,\bar w)$ satisfies \eqref{c6:PLhyp} on $\R$, with values in $[0,\infty]$. By Step 3,
+$\int_{\R^N}w=\int_\R\bar w\ge(\int_\R\bar u)^\tau(\int_\R\bar v)^{1-\tau}=(\int_{\R^N}u)^\tau(\int_{\R^N}v)^{1-\tau}$.
+\end{proof}
+
+\smallskip\noindent\emph{On the formulation.}
+The marginals in Step 4 may take the value $+\infty$ even when $u,v,w$ are finite; this is the only reason for allowing values in $[0,\infty]$ in the statement, and it removes the truncation of the marginals. In the applications below $u,v,w$ are finite, bounded on compacts of $\Sig$ and vanish outside $\Sig$.
+The sumset $\tau A_r+(1-\tau)B_r$ of two Borel sets need not be Borel; Step 2 avoids it.
+
+\subsection{Convexity of the log-gas Hamiltonian}
+
+For $r>0$ let
+\begin{equation}\label{c6:defLambda}
+\Lambda(r):=\log\frac{1+r}{2\sqrt r}=\log\cosh\big(\tfrac12\log r\big)\ \ge0 .
+\end{equation}
+(The two expressions agree since $\cosh(\frac12\log r)=\frac12(\sqrt r+1/\sqrt r)$; $\Lambda\ge0$ since $\cosh\ge1$.)
+As $\cosh$ is even and increasing on $[0,\infty)$, $\Lambda(r)=\ell(|\log r|)$ with $\ell(\vartheta):=\log\cosh(\vartheta/2)$ nondecreasing on $[0,\infty)$; in particular $\Lambda(r)=\Lambda(1/r)$.
+
+\begin{definition}\label{def:loggas}
+A \emph{convex log-gas} (of size $N$, with parameters $\beta\ge1$, $\kappa\ge0$) is a probability measure on $\R^N$ of the form
+\[\omega=Z^{-1}e^{-\cV}\mathbf 1_{\Sig}\,\rd x,\quad \cV(x):=\cV_0(x)-\beta\!\!\sum_{1\le i<j\le N}\!\!\log(x_j-x_i)\ \ (x\in\Sig),\quad Z:=\int_{\Sig}e^{-\cV}\rd x<\infty,\]
+where $\cV_0:\R^N\to\R$ is continuous and \emph{$\kappa$-convex}: for all $x,y\in\R^N$ and $\tau\in[0,1]$,
+\begin{equation}\label{c6:kconv}
+\tau\cV_0(x)+(1-\tau)\cV_0(y)-\cV_0(\tau x+(1-\tau)y)\ \ge\ \frac\kappa2\,\tau(1-\tau)\,|x-y|^2 .
+\end{equation}
+\end{definition}
+
+\noindent\emph{Comments.}
+(1) $\cV$ is continuous on the open set $\Sig$, so $e^{-\cV}\mathbf 1_{\Sig}$ (extended by $0$ outside $\Sig$) is a Borel function on $\R^N$, strictly positive on $\Sig$; hence $Z>0$. The requirement $Z<\infty$ is part of the definition; for $\kappa>0$ it is automatic (Lemma \ref{lem:convex}(c)).
+We write $\int\varphi\,\rd\omega=\int_{\Sig}\varphi\,\rd\omega=Z^{-1}\int_{\Sig}\varphi\,e^{-\cV}\rd x$. Since $\omega(\R^N\setminus\Sig)=0$, functions need only be defined on $\Sig$.
+On $\Sig$ one has $e^{-\cV}=\Delta^\beta e^{-\cV_0}$ with $\Delta(x)=\prod_{i<j}(x_j-x_i)$.
+
+(2) \emph{Examples.} For $a,b\ge0$ and $\gamma\in\R^N$ the function $\cV_0(x)=a|x|^2+b|x-\gamma|^2$ is $\kappa$-convex with $\kappa=2(a+b)$, with equality in \eqref{c6:kconv}: for every $c\in\R^N$,
+$\tau|x-c|^2+(1-\tau)|y-c|^2-|\tau x+(1-\tau)y-c|^2=\tau(1-\tau)|x-y|^2$ (expand the squares).
+Hence $\mu^*$ of \S\ref{sec:C5} ($a=\beta N/4$, $b=0$) is a convex log-gas with $\kappa=\beta N/2$, and the local relaxation measure $\omega_R$ of \eqref{omega} ($a=\beta N/4$, $b=N/(2R^2)$) is a convex log-gas with
+\[\kappa=N\Big(\frac\beta2+\frac1{R^2}\Big)\ \ge\ \frac N{R^2}.\]
+
+\begin{lemma}\label{lem:convex}
+For a convex log-gas, $x,y\in\Sig$ and $\tau\in[0,1]$:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em,itemsep=1pt]
+\item $\tau\cV(x)+(1-\tau)\cV(y)-\cV(\tau x+(1-\tau)y)\ge\frac\kappa2\tau(1-\tau)|x-y|^2$;
+\item $\cV(x)+\cV(y)-2\cV(\frac{x+y}2)\ge2\beta\sum_{i<j}\Lambda\big(\frac{x_j-x_i}{y_j-y_i}\big)$.
+\end{enumerate}
+Moreover:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em,itemsep=1pt,start=3]
+\item
+if $\cV_0:\R^N\to\R$ is continuous and $\kappa$-convex with $\kappa>0$, and $\beta\ge0$, then $\int_{\Sig}e^{-\cV}\rd x<\infty$ for $\cV:=\cV_0-\beta\sum_{i<j}\log(x_j-x_i)$; i.e.\ for $\kappa>0$ the condition $Z<\infty$ in Definition \ref{def:loggas} holds automatically.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $x,y\in\Sig$, $\tau\in[0,1]$, $z:=\tau x+(1-\tau)y\in\Sig$. For $i<j$ put $a_{ij}:=x_j-x_i>0$, $b_{ij}:=y_j-y_i>0$, so $z_j-z_i=\tau a_{ij}+(1-\tau)b_{ij}$.
+
+By the definition of $\cV$,
+\begin{align}\label{c6:Vdecomp}
+\tau\cV(x)+(1-\tau)\cV(y)-\cV(z)={}&\big[\tau\cV_0(x)+(1-\tau)\cV_0(y)-\cV_0(z)\big]\notag\\
+&+\beta\sum_{i<j}\big[\log(\tau a_{ij}+(1-\tau)b_{ij})-\tau\log a_{ij}-(1-\tau)\log b_{ij}\big].
+\end{align}
+
+(a) By concavity of $\log$ on $(0,\infty)$, every term of the sum in \eqref{c6:Vdecomp} is $\ge0$; as $\beta\ge0$, the second line of \eqref{c6:Vdecomp} is $\ge0$, and the first is $\ge\frac\kappa2\tau(1-\tau)|x-y|^2$ by \eqref{c6:kconv}.
+
+(b) Take $\tau=\frac12$ in \eqref{c6:Vdecomp} and multiply by $2$. The first bracket is $\ge\frac\kappa4|x-y|^2\ge0$ by \eqref{c6:kconv}. For the second,
+\[2\log\frac{a+b}2-\log a-\log b=2\log\frac{a+b}{2\sqrt{ab}}=2\log\frac{1+a/b}{2\sqrt{a/b}}=2\Lambda(a/b)\qquad(a,b>0).\]
+Hence $\cV(x)+\cV(y)-2\cV(\frac{x+y}2)\ge\frac\kappa4|x-y|^2+2\beta\sum_{i<j}\Lambda(a_{ij}/b_{ij})$, which is stronger than (b).
+
+(c) Let $c_1:=\max_{|e|=1}|\cV_0(e)-\cV_0(0)|<\infty$ (continuity on the compact unit sphere).
+For $|x|\ge1$ apply \eqref{c6:kconv} to the pair $(x,0)$ with $\tau:=1/|x|\in(0,1]$, so that $\tau x=e:=x/|x|$:
+$\tau\cV_0(x)+(1-\tau)\cV_0(0)-\cV_0(e)\ge\frac\kappa2\tau(1-\tau)|x|^2$. Dividing by $\tau$,
+\[\cV_0(x)\ \ge\ \cV_0(0)+|x|\big(\cV_0(e)-\cV_0(0)\big)+\frac\kappa2\big(|x|^2-|x|\big)\ \ge\ \cV_0(0)-\Big(c_1+\frac\kappa2\Big)|x|+\frac\kappa2|x|^2\qquad(|x|\ge1).\]
+On $\Sig$, $0<x_j-x_i\le2|x|$, so $e^{-\cV(x)}=\Delta(x)^\beta e^{-\cV_0(x)}\le(2|x|)^{\beta N(N-1)/2}e^{-\cV_0(x)}$. Therefore
+\begin{align*}
+\int_{\Sig}e^{-\cV}\rd x\le{}&2^{\beta N(N-1)/2}\,|\{|x|\le1\}|\,e^{-\min_{|x|\le1}\cV_0}\\
+&+e^{-\cV_0(0)}\int_{|x|>1}(2|x|)^{\beta N(N-1)/2}e^{(c_1+\kappa/2)|x|-\frac\kappa2|x|^2}\rd x<\infty,
+\end{align*}
+since a polynomial times $e^{c|x|-\frac\kappa2|x|^2}$ is integrable on $\R^N$ for $\kappa>0$ (for instance $c|x|\le\frac\kappa4|x|^2+\frac{c^2}{\kappa}$, and Gaussian moments are finite).
+\end{proof}
+
+\subsection{Logarithmic Sobolev inequality on $\Sig$ without semigroups}
+
+\begin{theorem}[LSI for a uniformly convex log-gas]\label{thm:LSI}
+Let $\omega$ be a convex log-gas with $\kappa>0$, and let $q\in C^2(\R^N)$, $q>0$, with $\int_{\Sig}q\,\rd\omega=1$. Then
+\begin{equation}\label{LSI}
+\Ent_\omega(q):=\int_{\Sig}q\log q\,\rd\omega\ \le\ \frac1{2\kappa}\int_{\Sig}\frac{|\nabla q|^2}{q}\,\rd\omega\qquad(\text{the right side may be }+\infty).
+\end{equation}
+\end{theorem}
+
+\noindent\emph{Notation for the proof.} Let $\mathfrak h(t):=t\log t$ for $t>0$, $\mathfrak h(0):=0$; $\mathfrak h$ is continuous on $[0,\infty)$ and $\mathfrak h\ge-1/e$.
+For a Borel function $F:\Sig\to[0,\infty)$ with $\int F\rd\omega<\infty$ put
+\[\Ent_\omega(F):=\int\mathfrak h(F)\,\rd\omega-\mathfrak h\Big(\int F\,\rd\omega\Big)\ \in(-\infty,+\infty];\]
+the integral is well defined because $\mathfrak h(F)+1/e\ge0$ and $\omega$ is a probability measure. If $\int F\rd\omega=1$ this is the left side of \eqref{LSI}.
+In particular the left side of \eqref{LSI} is a well-defined element of $(-\infty,\infty]$, and the theorem asserts that it is finite when the right side is.
+
+\begin{proof}
+\emph{Step 1 (exponentials of bounded $C^2$ functions).} \emph{Let $g\in C^2(\R^N)$ be such that
+$G_0:=\sup|g|$, $G_1:=\sup|\nabla g|$ and $M:=\sup_{z}\|\nabla^2g(z)\|_{op}$ are finite. Then}
+\begin{equation}\label{c6:LSIexp}
+\Ent_\omega(e^g)=\int ge^g\,\rd\omega-\int e^g\rd\omega\,\log\int e^g\rd\omega\ \le\ \frac1{2\kappa}\int|\nabla g|^2e^g\,\rd\omega .
+\end{equation}
+
+\emph{1a (pointwise inequality).} Put $s_0:=\kappa/(\kappa+M)\in(0,1]$. For $s\in(0,s_0)$ let $\tau:=1-s$; then $\kappa\tau-Ms=\kappa-(\kappa+M)s>0$. Define
+\[g_\tau(z):=g(z)+\frac{s\,|\nabla g(z)|^2}{2(\kappa\tau-Ms)}\qquad(z\in\R^N).\]
+Let $x,y\in\Sig$, $z:=\tau x+sy\in\Sig$ and $h:=x-y$, so that $x=z+sh$.
+Taylor's formula with Lagrange remainder for $\theta(t):=g(z+th)$ on $[0,s]$, with $\theta'(0)=\la\nabla g(z),h\ra$ and $\theta''(t)=\la\nabla^2g(z+th)h,h\ra\le M|h|^2$, gives
+\[g(x)\le g(z)+s\la\nabla g(z),h\ra+\tfrac M2s^2|h|^2 .\]
+Lemma \ref{lem:convex}(a) gives $\tau\cV(x)+s\cV(y)\ge\cV(z)+\frac\kappa2\tau s|h|^2$. Subtracting,
+\begin{align*}
+g(x)-\tau\cV(x)-s\cV(y)&\le g(z)-\cV(z)+s\la\nabla g(z),h\ra-\tfrac s2(\kappa\tau-Ms)|h|^2\\
+&\le g(z)-\cV(z)+\frac{s|\nabla g(z)|^2}{2(\kappa\tau-Ms)}=g_\tau(z)-\cV(z),
+\end{align*}
+where we used $\la p,h\ra-\frac c2|h|^2\le\frac{|p|^2}{2c}$ for $c>0$ (namely $\frac c2|h-p/c|^2\ge0$) with $p=\nabla g(z)$, $c=\kappa\tau-Ms$.
+
+\emph{1b (Pr\'ekopa--Leindler).} Define the Borel functions on $\R^N$
+\[u:=e^{g/\tau-\cV}\mathbf 1_{\Sig},\qquad v:=e^{-\cV}\mathbf 1_{\Sig},\qquad w:=e^{g_\tau-\cV}\mathbf 1_{\Sig}.\]
+For $x,y\in\Sig$, 1a says $u(x)^\tau v(y)^{s}=e^{g(x)-\tau\cV(x)-s\cV(y)}\le w(\tau x+sy)$; if $x\notin\Sig$ or $y\notin\Sig$ then $u(x)^\tau v(y)^s=0$. So \eqref{c6:PLhyp} holds, and Theorem \ref{thm:PL} gives $\int w\ge(\int u)^\tau(\int v)^s$. Dividing by $Z=\int v=Z^\tau Z^s\in(0,\infty)$:
+\begin{equation}\label{c6:BLstep}
+\Big(\int e^{g/(1-s)}\rd\omega\Big)^{1-s}\ \le\ \int e^{g+c(s)|\nabla g|^2}\rd\omega\qquad(0<s<s_0),\qquad c(s):=\frac{s}{2(\kappa-(\kappa+M)s)} .
+\end{equation}
+
+\emph{1c (differentiation at $s=0$).} Let $I:=(-s_0/2,s_0/2)$. For $s\in I$ we have $1-s\ge\frac12$ and $\kappa-(\kappa+M)s\ge\frac\kappa2$, so the functions
+\[a(s):=\int e^{g/(1-s)}\rd\omega,\qquad b(s):=\int e^{g+c(s)|\nabla g|^2}\rd\omega\]
+are well defined on $I$ (bounded continuous integrands), positive, and $a(0)=b(0)=m:=\int e^g\rd\omega\in[e^{-G_0},e^{G_0}]$.
+The integrands are $C^1$ in $s\in I$ for every fixed $x$, with
+\begin{align*}
+\Big|\partial_se^{g/(1-s)}\Big|&=\frac{|g|}{(1-s)^2}e^{g/(1-s)}\le4G_0e^{2G_0},\\
+\Big|\partial_se^{g+c(s)|\nabla g|^2}\Big|&=c'(s)|\nabla g|^2e^{g+c(s)|\nabla g|^2}\le\frac2\kappa G_1^2e^{G_0+G_1^2/\kappa},
+\end{align*}
+because $c'(s)=\dfrac{\kappa}{2(\kappa-(\kappa+M)s)^2}\in(0,\frac2\kappa]$ and $|c(s)|\le|s|/\kappa\le\frac1\kappa$ on $I$ (the quotient rule gives $c'=\frac{(\kappa-(\kappa+M)s)+(\kappa+M)s}{2(\kappa-(\kappa+M)s)^2}$).
+The bounds are constants, hence $\omega$-integrable; by differentiation under the integral sign, $a$ and $b$ are differentiable on $I$ and
+\[a'(0)=\int ge^g\,\rd\omega,\qquad b'(0)=c'(0)\int|\nabla g|^2e^g\,\rd\omega=\frac1{2\kappa}\int|\nabla g|^2e^g\,\rd\omega .\]
+Hence $\phi(s):=(1-s)\log a(s)-\log b(s)$ is differentiable at $0$, $\phi(0)=0$, and
+\[\phi'(0)=-\log m+\frac{a'(0)}{m}-\frac{b'(0)}{m}.\]
+By \eqref{c6:BLstep}, $\phi(s)\le0$ for $s\in(0,s_0/2)$. Therefore $\phi'(0)=\lim_{s\downarrow0}\phi(s)/s\le0$
+(only the right-hand difference quotient is used, although $\phi$ is differentiable from both sides), i.e.
+\[\int ge^g\,\rd\omega-m\log m-\frac1{2\kappa}\int|\nabla g|^2e^g\,\rd\omega\ \le0,\]
+which is \eqref{c6:LSIexp} (note $\mathfrak h(e^g)=ge^g$).
+
+\emph{Step 2 (general $q$).} Let $\mathcal I:=\int_{\Sig}|\nabla q|^2/q\,\rd\omega\in[0,\infty]$ (the integrand is continuous and nonnegative). If $\mathcal I=\infty$ there is nothing to prove; assume $\mathcal I<\infty$.
+Let $f:=\sqrt q\in C^2(\R^N)$, $f>0$; then $\int f^2\rd\omega=1$, $\nabla f=\nabla q/(2\sqrt q)$ and
+\begin{equation}\label{c6:fq}
+4\int|\nabla f|^2\rd\omega=\mathcal I .
+\end{equation}
+\emph{2a (cutoff).} Fix $\chi\in C^\infty(\R)$ with $0\le\chi\le1$, $\chi=1$ on $(-\infty,1]$, $\chi=0$ on $[4,\infty)$, and put $C_\chi:=4\sup|\chi'|<\infty$.
+For $r\ge1$ let $\chi_r(x):=\chi(|x|^2/r^2)$. Then $\chi_r\in C^\infty(\R^N)$, $0\le\chi_r\le1$, $\chi_r=1$ on $\{|x|\le r\}$, $\chi_r=0$ on $\{|x|\ge2r\}$, and
+$|\nabla\chi_r(x)|=|\chi'(|x|^2/r^2)|\cdot2|x|/r^2\le C_\chi/r$ (the derivative vanishes unless $|x|\le2r$).
+For $k\in\mathbb N$ put
+\[q_{k,r}:=q\chi_r^2+\frac1k=(f\chi_r)^2+\frac1k,\qquad g_{k,r}:=\log q_{k,r}.\]
+Then $q_{k,r}\in C^2(\R^N)$, $q_{k,r}\ge1/k$, so $g_{k,r}\in C^2(\R^N)$; on the open set $\{|x|>2r\}$, $g_{k,r}\equiv-\log k$, so $\nabla g_{k,r}=0$ and $\nabla^2g_{k,r}=0$ there, while on the compact ball $\{|x|\le2r\}$ the continuous functions $g_{k,r},\nabla g_{k,r},\nabla^2g_{k,r}$ are bounded. Thus Step 1 applies to $g=g_{k,r}$; since $e^{g}=q_{k,r}$ and $|\nabla g|^2e^g=|\nabla q_{k,r}|^2/q_{k,r}$, \eqref{c6:LSIexp} reads
+\begin{equation}\label{c6:LSIkr}
+\Ent_\omega(q_{k,r})\le\frac1{2\kappa}\int\frac{|\nabla q_{k,r}|^2}{q_{k,r}}\,\rd\omega .
+\end{equation}
+\emph{2b (the right side).} $\nabla q_{k,r}=2(f\chi_r)\nabla(f\chi_r)$, hence
+$\dfrac{|\nabla q_{k,r}|^2}{q_{k,r}}=\dfrac{4(f\chi_r)^2}{(f\chi_r)^2+1/k}|\nabla(f\chi_r)|^2\le4|\nabla(f\chi_r)|^2$.
+Moreover $|\nabla(f\chi_r)|\le\chi_r|\nabla f|+f|\nabla\chi_r|\le|\nabla f|+\frac{C_\chi}rf$, and $(a_1+a_2)^2\le(1+\eta)a_1^2+(1+\eta^{-1})a_2^2$ for all $a_1,a_2\ge0$, $\eta>0$. With $\int f^2\rd\omega=1$ and \eqref{c6:fq}, for every $\eta>0$:
+\begin{equation}\label{c6:LSIrhs}
+\int\frac{|\nabla q_{k,r}|^2}{q_{k,r}}\,\rd\omega\le(1+\eta)\,\mathcal I+4(1+\eta^{-1})\frac{C_\chi^2}{r^2}.
+\end{equation}
+\emph{2c ($k\to\infty$, $r$ fixed).} Let $B_r:=1+\sup_{|x|\le2r}q<\infty$. For all $k$ and $x$: $0\le q\chi_r^2(x)\le q_{k,r}(x)\le B_r$ and $|q_{k,r}(x)-q\chi_r^2(x)|=1/k$. Since $\mathfrak h$ is uniformly continuous on $[0,B_r]$, $\sup_x|\mathfrak h(q_{k,r}(x))-\mathfrak h(q\chi_r^2(x))|\to0$, hence $\int\mathfrak h(q_{k,r})\rd\omega\to\int\mathfrak h(q\chi_r^2)\rd\omega$; also $\int q_{k,r}\rd\omega=m_r+\frac1k\to m_r:=\int q\chi_r^2\rd\omega\in[0,1]$ and $\mathfrak h$ is continuous. So $\Ent_\omega(q_{k,r})\to\Ent_\omega(q\chi_r^2)$, and by \eqref{c6:LSIkr}, \eqref{c6:LSIrhs}
+\begin{equation}\label{c6:LSIr}
+\int\mathfrak h(q\chi_r^2)\,\rd\omega\le\mathfrak h(m_r)+\frac1{2\kappa}\Big[(1+\eta)\,\mathcal I+4(1+\eta^{-1})\frac{C_\chi^2}{r^2}\Big].
+\end{equation}
+\emph{2d ($r\to\infty$ along the integers).} For every $x$, $\chi_r(x)=1$ as soon as $r\ge|x|$, so $q\chi_r^2\to q$ and $\mathfrak h(q\chi_r^2)\to\mathfrak h(q)$ pointwise. By dominated convergence ($0\le q\chi_r^2\le q$, $\int q\,\rd\omega=1$), $m_r\to1$ and $\mathfrak h(m_r)\to0$. By Fatou's lemma applied to the nonnegative functions $\mathfrak h(q\chi_r^2)+1/e$,
+\[\int\mathfrak h(q)\,\rd\omega\le\liminf_{r\to\infty}\int\mathfrak h(q\chi_r^2)\,\rd\omega\le\frac{1+\eta}{2\kappa}\,\mathcal I .\]
+Letting $\eta\downarrow0$ gives \eqref{LSI}.
+\end{proof}
+
+\begin{remark}\label{rem:LSI}
+(i) No boundary term appears: the domain enters only through the convexity of $\Sig$ (so that $z\in\Sig$ in 1a) and through $\mathbf 1_{\Sig}$ in $u,v,w$. The singularity of $\cV$ at the walls is harmless because only the convexity inequality of Lemma \ref{lem:convex}(a) is used, never a derivative of $\cV$.
+The proof uses only two properties of $\omega$: it is a probability measure of the form $Z^{-1}e^{-\cV}\mathbf 1_{\Sig}\rd x$, and Lemma \ref{lem:convex}(a) holds with $\kappa>0$.
+
+(ii) In the application (Theorem \ref{thm:entropy}) $\omega=\omega_R$, $\kappa\ge N/R^2$, and \eqref{LSI} is used in the form $\int q\log q\,\rd\omega\le\frac{R^2}{2N}\int|\nabla q|^2/q\,\rd\omega$.
+
+(iii) The Herbst argument is \emph{not} used in NP: LSI\,+\,Herbst for the observable $F$ of Theorem \ref{thm:conc} only sees $\|\nabla F\|_\infty^2\cdot R^2/N\approx R^2|J|/N$ and would lose a factor $NR^2$ compared with \eqref{conc}; the gain comes from the logarithmic interaction, via Lemma \ref{lem:convex}(b).
+\end{remark}
+
+\subsection{Sub-Gaussian concentration of gap observables}
+
+\begin{lemma}[Two-point inequality]\label{lem:2pt}
+Let $A,A'\ge0$, $\rho>0$, and let $g:(0,\infty)\to\R$ satisfy $|g|\le A$, $|g(u)-g(v)|\le A'|u-v|$ for all $u,v>0$, and $g=0$ on $(\rho,\infty)$. Then for all $u,v>0$, $s\in\R$:
+\[s\,(g(u)-g(v))\le2\Lambda(u/v)+C_\star s^2,\qquad C_\star:=\max\Big(\frac{A^2}{2c_0},\ \tfrac98(e\rho A')^2\Big),\quad c_0:=\log\cosh\tfrac12 .\]
+\end{lemma}
+
+\noindent Numerically $c_0=0.1201\ldots$, so $C_\star=\max\big(4.16\ldots A^2,\ 8.31\ldots(\rho A')^2\big)$. The constant depends only on $(A,A',\rho)$.
+
+\begin{proof}
+\emph{Step 1 (an elementary bound).} \emph{For $0\le\vartheta\le1$: $\ \ell(\vartheta)=\log\cosh(\vartheta/2)\ge\vartheta^2/9$.}
+For real $t$: $\cosh t=1+2\sinh^2(t/2)\ge1+t^2/2$ because $|\sinh x|\ge|x|$. For $y\ge0$: $\log(1+y)\ge y-y^2/2$ (the difference vanishes at $0$ and has derivative $\frac1{1+y}-1+y=\frac{y^2}{1+y}\ge0$).
+For $|t|\le\frac12$ put $y:=t^2/2\in[0,\frac18]$: $\log\cosh t\ge\log(1+y)\ge y(1-\frac y2)\ge\frac{15}{16}y=\frac{15}{32}t^2$.
+With $t=\vartheta/2$: $\ell(\vartheta)\ge\frac{15}{128}\vartheta^2\ge\frac19\vartheta^2$.
+
+\emph{Step 2.} Fix $u,v>0$, $s\in\R$ and put $\vartheta:=|\log(u/v)|$, so that $\Lambda(u/v)=\ell(\vartheta)$ (see \eqref{c6:defLambda}). Recall $2\alpha\gamma\le\alpha^2+\gamma^2$ for real $\alpha,\gamma$.
+
+\emph{Case 1: $\vartheta\ge1$.} Then $2\Lambda(u/v)\ge2\ell(1)=2c_0$ by monotonicity of $\ell$, and, using $|g|\le A$,
+\[s(g(u)-g(v))\le2|s|A=2\cdot\sqrt{2c_0}\cdot\frac{|s|A}{\sqrt{2c_0}}\le2c_0+\frac{A^2}{2c_0}s^2\le2\Lambda(u/v)+C_\star s^2 .\]
+
+\emph{Case 2: $\vartheta<1$ and $\min(u,v)>\rho$.} Then $g(u)=g(v)=0$ and the left side is $0\le2\Lambda(u/v)+C_\star s^2$.
+
+\emph{Case 3: $\vartheta<1$ and $\min(u,v)\le\rho$.} Then $\max(u,v)=e^{\vartheta}\min(u,v)<e\rho$ and
+$|u-v|=\max(u,v)\,(1-e^{-\vartheta})\le\max(u,v)\,\vartheta\le e\rho\,\vartheta$. By the Lipschitz bound and Step 1,
+\[s(g(u)-g(v))\le|s|A'e\rho\,\vartheta=2\cdot\frac{\sqrt2}3\vartheta\cdot\frac{3}{2\sqrt2}A'e\rho|s|\le\frac29\vartheta^2+\frac98(A'e\rho)^2s^2\le2\ell(\vartheta)+C_\star s^2 .\]
+The three cases are exhaustive.
+\end{proof}
+
+\begin{theorem}[Gap concentration]\label{thm:conc}
+Let $\omega$ be a convex log-gas of size $N$ ($\beta\ge1$, $\kappa\ge0$). Let $n\ge2$, $1\le m_2<\dots<m_n$ integers, $J\subset\{1,\dots,N-m_n\}$, $A,A'\ge0$, $\rho>0$, and let
+$G:(0,\infty)^{n-1}\to\R$ be a Borel function, defined on all of $(0,\infty)^{n-1}$, with $|G|\le A$, $G(u)=0$ unless $u\in(0,\rho]^{n-1}$, and $|G(u)-G(u')|\le A'|u_k-u'_k|$ whenever $u,u'\in(0,\infty)^{n-1}$ differ only in the $k$-th coordinate. Put
+\begin{equation}\label{defF}
+F(x):=\frac1N\sum_{i\in J}G\big(N(x_{i+m_2}-x_i),\dots,N(x_{i+m_n}-x_i)\big),\qquad x\in\Sig .
+\end{equation}
+Then for all $\lambda\in\R$, with $C_\star=C_\star(A,A',\rho)$ from Lemma \ref{lem:2pt},
+\begin{equation}\label{conc}
+\int e^{\lambda(F-\int F\rd\omega)}\rd\omega\ \le\ \exp\Big(C_\star(n-1)\frac{|J|}{N^2}\lambda^2\Big).
+\end{equation}
+\end{theorem}
+
+\noindent\emph{Comments on the hypotheses.}
+The coordinates of $u\in(0,\infty)^{n-1}$ are indexed by $k=2,\dots,n$. If $m_n\ge N$ then $J=\emptyset$ and $F\equiv0$.
+The coordinatewise Lipschitz condition implies $|G(u)-G(u')|\le A'\sum_k|u_k-u_k'|$ for all $u,u'\in(0,\infty)^{n-1}$ (change one coordinate at a time; the intermediate points stay in the product set $(0,\infty)^{n-1}$), so $G$ is continuous, and the Borel hypothesis is automatic; it is stated for emphasis, as is the fact that $G$ must be defined (and satisfy the hypotheses) on all of $(0,\infty)^{n-1}$, not only near the diagonal or on a set of gaps of full measure.
+For $x\in\Sig$ and $i\in J$ all arguments $N(x_{i+m_k}-x_i)$ are positive, so $F$ is well defined on $\Sig$; $F$ is continuous on $\Sig$ and $|F|\le A|J|/N\le A$. In particular $\int F\rd\omega$ and $\int e^{\lambda F}\rd\omega$ are finite.
+$C_\star$ does not depend on $N$, $n$, $m$, $J$, $\beta$, $\kappa$, $\cV_0$.
+
+\begin{proof}
+Fix $\lambda\in\R$ and put $c_\lambda:=C_\star(n-1)|J|\lambda^2/N^2$.
+
+\emph{Step 1 (telescoping in the coordinates).} \emph{For all $a,b\in(0,\infty)^{n-1}$ and $s\in\R$,}
+\begin{equation}\label{c6:telesc}
+s\,\big(G(a)-G(b)\big)\ \le\ \sum_{k=2}^n\Big[2\Lambda(a_k/b_k)+C_\star s^2\Big].
+\end{equation}
+For $k=1,\dots,n$ let $c^{(k)}:=(b_2,\dots,b_k,a_{k+1},\dots,a_n)\in(0,\infty)^{n-1}$, so $c^{(1)}=a$, $c^{(n)}=b$ and $G(a)-G(b)=\sum_{k=2}^n[G(c^{(k-1)})-G(c^{(k)})]$.
+For $2\le k\le n$ define $g_k:(0,\infty)\to\R$, $g_k(t):=G(b_2,\dots,b_{k-1},t,a_{k+1},\dots,a_n)$. Then $G(c^{(k-1)})-G(c^{(k)})=g_k(a_k)-g_k(b_k)$, and $g_k$ satisfies the hypotheses of Lemma \ref{lem:2pt} with the same $(A,A',\rho)$: $|g_k|\le A$; $|g_k(t)-g_k(t')|\le A'|t-t'|$ since the two arguments of $G$ differ only in the $k$-th coordinate; and $g_k(t)=0$ for $t>\rho$ since then the argument of $G$ is not in $(0,\rho]^{n-1}$.
+Lemma \ref{lem:2pt} gives $s(g_k(a_k)-g_k(b_k))\le2\Lambda(a_k/b_k)+C_\star s^2$; summing over $k$ gives \eqref{c6:telesc}.
+
+\emph{Step 2 (pointwise inequality).} \emph{For all $x,y\in\Sig$,}
+\begin{equation}\label{c6:concpt}
+\lambda\big(F(x)-F(y)\big)\ \le\ \cV(x)+\cV(y)-2\cV\big(\tfrac{x+y}2\big)+c_\lambda .
+\end{equation}
+For $i\in J$ and $2\le k\le n$ let $a_{i,k}:=N(x_{i+m_k}-x_i)>0$, $b_{i,k}:=N(y_{i+m_k}-y_i)>0$. By \eqref{defF} and \eqref{c6:telesc} with $s=\lambda/N$,
+\[\lambda\big(F(x)-F(y)\big)=\sum_{i\in J}\frac\lambda N\big(G(a_{i,\cdot})-G(b_{i,\cdot})\big)\le2\sum_{i\in J}\sum_{k=2}^n\Lambda\Big(\frac{x_{i+m_k}-x_i}{y_{i+m_k}-y_i}\Big)+(n-1)|J|\,C_\star\frac{\lambda^2}{N^2}.\]
+The map $(i,k)\mapsto(i,i+m_k)$ from $J\times\{2,\dots,n\}$ to $\{(i,j):1\le i<j\le N\}$ is well defined ($m_k\ge1$, $i+m_k\le i+m_n\le N$) and injective ($m_2<\dots<m_n$). Since $\Lambda\ge0$ and $\beta\ge1$, Lemma \ref{lem:convex}(b) gives
+\[2\sum_{i\in J}\sum_{k=2}^n\Lambda\Big(\frac{x_{i+m_k}-x_i}{y_{i+m_k}-y_i}\Big)\le2\sum_{1\le i<j\le N}\Lambda\Big(\frac{x_j-x_i}{y_j-y_i}\Big)\le2\beta\sum_{i<j}\Lambda\Big(\frac{x_j-x_i}{y_j-y_i}\Big)\le\cV(x)+\cV(y)-2\cV\big(\tfrac{x+y}2\big).\]
+
+\emph{Step 3 (Pr\'ekopa--Leindler with $\tau=\frac12$).} Define the Borel functions on $\R^N$ (with $F$ extended by $0$ outside $\Sig$)
+\[u:=e^{\lambda F-c_\lambda-\cV}\mathbf 1_{\Sig},\qquad v:=e^{-\lambda F-\cV}\mathbf 1_{\Sig},\qquad w:=e^{-\cV}\mathbf 1_{\Sig}.\]
+For $x,y\in\Sig$ the midpoint $\frac{x+y}2$ is in $\Sig$ and, by \eqref{c6:concpt},
+$u(x)^{1/2}v(y)^{1/2}=\exp\big(\tfrac12[\lambda F(x)-\lambda F(y)-c_\lambda-\cV(x)-\cV(y)]\big)\le e^{-\cV(\frac{x+y}2)}=w\big(\tfrac{x+y}2\big)$;
+if $x\notin\Sig$ or $y\notin\Sig$ the left side is $0$. Theorem \ref{thm:PL} gives $\int w\ge(\int u)^{1/2}(\int v)^{1/2}$, i.e., after squaring and dividing by $Z^2$ ($\int w=Z$):
+\begin{equation}\label{c6:concprod}
+\int e^{\lambda F}\rd\omega\cdot\int e^{-\lambda F}\rd\omega\ \le\ e^{c_\lambda}.
+\end{equation}
+
+\emph{Step 4 (Jensen).} Let $\bar F:=\int F\rd\omega$. From $e^t\ge1+t$: $\int e^{-\lambda(F-\bar F)}\rd\omega\ge1-\lambda\int(F-\bar F)\rd\omega=1$, i.e.\ $\int e^{-\lambda F}\rd\omega\ge e^{-\lambda\bar F}$. Inserting this into \eqref{c6:concprod}:
+$\int e^{\lambda F}\rd\omega\le e^{c_\lambda}e^{\lambda\bar F}$, which is \eqref{conc}.
+\end{proof}
+
+\begin{lemma}[Entropy inequality]\label{lem:DV}
+Let $\nu\ll\omega$ be probability measures on a measurable space, $F$ a bounded measurable function, $\lambda>0$. Then
+\[\int F\rd\nu\le\frac1\lambda\Big[S(\nu|\omega)+\log\int e^{\lambda F}\rd\omega\Big],\]
+where $S(\nu|\omega):=\int\log\frac{\rd\nu}{\rd\omega}\rd\nu\in[0,\infty]$ (Mathlib: \texttt{klDiv}).
+\end{lemma}
+
+\noindent\emph{Precisely:} let $\varrho:=\rd\nu/\rd\omega$ be a measurable version of the Radon--Nikodym density, with values in $[0,\infty)$, $\int\varrho\,\rd\omega=1$, and $\mathfrak h(t)=t\log t$, $\mathfrak h(0)=0$ as in the proof of Theorem \ref{thm:LSI}. Then
+\[S(\nu|\omega)=\int\mathfrak h(\varrho)\,\rd\omega\in[0,\infty],\]
+which is well defined since $\mathfrak h\ge-1/e$, and nonnegative since $\mathfrak h(t)\ge t-1$ and $\int(\varrho-1)\rd\omega=0$. (Equality with $\int\log\varrho\,\rd\nu$: $\nu=\varrho\,\omega$ and $\varrho>0$ $\nu$-a.e. For probability measures with $\nu\ll\omega$ this is Mathlib's \texttt{klDiv}$(\nu,\omega)$, which equals $\int\texttt{llr}\,\rd\nu$ if the log-likelihood ratio is $\nu$-integrable and $+\infty$ otherwise; $\texttt{llr}$ is $\nu$-integrable iff $\mathfrak h(\varrho)$ is $\omega$-integrable iff $\int\mathfrak h(\varrho)\rd\omega<\infty$, the negative part of $\mathfrak h$ being bounded.)
+
+\begin{proof}
+If $S(\nu|\omega)=\infty$ there is nothing to prove. Assume $S(\nu|\omega)<\infty$, so $\mathfrak h(\varrho)\in L^1(\omega)$.
+\emph{Young's inequality:} for $a\ge0$ and $b\in\R$,
+\begin{equation}\label{c6:young}
+ab\ \le\ \mathfrak h(a)-a+e^b .
+\end{equation}
+For $a=0$ this is $0\le e^b$. For $a>0$ apply $\log t\le t-1$ to $t:=e^b/a$: $b-\log a\le e^b/a-1$, and multiply by $a$.
+Let $m:=\int e^{\lambda F}\rd\omega\in(0,\infty)$ ($F$ is bounded). Apply \eqref{c6:young} pointwise with $a=\varrho(x)$, $b=\lambda F(x)-\log m$:
+\[\varrho\,(\lambda F-\log m)\le\mathfrak h(\varrho)-\varrho+\frac{e^{\lambda F}}m .\]
+All four terms are $\omega$-integrable ($\varrho\in L^1(\omega)$, $F$ bounded, $\mathfrak h(\varrho)\in L^1(\omega)$). Integrating against $\omega$, with $\int F\varrho\,\rd\omega=\int F\rd\nu$ and $\int\varrho\,\rd\omega=1$:
+$\lambda\int F\rd\nu-\log m\le S(\nu|\omega)-1+1$. Divide by $\lambda>0$.
+\end{proof}
+
+\begin{corollary}[Gap observables see only the relative entropy]\label{cor:gap}
+In the setting of Theorem \ref{thm:conc}, for every probability measure $\nu\ll\omega$ on $\Sig$:
+\begin{equation}\label{gapent}
+\Big|\int F\,\rd\nu-\int F\,\rd\omega\Big|\le\frac{2}{N}\sqrt{C_\star(n-1)\,|J|\,S(\nu|\omega)} .
+\end{equation}
+\end{corollary}
+
+\noindent Here $\sqrt{\,\cdot\,}$ of $+\infty$ is $+\infty$, and $0\cdot\infty=0$ (if $C_\star|J|=0$ then $F\equiv0$, see the proof).
+
+\begin{proof}
+Let $\bar F:=\int F\rd\omega$, $K:=C_\star(n-1)|J|/N^2$ and $S:=S(\nu|\omega)$. The functions $\pm(F-\bar F)$ are bounded and Borel on $\Sig$, and both $\nu$ and $\omega$ are carried by $\Sig$.
+By Theorem \ref{thm:conc} applied with $\lambda$ and with $-\lambda$, $\log\int e^{\pm\lambda(F-\bar F)}\rd\omega\le K\lambda^2$ for every $\lambda>0$. By Lemma \ref{lem:DV} applied to $\pm(F-\bar F)$,
+\begin{equation}\label{c6:gapopt}
+\Big|\int F\rd\nu-\bar F\Big|\ \le\ \frac S\lambda+K\lambda\qquad\text{for every }\lambda>0 .
+\end{equation}
+If $K=0$, then $J=\emptyset$ or $C_\star=0$; in the latter case $A=0$; in both cases $F\equiv0$ and \eqref{gapent} is trivial. Let $K>0$.
+If $S=\infty$, the right side of \eqref{gapent} is $+\infty$. If $S=0$, let $\lambda\downarrow0$ in \eqref{c6:gapopt}: the left side of \eqref{gapent} is $0$. If $0<S<\infty$, choose $\lambda:=\sqrt{S/K}$: the right side of \eqref{c6:gapopt} is $2\sqrt{SK}=\frac2N\sqrt{C_\star(n-1)|J|S}$.
+\end{proof}
+
+\begin{remark}[Comparison with {[ESYY, Thm 4.1]}; not used in any proof]
+With $S(\nu|\omega)\le\frac{R^2}{2N}\int|\nabla\log\frac{\rd\nu}{\rd\omega}|^2\rd\nu=4R^2D_\omega(\sqrt q)$ (Theorem \ref{thm:LSI} with $\kappa\ge N/R^2$; $q=\rd\nu/\rd\omega$, and $D_\omega(f)=\frac1{2N}\int|\nabla f|^2\rd\omega$ is the Dirichlet form in the normalisation of [ESYY]) the bound \eqref{gapent} reads $C\sqrt{|J|R^2D_\omega(\sqrt q)}/N$, which is [ESYY, (4.3)] with $\tau\leftrightarrow R^2$, without the additional term $Ce^{-cN^{\eps}}\sqrt{S_\omega(q)}$ --- and without the auxiliary dynamics $\partial_tq=\widetilde Lq$.
+In NP the relative entropy $S(\nu_t|\omega)$ is estimated directly (Theorem \ref{thm:entropy}), and Corollary \ref{cor:gap} is applied as it stands.
+\end{remark}
+
+\subsection{What the later sections use}\label{ss:useC6}
+\begin{itemize}[leftmargin=1.6em,itemsep=1pt]
+\item Theorem \ref{thm:LSI} for $\omega=\omega_R$ (Definition \ref{def:loggas}, Comment (2): $\kappa\ge N/R^2$) and $q=f_r/\psi$ (with $\psi=\rd\omega/\rd\mu$ of Definition \ref{def:omega}) smooth and positive on $\R^N$: used once, in Theorem \ref{thm:entropy}.
+\item Corollary \ref{cor:gap} for $\omega=\omega_R$ and $\nu\in\{\nu_t,\mu\}$: used once, in Proposition \ref{prop:gapuniv}. The constant is $C_\star(A,A',\rho)=\max\big(A^2/(2\log\cosh\frac12),\ \frac98(e\rho A')^2\big)$; it enters only through $\sqrt{C_\star(n-1)|J|}$.
+\item Theorem \ref{thm:PL}, Lemmas \ref{lem:convex}, \ref{lem:2pt}, \ref{lem:DV} and Theorem \ref{thm:conc} are used only inside this section.
+\end{itemize}
+The numerical sanity checks for this section (Lemma \ref{lem:2pt} on $1.2\cdot10^8$ random triples for 300 random functions $g$; the pointwise inequalities \eqref{c6:concpt} and Step 1a of Theorem \ref{thm:LSI} on random configurations for $\beta\in\{1,2\}$, $\kappa=0$ and $\kappa>0$, $n\in\{2,3,4\}$; \eqref{LSI} and \eqref{conc} for $N=2$ by quadrature) found no violation.
