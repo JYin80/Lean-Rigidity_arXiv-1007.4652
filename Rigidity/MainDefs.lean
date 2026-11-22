@@ -141,7 +141,7 @@ noncomputable def eig {N : ℕ} (x : Pair N → 𝕜) (k : Fin N) : ℝ :=
 
 /-- The largest eigenvalue `λ_N`. -/
 noncomputable def lamMax {N : ℕ} (x : Pair N → 𝕜) : ℝ :=
-  if h : 0 < N then eig x ⟨N - 1, by omega⟩ else 0
+  if h : 0 < N then eig x ⟨N - 1, Nat.sub_lt h Nat.one_pos⟩ else 0
 
 /-- The smallest eigenvalue `λ_1`. -/
 noncomputable def lamMin {N : ℕ} (x : Pair N → 𝕜) : ℝ :=

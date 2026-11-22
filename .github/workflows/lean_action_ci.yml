@@ -48,7 +48,29 @@ jobs:
           sudo apt-get install -y -qq bubblewrap >/dev/null
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Run the toolchain's lake comparator
-        run: ./scripts/verify-comparator.sh
+        run: |
+          set -o pipefail
+          ./scripts/verify-comparator.sh 2>&1 | tee "$RUNNER_TEMP/comparator.log"
+      - name: On a mismatch, print the constant from both sides
+        if: failure()
+        run: |
+          name=$(sed -n "s/.*Const does not match between challenge and target '\(.*\)'.*/\1/p" "$RUNNER_TEMP/comparator.log" | head -1)
+          [ -n "$name" ] || exit 0
+          for side in Challenge Solution; do
+            cat > "$RUNNER_TEMP/$side.dbg.lean" <<EOF
+          import $side
+          import Lean
+          open Lean in
+          run_cmd do
+            let c ← getConstInfo \`$name
+            logInfo m!"{c.name} levels={c.levelParams} typeHash={c.type.hash} valueHash={c.value?.map (·.hash)} isThm={c.isTheorem}"
+            logInfo m!"constants in value: {(c.value?.map (·.getUsedConstants)).getD #[]}"
+          set_option pp.all true in
+          set_option pp.proofs true in
+          #print $name
+          EOF
+            echo "=========== $side"; lake env lean "$RUNNER_TEMP/$side.dbg.lean" 2>&1 | head -c 6000 || true
+          done
 
   metadata:
     name: Check formalization.yaml
