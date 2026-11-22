@@ -47,7 +47,7 @@ private noncomputable def qf {N : ℕ} (A : Matrix (Fin N) (Fin N) 𝕜)
   RCLike.re (inner 𝕜 X (Matrix.toEuclideanLin A X))
 
 /-- An orthonormal eigenbasis of `A`, with the eigenvalues in nondecreasing order. -/
-private structure AscEigen {N : ℕ} (A : Matrix (Fin N) (Fin N) 𝕜) where
+structure AscEigen {N : ℕ} (A : Matrix (Fin N) (Fin N) 𝕜) where
   vec : OrthonormalBasis (Fin N) 𝕜 (EuclideanSpace 𝕜 (Fin N))
   val : Fin N → ℝ
   mono : Monotone val
