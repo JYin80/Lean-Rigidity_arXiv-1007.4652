@@ -439,7 +439,7 @@ noncomputable instance : InnerProductSpace ℝ (Herm 𝕜 N) :=
   inferInstanceAs (InnerProductSpace ℝ (hermSub 𝕜 N))
 
 theorem instFiniteDimensionalReal : FiniteDimensional ℝ (Herm 𝕜 N) :=
-  inferInstanceAs (FiniteDimensional ℝ (hermSub 𝕜 N))
+  (inferInstance : FiniteDimensional ℝ (hermSub 𝕜 N))
 
 attribute [instance] instFiniteDimensionalReal
 
