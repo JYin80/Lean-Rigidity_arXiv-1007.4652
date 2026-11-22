@@ -1,5 +1,9 @@
-import Rigidity.Edge.EntryDet
-import Rigidity.Edge.Resolvent
+module
+
+public import Rigidity.Edge.EntryDet
+public import Rigidity.Edge.Resolvent
+
+@[expose] public section
 
 /-!
 # Good sets of matrices and the removed-entry bound

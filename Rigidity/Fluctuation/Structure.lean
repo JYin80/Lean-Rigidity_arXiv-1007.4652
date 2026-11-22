@@ -1,10 +1,14 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Fluctuation.Calculus
-import Rigidity.Resolvent.Basic
-import Rigidity.Resolvent.Minor
-import Rigidity.Resolvent.Schur
-import Rigidity.Spectrum.Measurable
-import Rigidity.Stability.Equations
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Fluctuation.Calculus
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Resolvent.Minor
+public import Rigidity.Resolvent.Schur
+public import Rigidity.Spectrum.Measurable
+public import Rigidity.Stability.Equations
+
+@[expose] public section
 
 open MeasureTheory Real Matrix Filter Topology
 open scoped ENNReal Matrix.Norms.L2Operator

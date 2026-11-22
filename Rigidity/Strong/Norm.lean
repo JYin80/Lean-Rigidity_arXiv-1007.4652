@@ -1,7 +1,11 @@
-import Rigidity.LocalLaw.CrudeNorm
-import Rigidity.Spectrum.Eigenvalues
-import Rigidity.Strong.FarPass
-import Rigidity.Strong.SecondPass
+module
+
+public import Rigidity.LocalLaw.CrudeNorm
+public import Rigidity.Spectrum.Eigenvalues
+public import Rigidity.Strong.FarPass
+public import Rigidity.Strong.SecondPass
+
+@[expose] public section
 
 /-!
 # No eigenvalues outside `2 + K^{C₃} N^{-2/3}` (NP v1.1, §8.1: Proposition 8.1)

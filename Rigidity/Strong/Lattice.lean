@@ -1,4 +1,8 @@
-import Rigidity.Strong.FirstPass
+module
+
+public import Rigidity.Strong.FirstPass
+
+@[expose] public section
 
 /-!
 # The strong local law on the lattice (NP v1.1, §7.2: Proposition 7.2)

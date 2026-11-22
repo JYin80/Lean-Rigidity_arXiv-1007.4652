@@ -1,5 +1,9 @@
-import Rigidity.Semicircle.Density
-import Rigidity.Semicircle.Stieltjes
+module
+
+public import Rigidity.Semicircle.Density
+public import Rigidity.Semicircle.Stieltjes
+
+@[expose] public section
 
 /-!
 # Edge and bulk behaviour of `ϱ_sc`, `n_sc` and the classical locations

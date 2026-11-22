@@ -1,5 +1,9 @@
-import Rigidity.Resolvent.Basic
-import Rigidity.Resolvent.Schur
+module
+
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Resolvent.Schur
+
+@[expose] public section
 
 /-!
 # Block Schur complement: the inverse of the `A`-block and the perturbation of minors

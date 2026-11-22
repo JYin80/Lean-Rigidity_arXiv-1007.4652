@@ -1,14 +1,19 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Ensemble.Moments
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.Gaussian
-import Rigidity.Flow.GoodSet
-import Rigidity.Flow.Herm
-import Rigidity.Flow.Invariant
-import Rigidity.Flow.Mehler
-import Rigidity.LocalLaw.GoodEvent
-import Rigidity.Semicircle.Density
-import Rigidity.Semicircle.Locations
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Ensemble.Moments
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.Gaussian
+public import Rigidity.Flow.GoodSet
+public import Rigidity.Flow.Herm
+public import Rigidity.Flow.Invariant
+public import Rigidity.Flow.Mehler
+public import Rigidity.LocalLaw.GoodEvent
+public import Rigidity.Semicircle.Density
+public import Rigidity.Semicircle.Locations
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The flow ensembles `H_t`, `H̃_t = κ_t H_t` and `Ṽ = κ_∞ V`
@@ -45,9 +50,6 @@ variable {N : ℕ} (M : Ensemble 𝕜 N)
 
 /-- The law of `H_t = e^{-t/2} H_0 + (1 - e^{-t})^{1/2} V` (12.1). -/
 noncomputable def flowLaw (t : ℝ) : Measure (Herm 𝕜 N) := ouLaw (gaussVar 𝕜 N) M.hermLaw t
-
-/-- `ν_t`, the law of `λ(H_t)` (§12.1). -/
-noncomputable def eigLaw (t : ℝ) : Measure (Fin N → ℝ) := eigFlow M.hermLaw t
 
 /-- `κ_t` (13.1). -/
 noncomputable def kappaT (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) (t : ℝ) : ℝ :=

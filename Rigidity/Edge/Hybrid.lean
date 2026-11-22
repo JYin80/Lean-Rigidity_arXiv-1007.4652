@@ -1,5 +1,9 @@
-import Rigidity.Resolvent.Basic
-import Rigidity.Edge.EntryDet
+module
+
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Edge.EntryDet
+
+@[expose] public section
 
 /-!
 # Complexified hybrid matrices and the bridge to the Green function

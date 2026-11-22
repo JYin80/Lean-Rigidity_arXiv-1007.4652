@@ -1,5 +1,9 @@
-import Rigidity.Fluctuation.Structure
-import Rigidity.Probability.LDMoment
+module
+
+public import Rigidity.Fluctuation.Structure
+public import Rigidity.Probability.LDMoment
+
+@[expose] public section
 
 /-!
 # Conditional moments (NP v1.1, §6.2–6.3: (6.9), Lemma 6.4 (d), Lemma 6.5)

@@ -1,6 +1,10 @@
-import Rigidity.Edge.EntryDet
-import Rigidity.Edge.Resolvent
-import Rigidity.Edge.SmoothCount
+module
+
+public import Rigidity.Edge.EntryDet
+public import Rigidity.Edge.Resolvent
+public import Rigidity.Edge.SmoothCount
+
+@[expose] public section
 
 /-!
 # The functional `X` for a minor

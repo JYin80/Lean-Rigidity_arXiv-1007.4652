@@ -1,4 +1,8 @@
-import Rigidity.LocalLaw.Lattice
+module
+
+public import Rigidity.LocalLaw.Lattice
+
+@[expose] public section
 
 /-!
 # The initial estimate (NP v1.1, §5.2: Lemma 5.3)

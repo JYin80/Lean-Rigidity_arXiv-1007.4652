@@ -1,8 +1,12 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Ensembles
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.GoodSet
-import Rigidity.Semicircle.Density
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Ensembles
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.GoodSet
+public import Rigidity.Semicircle.Density
+
+@[expose] public section
 
 /-!
 # The good event along the flow and the second-moment bound

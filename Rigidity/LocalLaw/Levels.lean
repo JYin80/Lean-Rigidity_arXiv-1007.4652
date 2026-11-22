@@ -1,6 +1,10 @@
-import Rigidity.LocalLaw.GoodEvent
-import Rigidity.LocalLaw.Ledger
-import Rigidity.Probability.Moments
+module
+
+public import Rigidity.LocalLaw.GoodEvent
+public import Rigidity.LocalLaw.Ledger
+public import Rigidity.Probability.Moments
+
+@[expose] public section
 
 /-!
 # The levels `p₁`, `p₂`, `𝔏`, `E_max` and the standing inequalities

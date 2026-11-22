@@ -1,4 +1,8 @@
-import Rigidity.Edge.Resolvent
+module
+
+public import Rigidity.Edge.Resolvent
+
+@[expose] public section
 
 /-!
 # The one-entry perturbation determinant

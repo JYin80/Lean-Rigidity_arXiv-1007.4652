@@ -1,5 +1,9 @@
-import Rigidity.Fluctuation.Main
-import Rigidity.LocalLaw.Weak
+module
+
+public import Rigidity.Fluctuation.Main
+public import Rigidity.LocalLaw.Weak
+
+@[expose] public section
 
 /-!
 # Fluctuation averaging on the lattice (NP v1.1, §6.8: Corollary 6.2)

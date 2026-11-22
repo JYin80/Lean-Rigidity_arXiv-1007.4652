@@ -1,9 +1,13 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Correlation
-import Rigidity.Flow.Ensembles
-import Rigidity.Flow.GapUniv
-import Rigidity.Flow.GoodEvent
-import Rigidity.Flow.GoodSet
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Correlation
+public import Rigidity.Flow.Ensembles
+public import Rigidity.Flow.GapUniv
+public import Rigidity.Flow.GoodEvent
+public import Rigidity.Flow.GoodSet
+
+@[expose] public section
 
 /-!
 # The quantitative local ergodicity bound (Theorem 12.1), conditional on the rigidity bound

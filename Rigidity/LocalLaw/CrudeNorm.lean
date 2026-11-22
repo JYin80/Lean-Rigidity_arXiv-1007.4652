@@ -1,7 +1,11 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.LocalLaw.GoodEvent
-import Rigidity.Probability.Moments
-import Rigidity.Spectrum.Net
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.LocalLaw.GoodEvent
+public import Rigidity.Probability.Moments
+public import Rigidity.Spectrum.Net
+
+@[expose] public section
 
 /-!
 # The a priori bound on the norm

@@ -1,4 +1,9 @@
-import Rigidity.Ensemble.Basic
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # Ordered eigenvalues, the operator norm, Weyl's inequality, reflection
@@ -25,27 +30,6 @@ namespace Rigidity
 variable {𝕜 : Type*} [RCLike 𝕜]
 
 /-! ### 3. Ordered eigenvalues -/
-
-/-- The eigenvalues of a hermitian matrix in increasing order, `k = 0, …, N - 1`; the
-`λ_j` of §2 is `eigAsc hA ⟨j - 1, _⟩`. -/
-noncomputable def eigAsc {N : ℕ} {A : Matrix (Fin N) (Fin N) 𝕜} (hA : A.IsHermitian)
-    (k : Fin N) : ℝ :=
-  hA.eigenvalues₀ (Fin.cast (Fintype.card_fin N).symm k.rev)
-
-/-- The ordered eigenvalues `λ_0 ≤ … ≤ λ_{N-1}` of `H` as functions of the entries. -/
-noncomputable def eig {N : ℕ} (x : Pair N → 𝕜) (k : Fin N) : ℝ :=
-  eigAsc (toMatrix_isHermitian x) k
-
-/-- The largest eigenvalue `λ_N`. -/
-noncomputable def lamMax {N : ℕ} (x : Pair N → 𝕜) : ℝ :=
-  if h : 0 < N then eig x ⟨N - 1, by omega⟩ else 0
-
-/-- The smallest eigenvalue `λ_1`. -/
-noncomputable def lamMin {N : ℕ} (x : Pair N → 𝕜) : ℝ :=
-  if h : 0 < N then eig x ⟨0, h⟩ else 0
-
-/-- The weight `min(j, N - j + 1)` of (2.25) at `j = k + 1`. -/
-def rigWeight (N : ℕ) (k : Fin N) : ℕ := min (k.val + 1) (N - k.val)
 
 theorem eigAsc_monotone {N : ℕ} {A : Matrix (Fin N) (Fin N) 𝕜} (hA : A.IsHermitian) :
     Monotone (eigAsc hA) := by

@@ -1,10 +1,14 @@
-import Rigidity.Counting.HelfferSjostrand
-import Rigidity.Ensemble.Basic
-import Rigidity.LocalLaw.Defs
-import Rigidity.Semicircle.Algebra
-import Rigidity.Semicircle.Basic
-import Rigidity.Semicircle.Density
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Counting.HelfferSjostrand
+public import Rigidity.Ensemble.Basic
+public import Rigidity.LocalLaw.Defs
+public import Rigidity.Semicircle.Algebra
+public import Rigidity.Semicircle.Basic
+public import Rigidity.Semicircle.Density
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # The counting function from the Stieltjes transform

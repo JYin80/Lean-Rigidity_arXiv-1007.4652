@@ -1,4 +1,9 @@
-import Rigidity.Flow.Gaussian
+module
+
+public import Rigidity.Flow.Gaussian
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The Ornstein–Uhlenbeck (Mehler) semigroup on a Euclidean space
@@ -29,12 +34,6 @@ section Mehler
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
   [MeasurableSpace E] [BorelSpace E]
 
-/-- `a_u = e^{-u/2}` (§14.3). -/
-noncomputable def ouA (u : ℝ) : ℝ := Real.exp (-u / 2)
-
-/-- `s_u = 1 - e^{-u}` (§14.3). -/
-noncomputable def ouS (u : ℝ) : ℝ := 1 - Real.exp (-u)
-
 /-- The Mehler semigroup (14.1), real-valued integrand:
 `T_u Φ(y) = ∫ Φ(a_u y + s_u^{1/2} z) g_v(dz)`. -/
 noncomputable def mehler (v u : ℝ) (Φ : E → ℝ) (y : E) : ℝ :=
@@ -43,10 +42,6 @@ noncomputable def mehler (v u : ℝ) (Φ : E → ℝ) (y : E) : ℝ :=
 /-- The Mehler semigroup (14.1) on `[0, ∞]`-valued functions. -/
 noncomputable def mehlerL (v u : ℝ) (Φ : E → ℝ≥0∞) (y : E) : ℝ≥0∞ :=
   ∫⁻ z, Φ (ouA u • y + Real.sqrt (ouS u) • z) ∂gaussE E v
-
-/-- `ρ_u = law(a_u Y + s_u^{1/2} Z)`, `Y ∼ ρ`, `Z ∼ g_v` independent (§14.3). -/
-noncomputable def ouLaw (v : ℝ) (ρ : Measure E) (u : ℝ) : Measure E :=
-  (ρ.prod (gaussE E v)).map fun p => ouA u • p.1 + Real.sqrt (ouS u) • p.2
 
 /-- The Mehler kernel `K(u, y, w)` (14.2). -/
 noncomputable def mehlerKernel (v u : ℝ) (y w : E) : ℝ :=

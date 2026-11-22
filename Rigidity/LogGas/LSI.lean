@@ -1,6 +1,10 @@
-import Rigidity.Flow.Chamber
-import Rigidity.LogGas.Defs
-import Rigidity.LogGas.PrekopaLeindler
+module
+
+public import Rigidity.Flow.Chamber
+public import Rigidity.LogGas.Defs
+public import Rigidity.LogGas.PrekopaLeindler
+
+@[expose] public section
 
 /-!
 # Logarithmic Sobolev inequality for convex log-gases

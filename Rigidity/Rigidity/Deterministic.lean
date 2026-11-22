@@ -1,6 +1,10 @@
-import Rigidity.Rigidity.Conversion
-import Rigidity.LocalLaw.Ledger
-import Rigidity.Resolvent.Spectral
+module
+
+public import Rigidity.Rigidity.Conversion
+public import Rigidity.LocalLaw.Ledger
+public import Rigidity.Resolvent.Spectral
+
+@[expose] public section
 
 /-!
 # Counting function and rigidity from the local law (NP v1.1, §9: Proposition 9.2)

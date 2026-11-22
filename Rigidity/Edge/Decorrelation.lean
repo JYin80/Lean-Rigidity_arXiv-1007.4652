@@ -1,14 +1,18 @@
-import Rigidity.Edge.Continuity
-import Rigidity.Edge.EdgeEvent
-import Rigidity.Edge.GoodSet
-import Rigidity.Edge.Hybrid
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.Minor
-import Rigidity.Edge.Params
-import Rigidity.Edge.Resample
-import Rigidity.Edge.Resolvent
-import Rigidity.Edge.SmoothCount
-import Rigidity.Ensemble.Basic
+module
+
+public import Rigidity.Edge.Continuity
+public import Rigidity.Edge.EdgeEvent
+public import Rigidity.Edge.GoodSet
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.Minor
+public import Rigidity.Edge.Params
+public import Rigidity.Edge.Resample
+public import Rigidity.Edge.Resolvent
+public import Rigidity.Edge.SmoothCount
+public import Rigidity.Ensemble.Basic
+
+@[expose] public section
 
 /-!
 # Decorrelation of one off-diagonal resolvent entry

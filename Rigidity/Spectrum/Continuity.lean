@@ -1,4 +1,8 @@
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # Continuity of the ordered eigenvalues in the entries

@@ -1,0 +1,21 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Rigidity.thm2_1_avg",
+    "Rigidity.thm2_1_entries",
+    "Rigidity.thm2_1_extreme",
+    "Rigidity.thm2_2_rigidity",
+    "Rigidity.thm2_2_counting",
+    "Rigidity.thm2_3_localErgodicity",
+    "Rigidity.thm2_4_max",
+    "Rigidity.thm2_4_min"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

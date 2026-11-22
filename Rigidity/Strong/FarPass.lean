@@ -1,5 +1,9 @@
-import Rigidity.Fluctuation.Lattice
-import Rigidity.Strong.Helpers
+module
+
+public import Rigidity.Fluctuation.Lattice
+public import Rigidity.Strong.Helpers
+
+@[expose] public section
 
 /-!
 # The averaged law, far regime (NP v1.1, §7.3: Proposition 7.4)

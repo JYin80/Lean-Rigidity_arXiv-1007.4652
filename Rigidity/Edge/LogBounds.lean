@@ -1,4 +1,8 @@
-import Mathlib
+module
+
+public import Mathlib
+
+@[expose] public section
 
 /-!
 # Bounds for the complex logarithm near `1`

@@ -1,4 +1,9 @@
-import Mathlib
+module
+
+public import Mathlib
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 open MeasureTheory Real Matrix Filter Topology
 open scoped ENNReal Matrix.Norms.L2Operator
@@ -15,108 +20,22 @@ Numbers refer to the blueprint NP v1.1; results of the original paper are cited 
 
 /-! ### 1. Ensembles (§2, (2.1)–(2.4), (2.17)) -/
 
-/-- Index pairs `(i, j)` with `i ≤ j`: the independent entries of an `N × N` hermitian matrix. -/
-abbrev Pair (N : ℕ) := {p : Fin N × Fin N // p.1 ≤ p.2}
-
-/-- The pair `(min i j, max i j)`. -/
-def Pair.mk' {N : ℕ} (i j : Fin N) : Pair N :=
-  if h : i ≤ j then ⟨(i, j), h⟩ else ⟨(j, i), (not_le.mp h).le⟩
-
-theorem Pair.mk'_comm {N : ℕ} (i j : Fin N) : Pair.mk' i j = Pair.mk' j i := by
-  unfold Pair.mk'
-  by_cases h₁ : i ≤ j <;> by_cases h₂ : j ≤ i
-  · have : i = j := le_antisymm h₁ h₂
-    subst this; rfl
-  · simp [h₁, h₂]
-  · simp [h₁, h₂]
-  · exact absurd (le_total i j) (by tauto)
-
-/-- The hermitian matrix with upper-triangular entries `x`: `h_ij = x_ij` for `i < j`,
-`h_ji = conj h_ij`, and real diagonal `h_ii = re x_ii`. -/
-def toMatrix {N : ℕ} (x : Pair N → 𝕜) : Matrix (Fin N) (Fin N) 𝕜 :=
-  Matrix.of fun i j =>
-    if i < j then x (Pair.mk' i j)
-    else if j < i then star (x (Pair.mk' i j))
-    else ((RCLike.re (x (Pair.mk' i j)) : ℝ) : 𝕜)
-
-theorem toMatrix_isHermitian {N : ℕ} (x : Pair N → 𝕜) : (toMatrix x).IsHermitian := by
-  ext i j
-  simp only [Matrix.conjTranspose_apply, toMatrix, Matrix.of_apply]
-  rw [Pair.mk'_comm j i]
-  rcases lt_trichotomy i j with h | rfl | h
-  · simp [h, not_lt_of_gt h]
-  · simp
-  · simp [h, not_lt_of_gt h]
-
-/-- One `N × N` ensemble: a probability law for each entry `h_ij`, `i ≤ j`. -/
-structure Ensemble (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) where
-  law : Pair N → Measure 𝕜
-  isProb : ∀ p, IsProbabilityMeasure (law p)
-
-attribute [instance] Ensemble.isProb
-
 namespace Ensemble
 
 variable {N : ℕ} (M : Ensemble 𝕜 N)
 
-/-- The joint law of the entries: the product of the entry laws. -/
-noncomputable def prodLaw : Measure (Pair N → 𝕜) := Measure.pi M.law
-
-instance : IsProbabilityMeasure M.prodLaw := by unfold prodLaw; infer_instance
-
-/-- `σ_p² = 𝔼|h_p|²` (2.1). -/
-noncomputable def varPair (p : Pair N) : ℝ := ∫ y, ‖y‖ ^ 2 ∂M.law p
-
-/-- `σ_ij²` for all `i, j`, with `σ_ji = σ_ij`. -/
-noncomputable def var (i j : Fin N) : ℝ := M.varPair (Pair.mk' i j)
-
 /-- `σ_ij`. -/
 noncomputable def sd (i j : Fin N) : ℝ := Real.sqrt (M.var i j)
-
-/-- The matrix of variances `B = (σ_ij²)`. -/
-noncomputable def varMatrix : Matrix (Fin N) (Fin N) ℝ := Matrix.of M.var
 
 theorem varMatrix_isHermitian : M.varMatrix.IsHermitian := by
   ext i j
   simp [varMatrix, var, Pair.mk'_comm i j]
-
-/-- Mean zero (2.1). -/
-def MeanZero : Prop := ∀ p, ∫ y, y ∂M.law p = 0
-
-/-- The diagonal entries are real. -/
-def DiagReal : Prop := ∀ i : Fin N, ∀ᵐ y ∂M.law (Pair.mk' i i), RCLike.im y = 0
-
-/-- Assumption (A) (2.2). -/
-def AssumptionA : Prop := ∀ j, ∑ i, M.var i j = 1
-
-/-- Assumption (B) as the quadratic-form bound on `𝐞^⊥`. -/
-def AssumptionB (δm δp : ℝ) : Prop :=
-  ∀ v : Fin N → ℝ, ∑ i, v i = 0 →
-    (-1 + δm) * ∑ i, v i ^ 2 ≤ v ⬝ᵥ (M.varMatrix *ᵥ v) ∧
-      v ⬝ᵥ (M.varMatrix *ᵥ v) ≤ (1 - δp) * ∑ i, v i ^ 2
 
 /-- Assumption (B) as printed (2.3): `1` is a simple eigenvalue of `B` and
 `Spec B ⊆ [-1 + δ₋, 1 - δ₊] ∪ {1}`. -/
 def AssumptionBSpec (δm δp : ℝ) : Prop :=
   ∃ k, M.varMatrix_isHermitian.eigenvalues k = 1 ∧
     ∀ k' ≠ k, M.varMatrix_isHermitian.eigenvalues k' ∈ Set.Icc (-1 + δm) (1 - δp)
-
-/-- Assumption (C) (2.4). -/
-def AssumptionC (C₀ : ℝ) : Prop := ∀ i j, M.var i j ≤ C₀ / N
-
-/-- Uniform subexponential decay (2.17). -/
-def SubexpDecay (ϑ : ℝ) : Prop :=
-  ∀ p, ∀ x : ℝ, 1 ≤ x →
-    M.law p {y | x * Real.sqrt (M.varPair p) < ‖y‖} ≤ ENNReal.ofReal (ϑ⁻¹ * Real.exp (-(x ^ ϑ)))
-
-/-- The hypotheses of Theorems 2.1 and 2.2: (2.1), real diagonal, (A), (B), (C), (2.17). -/
-structure Assumptions (ϑ δm δp C₀ : ℝ) : Prop where
-  meanZero : M.MeanZero
-  diagReal : M.DiagReal
-  sumA : M.AssumptionA
-  specB : M.AssumptionB δm δp
-  boundC : M.AssumptionC C₀
-  subexp : M.SubexpDecay ϑ
 
 theorem Assumptions.mono {ϑ δm δp C₀ ϑ' δm' δp' C₀' : ℝ} (h : M.Assumptions ϑ δm δp C₀)
     (hϑ' : 0 < ϑ') (hϑ : ϑ' ≤ ϑ) (hδm : δm' ≤ δm) (hδp : δp' ≤ δp) (hC : C₀ ≤ C₀') :
@@ -138,11 +57,6 @@ theorem Assumptions.mono {ϑ δm δp C₀ ϑ' δm' δp' C₀' : ℝ} (h : M.Assu
     have h2 : Real.exp (-(x ^ ϑ)) ≤ Real.exp (-(x ^ ϑ')) := Real.exp_le_exp.mpr (by linarith)
     have h3 : ϑ⁻¹ ≤ ϑ'⁻¹ := inv_anti₀ hϑ' hϑ
     exact mul_le_mul h3 h2 (Real.exp_nonneg _) (inv_nonneg.mpr hϑ'.le)
-
-/-- The moment-matching condition (2.40) for `l + u ≤ 2`, on the laws of `h_ij`. -/
-def MomentMatch2 (Mv Mw : Ensemble 𝕜 N) : Prop :=
-  ∀ p, ∀ l u : ℕ, l + u ≤ 2 →
-    ∫ y, star y ^ l * y ^ u ∂Mv.law p = ∫ y, star y ^ l * y ^ u ∂Mw.law p
 
 /-! #### Transformations of ensembles -/
 

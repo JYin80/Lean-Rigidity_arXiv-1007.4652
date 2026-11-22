@@ -1,6 +1,11 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Spectrum.Continuity
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Spectrum.Continuity
+public import Rigidity.Spectrum.Eigenvalues
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The space of hermitian matrices as a Euclidean space, and the eigenvalue vector
@@ -27,69 +32,10 @@ namespace Rigidity
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 
-/-- `β = dim_ℝ 𝕜` (§12.1). -/
-noncomputable def betaF (𝕜 : Type*) [RCLike 𝕜] : ℝ := Module.finrank ℝ 𝕜
-
-/-- Real coordinates of a matrix: `(i, j, 0) ↦ Re h_ij`, `(i, j, 1) ↦ Im h_ij`. -/
-abbrev HCoord (N : ℕ) := EuclideanSpace ℝ (Fin N × Fin N × Fin 2)
-
-/-- The coordinate vectors of the self-adjoint matrices over `𝕜`. -/
-def hermSub (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) : Submodule ℝ (HCoord N) where
-  carrier := {v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
-      (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)}
-  add_mem' := by
-    intro v w hv hw i j
-    obtain ⟨h1, h2, h3⟩ := hv i j
-    obtain ⟨h1', h2', h3'⟩ := hw i j
-    refine ⟨by simp [h1, h1'], by simp [h2, h2']; ring, fun hI => by simp [h3 hI, h3' hI]⟩
-  zero_mem' := by intro i j; simp
-  smul_mem' := by
-    intro c v hv i j
-    obtain ⟨h1, h2, h3⟩ := hv i j
-    exact ⟨by simp [h1], by simp [h2], fun hI => by simp [h3 hI]⟩
-
-/-- `𝓗_N(𝕜)` (§12.1): the real inner product space of self-adjoint `N × N` matrices over `𝕜`
-with `⟨X, Y⟩ = Tr(XY)` and `|X|² = ∑_{i,j} |x_ij|²`. -/
-def Herm (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) : Type := hermSub 𝕜 N
-
 namespace Herm
 
 variable {N : ℕ}
 
-noncomputable instance : NormedAddCommGroup (Herm 𝕜 N) :=
-  inferInstanceAs (NormedAddCommGroup (hermSub 𝕜 N))
-
-noncomputable instance : InnerProductSpace ℝ (Herm 𝕜 N) :=
-  inferInstanceAs (InnerProductSpace ℝ (hermSub 𝕜 N))
-
-instance : FiniteDimensional ℝ (Herm 𝕜 N) := inferInstanceAs (FiniteDimensional ℝ (hermSub 𝕜 N))
-
-noncomputable instance : MeasurableSpace (Herm 𝕜 N) := borel _
-
-instance : BorelSpace (Herm 𝕜 N) := ⟨rfl⟩
-
-/-- The real coordinates of `H`. -/
-def coord (H : Herm 𝕜 N) (q : Fin N × Fin N × Fin 2) : ℝ := (H : hermSub 𝕜 N).1 q
-
-/-- The upper-triangular entries `h_ij = Re h_ij + i Im h_ij`, `i ≤ j`. -/
-def toPair (H : Herm 𝕜 N) : Pair N → 𝕜 := fun p =>
-  ((H.coord (p.1.1, p.1.2, 0) : ℝ) : 𝕜) + ((H.coord (p.1.1, p.1.2, 1) : ℝ) : 𝕜) * RCLike.I
-
-/-- The matrix of `H`. -/
-def toMatrix (H : Herm 𝕜 N) : Matrix (Fin N) (Fin N) 𝕜 := Rigidity.toMatrix H.toPair
-
-theorem isHermitian (H : Herm 𝕜 N) : H.toMatrix.IsHermitian := toMatrix_isHermitian _
-
-/-- `H(x)` (Definition 2.1) as an element of `𝓗`. -/
-noncomputable def ofPair (x : Pair N → 𝕜) : Herm 𝕜 N :=
-  ⟨WithLp.toLp 2 fun q => if q.2.2 = 0 then RCLike.re (Rigidity.toMatrix x q.1 q.2.1)
-      else RCLike.im (Rigidity.toMatrix x q.1 q.2.1), by
-    intro i j
-    have h : Rigidity.toMatrix x j i = star (Rigidity.toMatrix x i j) := by
-      have := congrFun (congrFun (toMatrix_isHermitian x) j) i
-      simpa [Matrix.conjTranspose_apply] using this.symm
-    exact ⟨by simp [h, RCLike.star_def], by simp [h, RCLike.star_def], fun hI => by
-      simp [RCLike.im_eq_zero hI]⟩⟩
 
 /-- The element of `𝓗` with the upper triangle of `A` (equal to `A` if `A` is self-adjoint). -/
 noncomputable def ofMatrix (A : Matrix (Fin N) (Fin N) 𝕜) : Herm 𝕜 N :=
@@ -108,9 +54,6 @@ def IsInvariant {α : Type*} (Φ : Herm 𝕜 N → α) : Prop :=
   ∀ U ∈ Matrix.unitaryGroup (Fin N) 𝕜, ∀ H, Φ (conj U H) = Φ H
 
 end Herm
-
-/-- `λ(H)`: the ordered eigenvalues of `H ∈ 𝓗` (§12.1). -/
-noncomputable def eigVec {N : ℕ} (H : Herm 𝕜 N) : Fin N → ℝ := fun k => eigAsc H.isHermitian k
 
 /-! ### 1. Entries and real coordinates of `H ∈ 𝓗` -/
 

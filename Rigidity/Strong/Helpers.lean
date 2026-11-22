@@ -1,5 +1,9 @@
-import Rigidity.LocalLaw.Lattice
-import Rigidity.Semicircle.Size
+module
+
+public import Rigidity.LocalLaw.Lattice
+public import Rigidity.Semicircle.Size
+
+@[expose] public section
 
 /-!
 # Standing consequences of §7 (NP v1.1, §7: (T4)–(T6))

@@ -1,17 +1,21 @@
-import Rigidity.Edge.Continuity
-import Rigidity.Edge.EdgeEvent
-import Rigidity.Edge.Hybrid
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.LogBounds
-import Rigidity.Edge.Params
-import Rigidity.Edge.SmoothCount
-import Rigidity.Edge.SpecF
-import Rigidity.Ensemble.Basic
-import Rigidity.Resolvent.Basic
-import Rigidity.Semicircle.Density
-import Rigidity.Semicircle.Locations
-import Rigidity.Semicircle.Stieltjes
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Edge.Continuity
+public import Rigidity.Edge.EdgeEvent
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.LogBounds
+public import Rigidity.Edge.Params
+public import Rigidity.Edge.SmoothCount
+public import Rigidity.Edge.SpecF
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Semicircle.Density
+public import Rigidity.Semicircle.Locations
+public import Rigidity.Semicircle.Stieltjes
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # The law of `λ_N` against the smoothed counting functional

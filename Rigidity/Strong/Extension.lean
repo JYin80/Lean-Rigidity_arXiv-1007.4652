@@ -1,5 +1,9 @@
-import Rigidity.Rigidity.Reduction
-import Rigidity.Strong.Lattice
+module
+
+public import Rigidity.Rigidity.Reduction
+public import Rigidity.Strong.Lattice
+
+@[expose] public section
 
 /-!
 # From the lattice to the domain (NP v1.1, §7.4: Lemma 7.5 and Theorem 2.6 (i), (ii))

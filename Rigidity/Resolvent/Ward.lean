@@ -1,4 +1,8 @@
-import Rigidity.Resolvent.Basic
+module
+
+public import Rigidity.Resolvent.Basic
+
+@[expose] public section
 
 /-!
 # Entry bounds, symmetry, the Ward identity and resolvent identities

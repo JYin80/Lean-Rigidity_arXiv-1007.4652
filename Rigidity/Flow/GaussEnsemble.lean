@@ -1,6 +1,11 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Gaussian
-import Rigidity.Flow.Herm
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Gaussian
+public import Rigidity.Flow.Herm
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The Gaussian ensemble on the space of hermitian matrices
@@ -28,17 +33,6 @@ namespace Rigidity
 variable {𝕜 : Type*} [RCLike 𝕜]
 
 
-/-- `σ² = 2/(βN)` (§12.1). -/
-noncomputable def gaussVar (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) : ℝ := 2 / (betaF 𝕜 * N)
-
-/-- `𝐆 = 𝐆_{N,β}`, the centred Gaussian measure on `𝓗` with covariance `σ² Id` (§12.1). -/
-noncomputable def gaussH (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) : Measure (Herm 𝕜 N) :=
-  gaussE (Herm 𝕜 N) (gaussVar 𝕜 N)
-
-/-- `μ = λ_* 𝐆` (§12.1). -/
-noncomputable def gbeLaw (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) : Measure (Fin N → ℝ) :=
-  (gaussH 𝕜 N).map eigVec
-
 /-- The entry laws of `V ∼ 𝐆` (Lemma 14.C(ii)): `v_ii ∼ N(0, 2/(βN))` real, and for `i < j`,
 `v_ij = ξ + η I` with `ξ, η ∼ N(0, 1/(βN))` independent (`η` is void for `𝕜 = ℝ`). -/
 noncomputable def gbeEntryLaw (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) (p : Pair N) : Measure 𝕜 :=
@@ -60,9 +54,6 @@ noncomputable def gbeEnsemble (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) : Ensemble 
 namespace Ensemble
 
 variable {N : ℕ} (M : Ensemble 𝕜 N)
-
-/-- The law of `H_0 = H(x)`, `x ∼ ℙ_ν`, on `𝓗`. -/
-noncomputable def hermLaw : Measure (Herm 𝕜 N) := M.prodLaw.map Herm.ofPair
 
 end Ensemble
 

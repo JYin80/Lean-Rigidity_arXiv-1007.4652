@@ -1,4 +1,8 @@
-import Rigidity.Strong.Lattice
+module
+
+public import Rigidity.Strong.Lattice
+
+@[expose] public section
 
 /-!
 # The improved averaged law, near regime (NP v1.1, §7.3: Proposition 7.3)

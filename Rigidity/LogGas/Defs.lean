@@ -1,5 +1,9 @@
-import Rigidity.Flow.Chamber
-import Rigidity.LogGas.TwoPoint
+module
+
+public import Rigidity.Flow.Chamber
+public import Rigidity.LogGas.TwoPoint
+
+@[expose] public section
 
 /-!
 # Log-gases on the Weyl chamber

@@ -1,4 +1,8 @@
-import Rigidity.Resolvent.Ward
+module
+
+public import Rigidity.Resolvent.Ward
+
+@[expose] public section
 
 /-!
 # Minors, the Schur complement and the resolvent expansion formulas

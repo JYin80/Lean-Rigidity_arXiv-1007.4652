@@ -1,8 +1,13 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Correlation
-import Rigidity.Flow.GoodSet
-import Rigidity.Flow.Main
-import Rigidity.LocalLaw.Strong
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Correlation
+public import Rigidity.Flow.GoodSet
+public import Rigidity.Flow.Main
+public import Rigidity.LocalLaw.Strong
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # Local ergodicity of Dyson Brownian motion: the unconditional endpoints
@@ -211,16 +216,6 @@ theorem dbm_localErgodicity :
       _ ≤ max CH C₀' * X * Bd := by gcongr
       _ = max CH C₀' * Bd * 1 * X := by ring
       _ ≤ max CH C₀' * (Bd + K) * (N : ℝ) ^ (2 * ε') * X := by gcongr; linarith
-
-/-- The bound (2.36) for one field and one constant `C`. -/
-def ErgodicityBound (𝕜 : Type*) [RCLike 𝕜] (ϑ δm δp C₀ ε' δ c : ℝ) (n : ℕ) (ρO C : ℝ) : Prop :=
-  ∀ N : ℕ, max n 3 ≤ N → ∀ M : Ensemble 𝕜 N, M.Assumptions ϑ δm δp C₀ →
-    ∀ O : EuclideanSpace ℝ (Fin n) → ℝ, ∀ Bd : ℝ, ∀ K : ℝ≥0, (∀ u, |O u| ≤ Bd) →
-      LipschitzWith K O → (∀ u, (∃ k, ρO < |u k|) → O u = 0) →
-    ∀ E ∈ Set.Icc (-2 + c) (2 - c), ∀ b : ℝ, 0 < b → b < c / 2 →
-    ∀ t : ℝ, (N : ℝ) ^ (-1 + δ + ε') ≤ t →
-      corrLHS M O E b t ≤ C * (Bd + K) * (N : ℝ) ^ (2 * ε') *
-        (b⁻¹ * (N : ℝ) ^ (-1 + ε') + b ^ (-(1 / 2 : ℝ)) * (N : ℝ) ^ (-δ / 2))
 
 /-- Theorem 2.3 with one constant for both fields (NP: `C` does not depend on `𝕂`). -/
 theorem dbm_localErgodicity_uniform :

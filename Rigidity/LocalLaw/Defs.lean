@@ -1,9 +1,14 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Resolvent.Basic
-import Rigidity.Resolvent.Spectral
-import Rigidity.Semicircle.Basic
-import Rigidity.Semicircle.Density
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Resolvent.Spectral
+public import Rigidity.Semicircle.Basic
+public import Rigidity.Semicircle.Density
+public import Rigidity.Spectrum.Eigenvalues
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The counting function and the control quantities of the local law
@@ -31,30 +36,6 @@ namespace Rigidity
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 
-
-/-- The normalised counting function `𝔫(E)` (2.23). -/
-noncomputable def countFn {N : ℕ} (x : Pair N → 𝕜) (E : ℝ) : ℝ :=
-  (N : ℝ)⁻¹ * ((Finset.univ.filter fun k => eig x k ≤ E).card : ℝ)
-
-/-- `Λ = |m - m_sc|` (2.16). -/
-noncomputable def Lam {N : ℕ} (x : Pair N → 𝕜) (z : ℂ) : ℝ :=
-  ‖stieltjesEmp (toMatrix x) z - msc z‖
-
-/-- `Λ_d = max_k |G_kk - m_sc|` (2.16). -/
-noncomputable def LamD {N : ℕ} (x : Pair N → 𝕜) (z : ℂ) : ℝ :=
-  ⨆ k : Fin N, ‖green (toMatrix x) z k k - msc z‖
-
-/-- `Λ_o = max_{k ≠ l} |G_kl|` (2.16). -/
-noncomputable def LamO {N : ℕ} (x : Pair N → 𝕜) (z : ℂ) : ℝ :=
-  ⨆ q : {q : Fin N × Fin N // q.1 ≠ q.2}, ‖green (toMatrix x) z q.1.1 q.1.2‖
-
-/-- The spectral domain `S_L` (2.20). -/
-def SL (N : ℕ) (L : ℝ) : Set ℂ :=
-  {z | |z.re| ≤ 5 ∧ (N : ℝ)⁻¹ * Real.log N ^ (10 * L) < z.im ∧ z.im ≤ 10}
-
-/-- The range (2.18) of `L`. -/
-def LRange (A₀ : ℝ) (N : ℕ) (L : ℝ) : Prop :=
-  A₀ * Real.log (Real.log N) ≤ L ∧ L ≤ Real.log (10 * N) / (10 * Real.log (Real.log N))
 
 /-- For `A₀` fixed, eventually in `N`: `log N > 1` and `10 (|A₀| + 1) (log log N)² ≤ log N`. -/
 private lemma eventually_loglog_le (A₀ : ℝ) :

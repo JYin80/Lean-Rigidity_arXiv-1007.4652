@@ -1,9 +1,13 @@
-import Rigidity.Resolvent.Basic
-import Rigidity.Resolvent.Spectral
-import Rigidity.Semicircle.Basic
-import Rigidity.Semicircle.Size
-import Rigidity.Stability.Equations
-import Rigidity.Stability.Vector
+module
+
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Resolvent.Spectral
+public import Rigidity.Semicircle.Basic
+public import Rigidity.Semicircle.Size
+public import Rigidity.Stability.Equations
+public import Rigidity.Stability.Vector
+
+@[expose] public section
 
 /-!
 # Stability of the self-consistent equation in the near regime

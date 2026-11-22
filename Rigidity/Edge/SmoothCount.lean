@@ -1,7 +1,11 @@
-import Rigidity.Edge.EntryDet
-import Rigidity.Edge.LogBounds
-import Rigidity.Edge.Resolvent
-import Rigidity.Edge.SpecF
+module
+
+public import Rigidity.Edge.EntryDet
+public import Rigidity.Edge.LogBounds
+public import Rigidity.Edge.Resolvent
+public import Rigidity.Edge.SpecF
+
+@[expose] public section
 
 /-!
 # The smoothed counting functional

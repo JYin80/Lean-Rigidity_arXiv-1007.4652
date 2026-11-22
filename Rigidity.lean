@@ -1,112 +1,115 @@
-import Rigidity.LogGas.TwoPoint
-import Rigidity.LogGas.PrekopaLeindler
-import Rigidity.LogGas.EntropyIneq
-import Rigidity.Flow.Gaussian
-import Rigidity.Flow.Chamber
-import Rigidity.Ensemble.Basic
-import Rigidity.Edge.Resolvent
-import Rigidity.Edge.EntryDet
-import Rigidity.Stability.Vector
-import Rigidity.Probability.Split
-import Rigidity.Spectrum.Eigenvalues
-import Rigidity.Edge.LogBounds
-import Rigidity.Edge.SpecF
-import Rigidity.Semicircle.Basic
-import Rigidity.Resolvent.Basic
-import Rigidity.Probability.Moments
-import Rigidity.Resolvent.Ward
-import Rigidity.Semicircle.Algebra
-import Rigidity.Edge.SmoothCount
-import Rigidity.Counting.HelfferSjostrand
-import Rigidity.Ensemble.Moments
-import Rigidity.Spectrum.Continuity
-import Rigidity.Edge.GoodSet
-import Rigidity.Semicircle.Stieltjes
-import Rigidity.Edge.Minor
-import Rigidity.Resolvent.Spectral
-import Rigidity.Probability.LargeDeviation
-import Rigidity.Resolvent.Schur
-import Rigidity.Semicircle.Density
-import Rigidity.Edge.Expand
-import Rigidity.Semicircle.Size
-import Rigidity.Edge.HybridLaw
-import Rigidity.Edge.Hybrid
-import Rigidity.Fluctuation.Calculus
-import Rigidity.Probability.Decoupling
-import Rigidity.Resolvent.Minor
-import Rigidity.LocalLaw.Defs
-import Rigidity.LogGas.Defs
-import Rigidity.Semicircle.Locations
-import Rigidity.Edge.Continuity
-import Rigidity.Flow.Mehler
-import Rigidity.Stability.Equations
-import Rigidity.Probability.LDMoment
-import Rigidity.Spectrum.Measurable
-import Rigidity.LogGas.LSI
-import Rigidity.LogGas.GapConc
-import Rigidity.Counting.Count
-import Rigidity.Edge.Params
-import Rigidity.Stability.Near
-import Rigidity.Flow.Herm
-import Rigidity.LocalLaw.Ledger
-import Rigidity.Fluctuation.Structure
-import Rigidity.LocalLaw.GoodEvent
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.EdgeEvent
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.MehlerKernelBounds
-import Rigidity.Flow.GaussKL
-import Rigidity.Spectrum.Net
-import Rigidity.LocalLaw.Levels
-import Rigidity.Flow.IBP
-import Rigidity.Ensemble.SpecB
-import Rigidity.Fluctuation.Expansion
-import Rigidity.Edge.Resample
-import Rigidity.LocalLaw.Lattice
-import Rigidity.Flow.MehlerSmooth
-import Rigidity.Flow.Invariant
-import Rigidity.LocalLaw.CrudeNorm
-import Rigidity.Edge.EntryIntegral
-import Rigidity.Flow.GoodSet
-import Rigidity.Edge.Decorrelation
-import Rigidity.Edge.Cutoff
-import Rigidity.Flow.Givens
-import Rigidity.Edge.Sandwich
-import Rigidity.Edge.Comparison
-import Rigidity.Flow.Ensembles
-import Rigidity.Flow.JointDensity
-import Rigidity.Flow.EigDensity
-import Rigidity.Edge.OneSided
-import Rigidity.LocalLaw.WeakOnePoint
-import Rigidity.LocalLaw.WeakInitial
-import Rigidity.Fluctuation.Moments
-import Rigidity.LocalLaw.WeakFar
-import Rigidity.LocalLaw.WeakDichotomy
-import Rigidity.Fluctuation.EventBounds
-import Rigidity.Flow.Entropy
-import Rigidity.Strong.Helpers
-import Rigidity.Rigidity.Reduction
-import Rigidity.Fluctuation.Size
-import Rigidity.Rigidity.Conversion
-import Rigidity.Flow.GoodEvent
-import Rigidity.LocalLaw.Weak
-import Rigidity.Rigidity.Deterministic
-import Rigidity.Fluctuation.Tuple
-import Rigidity.Flow.EntropyBound
-import Rigidity.Flow.Correlation
-import Rigidity.Fluctuation.Main
-import Rigidity.Flow.GapUniv
-import Rigidity.Fluctuation.Lattice
-import Rigidity.Flow.Main
-import Rigidity.Strong.FirstPass
-import Rigidity.Strong.FarPass
-import Rigidity.Strong.Lattice
-import Rigidity.Strong.SecondPass
-import Rigidity.Strong.Extension
-import Rigidity.Strong.Norm
-import Rigidity.Strong.Event
-import Rigidity.Rigidity.Level
-import Rigidity.Rigidity.Main
-import Rigidity.LocalLaw.Strong
-import Rigidity.Edge.Universality
-import Rigidity.Flow.Endpoint
+module
+
+public import Rigidity.MainDefs
+public import Rigidity.LogGas.TwoPoint
+public import Rigidity.LogGas.PrekopaLeindler
+public import Rigidity.LogGas.EntropyIneq
+public import Rigidity.Flow.Gaussian
+public import Rigidity.Flow.Chamber
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Edge.Resolvent
+public import Rigidity.Edge.EntryDet
+public import Rigidity.Stability.Vector
+public import Rigidity.Probability.Split
+public import Rigidity.Spectrum.Eigenvalues
+public import Rigidity.Edge.LogBounds
+public import Rigidity.Edge.SpecF
+public import Rigidity.Semicircle.Basic
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Probability.Moments
+public import Rigidity.Resolvent.Ward
+public import Rigidity.Semicircle.Algebra
+public import Rigidity.Edge.SmoothCount
+public import Rigidity.Counting.HelfferSjostrand
+public import Rigidity.Ensemble.Moments
+public import Rigidity.Spectrum.Continuity
+public import Rigidity.Edge.GoodSet
+public import Rigidity.Semicircle.Stieltjes
+public import Rigidity.Edge.Minor
+public import Rigidity.Resolvent.Spectral
+public import Rigidity.Probability.LargeDeviation
+public import Rigidity.Resolvent.Schur
+public import Rigidity.Semicircle.Density
+public import Rigidity.Edge.Expand
+public import Rigidity.Semicircle.Size
+public import Rigidity.Edge.HybridLaw
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Fluctuation.Calculus
+public import Rigidity.Probability.Decoupling
+public import Rigidity.Resolvent.Minor
+public import Rigidity.LocalLaw.Defs
+public import Rigidity.LogGas.Defs
+public import Rigidity.Semicircle.Locations
+public import Rigidity.Edge.Continuity
+public import Rigidity.Flow.Mehler
+public import Rigidity.Stability.Equations
+public import Rigidity.Probability.LDMoment
+public import Rigidity.Spectrum.Measurable
+public import Rigidity.LogGas.LSI
+public import Rigidity.LogGas.GapConc
+public import Rigidity.Counting.Count
+public import Rigidity.Edge.Params
+public import Rigidity.Stability.Near
+public import Rigidity.Flow.Herm
+public import Rigidity.LocalLaw.Ledger
+public import Rigidity.Fluctuation.Structure
+public import Rigidity.LocalLaw.GoodEvent
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.EdgeEvent
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.MehlerKernelBounds
+public import Rigidity.Flow.GaussKL
+public import Rigidity.Spectrum.Net
+public import Rigidity.LocalLaw.Levels
+public import Rigidity.Flow.IBP
+public import Rigidity.Ensemble.SpecB
+public import Rigidity.Fluctuation.Expansion
+public import Rigidity.Edge.Resample
+public import Rigidity.LocalLaw.Lattice
+public import Rigidity.Flow.MehlerSmooth
+public import Rigidity.Flow.Invariant
+public import Rigidity.LocalLaw.CrudeNorm
+public import Rigidity.Edge.EntryIntegral
+public import Rigidity.Flow.GoodSet
+public import Rigidity.Edge.Decorrelation
+public import Rigidity.Edge.Cutoff
+public import Rigidity.Flow.Givens
+public import Rigidity.Edge.Sandwich
+public import Rigidity.Edge.Comparison
+public import Rigidity.Flow.Ensembles
+public import Rigidity.Flow.JointDensity
+public import Rigidity.Flow.EigDensity
+public import Rigidity.Edge.OneSided
+public import Rigidity.LocalLaw.WeakOnePoint
+public import Rigidity.LocalLaw.WeakInitial
+public import Rigidity.Fluctuation.Moments
+public import Rigidity.LocalLaw.WeakFar
+public import Rigidity.LocalLaw.WeakDichotomy
+public import Rigidity.Fluctuation.EventBounds
+public import Rigidity.Flow.Entropy
+public import Rigidity.Strong.Helpers
+public import Rigidity.Rigidity.Reduction
+public import Rigidity.Fluctuation.Size
+public import Rigidity.Rigidity.Conversion
+public import Rigidity.Flow.GoodEvent
+public import Rigidity.LocalLaw.Weak
+public import Rigidity.Rigidity.Deterministic
+public import Rigidity.Fluctuation.Tuple
+public import Rigidity.Flow.EntropyBound
+public import Rigidity.Flow.Correlation
+public import Rigidity.Fluctuation.Main
+public import Rigidity.Flow.GapUniv
+public import Rigidity.Fluctuation.Lattice
+public import Rigidity.Flow.Main
+public import Rigidity.Strong.FirstPass
+public import Rigidity.Strong.FarPass
+public import Rigidity.Strong.Lattice
+public import Rigidity.Strong.SecondPass
+public import Rigidity.Strong.Extension
+public import Rigidity.Strong.Norm
+public import Rigidity.Strong.Event
+public import Rigidity.Rigidity.Level
+public import Rigidity.Rigidity.Main
+public import Rigidity.LocalLaw.Strong
+public import Rigidity.Edge.Universality
+public import Rigidity.Flow.Endpoint

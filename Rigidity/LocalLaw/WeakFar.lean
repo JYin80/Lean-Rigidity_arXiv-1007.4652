@@ -1,7 +1,11 @@
-import Rigidity.Ensemble.SpecB
-import Rigidity.LocalLaw.Lattice
-import Rigidity.Semicircle.Algebra
-import Rigidity.Stability.Equations
+module
+
+public import Rigidity.Ensemble.SpecB
+public import Rigidity.LocalLaw.Lattice
+public import Rigidity.Semicircle.Algebra
+public import Rigidity.Stability.Equations
+
+@[expose] public section
 
 /-!
 # One step in the far regime (NP v1.1, §5.2: Lemma 5.4)

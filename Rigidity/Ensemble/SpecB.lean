@@ -1,5 +1,9 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Stability.Vector
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Stability.Vector
+
+@[expose] public section
 
 /-!
 # Condition (B) as a spectral condition, the band-matrix witness, and consequences of (A)-(C)

@@ -1,7 +1,11 @@
-import Rigidity.LogGas.Defs
-import Rigidity.LogGas.EntropyIneq
-import Rigidity.LogGas.PrekopaLeindler
-import Rigidity.LogGas.TwoPoint
+module
+
+public import Rigidity.LogGas.Defs
+public import Rigidity.LogGas.EntropyIneq
+public import Rigidity.LogGas.PrekopaLeindler
+public import Rigidity.LogGas.TwoPoint
+
+@[expose] public section
 
 /-!
 # Gap concentration for convex log-gases

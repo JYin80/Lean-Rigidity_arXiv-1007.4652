@@ -1,5 +1,9 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Ensemble.Moments
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Ensemble.Moments
+
+@[expose] public section
 
 /-!
 # Hybrid ensembles

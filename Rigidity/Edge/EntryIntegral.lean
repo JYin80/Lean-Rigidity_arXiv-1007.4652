@@ -1,13 +1,17 @@
-import Rigidity.Edge.EdgeEvent
-import Rigidity.Edge.EntryDet
-import Rigidity.Edge.Expand
-import Rigidity.Edge.GoodSet
-import Rigidity.Edge.Hybrid
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.Params
-import Rigidity.Edge.Resolvent
-import Rigidity.Edge.SmoothCount
-import Rigidity.Probability.Moments
+module
+
+public import Rigidity.Edge.EdgeEvent
+public import Rigidity.Edge.EntryDet
+public import Rigidity.Edge.Expand
+public import Rigidity.Edge.GoodSet
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.Params
+public import Rigidity.Edge.Resolvent
+public import Rigidity.Edge.SmoothCount
+public import Rigidity.Probability.Moments
+
+@[expose] public section
 
 /-!
 # Integration of the one-entry expansion over an entry law

@@ -1,9 +1,14 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Ensembles
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.GoodSet
-import Rigidity.LogGas.GapConc
-import Rigidity.Semicircle.Stieltjes
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Ensembles
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.GoodSet
+public import Rigidity.LogGas.GapConc
+public import Rigidity.Semicircle.Stieltjes
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # Correlation functionals and their reduction to gap observables
@@ -35,20 +40,6 @@ namespace Rigidity
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 
-
-/-- `𝒳^O_{E',ϱ}(x) = ∑_{i_1, …, i_n distinct} O(Nϱ(x_{i_1} - E'), …, Nϱ(x_{i_n} - E'))` (12.2). -/
-noncomputable def corrX {N n : ℕ} (O : EuclideanSpace ℝ (Fin n) → ℝ) (E' ϱ : ℝ)
-    (x : Fin N → ℝ) : ℝ :=
-  ∑ i : Fin n ↪ Fin N, O (WithLp.toLp 2 fun k => N * ϱ * (x (i k) - E'))
-
-/-- `C_{N,n} = N^n (N - n)!/N!` (12.2). -/
-noncomputable def corrC (N n : ℕ) : ℝ := (N : ℝ) ^ n * (N - n).factorial / N.factorial
-
-/-- The left side of (2.36) (NP (12.3)), with `ϱ = ϱ_sc(E)`. -/
-noncomputable def corrLHS {N n : ℕ} (M : Ensemble 𝕜 N) (O : EuclideanSpace ℝ (Fin n) → ℝ)
-    (E b t : ℝ) : ℝ :=
-  |∫ E' in (E - b)..(E + b), (2 * b)⁻¹ * corrC N n *
-      ((∫ x, corrX O E' (rhoSc E) x ∂M.eigLaw t) - ∫ x, corrX O E' (rhoSc E) x ∂gbeLaw 𝕜 N)|
 
 /-- The symmetrisation `O^s` (§19.2). -/
 noncomputable def symmetrize {n : ℕ} (O : EuclideanSpace ℝ (Fin n) → ℝ)

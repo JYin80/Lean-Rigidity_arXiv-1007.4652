@@ -93,3 +93,15 @@ The code is released under the Apache License 2.0; see [`LICENSE`](LICENSE).
 
 Original paper: László Erdős, Horng-Tzer Yau and Jun Yin. Paper version that the Lean proof follows
 ([`blueprint/NP.pdf`](blueprint/NP.pdf)): Jun Yin, Claude. Lean formalization: Jun Yin, Claude.
+
+## Palomar
+
+The repository is laid out for the [Palomar registry](https://palomar-registry.org/) of Lean-verified mathematics.
+All source files use Lean's module system. [`Rigidity/MainDefs.lean`](Rigidity/MainDefs.lean) holds every definition
+used by the statements of Theorems 2.1–2.4 and depends on Mathlib only; [`Challenge.lean`](Challenge.lean) is the
+statement to audit (it imports Mathlib only and repeats `Rigidity/MainDefs.lean` verbatim),
+[`Solution.lean`](Solution.lean) proves it from the library, [`comparator.json`](comparator.json) names the compared
+theorems and [`formalization.yaml`](formalization.yaml) holds the metadata. `lake build` also builds `Challenge.lean`
+(eight `sorry` warnings, by design) and `Solution.lean`. `python3 scripts/check-lean-sources.py` and
+`./scripts/verify-comparator.sh` (Linux, needs `bwrap`) run the checks locally; submissions go to
+<https://submit.palomar-registry.org/>.

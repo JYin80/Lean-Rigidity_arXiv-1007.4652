@@ -1,6 +1,10 @@
-import Rigidity.Counting.Count
-import Rigidity.Semicircle.Locations
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Counting.Count
+public import Rigidity.Semicircle.Locations
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # From the counting function to rigidity (NP v1.1, §9: Lemma 9.1)

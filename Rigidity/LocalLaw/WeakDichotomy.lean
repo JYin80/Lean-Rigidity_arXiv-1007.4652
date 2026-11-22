@@ -1,5 +1,9 @@
-import Rigidity.LocalLaw.WeakOnePoint
-import Rigidity.Semicircle.Size
+module
+
+public import Rigidity.LocalLaw.WeakOnePoint
+public import Rigidity.Semicircle.Size
+
+@[expose] public section
 
 /-!
 # Weak dichotomy (NP v1.1, §5.2: Lemma 5.2)

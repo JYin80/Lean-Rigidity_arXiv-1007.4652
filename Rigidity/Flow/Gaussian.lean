@@ -1,4 +1,9 @@
-import Mathlib
+module
+
+public import Mathlib
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # Gaussian measures on a Euclidean space
@@ -22,12 +27,6 @@ section Gaussian
 
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
   [MeasurableSpace E] [BorelSpace E]
-
-/-- Definition 14.A: the centred Gaussian measure `g_v` on `E` with covariance `v · Id`
-(the image of `stdGaussian E` under `z ↦ √v z`; `g_0 = δ_0`). -/
-noncomputable def gaussE (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E]
-    [FiniteDimensional ℝ E] [MeasurableSpace E] (v : ℝ) : Measure E :=
-  (ProbabilityTheory.stdGaussian E).map fun z => Real.sqrt v • z
 
 /-- The Gaussian density `γ_v(y) = (2πv)^{-d/2} exp(-|y|²/(2v))` (Definition 14.A). -/
 noncomputable def gaussDens (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E]

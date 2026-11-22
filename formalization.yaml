@@ -1,0 +1,156 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4, for Palomar (https://palomar-registry.org/).
+version: "v0.4"
+
+project:
+  name: "Rigidity of eigenvalues of generalized Wigner matrices"
+  description: >-
+    A Lean 4 / Mathlib proof of the main results, Theorems 2.1–2.4, of Erdős, Yau and Yin,
+    "Rigidity of eigenvalues of generalized Wigner matrices" (Adv. Math. 229 (2012),
+    arXiv:1007.4652), for real symmetric and complex hermitian generalized Wigner matrices with
+    independent entries, variances summing to one in each row, a spectral gap of the variance
+    matrix and uniform subexponential decay. Theorem 2.1: the strong local semicircle law
+    |m - m_sc| <= (log N)^{4L} / (N eta) down to the optimal scale, its entrywise form, and the
+    bound on the extreme eigenvalues. Theorem 2.2: rigidity of the eigenvalues,
+    |lambda_j - gamma_j| <= (log N)^L min(j, N-j+1)^{-1/3} N^{-2/3} for all j, and the
+    corresponding bound on the counting function, each with probability at least
+    1 - C exp(-c (log N)^{phi L}). Theorem 2.3: strong local ergodicity of Dyson Brownian
+    motion in the bulk, for times t >= N^{-1+delta+epsilon'}. Theorem 2.4: universality of the
+    largest and of the smallest eigenvalue for two ensembles whose entries have matching first
+    and second moments. No result of another work is assumed; the results the paper cites, in
+    particular the local relaxation flow, are proved in the library from Mathlib.
+  authors:
+    - "Jun Yin"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Jun Yin"
+
+classification:
+  arxiv: ["math.PR", "math-ph"]
+  msc2020: ["60B20", "15B52", "82B44"]
+
+sources:
+  - title: "Rigidity of eigenvalues of generalized Wigner matrices"
+    authors:
+      - "László Erdős"
+      - "Horng-Tzer Yau"
+      - "Jun Yin"
+    id: "arXiv:1007.4652"
+    type: "paper"
+    location: "Adv. Math. 229 (2012); https://arxiv.org/abs/1007.4652"
+    relationship: "formalizes"
+    note: >-
+      The Lean statements follow paper/rigi-10-25-11-final.pdf in this repository:
+      arXiv:1007.4652v7 with a small number of corrections, listed in docs/PAPER-VS-LEAN.md. The
+      Lean proof does not follow the paper line by line; it follows a self-contained proof
+      written for the formalization (blueprint/NP.pdf), which proves the paper's results at the
+      paper's precision without citing other papers. Jun Yin is an author of the paper and of
+      the formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized: Theorem 2.1 (i)–(iii), Theorem 2.2 ((2.25) and (2.26)), Theorem 2.3 ((2.36)) and
+    Theorem 2.4 ((2.41) and the statement for the smallest eigenvalue), for real symmetric and
+    complex hermitian matrices. Theorem 2.3 is stated for bulk energies E in [-2+c, 2-c] and for
+    Lipschitz test functions vanishing outside a box, as in the final version of the paper. Not
+    formalized: (2.37), universality for all t >= 0; (2.42), several extreme eigenvalues, and
+    Theorem 6.4; the quaternion self-dual case; decay conditions weaker than (2.17). The
+    Tracy–Widom limit (2.39) is background and is not part of the library.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["claude-opus-5-5", "claude-sonnet-5-5", "claude-fable-5-1", "claude-fable-5-2"]
+      framework: "Claude Code"
+      tool_setup: >-
+        AI-assisted: a team of Claude Code agents (a dispatcher, workers on ticket worktrees and
+        reviewing agents) wrote the Lean code, the blueprint and the comparison documents from the
+        paper's source, under the direction of Jun Yin, who fixed the endpoint statements. The
+        port to the Lean module system and the Challenge/Solution files for Palomar were also
+        written with Claude.
+      cost:
+        wall_time: "about 32 hours of active work between 2026-11-12 and 2026-11-16 (196 commits in the work repository; the run was paused for long stretches in between)"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+      prompting_notes: "n/a"
+  spend_usd: "not tracked"
+  notes: >-
+    The mathematical source is a paper by László Erdős, Horng-Tzer Yau and Jun Yin. The Lean
+    proofs were produced by AI agents; the statements of the main theorems and of the
+    definitions they use were fixed and checked by Jun Yin against the paper.
+
+fidelity:
+  divergences: >-
+    (1) Theorem 2.3: energies in the bulk [-2+c, 2-c] (the printed interval is a misprint) and
+    Lipschitz test functions with a constant depending on O only through its support; the
+    density-free form of (2.36); Dyson Brownian motion enters through the law of H_t at fixed
+    time. (2) Assumption (B) as a quadratic-form bound, proved equivalent to (2.3) under (A).
+    (3) gamma_N = 2, the supremum itself in (2.26), and 0-based indices. (4) Conditions (2.17)
+    and (2.40) are stated for the laws of h_ij; in Theorem 2.4 both ensembles have the same
+    parameters and the inequalities are in additive form. (5) The field is fixed before all
+    other quantifiers. (6) The events of (2.19) and (2.21) are unions over an uncountable set,
+    and their outer measure is bounded. (7) The proof follows the blueprint NP rather than
+    Sections 3–7 of the paper. Details: docs/PAPER-VS-LEAN.md, Section 2.
+
+review:
+  status: "agent-reviewed"
+  reviewers: []
+  notes: >-
+    The Lean proof of each ticket was audited by a separate auditing agent, and a supervising
+    agent checked the final statements. Jun Yin checked the statements of the main theorems and
+    of the definitions they use against the paper. docs/PAPER-VS-LEAN.md, Section 3, records the
+    ensembles at which the hypotheses are proved to hold. No independent human review has been
+    performed.
+
+alignment:
+  namespace: "Rigidity"
+  statements:
+    - source: "Theorem 2.1 (i), (2.19)"
+      lean: "Rigidity.thm2_1_avg"
+      module: "Challenge"
+      status: "proved"
+      note: "Proved in Solution.lean by Rigidity.strongLocalLaw_avg."
+    - source: "Theorem 2.1 (ii), (2.21)"
+      lean: "Rigidity.thm2_1_entries"
+      module: "Challenge"
+      status: "proved"
+      note: "Proved by Rigidity.strongLocalLaw_entries."
+    - source: "Theorem 2.1 (iii), (2.22)"
+      lean: "Rigidity.thm2_1_extreme"
+      module: "Challenge"
+      status: "proved"
+      note: "Proved by Rigidity.extremeEigenvalues_le."
+    - source: "Theorem 2.2, (2.25)"
+      lean: "Rigidity.thm2_2_rigidity"
+      module: "Challenge"
+      status: "proved"
+      note: "Proved by Rigidity.rigidity."
+    - source: "Theorem 2.2, (2.26)"
+      lean: "Rigidity.thm2_2_counting"
+      module: "Challenge"
+      status: "proved"
+      note: "Proved by Rigidity.countingFunction_close."
+    - source: "Theorem 2.3, (2.36)"
+      lean: "Rigidity.thm2_3_localErgodicity"
+      module: "Challenge"
+      status: "adapted"
+      note: "Proved by Rigidity.dbm_localErgodicity. Bulk energies and Lipschitz test functions; see fidelity."
+    - source: "Theorem 2.4, (2.41)"
+      lean: "Rigidity.thm2_4_max"
+      module: "Challenge"
+      status: "proved"
+      note: "Proved by Rigidity.edgeUniversality_max."
+    - source: "Theorem 2.4, the smallest eigenvalue"
+      lean: "Rigidity.thm2_4_min"
+      module: "Challenge"
+      status: "proved"
+      note: "Proved by Rigidity.edgeUniversality_min."
+
+acknowledgements: "Mathlib and the Lean community; Lean 4 (Lean FRO); Claude Code (Anthropic)."

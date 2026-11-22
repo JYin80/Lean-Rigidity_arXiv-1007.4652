@@ -1,7 +1,11 @@
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.GoodSet
-import Rigidity.Edge.Continuity
-import Rigidity.Edge.Params
+module
+
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.GoodSet
+public import Rigidity.Edge.Continuity
+public import Rigidity.Edge.Params
+
+@[expose] public section
 
 /-!
 # The edge event and its probability

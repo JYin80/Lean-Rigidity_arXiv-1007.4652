@@ -1,11 +1,15 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Ensembles
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.GaussKL
-import Rigidity.Flow.Herm
-import Rigidity.Flow.JointDensity
-import Rigidity.LogGas.Defs
-import Rigidity.Semicircle.Density
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Ensembles
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.GaussKL
+public import Rigidity.Flow.Herm
+public import Rigidity.Flow.JointDensity
+public import Rigidity.LogGas.Defs
+public import Rigidity.Semicircle.Density
+
+@[expose] public section
 
 /-!
 # The local relaxation measure and a priori entropy bounds

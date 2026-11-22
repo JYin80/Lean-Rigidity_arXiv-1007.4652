@@ -1,4 +1,8 @@
-import Rigidity.Flow.Mehler
+module
+
+public import Rigidity.Flow.Mehler
+
+@[expose] public section
 
 /-!
 # Bounds on the derivatives of the Mehler kernel; smoothness of kernel integrals

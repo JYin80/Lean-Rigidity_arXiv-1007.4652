@@ -1,7 +1,11 @@
-import Rigidity.LocalLaw.Defs
-import Rigidity.LocalLaw.Ledger
-import Rigidity.Semicircle.Density
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.LocalLaw.Defs
+public import Rigidity.LocalLaw.Ledger
+public import Rigidity.Semicircle.Density
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # The level form and the reduction (NP v1.1, §2: (2.27), Theorem 2.6 (i)–(v), Proposition 2.7)

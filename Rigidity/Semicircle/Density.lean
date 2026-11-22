@@ -1,4 +1,9 @@
-import Rigidity.Semicircle.Stieltjes
+module
+
+public import Rigidity.Semicircle.Stieltjes
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The semicircle distribution function and the classical locations
@@ -25,13 +30,6 @@ namespace Rigidity
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 
-
-/-- `n_sc(E) = ∫_{-∞}^E ϱ_sc` (2.24). -/
-noncomputable def nsc (E : ℝ) : ℝ := ∫ x in Set.Iic E, rhoSc x
-
-/-- The classical location `γ_{k+1}` (1.3): the least `x` with `N n_sc(x) ≥ k + 1`;
-`γ_N = 2`. -/
-noncomputable def gamma (N : ℕ) (k : Fin N) : ℝ := sInf {x : ℝ | (k.val + 1 : ℝ) ≤ N * nsc x}
 
 /-- `ϱ_sc` is continuous. -/
 private lemma density_rhoSc_continuous : Continuous rhoSc := by

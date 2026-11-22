@@ -1,11 +1,15 @@
-import Rigidity.Edge.Comparison
-import Rigidity.Edge.Continuity
-import Rigidity.Edge.Cutoff
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.Params
-import Rigidity.Edge.Sandwich
-import Rigidity.Ensemble.Basic
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Edge.Comparison
+public import Rigidity.Edge.Continuity
+public import Rigidity.Edge.Cutoff
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.Params
+public import Rigidity.Edge.Sandwich
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # The one-sided comparison for the largest eigenvalue

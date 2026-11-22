@@ -1,4 +1,9 @@
-import Rigidity.Semicircle.Basic
+module
+
+public import Rigidity.Semicircle.Basic
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The semicircle density and the Stieltjes representation of `m_sc`
@@ -26,9 +31,6 @@ namespace Rigidity
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 
-
-/-- The semicircle density (2.14). -/
-noncomputable def rhoSc (E : ℝ) : ℝ := (2 * π)⁻¹ * Real.sqrt (max (4 - E ^ 2) 0)
 
 /-- `ϱ_sc` is continuous. -/
 private lemma stieltjes_rhoSc_continuous : Continuous rhoSc := by

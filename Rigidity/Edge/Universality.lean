@@ -1,14 +1,18 @@
-import Rigidity.Edge.EdgeEvent
-import Rigidity.Edge.Hybrid
-import Rigidity.Edge.HybridLaw
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.OneSided
-import Rigidity.Edge.Params
-import Rigidity.Ensemble.Basic
-import Rigidity.Ensemble.Moments
-import Rigidity.LocalLaw.Defs
-import Rigidity.LocalLaw.Strong
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Edge.EdgeEvent
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Edge.HybridLaw
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.OneSided
+public import Rigidity.Edge.Params
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Ensemble.Moments
+public import Rigidity.LocalLaw.Defs
+public import Rigidity.LocalLaw.Strong
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # Edge universality

@@ -1,5 +1,9 @@
-import Rigidity.Strong.Extension
-import Rigidity.Strong.Norm
+module
+
+public import Rigidity.Strong.Extension
+public import Rigidity.Strong.Norm
+
+@[expose] public section
 
 /-!
 # The event `Ξ_K` (NP v1.1, §8.2: Definition 8.1, Proposition 8.2, Theorem 2.6 (i)–(iii))

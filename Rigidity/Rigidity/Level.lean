@@ -1,5 +1,9 @@
-import Rigidity.Rigidity.Deterministic
-import Rigidity.Strong.Event
+module
+
+public import Rigidity.Rigidity.Deterministic
+public import Rigidity.Strong.Event
+
+@[expose] public section
 
 /-!
 # Theorem 2.6: local law and rigidity at level K (NP v1.1, §2, §8.2)

@@ -1,4 +1,8 @@
-import Rigidity.Ensemble.Basic
+module
+
+public import Rigidity.Ensemble.Basic
+
+@[expose] public section
 
 /-!
 # Moments of the entries and transformations of ensembles

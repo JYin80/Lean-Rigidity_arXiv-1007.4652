@@ -1,7 +1,11 @@
-import Rigidity.Edge.GoodSet
-import Rigidity.Edge.LogBounds
-import Rigidity.Edge.SmoothCount
-import Rigidity.Edge.SpecF
+module
+
+public import Rigidity.Edge.GoodSet
+public import Rigidity.Edge.LogBounds
+public import Rigidity.Edge.SmoothCount
+public import Rigidity.Edge.SpecF
+
+@[expose] public section
 
 /-!
 # Expansion of the smoothed counting functional under a one-entry replacement

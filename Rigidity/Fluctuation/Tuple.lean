@@ -1,4 +1,8 @@
-import Rigidity.Fluctuation.Size
+module
+
+public import Rigidity.Fluctuation.Size
+
+@[expose] public section
 
 /-!
 # One index tuple; counting tuples (NP v1.1, §6.6: Lemmas 6.12, 6.13)

@@ -1,14 +1,18 @@
-import Rigidity.Edge.Decorrelation
-import Rigidity.Edge.EdgeEvent
-import Rigidity.Edge.EntryIntegral
-import Rigidity.Edge.Hybrid
-import Rigidity.Edge.HybridLaw
-import Rigidity.Edge.Inputs
-import Rigidity.Edge.Params
-import Rigidity.Edge.Resample
-import Rigidity.Edge.SmoothCount
-import Rigidity.Ensemble.Basic
-import Rigidity.Resolvent.Basic
+module
+
+public import Rigidity.Edge.Decorrelation
+public import Rigidity.Edge.EdgeEvent
+public import Rigidity.Edge.EntryIntegral
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Edge.HybridLaw
+public import Rigidity.Edge.Inputs
+public import Rigidity.Edge.Params
+public import Rigidity.Edge.Resample
+public import Rigidity.Edge.SmoothCount
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Resolvent.Basic
+
+@[expose] public section
 
 /-!
 # Green function comparison at the edge

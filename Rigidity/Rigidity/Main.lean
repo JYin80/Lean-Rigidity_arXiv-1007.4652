@@ -1,4 +1,8 @@
-import Rigidity.Rigidity.Level
+module
+
+public import Rigidity.Rigidity.Level
+
+@[expose] public section
 
 /-!
 # Theorems 2.1 and 2.2 on one event (NP v1.1, §2: Proposition 2.7)

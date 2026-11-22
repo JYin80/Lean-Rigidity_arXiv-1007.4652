@@ -1,9 +1,13 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.LocalLaw.Defs
-import Rigidity.Resolvent.Schur
-import Rigidity.Semicircle.Density
-import Rigidity.Spectrum.Continuity
-import Rigidity.Stability.Equations
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.LocalLaw.Defs
+public import Rigidity.Resolvent.Schur
+public import Rigidity.Semicircle.Density
+public import Rigidity.Spectrum.Continuity
+public import Rigidity.Stability.Equations
+
+@[expose] public section
 
 /-!
 # Lipschitz dependence of the minor resolvents on the entries; continuity

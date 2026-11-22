@@ -1,16 +1,20 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Chamber
-import Rigidity.Flow.EigDensity
-import Rigidity.Flow.Ensembles
-import Rigidity.Flow.Entropy
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.GoodEvent
-import Rigidity.Flow.GoodSet
-import Rigidity.Flow.Herm
-import Rigidity.Flow.IBP
-import Rigidity.Flow.Invariant
-import Rigidity.LogGas.LSI
-import Rigidity.Semicircle.Density
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Chamber
+public import Rigidity.Flow.EigDensity
+public import Rigidity.Flow.Ensembles
+public import Rigidity.Flow.Entropy
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.GoodEvent
+public import Rigidity.Flow.GoodSet
+public import Rigidity.Flow.Herm
+public import Rigidity.Flow.IBP
+public import Rigidity.Flow.Invariant
+public import Rigidity.LogGas.LSI
+public import Rigidity.Semicircle.Density
+
+@[expose] public section
 
 /-!
 # Entropy production along the flow (Proposition 18.3)

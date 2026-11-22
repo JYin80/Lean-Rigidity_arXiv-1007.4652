@@ -1,5 +1,9 @@
-import Rigidity.Fluctuation.Structure
-import Rigidity.LocalLaw.Lattice
+module
+
+public import Rigidity.Fluctuation.Structure
+public import Rigidity.LocalLaw.Lattice
+
+@[expose] public section
 
 /-!
 # The a priori event and the crude moment bound (NP v1.1, §6.3: Lemmas 6.6, 6.7)

@@ -1,9 +1,13 @@
-import Rigidity.Edge.Hybrid
-import Rigidity.Edge.Resolvent
-import Rigidity.Edge.SmoothCount
-import Rigidity.Ensemble.Basic
-import Rigidity.Spectrum.Continuity
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Edge.Resolvent
+public import Rigidity.Edge.SmoothCount
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Spectrum.Continuity
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # Continuity of `X`, of `λ_N` and of the resolvent in the entries

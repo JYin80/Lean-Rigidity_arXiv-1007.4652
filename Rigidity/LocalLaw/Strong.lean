@@ -1,4 +1,8 @@
-import Rigidity.Rigidity.Main
+module
+
+public import Rigidity.Rigidity.Main
+
+@[expose] public section
 
 /-!
 # Theorems 2.1 and 2.2: the endpoint statements (NP v1.1, §2: (2.19), (2.21), (2.22), (2.25),

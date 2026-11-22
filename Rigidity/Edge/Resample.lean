@@ -1,4 +1,8 @@
-import Rigidity.Ensemble.Basic
+module
+
+public import Rigidity.Ensemble.Basic
+
+@[expose] public section
 
 /-!
 # Resampling identities on product laws

@@ -1,5 +1,9 @@
-import Rigidity.Probability.LargeDeviation
-import Rigidity.Probability.Moments
+module
+
+public import Rigidity.Probability.LargeDeviation
+public import Rigidity.Probability.Moments
+
+@[expose] public section
 
 open MeasureTheory Real Matrix Filter Topology
 open scoped ENNReal Matrix.Norms.L2Operator

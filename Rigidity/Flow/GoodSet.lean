@@ -1,8 +1,12 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.LocalLaw.Defs
-import Rigidity.Semicircle.Density
-import Rigidity.Semicircle.Locations
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.LocalLaw.Defs
+public import Rigidity.Semicircle.Density
+public import Rigidity.Semicircle.Locations
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # The good set of eigenvalue vectors and its deterministic consequences

@@ -1,5 +1,10 @@
-import Rigidity.Spectrum.Eigenvalues
-import Rigidity.Edge.Resolvent
+module
+
+public import Rigidity.Spectrum.Eigenvalues
+public import Rigidity.Edge.Resolvent
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The Green function, minors and basic resolvent bounds
@@ -29,9 +34,6 @@ namespace Rigidity
 variable {𝕜 : Type*} [RCLike 𝕜]
 
 /-! ### 4. Resolvent quantities -/
-
-/-- The coordinate map `𝕜 → ℂ`, `y ↦ re y + i im y`. -/
-def toC (y : 𝕜) : ℂ := ⟨RCLike.re y, RCLike.im y⟩
 
 /-- `toC` as a ring homomorphism. -/
 noncomputable def toCHom : 𝕜 →+* ℂ where
@@ -91,16 +93,6 @@ theorem eigAsc_map_toC {N : ℕ} {A : Matrix (Fin N) (Fin N) 𝕜} (hA : A.IsHer
   funext k
   unfold eigAsc
   rw [h4]
-
-/-- The Green function `G(z) = (H - z)⁻¹` (2.8). -/
-noncomputable def green {n : Type*} [Fintype n] [DecidableEq n] (A : Matrix n n 𝕜) (z : ℂ) :
-    Matrix n n ℂ :=
-  (A.map toC - z • (1 : Matrix n n ℂ))⁻¹
-
-/-- `m(z) = N⁻¹ tr G(z)` (2.9). -/
-noncomputable def stieltjesEmp {n : Type*} [Fintype n] [DecidableEq n] (A : Matrix n n 𝕜)
-    (z : ℂ) : ℂ :=
-  ((Fintype.card n : ℂ))⁻¹ * (green A z).trace
 
 /-- The minor `H^{(T)}` (Definition 3.1). -/
 def minor {N : ℕ} (A : Matrix (Fin N) (Fin N) 𝕜) (T : Finset (Fin N)) :

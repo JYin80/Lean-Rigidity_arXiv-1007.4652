@@ -1,9 +1,13 @@
-import Rigidity.Flow.Chamber
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.Givens
-import Rigidity.Flow.Herm
-import Rigidity.Flow.Invariant
-import Rigidity.Flow.MehlerSmooth
+module
+
+public import Rigidity.Flow.Chamber
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.Givens
+public import Rigidity.Flow.Herm
+public import Rigidity.Flow.Invariant
+public import Rigidity.Flow.MehlerSmooth
+
+@[expose] public section
 
 /-!
 # Smooth symmetric versions of the eigenvalue densities along the flow (Proposition 15.4)

@@ -1,6 +1,10 @@
-import Rigidity.Ensemble.SpecB
-import Rigidity.LocalLaw.Lattice
-import Rigidity.Stability.Near
+module
+
+public import Rigidity.Ensemble.SpecB
+public import Rigidity.LocalLaw.Lattice
+public import Rigidity.Stability.Near
+
+@[expose] public section
 
 /-!
 # Bounds under the a priori assumption (NP v1.1, §5.2: Lemma 5.1)

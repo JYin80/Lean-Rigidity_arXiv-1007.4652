@@ -1,6 +1,11 @@
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.Herm
-import Rigidity.Flow.Mehler
+module
+
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.Herm
+public import Rigidity.Flow.Mehler
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # Invariant functions on the hermitian matrices, and the eigenvalue flow
@@ -27,10 +32,6 @@ namespace Rigidity
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 
-
-/-- The law of `λ(H_t)` for `H_0 ∼ ρ` (§12.1): `ν_t = λ_* ρ_t`. -/
-noncomputable def eigFlow {N : ℕ} (ρ : Measure (Herm 𝕜 N)) (t : ℝ) : Measure (Fin N → ℝ) :=
-  (ouLaw (gaussVar 𝕜 N) ρ t).map eigVec
 
 /-- Lemma 15.1: an invariant `Φ` is `φ ∘ λ` with `φ = Φ ∘ diag`. -/
 theorem Herm.IsInvariant.eq_comp_eigVec {N : ℕ} {α : Type*} {Φ : Herm 𝕜 N → α}

@@ -1,6 +1,10 @@
-import Rigidity.Flow.Gaussian
-import Rigidity.Flow.Mehler
-import Rigidity.Flow.MehlerKernelBounds
+module
+
+public import Rigidity.Flow.Gaussian
+public import Rigidity.Flow.Mehler
+public import Rigidity.Flow.MehlerKernelBounds
+
+@[expose] public section
 
 /-!
 # Smoothness of the Ornstein–Uhlenbeck densities and of the Mehler semigroup

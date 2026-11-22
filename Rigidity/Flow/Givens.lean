@@ -1,8 +1,12 @@
-import Rigidity.Flow.Chamber
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.Herm
-import Rigidity.Flow.Invariant
-import Rigidity.Flow.MehlerSmooth
+module
+
+public import Rigidity.Flow.Chamber
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.Herm
+public import Rigidity.Flow.Invariant
+public import Rigidity.Flow.MehlerSmooth
+
+@[expose] public section
 
 /-!
 # The radial part of the Ornstein–Uhlenbeck generator (Lemma 15.2)

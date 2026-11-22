@@ -1,13 +1,17 @@
-import Rigidity.Edge.Continuity
-import Rigidity.Edge.GoodSet
-import Rigidity.Edge.Hybrid
-import Rigidity.Edge.Params
-import Rigidity.Ensemble.Basic
-import Rigidity.LocalLaw.Defs
-import Rigidity.Resolvent.Basic
-import Rigidity.Semicircle.Basic
-import Rigidity.Semicircle.Density
-import Rigidity.Spectrum.Eigenvalues
+module
+
+public import Rigidity.Edge.Continuity
+public import Rigidity.Edge.GoodSet
+public import Rigidity.Edge.Hybrid
+public import Rigidity.Edge.Params
+public import Rigidity.Ensemble.Basic
+public import Rigidity.LocalLaw.Defs
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Semicircle.Basic
+public import Rigidity.Semicircle.Density
+public import Rigidity.Spectrum.Eigenvalues
+
+@[expose] public section
 
 /-!
 # The inputs (BB1), (BB2) and the semicircle law near the edge

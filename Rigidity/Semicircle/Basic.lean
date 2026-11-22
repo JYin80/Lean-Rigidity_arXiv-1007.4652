@@ -1,4 +1,9 @@
-import Mathlib
+module
+
+public import Mathlib
+public import Rigidity.MainDefs
+
+@[expose] public section
 
 /-!
 # The Stieltjes transform of the semicircle law
@@ -21,10 +26,6 @@ open MeasureTheory Real
 open scoped ENNReal
 
 namespace Rigidity
-
-/-- `m_sc(z) = (-z + √(z-2) √(z+2)) / 2` with principal square roots: the branch of (2.13)
-with cut `[-2, 2]`. -/
-noncomputable def msc (z : ℂ) : ℂ := (-z + Complex.sqrt (z - 2) * Complex.sqrt (z + 2)) / 2
 
 /-- The principal square root squares back: `(√ζ)² = ζ`. -/
 private lemma semicircle_sqrt_sq (ζ : ℂ) : Complex.sqrt ζ ^ 2 = ζ := by

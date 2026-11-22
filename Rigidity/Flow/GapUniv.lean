@@ -1,14 +1,18 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Flow.Chamber
-import Rigidity.Flow.Ensembles
-import Rigidity.Flow.Entropy
-import Rigidity.Flow.EntropyBound
-import Rigidity.Flow.GaussEnsemble
-import Rigidity.Flow.GoodSet
-import Rigidity.Flow.Herm
-import Rigidity.Flow.JointDensity
-import Rigidity.LogGas.GapConc
-import Rigidity.LogGas.TwoPoint
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Flow.Chamber
+public import Rigidity.Flow.Ensembles
+public import Rigidity.Flow.Entropy
+public import Rigidity.Flow.EntropyBound
+public import Rigidity.Flow.GaussEnsemble
+public import Rigidity.Flow.GoodSet
+public import Rigidity.Flow.Herm
+public import Rigidity.Flow.JointDensity
+public import Rigidity.LogGas.GapConc
+public import Rigidity.LogGas.TwoPoint
+
+@[expose] public section
 
 /-!
 # Gap universality along the flow (Proposition 19.1)

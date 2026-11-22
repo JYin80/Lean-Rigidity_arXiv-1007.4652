@@ -1,9 +1,13 @@
-import Rigidity.Resolvent.Basic
-import Rigidity.Resolvent.Schur
-import Rigidity.Resolvent.Spectral
-import Rigidity.Semicircle.Algebra
-import Rigidity.Semicircle.Basic
-import Rigidity.Stability.Vector
+module
+
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Resolvent.Schur
+public import Rigidity.Resolvent.Spectral
+public import Rigidity.Semicircle.Algebra
+public import Rigidity.Semicircle.Basic
+public import Rigidity.Stability.Vector
+
+@[expose] public section
 
 /-!
 # The self-consistent equation and its stability in the far regime

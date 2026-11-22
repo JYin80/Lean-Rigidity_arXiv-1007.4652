@@ -1,4 +1,8 @@
-import Rigidity.Semicircle.Algebra
+module
+
+public import Rigidity.Semicircle.Algebra
+
+@[expose] public section
 
 /-!
 # Size of the Stieltjes transform of the semicircle law

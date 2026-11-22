@@ -1,5 +1,9 @@
-import Rigidity.Fluctuation.Expansion
-import Rigidity.Fluctuation.Moments
+module
+
+public import Rigidity.Fluctuation.Expansion
+public import Rigidity.Fluctuation.Moments
+
+@[expose] public section
 
 /-!
 # Size of the terms (NP v1.1, §6.6: (6.26), (6.27), Lemma 6.11)

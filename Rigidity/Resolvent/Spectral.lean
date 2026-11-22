@@ -1,5 +1,9 @@
-import Rigidity.Resolvent.Ward
-import Rigidity.Semicircle.Basic
+module
+
+public import Rigidity.Resolvent.Ward
+public import Rigidity.Semicircle.Basic
+
+@[expose] public section
 
 /-!
 # Spectral form of the Green function, eigenvalue counting, and the comparison quantities

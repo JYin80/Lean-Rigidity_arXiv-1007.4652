@@ -1,4 +1,8 @@
-import Mathlib
+module
+
+public import Mathlib
+
+@[expose] public section
 
 open MeasureTheory Real Matrix
 open scoped ENNReal

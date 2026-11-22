@@ -1,5 +1,9 @@
-import Rigidity.Fluctuation.EventBounds
-import Rigidity.Fluctuation.Tuple
+module
+
+public import Rigidity.Fluctuation.EventBounds
+public import Rigidity.Fluctuation.Tuple
+
+@[expose] public section
 
 /-!
 # Fluctuation averaging (NP v1.1, §6.1, §6.7: Theorem 6.1)

@@ -1,7 +1,11 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Resolvent.Basic
-import Rigidity.Probability.Moments
-import Rigidity.Probability.Split
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Probability.Moments
+public import Rigidity.Probability.Split
+
+@[expose] public section
 
 open MeasureTheory Real Matrix Filter Topology
 open scoped ENNReal Matrix.Norms.L2Operator

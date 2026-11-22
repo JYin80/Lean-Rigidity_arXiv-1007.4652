@@ -1,7 +1,11 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.LocalLaw.GoodEvent
-import Rigidity.LocalLaw.Ledger
-import Rigidity.LocalLaw.Levels
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.LocalLaw.GoodEvent
+public import Rigidity.LocalLaw.Ledger
+public import Rigidity.LocalLaw.Levels
+
+@[expose] public section
 
 /-!
 # The lattice of spectral parameters, the columns, and the a priori event

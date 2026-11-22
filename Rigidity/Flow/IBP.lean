@@ -1,4 +1,8 @@
-import Rigidity.Flow.Chamber
+module
+
+public import Rigidity.Flow.Chamber
+
+@[expose] public section
 
 /-!
 # Integration by parts on the Weyl chamber against the Gaussian β-ensemble weight

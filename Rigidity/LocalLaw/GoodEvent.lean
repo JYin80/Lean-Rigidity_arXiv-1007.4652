@@ -1,13 +1,17 @@
-import Rigidity.Ensemble.Basic
-import Rigidity.Ensemble.Moments
-import Rigidity.Probability.Decoupling
-import Rigidity.Probability.Moments
-import Rigidity.Probability.Split
-import Rigidity.Resolvent.Basic
-import Rigidity.Resolvent.Minor
-import Rigidity.Resolvent.Schur
-import Rigidity.Spectrum.Measurable
-import Rigidity.Stability.Equations
+module
+
+public import Rigidity.Ensemble.Basic
+public import Rigidity.Ensemble.Moments
+public import Rigidity.Probability.Decoupling
+public import Rigidity.Probability.Moments
+public import Rigidity.Probability.Split
+public import Rigidity.Resolvent.Basic
+public import Rigidity.Resolvent.Minor
+public import Rigidity.Resolvent.Schur
+public import Rigidity.Spectrum.Measurable
+public import Rigidity.Stability.Equations
+
+@[expose] public section
 
 /-!
 # The good event at a fixed spectral parameter

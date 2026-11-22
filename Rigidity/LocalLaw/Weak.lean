@@ -1,6 +1,10 @@
-import Rigidity.LocalLaw.WeakDichotomy
-import Rigidity.LocalLaw.WeakFar
-import Rigidity.LocalLaw.WeakInitial
+module
+
+public import Rigidity.LocalLaw.WeakDichotomy
+public import Rigidity.LocalLaw.WeakFar
+public import Rigidity.LocalLaw.WeakInitial
+
+@[expose] public section
 
 /-!
 # The weak local law on the lattice (NP v1.1, §5.3: Theorem 5.5)

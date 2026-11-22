@@ -1,5 +1,9 @@
-import Rigidity.Flow.Gaussian
-import Rigidity.Flow.Mehler
+module
+
+public import Rigidity.Flow.Gaussian
+public import Rigidity.Flow.Mehler
+
+@[expose] public section
 
 /-!
 # Relative entropy of Gaussian measures and along the Ornstein–Uhlenbeck flow
