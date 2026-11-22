@@ -209,12 +209,6 @@ noncomputable def lamMin {N : ℕ} (x : Pair N → 𝕜) : ℝ :=
 /-- The weight `min(j, N - j + 1)` of (2.25) at `j = k + 1`. -/
 def rigWeight (N : ℕ) (k : Fin N) : ℕ := min (k.val + 1) (N - k.val)
 
-namespace AscEigen
-
-variable {N : ℕ} {A : Matrix (Fin N) (Fin N) 𝕜} (d : AscEigen A)
-
-end AscEigen
-
 end Rigidity
 
 end
