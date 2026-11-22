@@ -122,7 +122,10 @@ variable {N : ℕ} (M : Ensemble 𝕜 N)
 /-- The joint law of the entries: the product of the entry laws. -/
 noncomputable def prodLaw : Measure (Pair N → 𝕜) := Measure.pi M.law
 
-instance : IsProbabilityMeasure M.prodLaw := by unfold prodLaw; infer_instance
+theorem prodLaw_isProbabilityMeasure : IsProbabilityMeasure M.prodLaw := by
+  unfold prodLaw; infer_instance
+
+attribute [instance] prodLaw_isProbabilityMeasure
 
 /-- `σ_p² = 𝔼|h_p|²` (2.1). -/
 noncomputable def varPair (p : Pair N) : ℝ := ∫ y, ‖y‖ ^ 2 ∂M.law p
@@ -384,20 +387,42 @@ noncomputable def betaF (𝕜 : Type*) [RCLike 𝕜] : ℝ := Module.finrank ℝ
 /-- Real coordinates of a matrix: `(i, j, 0) ↦ Re h_ij`, `(i, j, 1) ↦ Im h_ij`. -/
 abbrev HCoord (N : ℕ) := EuclideanSpace ℝ (Fin N × Fin N × Fin 2)
 
+/-- The set of coordinate vectors of the self-adjoint matrices is closed under addition. -/
+theorem hermSub_add_mem (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) {v w : HCoord N}
+    (hv : v ∈ ({v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
+      (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)} : Set (HCoord N)))
+    (hw : w ∈ ({v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
+      (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)} : Set (HCoord N))) :
+    v + w ∈ ({v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
+      (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)} : Set (HCoord N)) := by
+  intro i j
+  obtain ⟨h1, h2, h3⟩ := hv i j
+  obtain ⟨h1', h2', h3'⟩ := hw i j
+  refine ⟨by simp [h1, h1'], by simp [h2, h2']; ring, fun hI => by simp [h3 hI, h3' hI]⟩
+
+/-- The set of coordinate vectors of the self-adjoint matrices contains `0`. -/
+theorem hermSub_zero_mem (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) :
+    (0 : HCoord N) ∈ ({v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
+      (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)} : Set (HCoord N)) := by
+  intro i j; simp
+
+/-- The set of coordinate vectors of the self-adjoint matrices is closed under real multiples. -/
+theorem hermSub_smul_mem (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) (c : ℝ) {v : HCoord N}
+    (hv : v ∈ ({v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
+      (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)} : Set (HCoord N))) :
+    c • v ∈ ({v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
+      (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)} : Set (HCoord N)) := by
+  intro i j
+  obtain ⟨h1, h2, h3⟩ := hv i j
+  exact ⟨by simp [h1], by simp [h2], fun hI => by simp [h3 hI]⟩
+
 /-- The coordinate vectors of the self-adjoint matrices over `𝕜`. -/
 def hermSub (𝕜 : Type*) [RCLike 𝕜] (N : ℕ) : Submodule ℝ (HCoord N) where
   carrier := {v | ∀ i j, v (j, i, 0) = v (i, j, 0) ∧ v (j, i, 1) = -v (i, j, 1) ∧
       (RCLike.I (K := 𝕜) = 0 → v (i, j, 1) = 0)}
-  add_mem' := by
-    intro v w hv hw i j
-    obtain ⟨h1, h2, h3⟩ := hv i j
-    obtain ⟨h1', h2', h3'⟩ := hw i j
-    refine ⟨by simp [h1, h1'], by simp [h2, h2']; ring, fun hI => by simp [h3 hI, h3' hI]⟩
-  zero_mem' := by intro i j; simp
-  smul_mem' := by
-    intro c v hv i j
-    obtain ⟨h1, h2, h3⟩ := hv i j
-    exact ⟨by simp [h1], by simp [h2], fun hI => by simp [h3 hI]⟩
+  add_mem' := fun hv hw => hermSub_add_mem 𝕜 N hv hw
+  zero_mem' := hermSub_zero_mem 𝕜 N
+  smul_mem' := fun c _ hv => hermSub_smul_mem 𝕜 N c hv
 
 /-- `𝓗_N(𝕜)` (§12.1): the real inner product space of self-adjoint `N × N` matrices over `𝕜`
 with `⟨X, Y⟩ = Tr(XY)` and `|X|² = ∑_{i,j} |x_ij|²`. -/
@@ -413,11 +438,16 @@ noncomputable instance : NormedAddCommGroup (Herm 𝕜 N) :=
 noncomputable instance : InnerProductSpace ℝ (Herm 𝕜 N) :=
   inferInstanceAs (InnerProductSpace ℝ (hermSub 𝕜 N))
 
-instance : FiniteDimensional ℝ (Herm 𝕜 N) := inferInstanceAs (FiniteDimensional ℝ (hermSub 𝕜 N))
+theorem instFiniteDimensionalReal : FiniteDimensional ℝ (Herm 𝕜 N) :=
+  inferInstanceAs (FiniteDimensional ℝ (hermSub 𝕜 N))
+
+attribute [instance] instFiniteDimensionalReal
 
 noncomputable instance : MeasurableSpace (Herm 𝕜 N) := borel _
 
-instance : BorelSpace (Herm 𝕜 N) := ⟨rfl⟩
+theorem instBorelSpace : BorelSpace (Herm 𝕜 N) := ⟨rfl⟩
+
+attribute [instance] instBorelSpace
 
 /-- The real coordinates of `H`. -/
 def coord (H : Herm 𝕜 N) (q : Fin N × Fin N × Fin 2) : ℝ := (H : hermSub 𝕜 N).1 q
@@ -429,16 +459,21 @@ def toPair (H : Herm 𝕜 N) : Pair N → 𝕜 := fun p =>
 /-- The matrix of `H`. -/
 def toMatrix (H : Herm 𝕜 N) : Matrix (Fin N) (Fin N) 𝕜 := Rigidity.toMatrix H.toPair
 
+/-- The coordinate vector of `H(x)` is a coordinate vector of a self-adjoint matrix. -/
+theorem ofPair_mem (x : Pair N → 𝕜) :
+    ((WithLp.toLp 2 fun q => if q.2.2 = 0 then RCLike.re (Rigidity.toMatrix x q.1 q.2.1)
+      else RCLike.im (Rigidity.toMatrix x q.1 q.2.1)) : HCoord N) ∈ hermSub 𝕜 N := by
+  intro i j
+  have h : Rigidity.toMatrix x j i = star (Rigidity.toMatrix x i j) := by
+    have := congrFun (congrFun (toMatrix_isHermitian x) j) i
+    simpa [Matrix.conjTranspose_apply] using this.symm
+  exact ⟨by simp [h, RCLike.star_def], by simp [h, RCLike.star_def], fun hI => by
+    simp [RCLike.im_eq_zero hI]⟩
+
 /-- `H(x)` (Definition 2.1) as an element of `𝓗`. -/
 noncomputable def ofPair (x : Pair N → 𝕜) : Herm 𝕜 N :=
   ⟨WithLp.toLp 2 fun q => if q.2.2 = 0 then RCLike.re (Rigidity.toMatrix x q.1 q.2.1)
-      else RCLike.im (Rigidity.toMatrix x q.1 q.2.1), by
-    intro i j
-    have h : Rigidity.toMatrix x j i = star (Rigidity.toMatrix x i j) := by
-      have := congrFun (congrFun (toMatrix_isHermitian x) j) i
-      simpa [Matrix.conjTranspose_apply] using this.symm
-    exact ⟨by simp [h, RCLike.star_def], by simp [h, RCLike.star_def], fun hI => by
-      simp [RCLike.im_eq_zero hI]⟩⟩
+      else RCLike.im (Rigidity.toMatrix x q.1 q.2.1), ofPair_mem x⟩
 
 theorem isHermitian (H : Herm 𝕜 N) : H.toMatrix.IsHermitian := toMatrix_isHermitian _
 
