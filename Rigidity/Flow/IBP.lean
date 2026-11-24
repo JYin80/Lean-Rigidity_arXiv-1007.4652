@@ -148,8 +148,8 @@ private lemma gbeWeight_hasFDerivAt {N : ℕ} (β : ℝ) {x : Fin N → ℝ} (hx
     ring
   refine ⟨_, hF.congr_of_eventuallyEq heq, fun i => ?_⟩
   rw [heq.eq_of_nhds]
-  simp only [smul_apply, add_apply,
-    sum_apply, sub_apply, ContinuousLinearMap.proj_apply,
+  simp only [_root_.smul_apply, _root_.add_apply,
+    _root_.sum_apply, _root_.sub_apply, ContinuousLinearMap.proj_apply,
     Pi.single_apply, smul_eq_mul]
   rw [sum_pairs_inv x i]
   simp only [mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true,
@@ -192,7 +192,7 @@ theorem divergence_weight_grad {N : ℕ} {β : ℝ} (hβ : 0 < β) {φ : (Fin N 
     intro i
     rw [fderiv_apply_eq (Z := fun y i => gbeWeight β N y * pderiv i φ y) hdc]
     rw [(hL.fun_mul (hdφ i).hasFDerivAt).fderiv]
-    simp only [add_apply, smul_apply, smul_eq_mul, hLi]
+    simp only [_root_.add_apply, _root_.smul_apply, smul_eq_mul, hLi]
     rfl
   unfold divergence
   simp only [hcomp]
@@ -222,7 +222,7 @@ private lemma divergence_mul_field {N : ℕ} {k : (Fin N → ℝ) → ℝ}
   refine Finset.sum_congr rfl fun i _ => ?_
   rw [fderiv_apply_eq (Z := fun y i => k y * Z y i) hc, fderiv_apply_eq hZ,
     (hk.hasFDerivAt.fun_mul (hZ i).hasFDerivAt).fderiv]
-  simp only [add_apply, smul_apply, smul_eq_mul, pderiv]
+  simp only [_root_.add_apply, _root_.smul_apply, smul_eq_mul, pderiv]
   ring
 
 /-- The normalising constant `Z_β = ∫_Σ w`. -/

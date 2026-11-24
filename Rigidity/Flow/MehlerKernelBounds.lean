@@ -407,8 +407,8 @@ private lemma mehlerKernelBounds_H_fderiv_apply {G : ℝ × E → ℝ}
       h * mehlerKernelBounds_H G (j + 1) k x m +
         mehlerKernelBounds_H G j (k + 1) x (Fin.cons e m) := by
   have : ((h, e) : ℝ × E) = h • ((1 : ℝ), (0 : E)) + ((0 : ℝ), e) := by ext <;> simp
-  rw [this, map_add, map_smul, add_apply,
-    smul_apply, mehlerKernelBounds_H_fderiv_inr hG j k x hx e m,
+  rw [this, map_add, map_smul, _root_.add_apply,
+    _root_.smul_apply, mehlerKernelBounds_H_fderiv_inr hG j k x hx e m,
     smul_eq_mul]
   rfl
 
@@ -473,8 +473,8 @@ private lemma mehlerKernelBounds_H_hasFDerivAt {G : ℝ × E → ℝ}
   refine ContinuousLinearMap.ext fun p => ?_
   ext m
   obtain ⟨h, e⟩ := p
-  rw [mehlerKernelBounds_H_fderiv_apply hG j k hx, add_apply,
-    add_apply, mehlerKernelBounds_L1_apply, mehlerKernelBounds_L2_apply]
+  rw [mehlerKernelBounds_H_fderiv_apply hG j k hx, _root_.add_apply,
+    _root_.add_apply, mehlerKernelBounds_L1_apply, mehlerKernelBounds_L2_apply]
 
 /-- Iterating `D H_{j,k} = L₁ H_{j+1,k} + L₂ H_{j,k+1}` (Step 5 of Lemma 14.F): if
 `‖H_{j+i,k+n-i}(x)‖ ≤ B` for `i ≤ n`, then `‖D^n H_{j,k}(x)‖ ≤ 2^n B`. -/
@@ -728,7 +728,7 @@ private lemma mehlerKernelBounds_norm_iteratedFDeriv_slice_le {v : ℝ} (hv : 0 
   set Lℓ : E →L[ℝ] E →L[ℝ] ℝ := (-(α * a)) • innerSL ℝ
   have hℓ : ∀ y', c + Lℓ y' = innerSL ℝ (α • (w - a • y')) := fun y' => by
     ext z
-    simp only [c, Lℓ, add_apply, smul_apply,
+    simp only [c, Lℓ, _root_.add_apply, _root_.smul_apply,
       innerSL_apply_apply, inner_sub_left, inner_smul_left, smul_eq_mul, RCLike.conj_to_real]
     have : (innerSL ℝ y') z = inner ℝ y' z := rfl
     rw [this]
@@ -766,7 +766,7 @@ private lemma mehlerKernelBounds_norm_iteratedFDeriv_slice_le {v : ℝ} (hv : 0 
   have hL2 : ‖Lℓ‖ ≤ Λ ^ 2 := by
     have h1 : ‖Lℓ‖ ≤ α * a := by
       refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun z => ?_
-      rw [smul_apply, norm_smul, innerSL_apply_norm, Real.norm_eq_abs,
+      rw [_root_.smul_apply, norm_smul, innerSL_apply_norm, Real.norm_eq_abs,
         abs_neg, abs_of_nonneg (by positivity)]
     have h2 : α * a ≤ mehlerKernelBoundsKappa v u₁ :=
       (mul_le_of_le_one_right hα0 ha1).trans (hα.trans hκ')
@@ -1135,7 +1135,7 @@ private lemma mehlerKernelBounds_iteratedFDeriv_integral_eq {v : ℝ} (hv : 0 < 
     ext m
     rw [iteratedFDeriv_zero_apply, ContinuousMultilinearMap.integral_apply
       (mehlerKernelBounds_integrable_smul hv hρ hh hC 0 hx)]
-    simp only [smul_apply, iteratedFDeriv_zero_apply, smul_eq_mul]
+    simp only [_root_.smul_apply, iteratedFDeriv_zero_apply, smul_eq_mul]
     exact integral_congr_ae (ae_of_all _ fun w => mul_comm _ _)
   | n + 1, x, hx => by
     have hev : iteratedFDeriv ℝ n (fun x : ℝ × E => ∫ w, mehlerKernel v x.1 x.2 w * h w ∂ρ)

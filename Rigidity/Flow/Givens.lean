@@ -385,7 +385,7 @@ private theorem betaF_eq_sum_wk : betaF 𝕜 = ∑ k, ‖(wk k : 𝕜)‖ ^ 2 :=
   simp only [wk, Matrix.cons_val_zero, Matrix.cons_val_one, norm_one, one_pow, betaF]
   rcases eq_or_ne (RCLike.I : 𝕜) 0 with h | h
   · have h1 : Module.finrank ℝ 𝕜 = 1 := by
-      refine (finrank_eq_one_iff_of_ne_zero' (1 : 𝕜) one_ne_zero).mpr fun w => ⟨RCLike.re w, ?_⟩
+      refine (finrank_eq_one_iff_of_nonzero' (1 : 𝕜) one_ne_zero).mpr fun w => ⟨RCLike.re w, ?_⟩
       conv_rhs => rw [← RCLike.re_add_im w, RCLike.im_eq_zero h w]
       simp [RCLike.real_smul_eq_coe_mul]
     rw [h1, h, norm_zero]

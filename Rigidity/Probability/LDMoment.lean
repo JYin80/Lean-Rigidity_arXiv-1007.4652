@@ -223,7 +223,7 @@ private lemma ldmoment_pointwise {t : ℕ → ℝ} (htu : Tendsto t atTop atTop)
           ENNReal.ofReal_le_ofReal (Real.rpow_le_rpow hx hmspec hq.le)
       _ = if t j < x then ENNReal.ofReal (t (j + 1) ^ q) else 0 := by simp [hjlt]
       _ ≤ ∑' k : ℕ, if t k < x then ENNReal.ofReal (t (k + 1) ^ q) else 0 :=
-          le_tsum (fun k => if t k < x then ENNReal.ofReal (t (k + 1) ^ q) else 0) j
+          ENNReal.le_tsum (f := fun k => if t k < x then ENNReal.ofReal (t (k + 1) ^ q) else 0) j
       _ ≤ _ := le_add_self
 
 end LDHelpers

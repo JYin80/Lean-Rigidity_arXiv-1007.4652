@@ -69,7 +69,7 @@ with `lake env lean <file>`.
 
 ## Build
 
-The toolchain is `leanprover/lean4:v4.36.0-rc2` (file `lean-toolchain`) with Mathlib `v4.36.0-rc2`.
+The toolchain is `leanprover/lean4:v4.36.0-rc1` (file `lean-toolchain`) with Mathlib `v4.36.0-rc1`.
 
 ```
 lake exe cache get

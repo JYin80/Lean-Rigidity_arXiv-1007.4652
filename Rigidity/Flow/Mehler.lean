@@ -522,11 +522,11 @@ theorem mehlerKernel_laplacian (v u : ℝ) (y w : E) :
     rw [← b.sum_sq_inner_right (w - ouA u • y)]
     refine Finset.sum_congr rfl fun i _ => ?_
     rw [inner_sub_right, real_inner_smul_right, real_inner_comm w, real_inner_comm y]
-  simp only [add_apply, smul_apply,
+  simp only [_root_.add_apply, _root_.smul_apply,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.smulRight_apply, innerSL_apply_apply,
     ContinuousLinearMap.id_apply, Matrix.cons_val_zero, Matrix.cons_val_one, smul_eq_mul,
     inner_smul_left, inner_sub_left, zero_sub, RCLike.conj_to_real,
-    neg_apply, inner_neg_left]
+    _root_.neg_apply, inner_neg_left]
   calc ∑ i, _ = ∑ i, mehlerKernel v u y w *
         (k ^ 2 * (inner ℝ w (b i) - ouA u * inner ℝ y (b i)) ^ 2 - k * ouA u) :=
       Finset.sum_congr rfl fun i _ => by rw [hb1]; ring
